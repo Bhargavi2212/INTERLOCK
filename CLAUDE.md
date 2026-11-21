@@ -25,7 +25,7 @@ Instructions for Claude Code in this repo. This file points to the docs; it does
 - **Every value read from a document carries `file`, `page`, `unit` and either a `quote` (text) or a `box` on a drawing whose text-layer label the code has verified,** and the evidence check confirms it before the value reaches the rules.
 - **Unknown or missing input → held.** Never guess a value or a unit.
 - **The agent never decides.** The server re-runs the rules and the register check on every agent fix.
-- **Measured numbers** live only in `docs/EVAL.md`; limits only in `docs/RULES.md`. Other files point to them, never copy them.
+- **Measured numbers** live only in `docs/EVAL.md`; limits only in `docs/RULES.md`. Other files point to them, never copy them. One exception: `README.md` may hold one summary table copied from `EVAL.md` §5, labelled as a copy; `EVAL.md` stays the source.
 - **Secrets:** never read, open, print, log or commit `.env` or any key, and never run commands that would show them. Bhargavi creates secrets and runs anything that needs the key herself; give her the command instead. Keys come from environment variables locally and Secret Manager in production. Model strings come from `MODEL_*` environment variables.
 - **New work only:** no code copied from outside this repo or from before 21 Nov 2026. Third-party libraries are fine; list them in `README.md`.
 - **No dashboards.** One screen: change in, evidence, drawing, calc sheet, verdict, fix.

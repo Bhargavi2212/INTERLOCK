@@ -96,6 +96,26 @@ flowchart LR
 
 Measured on changes Interlock never saw while being built (set E), a development set, P&ID locating (set B) and hand-worked math (set F), against a keyword search and **one Gemini call given all 851 pages**. The full table, and every failure we found: [`docs/EVAL.md`](docs/EVAL.md) §5 and §6.
 
+Copied from [`docs/EVAL.md`](docs/EVAL.md) §5, which is the source; the notes under it there apply.
+
+| Metric | Keyword | One call | Interlock |
+|---|---|---|---|
+| Set E page recall (worst of 3, mean of 5 changes) | 0.43 | 0.90 | 0.90 |
+| Set E wrong pages (worst of 3, summed over 5 changes) | 0 | 8 | 6 (rerun: 11) |
+| Set E value accuracy (worst of 3) | 0.00 | 0.79 | 0.93 |
+| Set E evidence (quotes found on the cited page) | n/a | 108 / 111 | 197 / 200 |
+| Set E verdict matches key | 0 / 5 | 14 / 15 | 11 / 15 (rerun: 12 / 15) |
+| Set A page recall (dev set) | 0.23 | 0.93 | 0.92 |
+| Set A verdict matches key (dev set) | 0 / 3 | 2 / 3 | 3 / 3 |
+| Same-item check precision / recall (set A) | n/a | n/a | 1.00 / 1.00 |
+| Set B drawing hits | n/a | n/a (not run) | 5 / 5 on the demo plant; 1 / 5 on the eval plant (not re-ingested after the drawing fix) |
+| Set F math correct | n/a | 1 / 3 | 3 / 3 |
+| Fix proven by the server (demo case) | n/a | n/a | 1 proven; impossible-change refusal shown by tests |
+| Clash caught (demo case) | n/a | n/a | 1 / 1 |
+| Time per change (median; first run on the plant) | 9 s; 10 s | 45 s; n/a | 61 s; 69 s |
+
+The drawing step was inactive in every set E and set A run (the eval plant was not re-ingested after the phase 3 fix), so those rows measure Interlock without it. The set E runs predate the "no spare" fix (`42de01d`) and are scored as measured.
+
 What it shows, in one line: one Gemini call can find most of the same pages, and on unseen changes it matched the expected verdict more often than Interlock did. What it cannot give is what an engineer needs to sign: quotes checked on their page, math done in code against the plant's own limits, a verified box on the drawing, a fix the server has proven, and a register that remembers.
 
 ## Where it still fails
