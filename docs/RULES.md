@@ -57,7 +57,7 @@ Every result carries: `rule_id`, `status`, `value`, `unit`, `limit`, `limit_sour
   - From the plant's documents when stated (BHEL D5-200, pump discharge: 50-150 mm 1.8-2.4 m/s; 200 mm and above 2.1-2.5 m/s). The **upper value is the check**; below the lower value is shown as information only.
   - Default when the documents state none: max 3.0 m/s (**CONFIRM**).
   - **Line roles** (input `line_role`): `discharge header`, `pump suction`, `pump discharge` (matched most specific first). A document band is used only if its `applies_to` matches the line's role and its unit is m/s; a header line uses the documents' header row. Role unstated → treated as pump discharge (stricter), with the assumption "line assumed to be pump discharge".
-  - **Defaults** when no document band applies (role stated as something else, or no band covers the size): pump suction max 1.8 m/s (**CONFIRM**); any other line 3.0 m/s.
+  - **Defaults** when no document band applies (role stated as something else, or no band covers the size): pump suction max 1.5 m/s (confirmed); any other line 3.0 m/s.
   - **Low side:** service matching a `solids_services` phrase and v below the band's lower value → **flagged**. Not solids → note "below the documents' lower value, information only". Service unstated → the note gives both facts (below the lower value; solids check not run, service not stated). The low side never makes the result held.
 - **Held if:** flow or line size missing; or the documents do not show whether the pumps share one discharge line.
 - **Test cases (limit 2.4 m/s for 50-150 mm, 2.5 m/s for 200 mm and above, nominal bore as D):**
@@ -175,7 +175,7 @@ Unknown units make the input **held**, never guessed. Superscripts and spacing a
 
 | Rule | Default above | Confirmed value | Reason |
 |---|---|---|---|
-| R1 suction velocity max when documents state none | 1.8 m/s | | |
+| R1 suction velocity max when documents state none | 1.8 m/s | 1.5 m/s | Suction velocity ≤ 1.5 m/s protects pump NPSH margin against cavitation; used only when the documents state no suction limit |
 | R1 velocity max when documents state none | 3.0 m/s | 3.0 m/s | Common upper limit for water pump discharge when the plant states none |
 | R2 standby default | 1 | 1 | Standard N+1 for continuous-duty pumps |
 | R3 max pump starts per hour | 6 (10 min cycle) | 6 (10 min cycle) | Typical motor starting limit for small and medium pump motors |

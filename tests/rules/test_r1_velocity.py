@@ -131,7 +131,7 @@ def test_band_by_line_role_mixed_order(role, expected_limit, page):
 def test_suction_without_band_uses_suction_default():
     r = run_rule("R1", {"flow_total": v(105, "m3/h"), "line_nb": v(150, "NB"),
                         "line_role": v("pump suction")}, bhel_bands())
-    assert r.limit == 1.8 and r.limit_source.startswith("default")
+    assert r.limit == 1.5 and r.limit_source.startswith("default")
 
 
 def test_band_with_non_velocity_unit_ignored():

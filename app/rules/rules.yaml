@@ -9,7 +9,7 @@ rules:
     live: true
     defaults:
       max_velocity: {value: 3.0, unit: m/s, confirm: false}
-      max_velocity_suction: {value: 1.8, unit: m/s, confirm: true}
+      max_velocity_suction: {value: 1.5, unit: m/s, confirm: false}
     line_roles: [discharge header, pump suction, pump discharge]  # most specific first
     assumed_line_role: pump discharge
     suction_line_role: pump suction
