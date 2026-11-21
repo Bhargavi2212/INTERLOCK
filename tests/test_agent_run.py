@@ -17,8 +17,14 @@ THIRD_PUMP = {"outcome": "proposed",
 
 
 class FakeAgent:
-    def __init__(self, *answers):
-        self.answers, self.calls = list(answers), []
+    def __init__(self, *answers, copied=None):
+        self.answers, self.calls, self.copied = list(answers), [], copied
+
+    def call(self, role, prompt, schema=None, thinking="low", usage=None):
+        assert role == "agent_answer"
+        if self.copied is None:
+            raise RuntimeError("no copy")
+        return self.copied
 
     def agent(self, prompt, environment, previous_id, schema, cfg):
         self.calls.append({"prompt": prompt, "environment": environment, "previous_id": previous_id})
@@ -116,3 +122,22 @@ def test_fix_route_needs_access_code(api, store):
     from app.api.main import app
     assert TestClient(app).post("/changes/x/fix").status_code == 401
     assert api.post("/changes/nope/fix").status_code == 404
+
+
+def test_off_schema_answer_is_copied_into_the_schema_then_validated(stored):
+    """Live 15:07: the agent's own answer did not hold to the schema (candidate an object);
+    a structured copy of its answer is validated again and re-checked by the server."""
+    s, change = stored
+    off_schema = {"result": "fix found", "tries": [{"n": 1, "candidate": {"installed": {"value": 3, "unit": "count"}},
+                                                    "flagged": [], "newly_held": []}]}
+    m = FakeAgent(off_schema, copied=ans(THIRD_PUMP))
+    res = agent_run.find_fix(s, m, change["change_id"])
+    assert res["answer_read_by"] and res["outcome"] == "proposed" and res["recheck"]["proven"]
+    assert res["raw_answer"] and "fix found" in res["raw_answer"]
+    assert isinstance(res["tries"][0]["candidate"], str)
+
+
+def test_unreadable_even_after_copy(stored):
+    s, change = stored
+    res = agent_run.find_fix(s, FakeAgent({"x": 1}), change["change_id"])
+    assert res["outcome"] == "refused" and "agent answer unreadable" in res["reasons"][0]

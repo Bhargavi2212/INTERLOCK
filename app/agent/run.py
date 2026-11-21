@@ -23,6 +23,7 @@ from app.agent import bundle
 from app.agent.levers import allowed, base_installed, levers
 from app.agent.recheck import rebuild, recheck
 from app.reading import schemas
+from app.reading.models import EXTRACT_PROMPT
 from app.rules.model import doclimit_to_dict, value_to_dict
 from app.reading.scenario import doc_limits
 
@@ -100,16 +101,33 @@ def find_fix(store, models, change_id: str, progress=lambda step: None) -> dict:
               "reasons": [], "recheck": None, "environment_id": out.get("environment_id"),
               "persistent": cfg["persistent"], "reused_sandbox": reuse,
               "sandbox_note": "sandbox renewed: rules changed" if renewed else "",
-              "runs_listing": ((answer or {}).get("smoke") or {}).get("runs_listing") if isinstance(answer, dict) else None}
+              "runs_listing": None}
 
     progress("read answer")
+    result["raw_answer"] = out.get("raw") or (json.dumps(answer, default=str)[:6000] if answer is not None else None)
     ok, why = validate(answer)
+    if not ok:
+        # The agent did not hold to the schema: one structured call copies its own answer into it
+        # (never invents), then the same validation runs again (PHASE_4 2.3 fallback).
+        try:
+            answer = models.call("agent_answer", EXTRACT_PROMPT + (result["raw_answer"] or ""),
+                                 schemas.AGENT_ANSWER, "low")
+            result["answer_read_by"] = "structured copy of the agent's answer"
+            result["tries"] = answer.get("tries", result["tries"]) if isinstance(answer, dict) else result["tries"]
+            ok, why = validate(answer)
+        except Exception as e:  # noqa: BLE001
+            ok, why = False, f"agent answer unreadable ({type(e).__name__})"
     if ok and not reuse:
         s = answer.get("smoke") or {}
         if not s.get("write_blocked"):
             ok, why = False, "bundle not read-only"
         elif abs(float(s.get("r1_velocity") or 0) - smoke["velocity"]) > smoke["tolerance"]:
             ok, why = False, f"smoke test failed: R1 {s.get('r1_velocity')} m/s, expected {smoke['velocity']}"
+    if isinstance(answer, dict):
+        result["runs_listing"] = (answer.get("smoke") or {}).get("runs_listing")
+        result["tries"] = [{**t, "candidate": t["candidate"] if isinstance(t.get("candidate"), str)
+                            else json.dumps(t.get("candidate"))} for t in (answer.get("tries") or [])
+                           if isinstance(t, dict)] or result["tries"]
     if not ok:
         result["reasons"] = [why]
     else:

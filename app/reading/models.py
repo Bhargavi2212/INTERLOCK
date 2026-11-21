@@ -148,7 +148,7 @@ class Models:
             answer = json.loads(text)
         else:
             answer = self.call("agent_answer", EXTRACT_PROMPT + text, schema, "low")
-        return {"answer": answer, "environment_id": getattr(inter, "environment_id", None),
+        return {"answer": answer, "raw": text[:6000], "environment_id": getattr(inter, "environment_id", None),
                 "interaction_id": inter.id}
 
     def decide(self, text: str, questions: dict) -> dict:
