@@ -89,7 +89,9 @@ Detailed spec: `docs/specs/PHASE_3.md` (with its Amendments); plan: `docs/specs/
 
 ## Phase 4 — Agent and register (14:45-15:45)
 
-Status: not started
+Status: in progress
+
+Detailed spec: `docs/specs/PHASE_4.md` (with its Amendments M1-M10); plan: `docs/specs/PHASE_4_PLAN.md`.
 
 **First (15 minutes):** eval runner and the keyword and one-call baselines; start sets E, A and B running in the background (`EVAL.md` §1).
 
