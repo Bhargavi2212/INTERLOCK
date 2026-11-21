@@ -40,7 +40,7 @@ Detailed spec: `docs/specs/PHASE_0.md`.
 
 ## Phase 1 — Rule engine (12:10-12:50)
 
-Status: in progress
+Status: done (phase-1-rules). Evidence: `pytest -q` 220 passed; CONFIRM values recorded (`rules.yaml` all `confirm: false`); keys A1-A3, B1-B5, F1-F3 committed 12:44 (`96ae8cb`).
 
 Detailed spec: `docs/specs/PHASE_1.md` (with its Amendments); plan: `docs/specs/PHASE_1_PLAN.md`.
 
