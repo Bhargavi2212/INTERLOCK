@@ -45,7 +45,7 @@ The BHEL floor-wash change above. Expected behaviour (rules and numbers from `RU
 - **Velocity limit comes from the tender itself:** the BHEL D5-200 pump discharge band for this line size (`RULES.md` R1).
 - **The drawing decides the line:** the P&ID (drawing D3-146, `Part3.pdf` p.146) shows both pump discharges joining one 200 NB header; there is no 100 NB line on this system.
 - **The change:** two pumps running into the shared 200 NB header is 1.86 m/s (an upper bound for parallel pumps): **OK**, with an information note that it is below the 2.1 m/s lower value. Velocity does not block this change. (The shared header is read from the drawing in phase 3; until then R1 is **held**: "documents do not state in text whether the pumps share one discharge line".)
-- **Standby:** the data sheet as issued has 2 pumps installed. The change as written (2W+1S) needs 3 installed: 2 < 2 + 1 → **flagged**.
+- **Standby:** the scope (1W+1S) and the data sheet (2W) disagree on the standby requirement, so the stricter value (1 standby) is used, naming both pages (`RULES.md` R2). The data sheet has 2 pumps installed; with 2 working after the change, 2 < 2 + 1 → **flagged**.
 - **Sump:** inflow is not stated: **held**, with pump-out time shown as information.
 - **Verdict: BLOCK**, from the documents that disagree (scope 1W+1S vs data sheet and P&ID 2W) and the standby check.
 - **The fix:** the agent proposes a third pump (3 installed); the header is already 200 NB. The server re-runs the rules: velocity OK, standby OK, sump still held as before → **proven**.

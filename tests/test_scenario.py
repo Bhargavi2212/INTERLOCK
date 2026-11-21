@@ -145,3 +145,26 @@ def test_service_only_from_fluid_to_be_handled():
     assert sc["after"]["R1"]["service"].value.startswith("Floor wash")
     r1 = next(r for r in run_rules(sc["after"], LIMITS) if r.rule_id == "R1")
     assert r1.status == "OK" and round(r1.value, 2) == 1.86   # 210 m3/h in 200 NB
+
+
+def test_disputed_standby_uses_stricter_value_and_still_blocks():
+    vals = [d("arrangement", "1W+1S", "", "Part1.pdf", 43),          # scope
+            d("arrangement", "2W", "", "Part4.pdf", 57),             # data sheet
+            d("installed", "2", "nos", "Part4.pdf", 57)]
+    changes = [{"input": "working", "from": "1", "to": "2", "unit": "count"}]
+    sc = build_scenario(vals, [], changes, CHANGE)
+    r2 = next(r for r in run_rules(sc["after"], []) if r.rule_id == "R2")
+    assert r2.status == "flagged"                                      # 2 < 2 + 1
+    note = " ".join(r2.assumptions)
+    assert "Part1.pdf p.43 = 1W+1S" in note and "Part4.pdf p.57 = 2W" in note and "stricter value, standby 1" in note
+    v = verdict(run_rules(sc["after"], []), sc["disagreements"], [], 851)
+    assert v["verdict"] == BLOCK
+    assert any("arrangement" in r and "Part1.pdf p.43" in r for r in v["reasons"])
+
+
+def test_disputed_installed_count_stays_held():
+    vals = [d("arrangement", "1W+1S", "", "Part1.pdf", 43), d("installed", "2", "nos", "Part1.pdf", 43),
+            d("installed", "3", "nos", "Part4.pdf", 57)]
+    sc = build_scenario(vals, [], [{"input": "working", "to": "2", "unit": "count"}], CHANGE)
+    r2 = next(r for r in run_rules(sc["after"], []) if r.rule_id == "R2")
+    assert r2.status == "held" and "installed" in r2.message

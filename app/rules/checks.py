@@ -9,8 +9,8 @@ from __future__ import annotations
 
 import math
 
-from app.rules.engine import HeldInput, default_limit
-from app.rules.model import RuleResult
+from app.rules.engine import HeldInput, _cite, default_limit
+from app.rules.model import Disputed, RuleResult
 from app.rules.units import UnknownUnit, matches_phrase, normalise, parse_arrangement
 
 FORMULAS = {
@@ -145,8 +145,27 @@ def r2_standby(ins, rule_cfg, rules, doc_limits):
     tol = _tol(rules)
     assumptions = []
     arr = None
+    strict_note = None
     needed = not (ins.has("installed") and ins.has("working") and ins.has("standby_required"))
-    if ins.has("arrangement") and needed:
+    raw_arr = ins.raw.get("arrangement")
+    if isinstance(raw_arr, Disputed) and needed:
+        # Documents disagree on the arrangement: for the standby REQUIREMENT only, use the
+        # stricter (larger) value, naming both pages (RULES.md R2). Working and installed
+        # counts are never taken from a disputed arrangement.
+        parsed = []
+        for x in raw_arr.values:
+            try:
+                parsed.append((parse_arrangement(x.value), x))
+            except UnknownUnit:
+                pass
+        if not parsed:
+            raise HeldInput("arrangement", "documents disagree and none states an arrangement")
+        best, best_v = max(parsed, key=lambda t: t[0]["standby"])
+        listed = "; ".join(f"{_cite(x)} = {x.value}" for _, x in parsed)
+        arr = {"standby": best["standby"]}
+        strict_note = (f"documents disagree on the standby requirement ({listed}); "
+                       f"the stricter value, standby {best['standby']} ({_cite(best_v)}), is used")
+    elif ins.has("arrangement") and needed:
         text = ins.text("arrangement")
         try:
             arr = parse_arrangement(text)
@@ -161,7 +180,7 @@ def r2_standby(ins, rule_cfg, rules, doc_limits):
 
     if ins.has("working"):
         working = ins.num("working")
-    elif arr is not None:
+    elif arr is not None and "working" in arr:
         working = float(arr["working"])
         assumptions.append("working count taken from the arrangement")
     else:
@@ -170,6 +189,10 @@ def r2_standby(ins, rule_cfg, rules, doc_limits):
     if ins.has("standby_required"):
         standby = ins.num("standby_required")
         source = f"stated ({ins.pages()})"
+    elif strict_note is not None:
+        standby = float(arr["standby"])
+        source = strict_note
+        assumptions.append(strict_note)
     elif arr is not None and ins.raw["arrangement"].source in ("document", "register"):
         # standby comes only from the documents' (or an approved) arrangement, never a change or fix
         standby = float(arr["standby"])

@@ -190,7 +190,9 @@ def doc_limits(checked_limits: list[dict]) -> list[DocLimit]:
 
 def build_scenario(checked_values: list[dict], checked_shared: list[dict], changes: list[dict],
                    change_text: str, register_entries: list[dict] | None = None) -> dict:
-    touched = {c.get("input") for c in changes} | ({"working"} if any(c.get("input") == "arrangement" for c in changes) else set())
+    touched = {c.get("input") for c in changes}
+    if touched & {"working", "arrangement"}:  # the same thing said two ways
+        touched |= {"working", "arrangement"}
     merged, disagreements, sources = merge_values(checked_values, touched)
 
     issued_vals = {**merged, **register_values(register_entries or [])}
