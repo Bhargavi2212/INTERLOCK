@@ -13,7 +13,7 @@ scenario:
   service_quote_marker: fluid to be handled   # service only from the data sheet's Fluid to be handled value
 same_item:
   mode: decisions                 # decisions | names (fallback)
-  threshold: 0.5                  # set once on set A, frozen for set E
+  threshold: 0.25                 # FROZEN 21 Nov 13:33: chosen once on set A (EVAL.md section 5); unchanged for set E
   min_confidence: 0.6
   max_input_tokens: 262144        # Decisions API input limit per call
   max_pages_per_call: 20

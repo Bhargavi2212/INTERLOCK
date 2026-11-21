@@ -104,7 +104,7 @@ The only home of these numbers. Raw outputs behind each cell: `eval/results/`.
 | Set E page recall (worst of 3) | | | n/a | |
 | Set E wrong pages | | | n/a | |
 | Set A page recall (dev set) | | | | |
-| Same-item check precision / recall | n/a | n/a | n/a | |
+| Same-item check precision / recall | n/a | n/a | n/a | Set A (dev set, threshold chosen on it): threshold **0.25**, precision 1.00 / recall 1.00 over the 19 candidate pages (10 key, 9 not); at the starting 0.5: 1.00 / 0.90 (A1 Part1 p.45, P(yes) 0.385, rejected). Key pages 0.385-0.94, non-key ≤ 0.081. Recall counts candidates only: a key page never found (A3 Part1 p.45) is a page-recall miss. Raw: `eval/results/run_2a419c376ac4.json`, `run_c4de3b150649.json`, `run_50d3d8363f83.json`. Set E: pending (threshold frozen) |
 | Set B drawing hits | n/a | | n/a | |
 | Set F math correct | n/a | | | |
 | Fix proven / refused correctly | n/a | n/a | n/a | |
