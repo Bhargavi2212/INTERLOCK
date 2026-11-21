@@ -50,6 +50,7 @@ Pinned in `requirements.txt`.
 | google-genai | Gemini models |
 | google-cloud-firestore | Plants, changes, register, jobs |
 | google-cloud-storage | Uploaded PDFs, page text and images |
+| google-auth | Signing upload URLs with the service account (no key file) |
 | pyyaml | `rules.yaml` |
 | pymupdf | PDF text, page images, text positions |
 | python-dotenv | Loads `.env` for local scripts |

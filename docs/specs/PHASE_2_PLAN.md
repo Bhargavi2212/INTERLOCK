@@ -1,6 +1,10 @@
 # Phase 2 — build plan (for approval)
 
-Implements `docs/specs/PHASE_2.md` **with its Amendments** (they override). No code until Bhargavi approves. Every step ends in a commit with `pytest -q` green. Claude Code never runs anything that needs the Gemini key; Bhargavi runs every live call and pastes back only printed output.
+Implements `docs/specs/PHASE_2.md` **with its Amendments** (they override). **Approved 21 Nov** with four changes that override the steps below:
+1. `scripts/ingest_local.py` dropped: `run_change.py` uses the plant from the live upload. C6 screen is minimal: verdict banner plus plain sections from the result JSON. C4 starts while Bhargavi deploys and uploads.
+2. Ingest also writes `plants/{id}/pages_all.json`: every page's `{n, file, page, text}` in `n` order. The pipeline reads that one file and caches it in memory per plant. Per-page JSON/PNG stay for phase 3. Test: `pages_all.json` order equals `n` order.
+3. The N in "No conflicts found in N pages checked" comes from the plant's `page_count` in the result, never computed in the browser.
+4. The long-read prompt is built from `pages_all.json`, so it is byte-identical across runs (automatic cache). Every step ends in a commit with `pytest -q` green. Claude Code never runs anything that needs the Gemini key; Bhargavi runs every live call and pastes back only printed output.
 
 Clock: starts ~13:00. **Deploy 1 by 13:20. Cut-line 14:00.** Anything not working at 14:00 moves to the first 15 minutes of phase 3; the drawing starts by 14:30.
 

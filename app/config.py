@@ -24,12 +24,14 @@ SETTING_NAMES = (
     "FIRESTORE_DATABASE",
     "ACCESS_CODE",
     "APP_VERSION",
+    "STORE",
 )
 
 DEFAULTS = {
     "GCP_REGION": "us-central1",
     "FIRESTORE_DATABASE": "(default)",
     "APP_VERSION": "dev",
+    "STORE": "gcp",
 }
 
 
@@ -78,3 +80,8 @@ class Settings:
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
     return Settings()
+
+
+def get_access_code() -> str:
+    """The shared access code, or "" when unset (protected routes then answer 503)."""
+    return get_settings().get("ACCESS_CODE")
