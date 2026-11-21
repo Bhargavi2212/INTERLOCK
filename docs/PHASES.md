@@ -110,6 +110,14 @@ Status: not started
 
 **Done when:** every cell in `EVAL.md` §5 holds a number from today's runs or "n/a", and each key was committed before its run.
 
+**Also in phase 5 (from the review before phase 4, 21 Nov):**
+- **Role-based stricter band (10):** when the line's role is unstated or disputed, use the stricter of the document bands that could apply.
+- **"Incomplete" verdict (7d):** a failed values step (or no values at all) gives an explicit incomplete verdict instead of a REVIEW built on nothing.
+- **Count next to its marker (7e):** a count must sit next to "nos", "W", "S" or a number word in the quote, not just appear anywhere in it.
+- **Cold and warm timing (9):** report both: the first check on a plant (no cache) and a check within a few minutes of another (cache).
+- **Guard tests (review item 6):** parse each RULES.md case into inputs, value and status; assert tolerance and live; ban http/subprocess/app.store imports; scan engine.py and verdict.py.
+- **`EVAL.md` §6 note (7c):** pages kept only because the same-item confidence was low ("uncertain") and what keeping them costs.
+
 ## Phase 6 — Ship (16:15-16:45)
 
 Status: not started
