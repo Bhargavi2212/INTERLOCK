@@ -186,6 +186,9 @@ def r2_standby(ins, rule_cfg, rules, doc_limits):
     else:
         raise HeldInput("working", "missing")
 
+    if ins.has("standby_required") and getattr(ins.raw["standby_required"], "source", "") in ("change", "fix"):
+        # RULES.md R2: never from the change or a fix; treated as not given
+        ins.raw = {k: v for k, v in ins.raw.items() if k != "standby_required"}
     if ins.has("standby_required"):
         standby = ins.num("standby_required")
         source = f"stated ({ins.pages()})"

@@ -3,6 +3,8 @@
 from app.rules.engine import INPUT_QUANTITY
 
 INPUT_NAMES = sorted(INPUT_QUANTITY)
+# A change never states the standby requirement (RULES.md R2: from the documents or the default).
+CHANGE_INPUTS = [n for n in INPUT_NAMES if n != "standby_required"]
 STR = {"type": "string"}
 INT = {"type": "integer"}
 NUM = {"type": "number"}
@@ -17,7 +19,7 @@ UNDERSTAND = {
         "is_pump_item": {"type": "boolean"},
         "changes": {"type": "array", "items": {
             "type": "object",
-            "properties": {"input": {"type": "string", "enum": INPUT_NAMES}, "from": STR, "to": STR, "unit": STR},
+            "properties": {"input": {"type": "string", "enum": CHANGE_INPUTS}, "from": STR, "to": STR, "unit": STR},
             "required": ["input", "to", "unit"]}},
     },
     "required": ["item", "names", "system", "unit_tag", "is_pump_item", "changes"],

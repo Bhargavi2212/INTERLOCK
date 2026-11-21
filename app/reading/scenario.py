@@ -172,7 +172,9 @@ def change_values(changes: list[dict], change_text: str) -> dict:
         if name in INPUT_QUANTITY and c.get("to") not in (None, ""):
             out[name] = Value(c["to"], c.get("unit", "") or "", quote=change_text, source="change")
     # A changed arrangement gives the working count only; the standby requirement stays
-    # the documents' arrangement or the default (RULES.md R2), so it is not passed on.
+    # the documents' arrangement or the default (RULES.md R2), so neither a changed
+    # arrangement nor a changed standby_required ("no spare") is passed on.
+    out.pop("standby_required", None)
     arrangement = out.pop("arrangement", None)
     if arrangement is not None and "working" not in out:
         try:

@@ -186,3 +186,30 @@ def test_doc_limit_rule_id_set_by_code_not_model():
                         "line_role": Value("discharge header", "", file="b", page=1, quote="200NB", source="drawing",
                                            box=(0, 0, 1, 1))}, lims)
     assert r.limit == 2.4 and r.status == "OK" and r.notes      # header row, 1.86 below 2.1 -> note
+
+
+def test_change_saying_no_spare_never_sets_standby():
+    """Made-up case (not a set E text): 'replace the three pumps with one, no spare'. A change
+    never sets the standby requirement (RULES.md R2); it stays the documents' 2W+1S -> flagged."""
+    vals = [d("installed", "3", "nos", "Doc.pdf", 1), d("arrangement", "2W+1S", "", "Doc.pdf", 1)]
+    changes = [{"input": "installed", "from": "3", "to": "1", "unit": "count"},
+               {"input": "standby_required", "from": "", "to": "false", "unit": ""}]
+    sc = build_scenario(vals, [], changes, "replace the three pumps with one pump and no spare")
+    assert "standby_required" not in sc["after"]["R2"]
+    r2 = next(r for r in run_rules(sc["after"], []) if r.rule_id == "R2")
+    assert r2.status == "flagged" and "installed 1 < working 2 + standby 1" in r2.message
+
+
+def test_engine_ignores_standby_from_change_or_fix():
+    from app.rules import run_rule
+    from tests.rules.conftest import v as rv
+    for src in ("change", "fix"):
+        r = run_rule("R2", {"installed": rv(1, "count"), "working": rv(1, "count"),
+                            "standby_required": rv(0, "count", source=src)})
+        assert r.status == "flagged" and "continuous duty assumed" in " ".join(r.assumptions)
+
+
+def test_understanding_schema_excludes_standby_required():
+    from app.reading import schemas
+    enum = schemas.UNDERSTAND["properties"]["changes"]["items"]["properties"]["input"]["enum"]
+    assert "standby_required" not in enum and "installed" in enum
