@@ -21,7 +21,7 @@ How we know Interlock works, measured against simple baselines, on inputs we did
 | **A. BHEL changes** | 3 changes on the BHEL Lara tender (851 pages): SG Unit-1 floor wash pumps, PT filter backwash pumps, MRS Unit-1 waste water pumps | Text search for every name **plus** every P&ID and data-sheet page of that system read by a person, committed in phase 1, before phase 2 runs | **Development set:** used while building and to set the Decisions API threshold, so not counted as unseen |
 | **B. P&ID locate** | 5 items on BHEL P&ID D3-146: SG Unit-1 floor wash pumps, SG Unit-2 floor wash pumps (look-alike), MRS Unit-1 waste water pumps, transformer yard Unit-2 oily waste pumps, SG Unit-3 floor wash pumps (does not exist) | True label position from the PDF's own text layer (D3-146 has one). No model. Committed in phase 1 | Drawing accuracy |
 | **D. Rules** | Every test case in `RULES.md` | Worked by hand | Math correctness |
-| **E. Unseen changes** | 3-5 changes on BHEL written today by other people at the event | Written by each change's author with Bhargavi and committed in phase 0, before any run | **The unseen test.** Problem Statement One's core |
+| **E. Unseen changes** | E1-E5: changes written by a separate Claude session from the BHEL pages, which did not see Interlock's code, prompts or results; never used while building; keys confirmed by Bhargavi. E6+: changes written by people at the event, if collected. | Committed before any system runs on them (E1-E5: 21 Nov, before phase 2) | **The unseen test.** Problem Statement One's core |
 | **F. Math from the documents** | 3 calculations on BHEL values (e.g. floor-wash discharge velocity against D5-200) | Input values read from the pages by a person, worked by hand, committed in phase 1, before any run | Code math vs one Gemini call's math |
 
 Public source: BHEL tender PE-TS-508-404-W001 (Lara STPP Stage-II water treatment packages). Local copies live in `data/bhel/` (git-ignored).
@@ -118,3 +118,4 @@ Filled in honestly as results arrive. Known limits:
 - **Values whose unit is not printed** next to them are held, not guessed.
 - **Consequences** only reach items the documents connect by name or off-page arrow; anything not written down is invisible.
 - **Parallel pump flow** is an upper bound (`RULES.md` R1).
+- **Set E authorship:** E1-E5: changes written by a separate Claude session from the BHEL pages, which did not see Interlock's code, prompts or results; never used while building; keys confirmed by Bhargavi. E6+: changes written by people at the event, if collected. E1-E5 are therefore not changes written by people at the event.

@@ -1,0 +1,84 @@
+{
+ "id": "E3",
+ "author": "Claude (independent reviewer, did not build Interlock; replace with a person's name and words if one writes it)",
+ "written_at": "12:40",
+ "change": "Change the COT/DOT waste water transfer pumps from 2 m3/hr to 5 m3/hr each.",
+ "expected_pages": [
+  {
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "file": "Part1.pdf",
+   "page": 45
+  },
+  {
+   "file": "Part4.pdf",
+   "page": 54
+  },
+  {
+   "file": "Part3.pdf",
+   "page": 146
+  }
+ ],
+ "expected_values": [
+  {
+   "attribute": "working pumps",
+   "value": "1",
+   "unit": "count",
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "attribute": "standby pumps",
+   "value": "1",
+   "unit": "count",
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "attribute": "working pumps",
+   "value": "1",
+   "unit": "count",
+   "file": "Part4.pdf",
+   "page": 54
+  },
+  {
+   "attribute": "standby pumps",
+   "value": "1",
+   "unit": "count",
+   "file": "Part4.pdf",
+   "page": 54
+  },
+  {
+   "attribute": "rated capacity, each",
+   "value": "2",
+   "unit": "m3/h",
+   "file": "Part4.pdf",
+   "page": 54
+  },
+  {
+   "attribute": "rated capacity",
+   "value": "2",
+   "unit": "m3/h",
+   "file": "Part3.pdf",
+   "page": 146
+  },
+  {
+   "attribute": "sump effective capacity",
+   "value": "1",
+   "unit": "m3",
+   "file": "Part4.pdf",
+   "page": 54
+  },
+  {
+   "attribute": "sump capacity",
+   "value": "1",
+   "unit": "m3",
+   "file": "Part3.pdf",
+   "page": 146
+  }
+ ],
+ "documents_disagree": false,
+ "expected_verdict": "REVIEW"
+}

@@ -1,0 +1,91 @@
+{
+ "id": "E2",
+ "author": "Claude (independent reviewer, did not build Interlock; replace with a person's name and words if one writes it)",
+ "written_at": "12:40",
+ "change": "Make one of the two SG unit 2 floor wash pumps a standby, so it is 1 working and 1 standby.",
+ "expected_pages": [
+  {
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "file": "Part1.pdf",
+   "page": 45
+  },
+  {
+   "file": "Part4.pdf",
+   "page": 58
+  },
+  {
+   "file": "Part3.pdf",
+   "page": 146
+  }
+ ],
+ "expected_values": [
+  {
+   "attribute": "working pumps",
+   "value": "1",
+   "unit": "count",
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "attribute": "standby pumps",
+   "value": "1",
+   "unit": "count",
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "attribute": "working pumps",
+   "value": "2",
+   "unit": "count",
+   "file": "Part4.pdf",
+   "page": 58
+  },
+  {
+   "attribute": "standby pumps",
+   "value": "0",
+   "unit": "count",
+   "file": "Part4.pdf",
+   "page": 58
+  },
+  {
+   "attribute": "working pumps",
+   "value": "2",
+   "unit": "count",
+   "file": "Part3.pdf",
+   "page": 146
+  },
+  {
+   "attribute": "rated capacity, each",
+   "value": "105",
+   "unit": "m3/h",
+   "file": "Part4.pdf",
+   "page": 58
+  },
+  {
+   "attribute": "rated capacity",
+   "value": "105",
+   "unit": "m3/h",
+   "file": "Part3.pdf",
+   "page": 146
+  },
+  {
+   "attribute": "sump effective capacity",
+   "value": "105",
+   "unit": "m3",
+   "file": "Part4.pdf",
+   "page": 58
+  },
+  {
+   "attribute": "discharge line size",
+   "value": "200",
+   "unit": "NB",
+   "file": "Part3.pdf",
+   "page": 146
+  }
+ ],
+ "documents_disagree": true,
+ "expected_verdict": "BLOCK"
+}

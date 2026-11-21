@@ -62,7 +62,7 @@ The BHEL floor-wash change above. Expected behaviour (rules and numbers from `RU
 ## 6. Success today
 
 - Every number in the proof table (`EVAL.md`) produced by code written today, except the "By hand" column (a timed person).
-- The unseen test (`EVAL.md` set E): changes written by other people today, keys committed before any run.
+- The unseen test (`EVAL.md` set E, authorship disclosed there): changes Interlock never saw while building, keys committed before any run.
 - The demo case works live on the deployed product, on a change typed by a judge.
 - At least one honest "where it fails" line.
 
