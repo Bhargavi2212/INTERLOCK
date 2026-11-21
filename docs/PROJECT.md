@@ -42,7 +42,7 @@ Input: the plant's documents, uploaded as **a whole folder or several individual
 The BHEL floor-wash change above. Expected behaviour (rules and numbers from `RULES.md`; pages from `EVAL.md` key A1):
 
 - **Pages found:** scope (1W+1S), data sheet (2W), P&ID (2W). The documents already disagree.
-- **Velocity limit comes from the tender itself:** BHEL D5-200 limits pump discharge lines of 200 mm and above to 2.5 m/s (2.1 m/s lower value, information only).
+- **Velocity limit comes from the tender itself:** the BHEL D5-200 pump discharge band for this line size (`RULES.md` R1).
 - **The drawing decides the line:** the P&ID (drawing D3-146, `Part3.pdf` p.146) shows both pump discharges joining one 200 NB header; there is no 100 NB line on this system.
 - **The change:** two pumps running into the shared 200 NB header is 1.86 m/s (an upper bound for parallel pumps): **OK**, with an information note that it is below the 2.1 m/s lower value. Velocity does not block this change. (The shared header is read from the drawing in phase 3; until then R1 is **held**: "documents do not state in text whether the pumps share one discharge line".)
 - **Standby:** the data sheet as issued has 2 pumps installed. The change as written (2W+1S) needs 3 installed: 2 < 2 + 1 → **flagged**.

@@ -9,6 +9,10 @@
    "page": 43
   },
   {
+   "file": "Part1.pdf",
+   "page": 45
+  },
+  {
    "file": "Part4.pdf",
    "page": 56
   },
@@ -59,9 +63,16 @@
    "unit": "",
    "file": "Part3.pdf",
    "page": 146
+  },
+  {
+   "attribute": "discharge line size",
+   "value": "50",
+   "unit": "NB",
+   "file": "Part3.pdf",
+   "page": 146
   }
  ],
  "documents_disagree": false,
- "expected_verdict": "REVIEW",
- "notes": "Name differs between scope ('waste water') and data sheet ('oily waste water'): a same-item test. Look-alike: MRS Unit-2 pumps on the same pages. Line size for this pump not confirmed from the drawing -> R1 held unless found; R3 held (inflow not stated); R2 OK."
+ "expected_verdict": "BLOCK",
+ "notes": "Name differs between scope ('waste water') and data sheet ('oily waste water'): a same-item test. Look-alike: MRS Unit-2 pumps on the same pages. The P&ID shows a 50NB discharge; with 1 working pump at the changed 20 m3/h that is 2.83 m/s > 2.4 m/s (D5-200, 50-150 mm) -> R1 flagged -> BLOCK. R3 held (inflow not stated); R2 OK."
 }

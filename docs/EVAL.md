@@ -24,6 +24,8 @@ How we know Interlock works, measured against simple baselines, on inputs we did
 | **E. Unseen changes** | E1-E5: changes written by a separate Claude session from the BHEL pages, which did not see Interlock's code, prompts or results; never used while building; keys confirmed by Bhargavi. E6+: changes written by people at the event, if collected. | Committed before any system runs on them (E1-E5: 21 Nov, before phase 2) | **The unseen test.** Problem Statement One's core |
 | **F. Math from the documents** | 3 calculations on BHEL values (e.g. floor-wash discharge velocity against D5-200) | Input values read from the pages by a person, worked by hand, committed in phase 1, before any run | Code math vs one Gemini call's math |
 
+**How the keys were written (disclosure).** Sets A, B and F: drafted by Claude from text search and the PDF text layer (no Gemini call), confirmed by Bhargavi. Their `written_at` was corrected from 12:55 to 12:42 (when each file was first saved) after they were committed (commit `5859356`), before any run. Set E: see the set E row; E keys confirmed by Bhargavi; author field "Claude (separate session)".
+
 Public source: BHEL tender PE-TS-508-404-W001 (Lara STPP Stage-II water treatment packages). Local copies live in `data/bhel/` (git-ignored).
 
 | # | File | Pages |
@@ -118,4 +120,5 @@ Filled in honestly as results arrive. Known limits:
 - **Values whose unit is not printed** next to them are held, not guessed.
 - **Consequences** only reach items the documents connect by name or off-page arrow; anything not written down is invisible.
 - **Parallel pump flow** is an upper bound (`RULES.md` R1).
-- **Set E authorship:** E1-E5: changes written by a separate Claude session from the BHEL pages, which did not see Interlock's code, prompts or results; never used while building; keys confirmed by Bhargavi. E6+: changes written by people at the event, if collected. E1-E5 are therefore not changes written by people at the event.
+- **Set E authorship:** E1-E5: changes written by a separate Claude session from the BHEL pages, which did not see Interlock's code, prompts or results; never used while building; keys confirmed by Bhargavi. E6+: changes written by people at the event, if collected. E1-E5 are therefore not changes written by people at the event; their keys were confirmed by Bhargavi.
+- **Key authorship:** sets A, B and F were drafted by Claude from text search and the PDF text layer (no Gemini call) and confirmed by Bhargavi; `written_at` corrected from 12:55 to 12:42 after commit (`5859356`), before any run.

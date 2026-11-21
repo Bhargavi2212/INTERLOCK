@@ -1,6 +1,6 @@
 {
  "id": "E4",
- "author": "Claude (independent reviewer, did not build Interlock; replace with a person's name and words if one writes it)",
+ "author": "Claude (separate session)",
  "written_at": "12:40",
  "change": "Add a third sludge sump transfer pump as a second standby (1 working + 2 standby).",
  "expected_pages": [
@@ -87,5 +87,5 @@
   }
  ],
  "documents_disagree": false,
- "expected_verdict": "REVIEW"
+ "expected_verdict": "BLOCK"
 }
