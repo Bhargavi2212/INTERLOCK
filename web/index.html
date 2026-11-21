@@ -11,6 +11,12 @@
     <h1>Interlock</h1>
     <p class="tagline">No plant change is signed off until every document agrees, and the numbers still work.</p>
     <p class="version">version <span id="version">…</span></p>
+    <form id="access" class="row" hidden>
+      <label for="access-code">Access code</label>
+      <input id="access-code" type="password" autocomplete="current-password">
+      <button type="submit">Enter</button>
+      <span id="access-msg" class="access-msg" role="alert"></span>
+    </form>
   </header>
 
   <main>

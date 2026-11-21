@@ -9,22 +9,40 @@ const store = {
 };
 
 // ------------------------------------------------------------ access code + API
+// In-page field at the top (no pop-ups); the code lives in sessionStorage only.
+function askForCode(message) {
+  $("access").hidden = false;
+  $("access-msg").textContent = message || "";
+  $("access-code").focus();
+}
+
 function accessCode() {
-  let code = store.get("access_code", true);
-  if (!code) {
-    code = (prompt("Access code") || "").trim();
-    if (code) store.set("access_code", code, true);
-  }
+  const code = store.get("access_code", true);
+  if (!code) { askForCode(); throw new Error("access code needed"); }
   return code;
 }
 
-async function api(path, opts = {}, retried = false) {
+function rejected(res) {
+  if (res.status !== 401) return false;
+  store.del("access_code", true);
+  askForCode("wrong or missing code");
+  return true;
+}
+
+$("access").onsubmit = (e) => {
+  e.preventDefault();
+  const code = $("access-code").value.trim();
+  if (!code) { askForCode("wrong or missing code"); return; }
+  store.set("access_code", code, true);
+  $("access-code").value = "";
+  $("access").hidden = true;
+  showPlant().then(loadPlants).then(loadRegister);
+};
+
+async function api(path, opts = {}) {
   const headers = { "X-Access-Code": accessCode(), ...(opts.body ? { "Content-Type": "application/json" } : {}) };
   const res = await fetch(path, { ...opts, headers });
-  if (res.status === 401 && !retried) {
-    store.del("access_code", true);
-    return api(path, opts, true);
-  }
+  if (rejected(res)) throw new Error("401 wrong or missing code");
   if (!res.ok) throw new Error(`${res.status} ${(await res.json().catch(() => ({}))).detail || ""}`.trim());
   return res.json();
 }
@@ -38,7 +56,7 @@ async function loadPlants() {
     $("plant-pick").innerHTML = `<option value="">Open a plant…</option>` + plants.map((p) =>
       `<option value="${p.plant_id}" ${p.plant_id === plantId ? "selected" : ""}>${
         String(p.name).replace(/[<>&"]/g, "")} — ${p.page_count} pages, ${p.files} files (${p.plant_id})</option>`).join("");
-  } catch (e) { /* access code prompt handles 401 */ }
+  } catch (e) { /* the access field handles 401 */ }
 }
 
 $("plant-pick").onchange = (e) => {
@@ -226,6 +244,7 @@ function calcRows(results, label) {
 
 async function fetchPng(path) {
   const r = await fetch(path, { headers: { "X-Access-Code": accessCode() } });
+  if (rejected(r)) throw new Error("401 wrong or missing code");
   if (!r.ok) throw new Error(`${r.status}`);
   return URL.createObjectURL(await r.blob());
 }
@@ -408,4 +427,5 @@ function showError(e) { $("upload-status").textContent = `Error: ${e.message}`; 
 
 fetch("/health").then((r) => r.json()).then((d) => { $("version").textContent = d.version; })
   .catch(() => { $("version").textContent = "unavailable"; });
-showPlant().then(loadPlants).then(loadRegister);
+if (!store.get("access_code", true)) askForCode();
+else showPlant().then(loadPlants).then(loadRegister);

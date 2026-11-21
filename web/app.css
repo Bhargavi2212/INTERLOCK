@@ -18,7 +18,9 @@ h2 { font-size: 1.1rem; margin: 0 0 8px; }
 .version, .muted { color: var(--muted); font-size: .85rem; }
 section { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px; margin: 14px 0; }
 .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-input[type=text], input:not([type]), textarea { font: inherit; padding: 6px 8px; border: 1px solid var(--line);
+[hidden] { display: none !important; }
+.access-msg { color: var(--bad); font-size: .9rem; }
+input[type=text], input[type=password], input:not([type]), textarea { font: inherit; padding: 6px 8px; border: 1px solid var(--line);
        border-radius: 6px; background: var(--bg); color: var(--fg); min-width: 0; flex: 1 1 220px; }
 button, .button { font: inherit; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--accent);
        background: var(--accent); color: #fff; cursor: pointer; display: inline-block; }
