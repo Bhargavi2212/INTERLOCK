@@ -90,6 +90,14 @@ def create_plant(body: NewPlant) -> dict:
     return {"plant_id": plant["plant_id"]}
 
 
+@api.get("/plants")
+def list_plants() -> list[dict]:
+    plants = sorted(get_store().list_plants(), key=lambda p: p.get("created_at", ""), reverse=True)
+    return [{"plant_id": p["plant_id"], "name": p.get("name"), "page_count": p.get("page_count", 0),
+             "ingest_status": p.get("ingest_status"), "files": len(p.get("files", [])),
+             "created_at": p.get("created_at")} for p in plants]
+
+
 @api.get("/plants/{plant_id}")
 def get_plant(plant_id: str) -> dict:
     return _plant_or_404(plant_id)

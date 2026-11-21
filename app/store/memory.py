@@ -32,6 +32,9 @@ class MemoryStore:
         p = self.plants.get(plant_id)
         return copy.deepcopy(p) if p else None
 
+    def list_plants(self):
+        return [copy.deepcopy(p) for p in self.plants.values()]
+
     def mutate_plant(self, plant_id, fn):
         with self._lock:
             p = self.plants[plant_id]

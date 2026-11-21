@@ -32,12 +32,33 @@ async function api(path, opts = {}, retried = false) {
 // ------------------------------------------------------------ plant
 let plantId = store.get("plant_id");
 
+async function loadPlants() {
+  try {
+    const plants = await api("/plants");
+    $("plant-pick").innerHTML = `<option value="">Open a plant…</option>` + plants.map((p) =>
+      `<option value="${p.plant_id}" ${p.plant_id === plantId ? "selected" : ""}>${
+        String(p.name).replace(/[<>&"]/g, "")} — ${p.page_count} pages, ${p.files} files (${p.plant_id})</option>`).join("");
+  } catch (e) { /* access code prompt handles 401 */ }
+}
+
+$("plant-pick").onchange = (e) => {
+  if (!e.target.value) return;
+  plantId = e.target.value;
+  store.set("plant_id", plantId);
+  $("result").hidden = true;
+  showPlant();
+};
+
 async function showPlant() {
   if (!plantId) { $("plant-info").textContent = "No plant selected."; return null; }
   try {
     const p = await api(`/plants/${plantId}`);
     $("plant-info").textContent =
       `${p.name} — ${p.page_count} pages, ingest ${p.ingest_status}, ${p.files.length} files (id ${p.plant_id})`;
+    const body = $("files").querySelector("tbody");
+    body.innerHTML = "";
+    p.files.forEach((f) => row(f.relative_path, `${f.status}${f.pages ? `, ${f.pages} pages` : ""}${f.error ? ` (${f.error})` : ""}`,
+      f.status === "ingested" ? "accepted" : f.status === "failed" || f.status === "missing" ? "failed" : ""));
     return p;
   } catch (e) {
     $("plant-info").textContent = `Plant ${plantId}: ${e.message}`;
@@ -51,7 +72,9 @@ $("new-plant").onclick = async () => {
   plantId = r.plant_id;
   store.set("plant_id", plantId);
   $("files").querySelector("tbody").innerHTML = "";
-  showPlant();
+  $("plant-name").value = "";
+  await showPlant();
+  loadPlants();
 };
 
 // ------------------------------------------------------------ collecting files
@@ -167,6 +190,7 @@ async function ingest(failed) {
     if (j.state === "done" || j.state === "failed") {
       if (j.state === "failed") $("ingest-status").textContent += ` — ${j.error}`;
       const plant = await showPlant();
+      loadPlants();
       if (plant && j.state === "done") $("ingest-status").textContent = `Ingest done: ${plant.page_count} pages in this plant.`;
       return;
     }
@@ -255,4 +279,4 @@ function showError(e) { $("upload-status").textContent = `Error: ${e.message}`; 
 
 fetch("/health").then((r) => r.json()).then((d) => { $("version").textContent = d.version; })
   .catch(() => { $("version").textContent = "unavailable"; });
-showPlant();
+showPlant().then(loadPlants);

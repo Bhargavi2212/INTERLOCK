@@ -53,3 +53,13 @@ def test_windows_backslashes_normalised(api):
 
 def test_unknown_plant_404(api):
     assert api.post("/plants/nope/files", json=[]).status_code == 404
+
+
+def test_list_plants_newest_first(api, store):
+    a = new_plant(api)
+    b = new_plant(api)
+    store.mutate_plant(a, lambda d: d.update(created_at="2026-11-21T10:00:00+00:00"))
+    store.mutate_plant(b, lambda d: d.update(created_at="2026-11-21T11:00:00+00:00"))
+    listed = api.get("/plants").json()
+    assert [p["plant_id"] for p in listed][:2] == [b, a]
+    assert set(listed[0]) == {"plant_id", "name", "page_count", "ingest_status", "files", "created_at"}

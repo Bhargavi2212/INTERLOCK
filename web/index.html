@@ -17,9 +17,12 @@
     <section id="plant">
       <h2>Plant</h2>
       <div class="row">
-        <input id="plant-name" placeholder="Plant name, e.g. BHEL Lara" autocomplete="off">
-        <button id="new-plant">New plant</button>
+        <select id="plant-pick" aria-label="Open a plant"><option value="">Open a plant…</option></select>
         <span id="plant-info" class="muted">No plant selected.</span>
+      </div>
+      <div class="row">
+        <input id="plant-name" placeholder="New plant name, e.g. BHEL Lara" autocomplete="off">
+        <button id="new-plant">New plant</button>
       </div>
     </section>
 

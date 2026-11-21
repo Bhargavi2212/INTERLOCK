@@ -47,6 +47,9 @@ class GcpStore:
         snap = self._plant_ref(plant_id).get()
         return snap.to_dict() if snap.exists else None
 
+    def list_plants(self):
+        return [d.to_dict() for d in self.db.collection("plants").stream()]
+
     def mutate_plant(self, plant_id, fn):
         # One Cloud Run instance today (ARCHITECTURE section 7): a process lock is enough.
         with self._lock:
