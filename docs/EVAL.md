@@ -102,15 +102,28 @@ The only home of these numbers. Raw outputs behind each cell: `eval/results/`.
 
 | Metric | Keyword | One call | By hand | Interlock |
 |---|---|---|---|---|
-| Set E page recall (worst of 3) | | | n/a | |
-| Set E wrong pages | | | n/a | |
-| Set A page recall (dev set) | | | | |
-| Same-item check precision / recall | n/a | n/a | n/a | Set A (dev set, threshold chosen on it): threshold **0.25**, precision 1.00 / recall 1.00 over the 19 candidate pages (10 key, 9 not); at the starting 0.5: 1.00 / 0.90 (A1 Part1 p.45, P(yes) 0.385, rejected). Key pages 0.385-0.94, non-key ≤ 0.081. Recall counts candidates only: a key page never found (A3 Part1 p.45) is a page-recall miss. Raw: `eval/results/run_2a419c376ac4.json`, `run_c4de3b150649.json`, `run_50d3d8363f83.json`. Set E: pending (threshold frozen) |
-| Set B drawing hits | n/a | | n/a | |
-| Set F math correct | n/a | | | |
-| Fix proven / refused correctly | n/a | n/a | n/a | |
-| Clash caught | n/a | n/a | n/a | |
-| Time per change | | | | |
+| Set E page recall (worst of 3, mean of 5 changes) | 0.43 | 0.90 | n/a | 0.90 |
+| Set E wrong pages (worst of 3, summed over 5 changes) | 0 | 8 | n/a | 6 (rerun: 11) |
+| Set E value accuracy (worst of 3) | 0.00 | 0.79 | n/a | 0.93 |
+| Set E evidence (quotes found on the cited page) | n/a | 108 / 111 | n/a | 197 / 200 |
+| Set E verdict matches key | 0 / 5 | 14 / 15 | n/a | 11 / 15 (rerun: 12 / 15) |
+| Set A page recall (dev set) | 0.23 | 0.93 | n/a (not run) | 0.92 |
+| Set A verdict matches key (dev set) | 0 / 3 | 2 / 3 | n/a (not run) | 3 / 3 |
+| Same-item check precision / recall | n/a | n/a | n/a | 1.00 / 1.00 on set A (dev set; threshold 0.25 chosen on it): 10 of 10 key candidate pages kept |
+| Set B drawing hits | n/a | n/a (not run) | n/a | 5 / 5 on the demo plant (`b_141730.json`); 1 / 5 on the eval plant, which was not re-ingested after the phase 3 fix (see note) |
+| Set F math correct | n/a | 1 / 3 | n/a (not run) | 3 / 3 |
+| Fix proven / refused correctly | n/a | n/a | n/a | Demo case, not a test set: the third-pump fix proposed and proven by the server once (job `10e4b042f88f`). Of 6 fix jobs on the demo plant: 1 proven, 3 refused, 2 failed with errors since fixed. The impossible-change refusal is shown by tests only |
+| Clash caught | n/a | n/a | n/a | 1 / 1 demo case ("remove the third pump" BLOCKed by the register) |
+| Time per change (median; first run on the plant) | 9 s; 10 s | 45 s; n/a | n/a (not run) | 61 s; 69 s |
+
+Notes, from `eval/results/scores.json` (written by `scripts/score_eval.py`; no number here is typed from memory):
+
+- **Runs.** Baselines and Interlock's first runs: 14:46-15:25 on plant `27d049ccd64f`. Interlock rerun: 15:56-16:17 on the same plant, at the code of the first runs (`fc7dadb`). Every key was committed before every run (last key commit 14:03).
+- **The drawing step was inactive in every set E and set A run, first and rerun.** The eval plant was not re-ingested after the phase 3 word-position fix, so its pages carried no drawing flag ("no drawing page among the pages found" in all 36 Interlock runs). These rows measure Interlock without its drawing step. Set B on a correctly ingested plant: 5 / 5.
+- **Runs predate two fixes** and are scored as measured, with no set E rerun on the fixed code: `42de01d` ("no spare" not read as a standby requirement; E5 said REVIEW, key BLOCK, in all runs) and the drawing fix above.
+- **Value matching is generous to the one-call baseline:** a returned string such as "Three (2W+1S)" contains several numbers and can match more than one key value.
+- **Set F, one call:** F1 computed 1.86 m/s correctly but called it flagged (key: OK); F3 returned 1 (key: 3); F2 correct.
+- **By hand** was not run.
 
 ## 6. Where it still fails
 
