@@ -1,0 +1,102 @@
+[
+ {
+  "id": "B1",
+  "query": "SG Unit-1 floor wash water transfer pumps",
+  "hit": true,
+  "distance": 0.004816637831516941,
+  "found": true,
+  "check": "item label 'SG UNIT-1 FLR WASH WTR TRANSFER PUMPS' found in the box",
+  "label_box": [
+   0.7693,
+   0.7806,
+   0.8029,
+   0.799
+  ],
+  "key_box": [
+   0.7694,
+   0.7809,
+   0.802,
+   0.7891
+  ],
+  "anchor": "SG UNIT-1 FLR WASH WTR TRANSFER PUMPS",
+  "why": "The SG Unit-1 floor wash water transfer pumps (CAPACITY : 105M3/HR (2W)) located in sump E8 join into a common discharge line going to Ash Slurry Sump Unit-1 labeled 200NB."
+ },
+ {
+  "id": "B2",
+  "query": "SG Unit-2 floor wash water transfer pumps",
+  "hit": true,
+  "distance": 0.004422951503238499,
+  "found": true,
+  "check": "item label 'SG UNIT-2 FLR WASH WTR TRANSFER PUMPS' found in the box",
+  "label_box": [
+   0.8996,
+   0.7797,
+   0.9352,
+   0.8005
+  ],
+  "key_box": [
+   0.9006,
+   0.7815,
+   0.9333,
+   0.7899
+  ],
+  "anchor": "SG UNIT-2 FLR WASH WTR TRANSFER PUMPS",
+  "why": "Located 'SG UNIT-2 FLR WASH WTR TRANSFER PUMPS' with capacity 105M3/HR (2W); both pumps discharge into a common 200NB header."
+ },
+ {
+  "id": "B3",
+  "query": "MRS Unit-1 waste water transfer pumps",
+  "hit": true,
+  "distance": 0.00535373701259232,
+  "found": true,
+  "check": "item label 'MRS UNIT-1 WASTE WATER TRANSFER PUMPS' found in the box",
+  "label_box": [
+   0.27765,
+   0.75795,
+   0.31645,
+   0.77555
+  ],
+  "key_box": [
+   0.2774,
+   0.7582,
+   0.3106,
+   0.7665
+  ],
+  "anchor": "MRS UNIT-1 WASTE WATER TRANSFER PUMPS",
+  "why": "The MRS Unit-1 waste water transfer pumps are located in the middle of the drawing, labelled 'MRS UNIT-1 WASTE WATER TRANSFER PUMPS' with capacity 10 M3/HR (1W+1S), and their discharge lines join a common 50NB header leading to NODE-5."
+ },
+ {
+  "id": "B4",
+  "query": "Transformer yard Unit-2 oily waste transfer pumps",
+  "hit": true,
+  "distance": 0.004612439701502886,
+  "found": true,
+  "check": "item label 'TRANSFORMER YARD UNIT-2 OILY WASTE TRANSFER PUMPS' found in the box",
+  "label_box": [
+   0.1132,
+   0.24586,
+   0.1524,
+   0.26306
+  ],
+  "key_box": [
+   0.1137,
+   0.2457,
+   0.1522,
+   0.254
+  ],
+  "anchor": "TRANSFORMER YARD UNIT-2 OILY WASTE TRANSFER PUMPS",
+  "why": "The image shows 'TRANSFORMER YARD UNIT-2 OILY WASTE TRANSFER PUMPS' with capacity 10 M3/HR (1W+1S), and both pumps discharge into a shared 65NB line before joining NODE-1."
+ },
+ {
+  "id": "B5",
+  "query": "SG Unit-3 floor wash water transfer pumps",
+  "hit": true,
+  "distance": null,
+  "found": false,
+  "check": "the model did not find the item on this sheet",
+  "label_box": null,
+  "key_box": null,
+  "anchor": null,
+  "why": "The drawing shows SG Unit-1 and SG Unit-2 floor wash water transfer pumps, as well as TG Unit-1A, 1B, 2A, and 2B floor wash water transfer pumps, but no SG Unit-3 floor wash water transfer pumps."
+ }
+]
