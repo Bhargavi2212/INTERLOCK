@@ -1,0 +1,20 @@
+{
+ "id": "F2",
+ "system": "one_call",
+ "started_at": "2026-11-21T15:56:47",
+ "seconds": 7.1,
+ "state": "done",
+ "error": null,
+ "output": {
+  "value": 30,
+  "unit": "min",
+  "status": "held",
+  "working": "Sump effective capacity V = 105 m3. Two working pumps (2W) each rated at 105 m3/h give total Q_out = 2 * 105 = 210 m3/h. Inflow Q_in is not stated in the specification, so full cycle time t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 cannot be computed (status: held). The computable zero-inflow pump-out time with both working pumps running is (V / Q_out) * 60 = (105 / 210) * 60 = 30 min (compared against a minimum cycle time limit of 60 / 6 = 10 min).",
+  "usage": {
+   "input": 1485,
+   "cached": 0,
+   "output": 224,
+   "thought": 0
+  }
+ }
+}

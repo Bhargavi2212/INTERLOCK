@@ -1,0 +1,20 @@
+{
+ "id": "F1",
+ "system": "one_call",
+ "started_at": "2026-11-21T15:56:38",
+ "seconds": 9.6,
+ "state": "done",
+ "error": null,
+ "output": {
+  "value": 1.86,
+  "unit": "m/s",
+  "status": "flagged",
+  "working": "Total flow Q = 2 * 105 = 210 m3/h = 0.058333 m3/s. For 200NB pipe: Nominal ID (200 mm) gives area = pi/4 * 0.2^2 = 0.031416 m2, v = 0.058333 / 0.031416 = 1.8568 m/s (~1.86 m/s). (Using Sch 40 ID = 202.7 mm: v = 1.81 m/s; using Sch 80 ID = 193.7 mm: v = 1.98 m/s). Across all diameter bases, the velocity (~1.81 - 1.98 m/s) falls below the specified velocity band of 2.1 - 2.5 m/s (or 2.1 - 2.4 m/s for header) for 200 mm & above pipes. Since the fluid contains ash traces (solids service), operating below the minimum recommended velocity risks solids settling in the header. Status is flagged.",
+  "usage": {
+   "input": 6760,
+   "cached": 0,
+   "output": 310,
+   "thought": 0
+  }
+ }
+}
