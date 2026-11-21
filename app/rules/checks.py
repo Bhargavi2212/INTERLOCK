@@ -209,8 +209,120 @@ def r3_sump(ins, rule_cfg, rules, doc_limits):
     return _result("R3", rule_cfg, status, t, "min", limit, source, msg, assumptions)
 
 
+# ---------------------------------------------------------------- R4 relief valve
+
+def r4_relief(ins, rule_cfg, rules, doc_limits):
+    tol = _tol(rules)
+    op = ins.num("operating")
+    set_p = ins.num("set")
+    design = ins.num("design")
+    ratio, source = default_limit(rule_cfg, "operating_to_set_max")
+    margin_limit = ratio * set_p
+
+    failures = []
+    if op > set_p or math.isclose(op, set_p, rel_tol=tol):
+        failures.append(f"set {set_p:g} at or below operating {op:g} bar(g): the valve lifts in normal operation")
+    elif _gt(op, margin_limit, tol):
+        failures.append(f"operating {op:g} > {ratio:g} x set = {margin_limit:.2f} bar(g): the valve simmers")
+    if _gt(set_p, design, tol):
+        failures.append(f"set {set_p:g} above design {design:g} bar(g): item not protected")
+
+    status = "flagged" if failures else "OK"
+    msg = "; ".join(failures) if failures else (
+        f"operating {op:g} <= {margin_limit:.2f} and set {set_p:g} <= design {design:g} bar(g)")
+    return _result("R4", rule_cfg, status, op, "bar(g)", margin_limit, source,
+                   f"{msg}; inputs {ins.pages()}")
+
+
+# ---------------------------------------------------------------- R5 design pressure
+
+def _shutoff_bar(ins, rules) -> float:
+    """Shut-off as a pressure, or a head in m converted with SG (water rule)."""
+    from app.rules.units import normalise
+
+    v = ins._value("shutoff_head")
+    if normalise(v.unit) != "m":
+        return ins.num("shutoff_head", "pressure")
+    head = ins.num("shutoff_head", "head")
+    if ins.has("sg"):
+        sg = ins.num("sg")
+    else:
+        service = _optional_text(ins, "service")
+        water = rules["rules"]["R5"]["water_services"]["value"]
+        solids = rules["rules"]["R1"]["solids_services"]["value"]
+        if service and matches_phrase(service, water) and not matches_phrase(service, solids):
+            sg = 1.0
+            ins.assumptions.append(f"SG 1.0 for water service '{service}'")
+        else:
+            why = f"service '{service}' is not a water service" if service else "service not stated"
+            raise HeldInput("sg", f"missing: head in m needs SG ({why}; no default SG)")
+    return head * rules["units"]["head_m_to_bar_per_sg"] * sg
+
+
+def r5_design_pressure(ins, rule_cfg, rules, doc_limits):
+    tol = _tol(rules)
+    design = ins.num("design")
+    if ins.has("max_suction") and ins.has("shutoff_head"):
+        suction = ins.num("max_suction")
+        shutoff = _shutoff_bar(ins, rules)
+        required = suction + shutoff
+        basis = f"pump basis: max suction {suction:g} + shut-off {shutoff:.2f} bar(g)"
+        source = f"stated ({ins.pages()})"
+    elif ins.has("operating"):
+        op = ins.num("operating")
+        factor, src_f = default_limit(rule_cfg, "margin_factor")
+        adder, _ = default_limit(rule_cfg, "margin_adder")
+        required = max(factor * op, op + adder)
+        basis = f"margin basis: max({factor:g} x {op:g}, {op:g} + {adder:g})"
+        source = src_f
+    else:
+        raise HeldInput("operating", "missing (and no max_suction + shutoff_head)")
+
+    status = "flagged" if _lt(design, required, tol) else "OK"
+    msg = f"design {design:g} vs required {required:.2f} bar(g) ({basis}); inputs {ins.pages()}"
+    return _result("R5", rule_cfg, status, design, "bar(g)", required, source, msg, [basis])
+
+
+# ---------------------------------------------------------------- R6 chemical dose
+
+def r6_dose(ins, rule_cfg, rules, doc_limits):
+    from app.rules.units import strength_kind
+
+    tol = _tol(rules)
+    dose = ins.num("dose")
+    q = ins.num("flow")
+    strength = ins.num("strength")
+    kind = strength_kind(ins.raw["strength"].unit)
+    kg_h = dose * q / 1000
+    if kind == "w/w":
+        if not ins.has("density"):
+            raise HeldInput("density", "missing: strength is w/w and there is no default density")
+        l_h = kg_h / (strength * ins.num("density"))
+    else:
+        l_h = kg_h / strength
+
+    lh_to_m3h = rules["units"]["flow"]["l/h"]
+    pump_min = ins.num("pump_min") / lh_to_m3h
+    pump_max = ins.num("pump_max") / lh_to_m3h
+
+    if _lt(l_h, pump_min, tol):
+        status, why = "flagged", f"below pump minimum {pump_min:g} L/h"
+        limit = pump_min
+    elif _gt(l_h, pump_max, tol):
+        status, why = "flagged", f"above pump maximum {pump_max:g} L/h"
+        limit = pump_max
+    else:
+        status, why = "OK", f"within pump range {pump_min:g}-{pump_max:g} L/h"
+        limit = pump_max
+    msg = f"{kg_h:.2f} kg/h active -> {l_h:.2f} L/h ({kind}), {why}; inputs {ins.pages()}"
+    return _result("R6", rule_cfg, status, l_h, "L/h", limit, f"pump range ({ins.pages()})", msg)
+
+
 CHECKS = {
     "R1": r1_velocity,
     "R2": r2_standby,
     "R3": r3_sump,
+    "R4": r4_relief,
+    "R5": r5_design_pressure,
+    "R6": r6_dose,
 }
