@@ -15,9 +15,13 @@ same_item:
   mode: decisions                 # decisions | names (fallback)
   threshold: 0.5                  # set once on set A, frozen for set E
   min_confidence: 0.6
+  max_input_tokens: 262144        # Decisions API input limit per call
+  max_pages_per_call: 20
 long_read:
   token_limit: 1048576
   chars_per_token_estimate: 4
+values:
+  design_basis_pages: 5            # top pages with 'velocity' and 'm/s' added to the values call
 thinking:                          # every call starts low (PHASE_2 Amendments A4)
   understand: low
   long_read: low
