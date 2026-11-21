@@ -218,7 +218,44 @@ function calcRows(results, label) {
     <td>${r.limit == null ? "" : esc(Number(r.limit).toFixed(2))}<div class="small">${esc(r.limit_source)}</div></td>
     <td><div>${esc(r.message)}</div><div class="small">${esc(r.formula)}</div>
       ${(r.assumptions || []).map((a) => `<div class="small">assumes: ${esc(a)}</div>`).join("")}
-      ${(r.notes || []).map((n) => `<div class="small">note: ${esc(n)}</div>`).join("")}</td></tr>`).join("");
+      ${(r.notes || []).map((n) => `<div class="small">note: ${esc(n)}</div>`).join("")}
+      <div class="small">${Object.entries(r.inputs || {}).filter(([, v]) => v && v.value !== undefined).map(([k, v]) =>
+        `${esc(k)}=${esc(v.value)} ${esc(v.unit || "")} [${esc(v.source)}${v.file ? " " + esc(v.file) + " p." + esc(v.page) : ""}]`).join(" · ")}</div></td></tr>`).join("");
+}
+
+async function fetchPng(path) {
+  const r = await fetch(path, { headers: { "X-Access-Code": accessCode() } });
+  if (!r.ok) throw new Error(`${r.status}`);
+  return URL.createObjectURL(await r.blob());
+}
+
+async function showDrawing(res) {
+  const d = res.drawing || {};
+  const el = $("drawing");
+  if (!d.image && !d.readings?.length) {
+    el.innerHTML = `<p class="muted">No drawing: ${esc(d.reason || d.check || "not found")}</p>`;
+    return;
+  }
+  const rows = (d.readings || []).map((r) => `<tr><td>${esc(r.input)}</td><td>${esc(r.value)} ${esc(r.unit || "")}</td>
+    <td>"${esc(r.quote)}"</td><td>${r.evidence_ok ? '<span class="ok-mark">verified ✓</span>'
+      : `<span class="bad-mark">not verified</span> <span class="small">${esc(r.evidence_reason)}</span>`}</td></tr>`).join("");
+  el.innerHTML = `<p>${d.found ? "Item found and verified on" : "Item not verified on"} ${cite(d)} (drawing)
+      · anchor: ${esc(d.anchor_text || d.anchor || "none")}
+      · <a href="#" id="whole-sheet">view whole sheet</a></p>
+    <p class="small">${esc(d.check || "")} ${d.why ? "· model: " + esc(d.why) : ""}</p>
+    <div id="drawing-img" class="muted">loading drawing…</div>
+    <table><thead><tr><th>Reading</th><th>Value</th><th>Label as printed</th><th>Check</th></tr></thead><tbody>${rows ||
+      "<tr><td colspan=4 class='muted'>no readings</td></tr>"}</tbody></table>`;
+  $("whole-sheet").onclick = async (e) => {
+    e.preventDefault();
+    try { window.open(await fetchPng(`/changes/${res.change_id}/drawing.png?full=1`), "_blank"); } catch (err) { alert(err.message); }
+  };
+  try {
+    const url = await fetchPng(`/changes/${res.change_id}/drawing.png`);
+    $("drawing-img").innerHTML = `<img alt="P&ID crop with the item boxed" src="${url}">`;
+  } catch (err) {
+    $("drawing-img").textContent = `drawing image not available (${err.message})`;
+  }
 }
 
 function showResult(res) {
@@ -242,6 +279,7 @@ function showResult(res) {
   $("calc").innerHTML = `<table><thead><tr><th></th><th>Rule</th><th>Status</th><th>Value</th><th>Limit</th><th>Detail</th></tr></thead>
     <tbody>${calcRows(res.results_after || [], "after change")}${calcRows(res.results_issued || [], "as issued")}</tbody></table>`;
   $("clashes").innerHTML = (res.clashes || []).map((c) => `<p>${esc(c.entry_id)}: ${esc(c.attribute)} approved ${esc(c.approved)}, proposed ${esc(c.proposed)}</p>`).join("") || "<p class='muted'>none (register checked)</p>";
+  showDrawing(res);
   $("timing").textContent = `${res.seconds_total} s: ` + (res.steps || []).map((s) => `${s.name} ${s.seconds}s`).join(", ") +
     ` · long read ${res.long_read} · same-item ${res.same_item_mode} ${res.same_item_note || ""}`;
 }
