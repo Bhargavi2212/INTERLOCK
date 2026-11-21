@@ -173,10 +173,10 @@ Unknown units make the input **held**, never guessed. Superscripts and spacing a
 
 | Rule | Default above | Confirmed value | Reason |
 |---|---|---|---|
-| R1 velocity max when documents state none | 3.0 m/s | | |
-| R2 standby default | 1 | | |
-| R3 max pump starts per hour | 6 (10 min cycle) | | |
-| R4 operating / set margin | 0.90 | | |
-| R5 margin factor / adder | 1.10 / 1.0 bar | | |
-| R1 solids-bearing services | slurry, sludge, ash, waste water, backwash | | |
-| R5 water services (SG 1.0) | water | | |
+| R1 velocity max when documents state none | 3.0 m/s | 3.0 m/s | Common upper limit for water pump discharge when the plant states none |
+| R2 standby default | 1 | 1 | Standard N+1 for continuous-duty pumps |
+| R3 max pump starts per hour | 6 (10 min cycle) | 6 (10 min cycle) | Typical motor starting limit for small and medium pump motors |
+| R4 operating / set margin | 0.90 | 0.90 | Keeps relief valves from simmering in normal operation |
+| R5 margin factor / adder | 1.10 / 1.0 bar | 1.10 / 1.0 bar | The greater of 10% or 1 bar above operating |
+| R1 solids-bearing services | slurry, sludge, ash, waste water, backwash | slurry, sludge, ash, waste water, backwash | Services carrying suspended solids that settle at low velocity |
+| R5 water services (SG 1.0) | water | water, raw water, clarified water, filtered water, DM water, service water, fire water, floor wash water | Water services where SG 1.0 is accurate |

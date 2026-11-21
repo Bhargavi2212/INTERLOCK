@@ -1,6 +1,6 @@
 # Every limit, default and unit factor the rule engine uses.
 # Mirrors docs/RULES.md exactly; tests/rules/test_rules_match_doc.py enforces it.
-# confirm: true = default not yet confirmed by Bhargavi (RULES.md confirmed table).
+# confirm: false = confirmed by Bhargavi on 21 Nov (RULES.md confirmed table); true = not yet.
 version: 1
 tolerance_rel: 1.0e-9
 rules:
@@ -8,9 +8,9 @@ rules:
     name: Pipe velocity
     live: true
     defaults:
-      max_velocity: {value: 3.0, unit: m/s, confirm: true}
+      max_velocity: {value: 3.0, unit: m/s, confirm: false}
     band_line_role: pump discharge
-    solids_services: {value: [slurry, sludge, ash, waste water, backwash], confirm: true}
+    solids_services: {value: [slurry, sludge, ash, waste water, backwash], confirm: false}
     schedule_id_mm:
       100: {sch40: 102.3, sch80: 97.2}
       150: {sch40: 154.1, sch80: 146.3}
@@ -19,24 +19,24 @@ rules:
     name: Standby available
     live: true
     defaults:
-      standby_required: {value: 1, unit: count, confirm: true}
+      standby_required: {value: 1, unit: count, confirm: false}
   R3:
     name: Sump cycle time
     live: true
     defaults:
-      max_starts_per_hour: {value: 6, unit: 1/h, confirm: true}
+      max_starts_per_hour: {value: 6, unit: 1/h, confirm: false}
   R4:
     name: Relief valve setting
     live: false
     defaults:
-      operating_to_set_max: {value: 0.90, unit: ratio, confirm: true}
+      operating_to_set_max: {value: 0.90, unit: ratio, confirm: false}
   R5:
     name: Design pressure
     live: false
     defaults:
-      margin_factor: {value: 1.10, unit: ratio, confirm: true}
-      margin_adder: {value: 1.0, unit: bar, confirm: true}
-    water_services: {value: [water], confirm: true}
+      margin_factor: {value: 1.10, unit: ratio, confirm: false}
+      margin_adder: {value: 1.0, unit: bar, confirm: false}
+    water_services: {value: [water, raw water, clarified water, filtered water, DM water, service water, fire water, floor wash water], confirm: false}
   R6:
     name: Chemical dose within pump range
     live: false
