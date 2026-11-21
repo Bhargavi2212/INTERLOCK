@@ -1,0 +1,1216 @@
+{
+ "first_runs": {
+  "systems": {
+   "interlock": {
+    "A": {
+     "page_recall_worst_mean": 0.917,
+     "page_recall_worst": {
+      "A1": 1.0,
+      "A2": 1.0,
+      "A3": 0.75
+     },
+     "page_recall_spread": {
+      "A1": [
+       1.0,
+       1.0
+      ],
+      "A2": [
+       1.0,
+       1.0
+      ],
+      "A3": [
+       0.75,
+       0.75
+      ]
+     },
+     "wrong_pages_worst": {
+      "A1": 0,
+      "A2": 0,
+      "A3": 0
+     },
+     "wrong_pages_sum": 0,
+     "value_accuracy_worst_mean": 0.97,
+     "evidence": [
+      33,
+      33
+     ],
+     "verdict_matches": [
+      3,
+      3
+     ],
+     "seconds_median": 70.1,
+     "seconds_max": 99.0,
+     "runs": 3
+    },
+    "E": {
+     "page_recall_worst_mean": 0.9,
+     "page_recall_worst": {
+      "E1": 1.0,
+      "E2": 1.0,
+      "E3": 0.75,
+      "E4": 1.0,
+      "E5": 0.75
+     },
+     "page_recall_spread": {
+      "E1": [
+       1.0,
+       1.0
+      ],
+      "E2": [
+       1.0,
+       1.0
+      ],
+      "E3": [
+       0.75,
+       1.0
+      ],
+      "E4": [
+       1.0,
+       1.0
+      ],
+      "E5": [
+       0.75,
+       1.0
+      ]
+     },
+     "wrong_pages_worst": {
+      "E1": 1,
+      "E2": 0,
+      "E3": 0,
+      "E4": 5,
+      "E5": 0
+     },
+     "wrong_pages_sum": 6,
+     "value_accuracy_worst_mean": 0.933,
+     "evidence": [
+      197,
+      200
+     ],
+     "verdict_matches": [
+      11,
+      15
+     ],
+     "seconds_median": 60.9,
+     "seconds_max": 72.7,
+     "runs": 15
+    }
+   },
+   "keyword": {
+    "A": {
+     "page_recall_worst_mean": 0.233,
+     "page_recall_worst": {
+      "A1": 0.2,
+      "A2": 0.0,
+      "A3": 0.5
+     },
+     "page_recall_spread": {
+      "A1": [
+       0.2,
+       0.2
+      ],
+      "A2": [
+       0.0,
+       0.0
+      ],
+      "A3": [
+       0.5,
+       0.5
+      ]
+     },
+     "wrong_pages_worst": {
+      "A1": 0,
+      "A2": 0,
+      "A3": 0
+     },
+     "wrong_pages_sum": 0,
+     "value_accuracy_worst_mean": 0.0,
+     "evidence": null,
+     "verdict_matches": [
+      0,
+      3
+     ],
+     "seconds_median": 8.9,
+     "seconds_max": 23.0,
+     "runs": 3
+    },
+    "E": {
+     "page_recall_worst_mean": 0.433,
+     "page_recall_worst": {
+      "E1": 0.6666666666666666,
+      "E2": 0.0,
+      "E3": 0.75,
+      "E4": 0.75,
+      "E5": 0.0
+     },
+     "page_recall_spread": {
+      "E1": [
+       0.6666666666666666,
+       0.6666666666666666
+      ],
+      "E2": [
+       0.0,
+       0.0
+      ],
+      "E3": [
+       0.75,
+       0.75
+      ],
+      "E4": [
+       0.75,
+       0.75
+      ],
+      "E5": [
+       0.0,
+       0.0
+      ]
+     },
+     "wrong_pages_worst": {
+      "E1": 0,
+      "E2": 0,
+      "E3": 0,
+      "E4": 0,
+      "E5": 0
+     },
+     "wrong_pages_sum": 0,
+     "value_accuracy_worst_mean": 0.0,
+     "evidence": null,
+     "verdict_matches": [
+      0,
+      5
+     ],
+     "seconds_median": 9.1,
+     "seconds_max": 10.3,
+     "runs": 5
+    }
+   },
+   "one_call": {
+    "A": {
+     "page_recall_worst_mean": 0.933,
+     "page_recall_worst": {
+      "A1": 0.8,
+      "A2": 1.0,
+      "A3": 1.0
+     },
+     "page_recall_spread": {
+      "A1": [
+       0.8,
+       0.8
+      ],
+      "A2": [
+       1.0,
+       1.0
+      ],
+      "A3": [
+       1.0,
+       1.0
+      ]
+     },
+     "wrong_pages_worst": {
+      "A1": 1,
+      "A2": 0,
+      "A3": 1
+     },
+     "wrong_pages_sum": 2,
+     "value_accuracy_worst_mean": 0.736,
+     "evidence": [
+      22,
+      24
+     ],
+     "verdict_matches": [
+      2,
+      3
+     ],
+     "seconds_median": 47.8,
+     "seconds_max": 87.0,
+     "runs": 3
+    },
+    "E": {
+     "page_recall_worst_mean": 0.9,
+     "page_recall_worst": {
+      "E1": 1.0,
+      "E2": 1.0,
+      "E3": 1.0,
+      "E4": 0.75,
+      "E5": 0.75
+     },
+     "page_recall_spread": {
+      "E1": [
+       1.0,
+       1.0
+      ],
+      "E2": [
+       1.0,
+       1.0
+      ],
+      "E3": [
+       1.0,
+       1.0
+      ],
+      "E4": [
+       0.75,
+       0.75
+      ],
+      "E5": [
+       0.75,
+       1.0
+      ]
+     },
+     "wrong_pages_worst": {
+      "E1": 4,
+      "E2": 1,
+      "E3": 2,
+      "E4": 1,
+      "E5": 0
+     },
+     "wrong_pages_sum": 8,
+     "value_accuracy_worst_mean": 0.788,
+     "evidence": [
+      108,
+      111
+     ],
+     "verdict_matches": [
+      14,
+      15
+     ],
+     "seconds_median": 44.5,
+     "seconds_max": 89.1,
+     "runs": 15
+    }
+   }
+  },
+  "misses": [
+   {
+    "set": "A",
+    "id": "A1",
+    "system": "keyword",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      43
+     ],
+     [
+      "Part1.pdf",
+      45
+     ],
+     [
+      "Part3.pdf",
+      146
+     ],
+     [
+      "Part5.pdf",
+      200
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": null,
+    "expected": "BLOCK"
+   },
+   {
+    "set": "A",
+    "id": "A1",
+    "system": "one_call",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part5.pdf",
+      200
+     ]
+    ],
+    "wrong_pages": [
+     [
+      "Part4.pdf",
+      58
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "A",
+    "id": "A2",
+    "system": "keyword",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      85
+     ],
+     [
+      "Part4.pdf",
+      4
+     ],
+     [
+      "Part4.pdf",
+      107
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": null,
+    "expected": "BLOCK"
+   },
+   {
+    "set": "A",
+    "id": "A3",
+    "system": "interlock",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "A",
+    "id": "A3",
+    "system": "keyword",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ],
+     [
+      "Part4.pdf",
+      56
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": null,
+    "expected": "BLOCK"
+   },
+   {
+    "set": "A",
+    "id": "A3",
+    "system": "one_call",
+    "run": 1,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part5.pdf",
+      200
+     ]
+    ],
+    "verdict": "REVIEW",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "interlock",
+    "run": 1,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part3.pdf",
+      26
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "interlock",
+    "run": 2,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part3.pdf",
+      26
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "interlock",
+    "run": 3,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part3.pdf",
+      26
+     ]
+    ],
+    "verdict": "REVIEW",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "keyword",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      43
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": null,
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "one_call",
+    "run": 1,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      46
+     ],
+     [
+      "Part1.pdf",
+      48
+     ],
+     [
+      "Part4.pdf",
+      60
+     ],
+     [
+      "Part5.pdf",
+      221
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "one_call",
+    "run": 2,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      46
+     ],
+     [
+      "Part1.pdf",
+      48
+     ],
+     [
+      "Part4.pdf",
+      60
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "one_call",
+    "run": 3,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      46
+     ],
+     [
+      "Part1.pdf",
+      48
+     ],
+     [
+      "Part3.pdf",
+      26
+     ],
+     [
+      "Part4.pdf",
+      60
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E2",
+    "system": "keyword",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      43
+     ],
+     [
+      "Part1.pdf",
+      45
+     ],
+     [
+      "Part3.pdf",
+      146
+     ],
+     [
+      "Part4.pdf",
+      58
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": null,
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E2",
+    "system": "one_call",
+    "run": 1,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part4.pdf",
+      57
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E3",
+    "system": "interlock",
+    "run": 3,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "REVIEW",
+    "expected": "REVIEW"
+   },
+   {
+    "set": "E",
+    "id": "E3",
+    "system": "keyword",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": null,
+    "expected": "REVIEW"
+   },
+   {
+    "set": "E",
+    "id": "E3",
+    "system": "one_call",
+    "run": 1,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part4.pdf",
+      53
+     ],
+     [
+      "Part5.pdf",
+      200
+     ]
+    ],
+    "verdict": "REVIEW",
+    "expected": "REVIEW"
+   },
+   {
+    "set": "E",
+    "id": "E3",
+    "system": "one_call",
+    "run": 2,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part4.pdf",
+      53
+     ],
+     [
+      "Part5.pdf",
+      200
+     ]
+    ],
+    "verdict": "REVIEW",
+    "expected": "REVIEW"
+   },
+   {
+    "set": "E",
+    "id": "E3",
+    "system": "one_call",
+    "run": 3,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part4.pdf",
+      53
+     ]
+    ],
+    "verdict": "REVIEW",
+    "expected": "REVIEW"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "interlock",
+    "run": 1,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      92
+     ],
+     [
+      "Part4.pdf",
+      65
+     ],
+     [
+      "Part4.pdf",
+      91
+     ],
+     [
+      "Part4.pdf",
+      97
+     ],
+     [
+      "Part4.pdf",
+      101
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "interlock",
+    "run": 2,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      92
+     ],
+     [
+      "Part4.pdf",
+      97
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "interlock",
+    "run": 3,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      92
+     ],
+     [
+      "Part4.pdf",
+      97
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "keyword",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": null,
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "one_call",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "REVIEW",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "one_call",
+    "run": 2,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "one_call",
+    "run": 3,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [
+     [
+      "Part4.pdf",
+      62
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E5",
+    "system": "interlock",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "REVIEW",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E5",
+    "system": "interlock",
+    "run": 2,
+    "missing_pages": [],
+    "wrong_pages": [],
+    "verdict": "REVIEW",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E5",
+    "system": "interlock",
+    "run": 3,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "REVIEW",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E5",
+    "system": "keyword",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      43
+     ],
+     [
+      "Part1.pdf",
+      45
+     ],
+     [
+      "Part3.pdf",
+      146
+     ],
+     [
+      "Part4.pdf",
+      58
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": null,
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E5",
+    "system": "one_call",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E5",
+    "system": "one_call",
+    "run": 3,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   }
+  ],
+  "key_before_run": [
+   {
+    "file": "A_A1_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:01:50",
+    "ok": true
+   },
+   {
+    "file": "A_A1_keyword_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:08:25",
+    "ok": true
+   },
+   {
+    "file": "A_A1_one_call_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:22:40",
+    "ok": true
+   },
+   {
+    "file": "A_A2_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:03:34",
+    "ok": true
+   },
+   {
+    "file": "A_A2_keyword_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:08:52",
+    "ok": true
+   },
+   {
+    "file": "A_A2_one_call_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:24:12",
+    "ok": true
+   },
+   {
+    "file": "A_A3_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:04:34",
+    "ok": true
+   },
+   {
+    "file": "A_A3_keyword_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:09:06",
+    "ok": true
+   },
+   {
+    "file": "A_A3_one_call_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:24:56",
+    "ok": true
+   },
+   {
+    "file": "E_E1_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:46:46",
+    "ok": true
+   },
+   {
+    "file": "E_E1_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:52:55",
+    "ok": true
+   },
+   {
+    "file": "E_E1_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:57:20",
+    "ok": true
+   },
+   {
+    "file": "E_E1_keyword_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:07:15",
+    "ok": true
+   },
+   {
+    "file": "E_E1_one_call_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:09:19",
+    "ok": true
+   },
+   {
+    "file": "E_E1_one_call_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:13:59",
+    "ok": true
+   },
+   {
+    "file": "E_E1_one_call_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:18:07",
+    "ok": true
+   },
+   {
+    "file": "E_E2_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:48:00",
+    "ok": true
+   },
+   {
+    "file": "E_E2_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:54:00",
+    "ok": true
+   },
+   {
+    "file": "E_E2_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:58:28",
+    "ok": true
+   },
+   {
+    "file": "E_E2_keyword_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:07:30",
+    "ok": true
+   },
+   {
+    "file": "E_E2_one_call_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:10:18",
+    "ok": true
+   },
+   {
+    "file": "E_E2_one_call_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:15:14",
+    "ok": true
+   },
+   {
+    "file": "E_E2_one_call_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:19:02",
+    "ok": true
+   },
+   {
+    "file": "E_E3_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:49:15",
+    "ok": true
+   },
+   {
+    "file": "E_E3_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:55:15",
+    "ok": true
+   },
+   {
+    "file": "E_E3_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:59:42",
+    "ok": true
+   },
+   {
+    "file": "E_E3_keyword_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:07:45",
+    "ok": true
+   },
+   {
+    "file": "E_E3_one_call_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:11:22",
+    "ok": true
+   },
+   {
+    "file": "E_E3_one_call_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:16:02",
+    "ok": true
+   },
+   {
+    "file": "E_E3_one_call_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:19:51",
+    "ok": true
+   },
+   {
+    "file": "E_E4_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:50:31",
+    "ok": true
+   },
+   {
+    "file": "E_E4_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:55:54",
+    "ok": true
+   },
+   {
+    "file": "E_E4_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:00:21",
+    "ok": true
+   },
+   {
+    "file": "E_E4_keyword_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:07:57",
+    "ok": true
+   },
+   {
+    "file": "E_E4_one_call_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:12:17",
+    "ok": true
+   },
+   {
+    "file": "E_E4_one_call_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:16:33",
+    "ok": true
+   },
+   {
+    "file": "E_E4_one_call_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:20:18",
+    "ok": true
+   },
+   {
+    "file": "E_E5_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:51:49",
+    "ok": true
+   },
+   {
+    "file": "E_E5_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T14:56:41",
+    "ok": true
+   },
+   {
+    "file": "E_E5_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:01:08",
+    "ok": true
+   },
+   {
+    "file": "E_E5_keyword_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:08:10",
+    "ok": true
+   },
+   {
+    "file": "E_E5_one_call_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:13:11",
+    "ok": true
+   },
+   {
+    "file": "E_E5_one_call_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:17:19",
+    "ok": true
+   },
+   {
+    "file": "E_E5_one_call_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:21:06",
+    "ok": true
+   }
+  ],
+  "time": {
+   "cold_first_run_s": 69.3,
+   "cold_started": "2026-11-21T14:46:46",
+   "warm_median_s": 60.9
+  },
+  "same_item": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "kept": 10,
+   "key_candidates": 10
+  },
+  "drawing": {
+   "hits": 1,
+   "of": 5,
+   "file": "B_all_interlock_1.json",
+   "rows": [
+    {
+     "id": "B1",
+     "hit": false,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    },
+    {
+     "id": "B2",
+     "hit": false,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    },
+    {
+     "id": "B3",
+     "hit": false,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    },
+    {
+     "id": "B4",
+     "hit": false,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    },
+    {
+     "id": "B5",
+     "hit": true,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    }
+   ]
+  }
+ },
+ "F": {}
+}
