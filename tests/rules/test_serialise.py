@@ -48,3 +48,12 @@ def test_engine_runs_from_rules_json_without_yaml(tmp_path, monkeypatch):
     finally:
         engine.load_rules.cache_clear()
     assert _yaml
+
+
+def test_rule_result_with_disputed_input_round_trips():
+    """Live 15:31: a stored results_after held a Disputed input (asdict form {"values": [...]});
+    reading it back for the server re-check raised TypeError."""
+    d = Disputed((v("1W+1S", "", page=43), v("2W", "", page=146)))
+    r = run_rule("R2", {"installed": v(2, "count"), "working": v(2, "count", source="change"), "arrangement": d})
+    back = result_from_dict(json.loads(json.dumps(r.to_dict())))
+    assert back.inputs["arrangement"] == d and back.status == r.status

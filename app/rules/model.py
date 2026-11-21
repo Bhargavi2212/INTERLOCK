@@ -96,6 +96,8 @@ def value_from_dict(d: dict | None):
         return None
     if "disputed" in d:
         return Disputed(tuple(value_from_dict(x) for x in d["disputed"]))
+    if "values" in d and "value" not in d:   # a Disputed saved by dataclasses.asdict (RuleResult.to_dict)
+        return Disputed(tuple(value_from_dict(x) for x in d["values"]))
     fields = {k: d[k] for k in ("value", "unit", "file", "page", "quote", "evidence_ok", "source") if k in d}
     return Value(**fields, box=tuple(d["box"]) if d.get("box") else None)
 
