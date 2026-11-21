@@ -89,7 +89,7 @@ Detailed spec: `docs/specs/PHASE_3.md` (with its Amendments); plan: `docs/specs/
 
 ## Phase 4 — Agent and register (14:45-15:45)
 
-Status: in progress
+Status: done (phase-4-agent). Evidence: eval E×3, A, B, keyword and one-call runs started before the agent work on plant `27d049ccd64f` (keys untouched, register empty), 46/46 done, raw in `eval/results/`; demo plant `9eeb30bca0d5`: the Managed Agent proposed installed 3 in the plant's sandbox and the server re-check marked it **proven** (tries and server stamp shown separately), approved with both disagreements ticked; the second fix reused the same `environment_id` (f810c807…) and listed the earlier run; "remove the third pump" was **BLOCKed** by the register ("clashes with approved change 93a42c41cf6f: installed approved 3, proposed 2"). The impossible change is shown by tests only (D1 (b): R1 held on A1, `EVAL.md` §6). Sandbox has no read-only mounts: bundle integrity by agent-reported sha256; the server re-check decides (`EVAL.md` §6).
 
 Detailed spec: `docs/specs/PHASE_4.md` (with its Amendments M1-M10); plan: `docs/specs/PHASE_4_PLAN.md`.
 
