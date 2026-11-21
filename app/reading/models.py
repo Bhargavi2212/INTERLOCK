@@ -27,6 +27,7 @@ ROLE_MODEL = {
     "explain": "MODEL_CARBON",
     "headlines": "MODEL_HYDROGEN",
     "drawing": "MODEL_ARGON",
+    "one_call": "MODEL_ARGON",
 }
 RETRY_CODES = {429, 500, 502, 503, 504}
 RETRY_WAIT_S = 2

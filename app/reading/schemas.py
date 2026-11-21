@@ -86,3 +86,17 @@ DRAWING = {
     },
     "required": ["found", "readings", "why"],
 }
+
+ONE_CALL = {
+    "type": "object",
+    "properties": {
+        "pages": {"type": "array", "items": {"type": "object", "properties": {"file": STR, "page": INT, "why": STR},
+                                             "required": ["file", "page"]}},
+        "values": {"type": "array", "items": {"type": "object",
+                   "properties": {"attribute": STR, "value": STR, "unit": STR, "file": STR, "page": INT, "quote": STR},
+                   "required": ["attribute", "value", "file", "page", "quote"]}},
+        "verdict": {"type": "string", "enum": ["BLOCK", "REVIEW", "no conflicts found"]},
+        "why": STR,
+    },
+    "required": ["pages", "values", "verdict"],
+}
