@@ -120,5 +120,15 @@ Filled in honestly as results arrive. Known limits:
 - **Values whose unit is not printed** next to them are held, not guessed.
 - **Consequences** only reach items the documents connect by name or off-page arrow; anything not written down is invisible.
 - **Parallel pump flow** is an upper bound (`RULES.md` R1).
+
+**Phase 2 (set A, development set; A1-A3 results confirmed by Bhargavi against the PDFs, 21 Nov):**
+
+- **A3: value read from the wrong line.** The run read the MRS Unit-1 discharge as 65NB (Part3 p.146) and computed 1.67 m/s (20 m3/h in 65 NB). On the P&ID, 50NB is the MRS Unit-1 pump discharge (header down to NODE-5); the 65NB labels are the other pump set's line into NODE-5 and the combined line from NODE-5 to TP-18. The quote passed the evidence check because "65NB" is on the page: a text quote cannot say which line a label belongs to. The verdict was still BLOCK, but for the wrong reason (low velocity in a solids service instead of 2.83 m/s over the 2.4 m/s limit). Key unchanged (50NB). Raw: `eval/results/run_50d3d8363f83.json`.
+- **A1: Part1 p.45 lost at the starting threshold.** P(yes) 0.385 < 0.5 in the first local run; kept (0.39) on the live run after the threshold was chosen on set A and frozen at 0.25 (section 5).
+- **A3: Part1 p.45 never a candidate.** Neither code search nor the long read proposed it: a page-recall miss, not a same-item miss.
+- **R1 is held on every pump change in phase 2.** Whether pumps share one discharge line is shown on the P&ID, not stated in text, so `pumps_into_line` is missing unless one pump works (`RULES.md` R1; drawing evidence arrives in phase 3).
+- **A2: R2 held.** Documents disagree on the installed count (3 vs 2); disputed measured counts stay held (`RULES.md` R2). The verdict is BLOCK from the disagreement.
+- **Time over target on the first live run of a plant.** 102.1 s on the live URL (target < 90 s): long read 74 s with no cache hit (`cached` 0 of 593,683 input tokens) and the one-time token count for that plant in the same step. Local runs: 55-64 s.
+- **Folder uploads cite files with their folder** (`bhel/Part1.pdf`); keys use the file name, so scoring compares file names without the folder.
 - **Set E authorship:** E1-E5: changes written by a separate Claude session from the BHEL pages, which did not see Interlock's code, prompts or results; never used while building; keys confirmed by Bhargavi. E6+: changes written by people at the event, if collected. E1-E5 are therefore not changes written by people at the event; their keys were confirmed by Bhargavi.
 - **Key authorship:** sets A, B and F were drafted by Claude from text search and the PDF text layer (no Gemini call) and confirmed by Bhargavi; `written_at` corrected from 12:55 to 12:42 after commit (`5859356`), before any run.
