@@ -1,18 +1,38 @@
 """FastAPI app: /health, the one screen, and the protected API (ARCHITECTURE.md section 6)."""
 
+from __future__ import annotations
+
+import logging
+import posixpath
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import APIRouter, Depends, FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 from app.api.access import require_access
 from app.config import get_settings
+from app.jobs import runner
 from app.store.base import get_store
 
 WEB_DIR = Path(__file__).resolve().parents[2] / "web"
+log = logging.getLogger("interlock.api")
 
-app = FastAPI(title="Interlock")
+
+@asynccontextmanager
+async def lifespan(_app):
+    try:
+        n = runner.fail_unfinished_on_startup()
+        if n:
+            log.warning("marked %d unfinished jobs failed (server restarted)", n)
+    except Exception as e:  # never block /health on a store problem
+        log.warning("startup job sweep skipped: %s", type(e).__name__)
+    yield
+
+
+app = FastAPI(title="Interlock", lifespan=lifespan)
 api = APIRouter(dependencies=[Depends(require_access)])
 
 
@@ -26,12 +46,95 @@ def index() -> FileResponse:
     return FileResponse(WEB_DIR / "index.html")
 
 
-@api.get("/plants/{plant_id}")
-def get_plant(plant_id: str) -> dict:
+# ---------------------------------------------------------------- plants and upload
+
+class NewPlant(BaseModel):
+    name: str
+
+
+class FileIn(BaseModel):
+    relative_path: str
+    size: int
+    content_hash: str
+    content_type: str = ""
+
+
+def _plant_or_404(plant_id: str) -> dict:
     plant = get_store().get_plant(plant_id)
     if plant is None:
         raise HTTPException(status_code=404, detail="plant not found")
     return plant
+
+
+def clean_path(raw: str) -> str | None:
+    """Relative path with '/' separators, or None if unsafe."""
+    p = raw.replace("\\", "/").strip()
+    if not p or p.startswith("/") or ":" in p.split("/")[0]:
+        return None
+    parts = p.split("/")
+    if any(part in ("", ".", "..") for part in parts):
+        return None
+    return posixpath.join(*parts)
+
+
+@api.post("/plants")
+def create_plant(body: NewPlant) -> dict:
+    plant = get_store().create_plant(body.name.strip() or "plant")
+    return {"plant_id": plant["plant_id"]}
+
+
+@api.get("/plants/{plant_id}")
+def get_plant(plant_id: str) -> dict:
+    return _plant_or_404(plant_id)
+
+
+@api.post("/plants/{plant_id}/files")
+def add_files(plant_id: str, files: list[FileIn]) -> dict:
+    plant = _plant_or_404(plant_id)
+    store = get_store()
+    known_hashes = {f["content_hash"] for f in plant["files"] if f.get("status") not in ("failed", "missing")}
+    known_paths = {f["relative_path"] for f in plant["files"]}
+    accepted, skipped, duplicates, new_entries = [], [], [], []
+
+    for f in files:
+        rel = clean_path(f.relative_path)
+        if rel is None:
+            skipped.append({"relative_path": f.relative_path, "reason": "unsafe path"})
+            continue
+        ext = posixpath.splitext(rel)[1].lower()
+        if ext != ".pdf":
+            skipped.append({"relative_path": rel, "reason": f"not a PDF: {ext or 'no extension'}"})
+            continue
+        if f.size <= 0:
+            skipped.append({"relative_path": rel, "reason": "empty file"})
+            continue
+        if f.content_hash in known_hashes:
+            duplicates.append({"relative_path": rel})
+            continue
+        if rel in known_paths:
+            skipped.append({"relative_path": rel, "reason": "a different file with this path is already in the plant"})
+            continue
+        known_hashes.add(f.content_hash)
+        known_paths.add(rel)
+        new_entries.append({"relative_path": rel, "size": f.size, "content_hash": f.content_hash,
+                            "status": "uploading", "pages": 0, "skipped_reason": None})
+        accepted.append({"relative_path": rel, "upload_url": store.signed_put_url(plant_id, rel)})
+
+    if new_entries:
+        store.mutate_plant(plant_id, lambda d: d["files"].extend(new_entries))
+    return {"accepted": accepted, "skipped": skipped, "duplicates": duplicates}
+
+
+@api.post("/plants/{plant_id}/ingest")
+def ingest(plant_id: str) -> dict:
+    _plant_or_404(plant_id)
+    from app.ingest.ingest import ingest_plant
+
+    store = get_store()
+    job_id = store.create_job({"type": "ingest", "plant_id": plant_id, "step": "queued",
+                               "progress": {"files_done": 0, "files_total": 0, "pages_done": 0}})
+    runner.submit(job_id, lambda: ingest_plant(store, plant_id, job_id))
+    return {"job_id": job_id}
 
 
 @api.get("/jobs/{job_id}")

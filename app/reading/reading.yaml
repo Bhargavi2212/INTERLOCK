@@ -1,0 +1,24 @@
+# Reading settings: thresholds and thinking levels. Not engineering limits
+# (those live only in app/rules/rules.yaml, mirroring docs/RULES.md).
+# Measured results (e.g. the same-item threshold's precision/recall) go to docs/EVAL.md only.
+version: 1
+ingest:
+  drawing_min_long_side_mm: 600   # A2 and larger
+  drawing_max_text_chars: 200     # near-empty text layer
+  png_dpi: 150
+  progress_every_pages: 10
+evidence:
+  table_row_word_fraction: 0.9
+same_item:
+  mode: decisions                 # decisions | names (fallback)
+  threshold: 0.5                  # set once on set A, frozen for set E
+  min_confidence: 0.6
+long_read:
+  token_limit: 1048576
+  chars_per_token_estimate: 4
+thinking:                          # every call starts low (PHASE_2 Amendments A4)
+  understand: low
+  long_read: low
+  values: low
+  explain: low
+  headlines: low
