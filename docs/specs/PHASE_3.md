@@ -1,5 +1,7 @@
 # Phase 3 spec — Drawing
 
+**The Amendments section at the end overrides the text above it.**
+
 Owner docs: `PHASES.md` (phase 3; never cut), `ARCHITECTURE.md` §1 step 6, §3 (Argon reads the P&ID image), §5 (drawing.png), `CLAUDE.md` (evidence rule), `RULES.md` (Inputs), `EVAL.md` §2 set B, §4 "Drawing hit". Builds on the phase 2 code as of `869c349` and PHASE_2 Amendment **A1** (drawing evidence). Time: 14:15-14:45 (starts earlier if phase 2 closes early).
 
 ## Goal
@@ -136,3 +138,34 @@ Drawings without a text layer verified by other means; reading lines/arrows by c
 - [ ] A change with no drawing page still returns its verdict; the screen says why there is no drawing.
 - [ ] CLAUDE.md, RULES.md, ARCHITECTURE.md updated with the drawing evidence rule.
 - [ ] `pytest -q` green; change check still under 90 s (seconds per step in the commit message); `PHASES.md` phase 3 `done (phase-3-drawing)`, tag pushed, deployed.
+
+
+---
+
+## Amendments (approved 21 Nov; these override the text above)
+
+From the phase 3 review and Bhargavi's decisions. Plan: `docs/specs/PHASE_3_PLAN.md`.
+
+**A1 Set B scoring box.** `score_b.py` scores the **label_box** centre against the key box (the key holds the label's text-layer box), hit if within 0.03 of the page (`EVAL.md` §4). Not the item box.
+
+**A2 No answer leak to the scorer.** Each B key gains `item_query` (B1 "SG Unit-1 floor wash water transfer pumps", B2 "SG Unit-2 floor wash water transfer pumps", B3 "MRS Unit-1 waste water transfer pumps", B4 "Transformer yard Unit-2 oily waste transfer pumps", B5 "SG Unit-3 floor wash water transfer pumps"), committed alone before any B run ("B keys: item_query added so the scorer never sees key notes"). The scorer uses only `item_query`; never `item`, `notes` or any other key field.
+
+**A3 Line facts from the drawing only.** On a drawing page (`is_drawing`), `line_nb`, `line_role` and `shared_discharge` come only from verified drawing readings; text quotes from drawing pages are dropped for those three inputs (a bare "65NB" in the text layer does not say which line it labels: `EVAL.md` §6, A3).
+
+**A4 Item box check.** The item box must contain the anchor label's words **including the unit tag token** (e.g. "UNIT-1"); otherwise `found` is overridden to false.
+
+**B5 Engine and scenario.** `engine.py` applies the evidence gate to `source "drawing"` like `"document"`; `scenario._doc_value` passes the source through; `Value` gains an optional `box`.
+
+**B6 Store.** Both stores gain `get_page_png`, `put_change_png`, `get_change_png`.
+
+**B7 Crop.** `drawing.crop_fraction` 0.40 in `reading.yaml`; when a needed reading (line size, shared discharge) is missing from the crop, one more call on the whole sheet (downscaled) fills it.
+
+**B8 Box format calibration.** Calibrate once on **ESP Unit-1 waste water transfer pumps** (Part3 p.146; not in set B): compare Argon's label box with its text-layer box, set the conversion in `reading.yaml` (`drawing.box_format`), record the result in `vision.py`'s docstring. **Never calibrate on a B item.**
+
+**B9 PROJECT.md §4.** "the D5-200 band for the line's role" (the 200NB header may be a discharge header: header row 2.1-2.4 m/s).
+
+**C10 Re-ingest.** `POST /plants/{id}/reingest` re-ingests the files already in the bucket (same plant id; pages, `pages_all.json`, PNGs rewritten; token count kept). Replaces "re-upload as a new plant" in §0 and §10.
+
+**C11 Time.** The done-when "under 90 s" is measured after one warm-up check on the plant (the first check on a plant fills the automatic cache).
+
+**C12 PHASES.md.** Phase 3 in progress with a pointer to this spec and its plan.

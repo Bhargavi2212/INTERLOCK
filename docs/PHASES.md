@@ -77,7 +77,9 @@ Detailed spec: `docs/specs/PHASE_2.md` (with its Amendments); plan: `docs/specs/
 
 ## Phase 3 — Drawing (14:15-14:45)
 
-Status: not started
+Status: in progress
+
+Detailed spec: `docs/specs/PHASE_3.md` (with its Amendments); plan: `docs/specs/PHASE_3_PLAN.md`.
 
 **Build:** find the P&ID page(s) for the item; Argon returns a box; draw the red box and values on the image; where a text layer exists, confirm the box lands on the printed label.
 
