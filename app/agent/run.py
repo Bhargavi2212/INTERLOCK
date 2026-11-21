@@ -94,8 +94,16 @@ def find_fix(store, models, change_id: str, progress=lambda step: None) -> dict:
         levers=lever_text(base_installed(change, register)), max_tries=cfg["max_tries"])
 
     progress("agent")
-    out = models.agent(prompt, environment, state.get("last_interaction_id") if reuse else None,
-                       schemas.AGENT_ANSWER, cfg)
+    try:
+        out = models.agent(prompt, environment, state.get("last_interaction_id") if reuse else None,
+                           schemas.AGENT_ANSWER, cfg)
+    except Exception as e:  # never lose a failed run: store it with its reason, shown on screen
+        failed = {"outcome": "refused", "fix": [], "tries": [], "recheck": None, "environment_id": None,
+                  "persistent": cfg["persistent"], "reused_sandbox": reuse, "sandbox_note": "",
+                  "reasons": [f"agent run failed ({type(e).__name__})"], "seconds": round(time.monotonic() - t0, 1)}
+        change["fix"] = failed
+        store.put_change(plant_id, change_id, change)
+        return failed
     answer = out["answer"]
     result = {"outcome": "refused", "fix": [], "tries": (answer or {}).get("tries", []) if isinstance(answer, dict) else [],
               "reasons": [], "recheck": None, "environment_id": out.get("environment_id"),

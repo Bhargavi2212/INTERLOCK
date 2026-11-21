@@ -141,3 +141,22 @@ def test_unreadable_even_after_copy(stored):
     s, change = stored
     res = agent_run.find_fix(s, FakeAgent({"x": 1}), change["change_id"])
     assert res["outcome"] == "refused" and "agent answer unreadable" in res["reasons"][0]
+
+
+def test_agent_crash_is_stored_with_reason(stored):
+    s, change = stored
+
+    class Crash(FakeAgent):
+        def agent(self, *a, **k):
+            raise TimeoutError("slow")
+    res = agent_run.find_fix(s, Crash(), change["change_id"])
+    assert res["outcome"] == "refused" and "agent run failed (TimeoutError)" in res["reasons"][0]
+    assert s.get_change(change["change_id"])["fix"]["reasons"] == res["reasons"]
+
+
+def test_prose_answer_goes_to_the_copy(stored):
+    """Live 15:16: the agent answered in prose (JSONDecodeError). answer None -> structured copy."""
+    s, change = stored
+    m = FakeAgent(None, copied=ans(THIRD_PUMP))
+    res = agent_run.find_fix(s, m, change["change_id"])
+    assert res["outcome"] == "proposed" and res["recheck"]["proven"]

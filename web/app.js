@@ -330,9 +330,9 @@ async function findFix(changeId) {
       const j = await api(`/jobs/${job_id}`);
       $("fix-status").textContent = `${j.step === "agent" ? "Agent working in the plant's sandbox…" : esc(j.step)} ${Math.round((Date.now() - started) / 1000)} s`;
       if (j.state === "done" || j.state === "failed") {
-        if (j.state === "failed") $("fix-status").textContent = `failed: ${j.error}`;
         const res = await api(`/changes/${changeId}`);
         renderFix(res);
+        if (j.state === "failed") $("fix-status").textContent = `Fix job failed: ${j.error}`;
         return;
       }
     }

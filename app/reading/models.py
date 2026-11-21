@@ -145,7 +145,10 @@ class Models:
             inter = beta.interactions.get(inter.id, timeout=cfg["timeout_s"])
         text = (inter.output_text or "").strip()
         if structured:
-            answer = json.loads(text)
+            try:
+                answer = json.loads(text)
+            except ValueError:  # the agent answered in prose despite response_format
+                answer = None   # run.py copies its raw text into the schema, then validates
         else:
             answer = self.call("agent_answer", EXTRACT_PROMPT + text, schema, "low")
         return {"answer": answer, "raw": text[:6000], "environment_id": getattr(inter, "environment_id", None),
