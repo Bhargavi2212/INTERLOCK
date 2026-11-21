@@ -2,79 +2,135 @@
 
 **No plant change is signed off until every document agrees, and the numbers still work.**
 
-An engineer types a change to a process plant ("SG Unit-1 floor wash pumps: go from 1 working + 1 standby to 2 working + 1 standby"). Interlock reads the plant's whole document set, finds every page about that equipment under all its names, boxes it on the real P&ID drawing, runs the engineering checks **in code** with every input traced to a quoted line on a page, and gives a verdict: **BLOCK**, **REVIEW**, or **no conflicts found** (never "PASS"). A **Gemini Managed Agent** then searches for a fix in the plant's own sandbox; the **server re-checks** it before anything says "proven"; the engineer approves; and the plant's **register** remembers it, so a later change that undoes it is blocked.
+[**Live app**](https://interlock-67888742605.us-central1.run.app) · [**1-minute video**](VIDEO_LINK) · Built today at the Gemini 4 NYC Hackathon (21 Nov 2026) · Problem Statement One
 
-Built at the Gemini 4 NYC Hackathon (Cerebral Valley x Google DeepMind), 21 Nov 2026. Problem Statement One.
+![Interlock: a change checked against 851 pages, the pump boxed on the P&ID, the calc sheet and a BLOCK verdict](docs/img/10_screen.png)
 
-## Live
+---
 
-- **App:** https://interlock-67888742605.us-central1.run.app (one shared access code, available on request)
-- **Video:** added in phase 6, recorded from the live URL at tag `phase-6-ship`
-- **Test documents:** a public BHEL tender, 5 PDFs, 851 pages (listed in [`docs/EVAL.md`](docs/EVAL.md) §2)
+## The problem
 
-## The demo in five steps
+When a process plant wants to change something (run a second pump, resize a line, drop a spare), an engineer has to approve it first. This is management of change, and today it works like this:
 
-1. **Upload** the plant's documents as a folder or as files (PDFs; anything else is listed as skipped, never silently dropped).
-2. **Type the change.** Interlock finds the scope page (1W+1S), the data sheet (2W) and the P&ID (2W): the issued documents already disagree.
-3. **See the evidence:** every value with its file, page and exact quote (checked by code to be on that page); the pump boxed in red on the P&ID crop, its labels verified against the drawing's own text layer; a calc sheet with each rule's formula, limit, limit source (the tender's own velocity table) and assumptions.
-4. **Verdict: BLOCK.** The standby check fails: "This change needs 3 pumps installed; the documents show 2."
-5. **Find a fix.** The Managed Agent tries candidates with the real rule engine in its sandbox and proposes a third pump; the server re-runs every rule and the register check itself and stamps it **Proven by the server**. The engineer ticks each document disagreement as resolved and approves. A later change, "remove the third pump", is **BLOCKed by the register**.
+- The plant's design lives in **hundreds of pages**: scope of supply, equipment data sheets, P&ID drawings, design-basis tables. One piece of equipment appears in many of them, often **under different names**.
+- The engineer finds every page about that equipment **by hand**, checks the pages agree, then works out **by hand** what the change does to everything connected to it: the pipe, the spare pump, the sump.
+- It takes **weeks per change** (2-4 weeks in the builder's experience of plant engineering reviews; experience, not a measurement), and errors still get through, because nobody can hold 851 pages in their head. A missed page means a pump with no spare, or a pipe running faster than the plant's own design basis allows.
 
-## How Gemini is used
+Interlock does that check for one change at a time: it finds every page, proves each value against its page, runs the engineering math in code, shows the equipment on the drawing, and only then gives a verdict.
 
-| Model | Job |
-|---|---|
-| Gemini 4 **Neon** | Understands the change (item, names, unit tag, changed values); the Managed Agent's model |
-| Gemini 4 **Argon** | One long read over all 851 pages (automatic cache); pulls values with exact quotes; reads the P&ID image and boxes the item |
-| Gemini 4 **Carbon** | When documents disagree: which page is likely right, and what goes wrong in the plant |
-| Gemini 4 **Hydrogen** | One-line headlines per finding |
-| **Decisions API** | "Is this page about the same item?" with a probability; threshold set once on the development set and frozen |
-| **Managed Agent** (Antigravity, Neon) | One persistent sandbox per plant with the rule engine mounted; tries levers (line size, added pumps), at most 8 tries, proposes or refuses |
+## A real example: the error is already in the issued tender
 
-Details and why each model: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) §3.
+A public tender (BHEL, Lara power station water treatment package: 5 PDFs, 851 pages). The same pumps, three documents, two answers:
+
+| Scope of supply, Part1 p.43 | Data sheet, Part4 p.57 | P&ID D3-146, Part3 p.146 |
+|---|---|---|
+| ![Scope: Two (2) nos. (1W+1S) SG UNIT-1 waste water transfer pumps](docs/img/01_scope_p43_1W1S_v3.png) | ![Data sheet: SG UNIT-1 floor wash water transfer pumps, Two (2W) nos.](docs/img/02_datasheet_p57_2W.png) | ![P&ID: SG UNIT-1 FLR WASH WTR TRANSFER PUMPS, 105M3/HR (2W)](docs/img/03_pid_d3-146_sg_unit1.png) |
+| **1 working + 1 standby** | **2 working** | **2 working** |
+
+Three names for one pump set ("waste water", "floor wash water", "FLR WASH WTR"), and the documents disagree on how many run. An engineer asked to approve *"go from 1 working + 1 standby to 2 working + 1 standby"* has to find all three pages first. Interlock finds them while you watch (timings in [`EVAL.md`](docs/EVAL.md) §5), shows the contradiction, and then checks whether the change itself is safe. This change is the walkthrough below.
+
+## What the engineer does
+
+1. **Upload** the plant's documents: a whole folder or several files. Anything that is not a PDF is listed as skipped, with the reason.
+2. **Type a change**, in plain English: *"SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby."*
+3. **Read the answer** on one screen:
+   - every page about this equipment, under all its names, each value with its **exact quote, checked by code to be on that page**;
+   - the pumps **boxed in red on the real P&ID**, with what the drawing says (the 200NB header both pumps share), each reading checked against the drawing's own text layer;
+   - a **calc sheet**: pipe velocity, standby, sump cycle, each with its formula, inputs and their pages, the limit and where the limit comes from (the tender's own velocity table, Part5 p.200);
+   - the **verdict**: BLOCK, REVIEW, or "no conflicts found in N pages read". Never "PASS".
+4. **Find a fix.** A Gemini Managed Agent searches for one in the plant's own sandbox; the **server re-checks it** before anything says proven.
+5. **Approve.** The plant's **register** remembers. A later change that undoes it is blocked.
+
+| The drawing, verified | The calc sheet | The fix, proven by the server | The register remembers |
+|---|---|---|---|
+| ![P&ID crop with the red box](docs/img/11_drawing.png) | ![Calc sheet with sources](docs/img/12_calc_sheet.png) | ![Agent tries and the server stamp](docs/img/13_fix_proven.png) | ![Second change BLOCKed by the register](docs/img/14_register_block.png) |
+
+## The Managed Agent: it proposes, the server proves
+
+- **One persistent sandbox per plant.** The first fix mounts the real rule engine into a Gemini Managed Agent (Antigravity, Gemini 4 Neon) sandbox and smoke-tests it (210 m3/h in 200 NB gives 1.86 m/s, exactly what the server computes). Later fixes on the same plant reuse the same sandbox and its history.
+- **It works like an engineer.** It writes a candidate (a line size, an added pump: only the levers in [`levers.yaml`](app/agent/levers.yaml)), runs the real rules on it, reads the result, and tries again: at most 8 tries, smallest change first. It proposes one fix or refuses with reasons.
+- **The agent never decides.** The server rebuilds the case from stored evidence, adds the fix, re-runs every rule and the register check **on its own code**, and only then shows **Proven by the server**. The agent's tries are labelled as its own report.
+- **The engineer stays in charge.** A fix cannot settle documents that disagree, so approval needs the engineer to tick each disagreement as resolved; the tick is stored with the approval.
+- We tested a safety assumption and it was false: the sandbox does not support read-only mounts. So the guarantee is the server re-check, and we say so ([`EVAL.md`](docs/EVAL.md) §6).
+
+## How Gemini 4 is used
+
+| Model | Job | Why this one |
+|---|---|---|
+| **Neon** | Understands the change: item, every name it goes by, unit, what changes | Fast, near-Carbon reasoning |
+| **Argon** | One long read over all 851 pages (served from the automatic cache on repeat checks); values with exact quotes; **reads the P&ID image** and boxes the item | Long context and vision |
+| **Decisions API** | "Is this page about the same item, not the Unit-2 look-alike?" as a probability; threshold set once on the development set, then frozen | A narrow, measurable yes/no |
+| **Carbon** | When documents disagree: which page is likely right, what goes wrong in the plant | Deepest reasoning, once per change |
+| **Hydrogen** | One-line headline per finding | Fast workhorse |
+| **Managed Agent** (Antigravity, Neon) | Fix search in the plant's persistent sandbox | Runs real code, keeps state |
+
+```mermaid
+flowchart LR
+  U[Upload folder or files] --> I[Ingest: text, word positions, drawings]
+  C[Change in plain English] --> N[Neon: understand]
+  C --> L[Argon: long read, 851 pages]
+  N --> S[Code search, all names]
+  L --> D{Decisions API: same item?}
+  S --> D
+  D --> V[Argon: values + quotes]
+  D --> P[Argon vision: P&ID box]
+  V --> E[Code: evidence check]
+  P --> E
+  E --> R[Code: rules R1-R3]
+  E --> G[Code: register clash]
+  R --> X[Verdict: BLOCK / REVIEW / no conflicts found]
+  G --> X
+  X --> A[Managed Agent: fix in plant sandbox]
+  A --> Q[Server re-check: rules + register]
+  Q --> K[Engineer approves -> register]
+```
 
 ## Why the answer can be trusted
 
-- **The model never decides.** Every rule (pipe velocity, standby, sump cycle; relief valve, design pressure and dose built and tested) runs in code from [`app/rules/rules.yaml`](app/rules/rules.yaml), which a test keeps identical to [`docs/RULES.md`](docs/RULES.md).
-- **Every value carries its evidence.** A value reaches the rules only if code finds its quote on the cited page; a drawing value only if its box holds the printed label in the PDF's text layer and that label is nearest to this item's own label.
-- **Unknown means held.** A missing value, unknown unit or unverifiable reading makes the rule **held** (named), never guessed.
-- **The agent proposes; the server proves.** The server rebuilds the case from stored evidence, overlays the fix and re-runs every rule and the register check on its own code. The agent's tries are shown as the agent's report.
-- **The engineer stays in charge** of document disagreements: approval needs an explicit tick for each one.
+- **Code does the math.** Every rule runs from [`rules.yaml`](app/rules/rules.yaml), and a test keeps it identical to [`RULES.md`](docs/RULES.md), where every formula and limit is written down with hand-worked test cases.
+- **Every value carries its evidence.** Text values reach the rules only if code finds the quote on the cited page; drawing values only if the printed label sits inside the model's box and is nearest to this item's own label.
+- **Unknown means held.** A missing value, an unknown unit or an unverifiable reading makes the rule **held**, by name. Nothing is guessed.
+- **Measured, with answer keys committed before any run** (the git history shows the times).
 
 ## Results, honestly
 
-Measured on unseen changes (set E), a development set, P&ID locating and hand-worked math, against a keyword search and **one Gemini call given all pages**: [`docs/EVAL.md`](docs/EVAL.md) §5. Every failure we found is in §6.
+Measured on changes Interlock never saw while being built (set E), a development set, P&ID locating (set B) and hand-worked math (set F), against a keyword search and **one Gemini call given all 851 pages**. The full table, and every failure we found: [`docs/EVAL.md`](docs/EVAL.md) §5 and §6.
 
-In short: on unseen changes, one Gemini call finds about the same pages and gets more verdicts right than Interlock today. What one call cannot give is what Interlock is for: quotes checked on their page, the math done in code with its source, the verified P&ID box, a fix proven by the server, and a register that remembers. The numbers live only in `EVAL.md`.
+What it shows, in one line: one Gemini call can find most of the same pages, and on unseen changes it matched the expected verdict more often than Interlock did. What it cannot give is what an engineer needs to sign: quotes checked on their page, math done in code against the plant's own limits, a verified box on the drawing, a fix the server has proven, and a register that remembers.
+
+## Where it still fails
+
+From [`EVAL.md`](docs/EVAL.md) §6, the ones that matter most:
+- **Scanned pages** have no text to search or quote, and scanned drawings cannot be verified, so those values stay held.
+- **Line sizes on drawings** are the hard part: in development it once read the downstream 65NB line instead of the pumps' own 50NB. The drawing check now requires the label to be nearest to this item's own label.
+- **One unseen change was misread** ("no spare" was not understood as a standby requirement). Fixed after the measurement, with a test; scored as measured.
 
 ## Run it
 
-Windows PowerShell, from the repo root. Python 3.13 (python.org).
+Windows PowerShell, from the repo root, Python 3.13 (python.org):
 
 ```powershell
-conda deactivate                      # only if a conda env is active
-py -3.13 -m venv .venv                # once
+py -3.13 -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
-pytest -q                             # tests (no network, no key)
-uvicorn app.api.main:app --reload --env-file .env   # local, http://127.0.0.1:8000
+pytest -q                     # no network, no key
+uvicorn app.api.main:app --reload --env-file .env
 ```
 
-Copy `.env.example` to `.env` and fill it in yourself; it is git-ignored. Check every model answers: `python scripts/check_models.py`. Deploy (Cloud Run, Firestore, Cloud Storage, Secret Manager): [`deploy/COMMANDS.md`](deploy/COMMANDS.md).
+Copy `.env.example` to `.env` and fill it in yourself (git-ignored). `python scripts/check_models.py` checks every model answers. Production (Cloud Run, Firestore, Cloud Storage, Secret Manager): [`deploy/COMMANDS.md`](deploy/COMMANDS.md).
 
 ## Repo map
 
 | Path | What |
 |---|---|
-| `app/rules/` | The rule engine and units (no model, ever) |
-| `app/reading/` | Change understanding, long read, same-item check, values, evidence check, scenario, pipeline |
+| `app/rules/` | Rule engine and units (never calls a model) |
+| `app/reading/` | Understand, long read, same-item check, values, evidence check, scenario, pipeline |
 | `app/drawing/` | P&ID: text-layer anchor, crop, Argon boxes, code verification, red box |
-| `app/agent/` | Managed Agent: bundle, levers, sandbox run, server re-check |
-| `app/register/` | Approve into the register; clash check |
-| `app/verdict/` | Verdict and "proven" (pure functions) |
+| `app/agent/` | Managed Agent: bundle, levers, persistent sandbox, server re-check |
+| `app/register/`, `app/verdict/` | Register and clash check; verdict and "proven" |
 | `web/` | The one screen |
-| `eval/` | Answer keys (committed before any run), baselines, raw run outputs |
-| `docs/` | Project, architecture, rules, evaluation, phases, specs |
+| `eval/` | Answer keys (committed before any run), baselines, every raw run output |
+| `docs/` | [Project](docs/PROJECT.md), [architecture](docs/ARCHITECTURE.md), [rules](docs/RULES.md), [evaluation](docs/EVAL.md), [phases](docs/PHASES.md), per-phase specs |
 
 ## Built today
 
