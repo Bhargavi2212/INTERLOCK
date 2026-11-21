@@ -124,7 +124,7 @@ def check_change(store, models, plant_id: str, change_id: str, text: str, progre
     register = store.list_register(plant_id)
 
     def rules():
-        sc = build_scenario(values, shared, u["changes"], text, register, drawing_pages)
+        sc = build_scenario(values, shared, u["changes"], text, register, drawing_pages, u)
         lims = doc_limits(limits)
         issued_r, after_r = run_rules(sc["issued"], lims), run_rules(sc["after"], lims)
         used = [r for r in d_shared if r.get("evidence_ok") and r.get("assumption")]

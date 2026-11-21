@@ -183,9 +183,15 @@ def change_values(changes: list[dict], change_text: str) -> dict:
     return out
 
 
-def register_values(entries: list[dict]) -> dict:
+def register_values(entries: list[dict], understanding: dict | None = None) -> dict:
+    """Approved values overlaid on the as-issued inputs: only entries for this change's item
+    AND unit tag (never another unit's approval)."""
+    from app.register.clash import same_item
+
     out = {}
     for e in entries:
+        if understanding is not None and not same_item(e, understanding):
+            continue
         if e.get("attribute") in INPUT_QUANTITY:
             out[e["attribute"]] = Value(e["value"], e.get("unit", "") or "",
                                         quote=f"approved change {e.get('entry_id', '')}", source="register")
@@ -206,7 +212,7 @@ def doc_limits(checked_limits: list[dict]) -> list[DocLimit]:
 
 def build_scenario(checked_values: list[dict], checked_shared: list[dict], changes: list[dict],
                    change_text: str, register_entries: list[dict] | None = None,
-                   drawing_pages: set | None = None) -> dict:
+                   drawing_pages: set | None = None, understanding: dict | None = None) -> dict:
     if drawing_pages:
         checked_values = drop_text_line_facts(checked_values, drawing_pages)
         checked_shared = drop_text_line_facts([{**s, "input": "shared_discharge"} for s in checked_shared],
@@ -216,7 +222,7 @@ def build_scenario(checked_values: list[dict], checked_shared: list[dict], chang
         touched |= {"working", "arrangement"}
     merged, disagreements, sources = merge_values(checked_values, touched)
 
-    issued_vals = {**merged, **register_values(register_entries or [])}
+    issued_vals = {**merged, **register_values(register_entries or [], understanding)}
     after_vals = {**issued_vals, **change_values(changes, change_text)}
 
     shared, shared_src = _shared(checked_shared)

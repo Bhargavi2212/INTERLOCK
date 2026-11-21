@@ -9,16 +9,35 @@ approved value and does not clash; one the change undoes does.
 
 from __future__ import annotations
 
+import re
+
 from app.reading.evidence import norm
 from app.rules.model import Disputed, Value
 
 
-def _same_item(entry: dict, understanding: dict) -> bool:
+UNIT = re.compile(r"(?<![a-z0-9])unit\s*-?\s*([a-z0-9]+)(?![a-z0-9])")
+
+
+def unit_key(text: str) -> str:
+    """'Unit-1' / 'UNIT 1' / 'SG Unit-1 floor wash ...' -> 'unit1'; '' if none."""
+    m = UNIT.search(str(text or "").lower())
+    return f"unit{m.group(1)}" if m else ""
+
+
+def same_item(entry: dict, understanding: dict) -> bool:
+    """A register entry is about this change's item only if they share a name (normalised item
+    or any name) AND have the same unit tag (a shared name such as 'floor wash pump' alone
+    does not separate Unit-1 from Unit-2)."""
     mine = {norm(understanding.get("item", ""))} | {norm(n) for n in understanding.get("names", [])}
     theirs = {norm(entry.get("item", ""))} | {norm(n) for n in entry.get("names", [])}
     mine.discard("")
     theirs.discard("")
-    return bool(mine & theirs)
+    my_unit = unit_key(understanding.get("unit_tag", "")) or unit_key(understanding.get("item", ""))
+    their_unit = unit_key(entry.get("unit_tag", "")) or unit_key(entry.get("item", ""))
+    return bool(mine & theirs) and my_unit == their_unit
+
+
+_same_item = same_item
 
 
 def _same_value(a, b) -> bool:
