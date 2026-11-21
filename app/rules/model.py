@@ -77,3 +77,39 @@ class RuleResult:
 
     def to_dict(self) -> dict:
         return asdict(self)
+
+
+# ---- serialisation (agent case files, stored change results) -------------------------------
+
+def value_to_dict(v) -> dict | None:
+    if v is None:
+        return None
+    if isinstance(v, Disputed):
+        return {"disputed": [value_to_dict(x) for x in v.values]}
+    d = asdict(v)
+    d["box"] = list(v.box) if v.box else None
+    return d
+
+
+def value_from_dict(d: dict | None):
+    if d is None:
+        return None
+    if "disputed" in d:
+        return Disputed(tuple(value_from_dict(x) for x in d["disputed"]))
+    fields = {k: d[k] for k in ("value", "unit", "file", "page", "quote", "evidence_ok", "source") if k in d}
+    return Value(**fields, box=tuple(d["box"]) if d.get("box") else None)
+
+
+def doclimit_to_dict(dl: DocLimit) -> dict:
+    return asdict(dl)
+
+
+def doclimit_from_dict(d: dict) -> DocLimit:
+    return DocLimit(**{k: d[k] for k in DocLimit.__dataclass_fields__ if k in d})
+
+
+def result_from_dict(d: dict) -> RuleResult:
+    """A stored RuleResult dict back to a RuleResult (inputs restored as Values / Disputed)."""
+    r = RuleResult(**{k: d[k] for k in RuleResult.__dataclass_fields__ if k in d})
+    r.inputs = {k: value_from_dict(v) if isinstance(v, dict) else v for k, v in (d.get("inputs") or {}).items()}
+    return r

@@ -9,9 +9,8 @@ Nothing is ever guessed: defaults exist only for limits in rules.yaml.
 from __future__ import annotations
 
 from functools import lru_cache
+import json
 from pathlib import Path
-
-import yaml
 
 from app.rules.model import Disputed, DocLimit, RuleResult, Value
 from app.rules.units import UnknownUnit, to_base
@@ -41,7 +40,14 @@ POSITIVE_QUANTITIES = {"flow", "nb", "diameter", "volume", "concentration", "str
 
 @lru_cache(maxsize=4)
 def load_rules(path: str | None = None) -> dict:
-    with open(path or RULES_PATH, encoding="utf-8") as f:
+    """rules.yaml (the source, mirrors RULES.md) or rules.json (the same data, built for the agent's
+    sandbox, which has no pyyaml). With no path: rules.yaml if present, else rules.json beside it."""
+    p = Path(path) if path else (RULES_PATH if RULES_PATH.exists() else RULES_PATH.with_suffix(".json"))
+    with open(p, encoding="utf-8") as f:
+        if p.suffix == ".json":
+            return json.load(f)
+        import yaml  # only where rules.yaml is read (the server); the sandbox reads JSON
+
         return yaml.safe_load(f)
 
 
