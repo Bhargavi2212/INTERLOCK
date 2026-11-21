@@ -1,0 +1,741 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T14:49:15",
+ "seconds": 70.9,
+ "state": "done",
+ "error": null,
+ "output": {
+  "change_id": "eval-E3-1-1795290555",
+  "plant_id": "27d049ccd64f",
+  "text": "Change the COT/DOT waste water transfer pumps from 2 m3/hr to 5 m3/hr each.",
+  "understanding": {
+   "item": "COT/DOT waste water transfer pumps",
+   "names": [
+    "COT/DOT waste water transfer pumps",
+    "COT/DOT waste water transfer pump",
+    "COT/DOT wastewater transfer pumps",
+    "COT/DOT wastewater transfer pump",
+    "COT/DOT WW transfer pumps",
+    "COT/DOT WW transfer pump",
+    "COT/DOT WWT pumps",
+    "COT/DOT WWT pump",
+    "COT/DOT waste water pumps",
+    "COT/DOT waste water pump",
+    "waste water transfer pumps",
+    "wastewater transfer pumps",
+    "COT/DOT waste water"
+   ],
+   "system": "COT/DOT waste water",
+   "unit_tag": "COT/DOT",
+   "is_pump_item": true,
+   "changes": [
+    {
+     "input": "flow_per_pump",
+     "from": "2",
+     "to": "5",
+     "unit": "m3/hr"
+    }
+   ]
+  },
+  "seconds_total": 70.9,
+  "steps": [
+   {
+    "name": "understand",
+    "state": "done",
+    "seconds": 7.5
+   },
+   {
+    "name": "long_read",
+    "state": "done",
+    "seconds": 47.3
+   },
+   {
+    "name": "search",
+    "state": "done",
+    "seconds": 0.1
+   },
+   {
+    "name": "same_item",
+    "state": "done",
+    "seconds": 0.3
+   },
+   {
+    "name": "values",
+    "state": "done",
+    "seconds": 19.2
+   },
+   {
+    "name": "drawing",
+    "seconds": 0.0,
+    "state": "no drawing page among the pages found"
+   },
+   {
+    "name": "evidence",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "rules",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "clash",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "explain",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "headlines",
+    "state": "done",
+    "seconds": 3.8
+   },
+   {
+    "name": "verdict",
+    "state": "done",
+    "seconds": 0.0
+   }
+  ],
+  "page_count": 851,
+  "pages_read": 805,
+  "pages_unreadable": 46,
+  "token_count": {
+   "value": 593301,
+   "estimated": false
+  },
+  "long_read": "done",
+  "long_read_message": null,
+  "long_read_usage": {
+   "input": 593680,
+   "cached": 0,
+   "output": 239,
+   "thought": 0
+  },
+  "same_item_mode": "decisions",
+  "same_item_note": "",
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "found_by": "both",
+    "same_item_p": 0.9635827112627032,
+    "uncertain": false,
+    "why": "Lists Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS in the Effluent Treatment Plant scope of supply (clause 7.1.14).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "found_by": "both",
+    "same_item_p": 0.8347392351350696,
+    "uncertain": false,
+    "why": "P&ID for the Effluent Treatment Plant (PE-DG-508-164-W001) showing COT/DOT WASTE WATER TRANSFER PUMPS with capacity 2 M3/HR (1W+1S).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "found_by": "both",
+    "same_item_p": 0.9659374285809564,
+    "uncertain": false,
+    "why": "Datasheet A for Effluent Treatment Plant specifying COT/DOT WASTE WATER TRANSFER PUMPS (Item 6) with rated capacity 2 m3/hr each.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "found_by": "longread",
+    "same_item_p": 0.5183126660671099,
+    "uncertain": true,
+    "why": "Lists piping distance from COT/DOT PIT to TG Unit-1B Floor Wash Water Sump in the ETP piping table.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "found_by": "design basis",
+    "same_item_p": null,
+    "uncertain": false,
+    "why": "design-basis limit used (evidence checked)",
+    "look_alike": false
+   }
+  ],
+  "pages_rejected": [
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "same_item_p": 0.05804314799509716
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "same_item_p": 0.0734459870130077
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 71,
+    "same_item_p": 0.021683560496524514
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 75,
+    "same_item_p": 0.03392003742652148
+   }
+  ],
+  "design_basis_pages": [
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 76
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 34
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 88
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 78
+   }
+  ],
+  "values": [
+   {
+    "input": "installed",
+    "value": "2",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "unit": "",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "1",
+    "unit": "count",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "2",
+    "unit": "M3/HR",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "COT/DOT WASTE WATER TRANSFER PUMPS CAP.- 2 M3/HR (1W+1S) TYPE : HORIZONTAL SCREW",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "unit": "",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "COT/DOT WASTE WATER TRANSFER PUMPS CAP.- 2 M3/HR (1W+1S) TYPE : HORIZONTAL SCREW",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "1",
+    "unit": "count",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "COT/DOT WASTE WATER TRANSFER PUMPS CAP.- 2 M3/HR (1W+1S) TYPE : HORIZONTAL SCREW",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "1",
+    "unit": "M3",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "COT/DOT WASTE WATER COLLECTION SUMP (E1C) CAP.- 1 M3 M.O.C.-RCC (UNDER GROUND)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "schedule",
+    "value": "SCH.80",
+    "unit": "",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "3. CPVC PIPES SHALL BE MINIMUM SCH.80 OR AS PER SYSTEM REQUIREMENT WHICH EVER IS HIGHER.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "1",
+    "unit": "m3",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "b) Effective Capacity, m3 1 m3",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "a) Number required Two (1W+1S) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "1",
+    "unit": "nos.",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "a) Number required Two (1W+1S) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "service",
+    "value": "1. Oily effluent from COT/DOT area",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "d) Fluid to be handled 1. Oily effluent from COT/DOT area",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "2",
+    "unit": "m3/ hr.",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "f) Rated capacity, each m3/ hr. 2",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "limits": [
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.5,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_from_nb": 0,
+    "applies_to_nb": 49,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.8,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.5,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.5,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "shared_discharge": [],
+  "disagreements": [],
+  "explanations": [],
+  "results_issued": [
+   {
+    "rule_id": "R1",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "2",
+      "unit": "M3/HR",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "COT/DOT WASTE WATER TRANSFER PUMPS CAP.- 2 M3/HR (1W+1S) TYPE : HORIZONTAL SCREW",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "schedule": {
+      "value": "SCH.80",
+      "unit": "",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "3. CPVC PIPES SHALL BE MINIMUM SCH.80 OR AS PER SYSTEM REQUIREMENT WHICH EVER IS HIGHER.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "1. Oily effluent from COT/DOT area",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 54,
+      "quote": "d) Fluid to be handled 1. Oily effluent from COT/DOT area",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "pumps_into_line": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity held: line_nb missing: no line size (line_nb or line_id)",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "OK",
+    "value": 2.0,
+    "unit": "count",
+    "limit": 2.0,
+    "limit_source": "arrangement '1W+1S' (bhel/Part1.pdf p.43)",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "2",
+      "unit": "nos.",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "working": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "arrangement": {
+      "value": "1W+1S",
+      "unit": "",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R2 Standby available: installed 2 >= working 1 + standby 1; standby from arrangement '1W+1S' (bhel/Part1.pdf p.43); inputs bhel/Part1.pdf p.43",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "1",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "COT/DOT WASTE WATER COLLECTION SUMP (E1C) CAP.- 1 M3 M.O.C.-RCC (UNDER GROUND)",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "q_out": {
+      "value": 2.0,
+      "unit": "m3/h",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "2 M3/HR per pump x 1 working",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+    "assumptions": [],
+    "notes": [
+     "pump-out only 30.0 min, information only"
+    ]
+   }
+  ],
+  "results_after": [
+   {
+    "rule_id": "R1",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "5",
+      "unit": "m3/hr",
+      "file": "",
+      "page": 0,
+      "quote": "Change the COT/DOT waste water transfer pumps from 2 m3/hr to 5 m3/hr each.",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     },
+     "schedule": {
+      "value": "SCH.80",
+      "unit": "",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "3. CPVC PIPES SHALL BE MINIMUM SCH.80 OR AS PER SYSTEM REQUIREMENT WHICH EVER IS HIGHER.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "1. Oily effluent from COT/DOT area",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 54,
+      "quote": "d) Fluid to be handled 1. Oily effluent from COT/DOT area",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "pumps_into_line": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity held: line_nb missing: no line size (line_nb or line_id)",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "OK",
+    "value": 2.0,
+    "unit": "count",
+    "limit": 2.0,
+    "limit_source": "arrangement '1W+1S' (bhel/Part1.pdf p.43)",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "2",
+      "unit": "nos.",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "working": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "arrangement": {
+      "value": "1W+1S",
+      "unit": "",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R2 Standby available: installed 2 >= working 1 + standby 1; standby from arrangement '1W+1S' (bhel/Part1.pdf p.43); inputs bhel/Part1.pdf p.43",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "1",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "COT/DOT WASTE WATER COLLECTION SUMP (E1C) CAP.- 1 M3 M.O.C.-RCC (UNDER GROUND)",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "q_out": {
+      "value": 5.0,
+      "unit": "m3/h",
+      "file": "",
+      "page": 0,
+      "quote": "5 m3/hr per pump x 1 working",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+    "assumptions": [],
+    "notes": [
+     "pump-out only 12.0 min, information only"
+    ]
+   }
+  ],
+  "clashes": [],
+  "verdict": {
+   "verdict": "REVIEW",
+   "label": "REVIEW",
+   "reasons": [
+    "held: R1 Pipe velocity held: line_nb missing: no line size (line_nb or line_id)",
+    "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+   ]
+  },
+  "headlines": [
+   "Pipe velocity held: line_nb missing with no line size (line_nb or line_id).",
+   "Sump cycle time held: q_in missing (inflow not stated)."
+  ],
+  "drawing": {
+   "found": false,
+   "reason": "no drawing page among the pages found",
+   "readings": []
+  }
+ }
+}
