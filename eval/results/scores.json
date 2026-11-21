@@ -1212,6 +1212,481 @@
    ]
   }
  },
+ "rerun": {
+  "systems": {
+   "interlock": {
+    "A": {
+     "page_recall_worst_mean": 0.917,
+     "page_recall_worst": {
+      "A1": 1.0,
+      "A2": 1.0,
+      "A3": 0.75
+     },
+     "page_recall_spread": {
+      "A1": [
+       1.0,
+       1.0
+      ],
+      "A2": [
+       1.0,
+       1.0
+      ],
+      "A3": [
+       0.75,
+       0.75
+      ]
+     },
+     "wrong_pages_worst": {
+      "A1": 0,
+      "A2": 0,
+      "A3": 0
+     },
+     "wrong_pages_sum": 0,
+     "value_accuracy_worst_mean": 0.922,
+     "evidence": [
+      35,
+      35
+     ],
+     "verdict_matches": [
+      3,
+      3
+     ],
+     "seconds_median": 61.4,
+     "seconds_max": 62.3,
+     "runs": 3
+    },
+    "E": {
+     "page_recall_worst_mean": 0.9,
+     "page_recall_worst": {
+      "E1": 1.0,
+      "E2": 1.0,
+      "E3": 0.75,
+      "E4": 1.0,
+      "E5": 0.75
+     },
+     "page_recall_spread": {
+      "E1": [
+       1.0,
+       1.0
+      ],
+      "E2": [
+       1.0,
+       1.0
+      ],
+      "E3": [
+       0.75,
+       1.0
+      ],
+      "E4": [
+       1.0,
+       1.0
+      ],
+      "E5": [
+       0.75,
+       1.0
+      ]
+     },
+     "wrong_pages_worst": {
+      "E1": 6,
+      "E2": 0,
+      "E3": 0,
+      "E4": 5,
+      "E5": 0
+     },
+     "wrong_pages_sum": 11,
+     "value_accuracy_worst_mean": 0.933,
+     "evidence": [
+      200,
+      204
+     ],
+     "verdict_matches": [
+      12,
+      15
+     ],
+     "seconds_median": 62.4,
+     "seconds_max": 76.2,
+     "runs": 15
+    }
+   }
+  },
+  "misses": [
+   {
+    "set": "A",
+    "id": "A3",
+    "system": "interlock",
+    "run": 1,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "interlock",
+    "run": 1,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      44
+     ],
+     [
+      "Part3.pdf",
+      26
+     ],
+     [
+      "Part3.pdf",
+      36
+     ],
+     [
+      "Part4.pdf",
+      3
+     ],
+     [
+      "Part4.pdf",
+      60
+     ],
+     [
+      "Part4.pdf",
+      61
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "interlock",
+    "run": 2,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part3.pdf",
+      26
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E1",
+    "system": "interlock",
+    "run": 3,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      44
+     ],
+     [
+      "Part3.pdf",
+      26
+     ],
+     [
+      "Part3.pdf",
+      147
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E3",
+    "system": "interlock",
+    "run": 2,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "REVIEW",
+    "expected": "REVIEW"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "interlock",
+    "run": 1,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      92
+     ],
+     [
+      "Part4.pdf",
+      97
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "interlock",
+    "run": 2,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      92
+     ],
+     [
+      "Part4.pdf",
+      65
+     ],
+     [
+      "Part4.pdf",
+      91
+     ],
+     [
+      "Part4.pdf",
+      97
+     ],
+     [
+      "Part4.pdf",
+      101
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E4",
+    "system": "interlock",
+    "run": 3,
+    "missing_pages": [],
+    "wrong_pages": [
+     [
+      "Part1.pdf",
+      92
+     ],
+     [
+      "Part4.pdf",
+      97
+     ]
+    ],
+    "verdict": "BLOCK",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E5",
+    "system": "interlock",
+    "run": 1,
+    "missing_pages": [],
+    "wrong_pages": [],
+    "verdict": "REVIEW",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E5",
+    "system": "interlock",
+    "run": 2,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "REVIEW",
+    "expected": "BLOCK"
+   },
+   {
+    "set": "E",
+    "id": "E5",
+    "system": "interlock",
+    "run": 3,
+    "missing_pages": [
+     [
+      "Part1.pdf",
+      45
+     ]
+    ],
+    "wrong_pages": [],
+    "verdict": "REVIEW",
+    "expected": "BLOCK"
+   }
+  ],
+  "key_before_run": [
+   {
+    "file": "A_A1_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:11:13",
+    "ok": true
+   },
+   {
+    "file": "A_A2_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:12:21",
+    "ok": true
+   },
+   {
+    "file": "A_A3_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:13:27",
+    "ok": true
+   },
+   {
+    "file": "E_E1_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:56:03",
+    "ok": true
+   },
+   {
+    "file": "E_E1_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:01:49",
+    "ok": true
+   },
+   {
+    "file": "E_E1_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:06:34",
+    "ok": true
+   },
+   {
+    "file": "E_E2_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:57:24",
+    "ok": true
+   },
+   {
+    "file": "E_E2_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:02:37",
+    "ok": true
+   },
+   {
+    "file": "E_E2_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:07:21",
+    "ok": true
+   },
+   {
+    "file": "E_E3_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:58:38",
+    "ok": true
+   },
+   {
+    "file": "E_E3_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:03:46",
+    "ok": true
+   },
+   {
+    "file": "E_E3_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:08:30",
+    "ok": true
+   },
+   {
+    "file": "E_E4_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T15:59:50",
+    "ok": true
+   },
+   {
+    "file": "E_E4_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:05:07",
+    "ok": true
+   },
+   {
+    "file": "E_E4_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:09:40",
+    "ok": true
+   },
+   {
+    "file": "E_E5_interlock_1.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:00:41",
+    "ok": true
+   },
+   {
+    "file": "E_E5_interlock_2.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:05:52",
+    "ok": true
+   },
+   {
+    "file": "E_E5_interlock_3.json",
+    "key_committed": "2026-11-21T13:10:49",
+    "run_started": "2026-11-21T16:10:28",
+    "ok": true
+   }
+  ],
+  "time": {
+   "cold_first_run_s": 76.2,
+   "cold_started": "2026-11-21T15:56:03",
+   "warm_median_s": 61.4
+  },
+  "same_item": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "kept": 10,
+   "key_candidates": 10
+  },
+  "drawing": {
+   "hits": 1,
+   "of": 5,
+   "file": "B_all_interlock_1.json",
+   "rows": [
+    {
+     "id": "B1",
+     "hit": false,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    },
+    {
+     "id": "B2",
+     "hit": false,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    },
+    {
+     "id": "B3",
+     "hit": false,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    },
+    {
+     "id": "B4",
+     "hit": false,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    },
+    {
+     "id": "B5",
+     "hit": true,
+     "distance": null,
+     "found": false,
+     "check": "the model did not find the item on this sheet"
+    }
+   ]
+  }
+ },
  "F": {
   "interlock": [
    {

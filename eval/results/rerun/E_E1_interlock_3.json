@@ -1,0 +1,1056 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T16:06:34",
+ "seconds": 42.1,
+ "state": "done",
+ "error": null,
+ "output": {
+  "change_id": "eval-E1-3-1795295194",
+  "plant_id": "27d049ccd64f",
+  "text": "Run all three WSWS transfer pumps together when the sump level is high, with no standby.",
+  "understanding": {
+   "item": "WSWS transfer pumps",
+   "names": [
+    "WSWS transfer pumps",
+    "WSWS transfer pump",
+    "WSWS pumps",
+    "WSWS pump",
+    "WSWS sump transfer pumps",
+    "WSWS sump transfer pump",
+    "WSWS XFER pumps",
+    "WSWS XFER pump",
+    "transfer pumps",
+    "transfer pump",
+    "WSWS"
+   ],
+   "system": "WSWS",
+   "unit_tag": "",
+   "is_pump_item": true,
+   "changes": [
+    {
+     "input": "working",
+     "from": "",
+     "to": "3",
+     "unit": "count"
+    },
+    {
+     "input": "arrangement",
+     "from": "",
+     "to": "3W+0S",
+     "unit": ""
+    },
+    {
+     "input": "standby_required",
+     "from": "",
+     "to": "false",
+     "unit": ""
+    }
+   ]
+  },
+  "seconds_total": 42.1,
+  "steps": [
+   {
+    "name": "understand",
+    "state": "done",
+    "seconds": 7.1
+   },
+   {
+    "name": "long_read",
+    "state": "done",
+    "seconds": 15.3
+   },
+   {
+    "name": "search",
+    "state": "done",
+    "seconds": 0.2
+   },
+   {
+    "name": "same_item",
+    "state": "done",
+    "seconds": 1.7
+   },
+   {
+    "name": "values",
+    "state": "done",
+    "seconds": 18.2
+   },
+   {
+    "name": "drawing",
+    "seconds": 0.0,
+    "state": "no drawing page among the pages found"
+   },
+   {
+    "name": "evidence",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "rules",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "clash",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "explain",
+    "state": "done",
+    "seconds": 6.4
+   },
+   {
+    "name": "headlines",
+    "state": "done",
+    "seconds": 4.4
+   },
+   {
+    "name": "verdict",
+    "state": "done",
+    "seconds": 0.0
+   }
+  ],
+  "page_count": 851,
+  "pages_read": 805,
+  "pages_unreadable": 46,
+  "token_count": {
+   "value": 593301,
+   "estimated": false
+  },
+  "long_read": "done",
+  "long_read_message": null,
+  "long_read_usage": {
+   "input": 593674,
+   "cached": 591620,
+   "output": 675,
+   "thought": 0
+  },
+  "same_item_mode": "decisions",
+  "same_item_note": "",
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "found_by": "both",
+    "same_item_p": 0.9371016835312788,
+    "uncertain": false,
+    "why": "Scope of supply for Effluent Treatment Plant (ETP) listing Waste Service Water Sump (WSWS) and three (2W+1S) WSWS transfer pumps (clauses 7.1.16, 7.1.17).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 44,
+    "found_by": "both",
+    "same_item_p": 0.4821088256744757,
+    "uncertain": true,
+    "why": "ETP scope of supply including Lamella Clarifiers (fed by WSWS transfer pumps) and ETP terminal points.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 26,
+    "found_by": "both",
+    "same_item_p": 0.5115111926589077,
+    "uncertain": true,
+    "why": "Mandatory spares for ETP listing Waste Service Water transfer pump motor (item 6.3).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "found_by": "both",
+    "same_item_p": 0.9274882461693205,
+    "uncertain": false,
+    "why": "P&ID of Effluent Treatment Plant (PE-DG-508-164-W001) showing Waste Service Water Sump (WSWS) and WSWS Transfer Pumps (3x50%, 125 m3/hr each).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 147,
+    "found_by": "search",
+    "same_item_p": 0.631137428545607,
+    "uncertain": false,
+    "why": null,
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "found_by": "both",
+    "same_item_p": 0.899988246181089,
+    "uncertain": false,
+    "why": "Datasheet A for Effluent Treatment Plant specifying Waste Service Water Sump (WSWS) (item 27) and WSWS Transfer Pumps (3 nos., 2W+1S, 125 m3/hr each) (item 28).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "found_by": "design basis",
+    "same_item_p": null,
+    "uncertain": false,
+    "why": "design-basis limit used (evidence checked)",
+    "look_alike": false
+   }
+  ],
+  "pages_rejected": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 27,
+    "same_item_p": 0.02044145467067919
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 28,
+    "same_item_p": 0.05263973076743499
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 29,
+    "same_item_p": 0.025894529182032805
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 37,
+    "same_item_p": 0.040553591270756924
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 38,
+    "same_item_p": 0.044013097292832135
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 40,
+    "same_item_p": 0.03986244099851281
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 63,
+    "same_item_p": 0.017583307744083253
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 70,
+    "same_item_p": 0.04800296416367351
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 74,
+    "same_item_p": 0.02752612943196065
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 75,
+    "same_item_p": 0.032597872731634725
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 76,
+    "same_item_p": 0.05601250122327344
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 81,
+    "same_item_p": 0.04827289026203934
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 82,
+    "same_item_p": 0.041002637396360966
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 85,
+    "same_item_p": 0.024829675804245655
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 88,
+    "same_item_p": 0.0416975240094954
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 92,
+    "same_item_p": 0.04159479453264878
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 93,
+    "same_item_p": 0.02591293224303469
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 95,
+    "same_item_p": 0.04300968121246007
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 96,
+    "same_item_p": 0.04172979091161498
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 97,
+    "same_item_p": 0.06099742170216323
+   },
+   {
+    "file": "bhel/Part2.pdf",
+    "page": 144,
+    "same_item_p": 0.08610171553291415
+   },
+   {
+    "file": "bhel/Part2.pdf",
+    "page": 149,
+    "same_item_p": 0.0630544478856636
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 19,
+    "same_item_p": 0.06665893917406103
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 22,
+    "same_item_p": 0.11692818299248396
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 24,
+    "same_item_p": 0.11990046040661172
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 36,
+    "same_item_p": 0.12490708969775413
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 136,
+    "same_item_p": 0.04745219527559355
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 145,
+    "same_item_p": 0.08799129451948026
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 3,
+    "same_item_p": 0.16974637389154465
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 4,
+    "same_item_p": 0.08232698366926244
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 27,
+    "same_item_p": 0.0734512364335627
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 41,
+    "same_item_p": 0.07828044833728351
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 46,
+    "same_item_p": 0.04376549813828638
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 47,
+    "same_item_p": 0.07565160210308419
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 51,
+    "same_item_p": 0.07173223104405275
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 53,
+    "same_item_p": 0.021092847785957557
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "same_item_p": 0.030480545156555787
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 55,
+    "same_item_p": 0.037914522762940384
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "same_item_p": 0.01921232547621178
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "same_item_p": 0.029194746662521316
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 58,
+    "same_item_p": 0.021068325134590886
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 60,
+    "same_item_p": 0.11594124078558918
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "same_item_p": 0.13917308134973297
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 71,
+    "same_item_p": 0.029657114881366888
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 75,
+    "same_item_p": 0.021957205559925662
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 89,
+    "same_item_p": 0.032961618685875445
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 96,
+    "same_item_p": 0.033503902199472184
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 97,
+    "same_item_p": 0.03521895949145618
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 106,
+    "same_item_p": 0.03676080275073803
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 125,
+    "same_item_p": 0.026815257015142056
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "same_item_p": 0.06393040330977469
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 46,
+    "same_item_p": 0.07642180910559612
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 47,
+    "same_item_p": 0.16280498788434047
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 48,
+    "same_item_p": 0.050094982552604236
+   }
+  ],
+  "design_basis_pages": [
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 76
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 34
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 88
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 78
+   }
+  ],
+  "values": [
+   {
+    "input": "installed",
+    "value": "3",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "2",
+    "unit": "count",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "2W+1S",
+    "unit": "",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "3X50%",
+    "unit": "",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "WSWS TRANSFER PUMPS (3X50%) TYPE : VERTICAL CENTRIFUGAL CAP.: 125M3/HR. EACH",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "125",
+    "unit": "M3/HR.",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "WSWS TRANSFER PUMPS (3X50%) TYPE : VERTICAL CENTRIFUGAL CAP.: 125M3/HR. EACH",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "250",
+    "unit": "M3",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "WASTE SERVICE WATER SUMP  (WSWS) MOC: RCC (E12) (UNDER GROUND ,IN TWO COMPARTMENTS) CAPACITY :  250 M3 EACH  COMPARTMENT",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "line_nb",
+    "value": "200",
+    "unit": "NB",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "200NB",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "250",
+    "unit": "m3",
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "quote": "b)  Effective Capacity (each compartment), m3 250m3",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "2W+1S",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "quote": "a)  Number required Three (2W+1S) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "2",
+    "unit": "count",
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "quote": "a)  Number required Three (2W+1S) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "service",
+    "value": "Effluent from WSWS",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "quote": "d)  Fluid to be handled Effluent from WSWS",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "125",
+    "unit": "m3/ hr.",
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "quote": "f)  Rated capacity, each m3/ hr. 125",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "limits": [
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.5,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_to_nb": 49,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.8,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.5,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.5,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "shared_discharge": [],
+  "disagreements": [
+   {
+    "attribute": "arrangement",
+    "values": [
+     {
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "value": "2W+1S"
+     },
+     {
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "value": "3X50%"
+     }
+    ]
+   }
+  ],
+  "explanations": [
+   {
+    "attribute": "arrangement",
+    "likely_right_file": "bhel/Part1.pdf",
+    "likely_right_page": 43,
+    "why": "Both 2W+1S (two working, one standby) and 3X50% (three pumps at 50% system capacity each) actually describe the exact same design setup, though 2W+1S is explicitly stated in two separate equipment specification sections (Part1 p.43 and Part4 p.59). Running all three together is an operational change from this 100% design flow (2 x 50%) to 150% flow.",
+    "consequence": "Because the system was sized for two working pumps (100% capacity, or 250 m3/hr total), running all three pumps together (150% capacity, or 375 m3/hr) may overload the electrical supply, exceed downstream piping pressure or flow limits, and leave no backup if a pump fails during high sump level."
+   }
+  ],
+  "results_issued": [
+   {
+    "rule_id": "R1",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "125",
+      "unit": "M3/HR.",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "WSWS TRANSFER PUMPS (3X50%) TYPE : VERTICAL CENTRIFUGAL CAP.: 125M3/HR. EACH",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "line_nb": {
+      "value": "200",
+      "unit": "NB",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "200NB",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "Effluent from WSWS",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 59,
+      "quote": "d)  Fluid to be handled Effluent from WSWS",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "OK",
+    "value": 3.0,
+    "unit": "count",
+    "limit": 3.0,
+    "limit_source": "documents disagree on the standby requirement (bhel/Part1.pdf p.43 = 2W+1S; bhel/Part3.pdf p.146 = 3X50%); the stricter value, standby 1 (bhel/Part1.pdf p.43), is used",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "3",
+      "unit": "nos.",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "working": {
+      "value": "2",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "arrangement": {
+      "values": [
+       {
+        "value": "2W+1S",
+        "unit": "",
+        "file": "bhel/Part1.pdf",
+        "page": 43,
+        "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc.",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "3X50%",
+        "unit": "",
+        "file": "bhel/Part3.pdf",
+        "page": 146,
+        "quote": "WSWS TRANSFER PUMPS (3X50%) TYPE : VERTICAL CENTRIFUGAL CAP.: 125M3/HR. EACH",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     }
+    },
+    "message": "R2 Standby available: installed 3 >= working 2 + standby 1; standby from documents disagree on the standby requirement (bhel/Part1.pdf p.43 = 2W+1S; bhel/Part3.pdf p.146 = 3X50%); the stricter value, standby 1 (bhel/Part1.pdf p.43), is used; inputs bhel/Part1.pdf p.43",
+    "assumptions": [
+     "documents disagree on the standby requirement (bhel/Part1.pdf p.43 = 2W+1S; bhel/Part3.pdf p.146 = 3X50%); the stricter value, standby 1 (bhel/Part1.pdf p.43), is used"
+    ],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "250",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "WASTE SERVICE WATER SUMP  (WSWS) MOC: RCC (E12) (UNDER GROUND ,IN TWO COMPARTMENTS) CAPACITY :  250 M3 EACH  COMPARTMENT",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "q_out": {
+      "value": 250.0,
+      "unit": "m3/h",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "125 M3/HR. per pump x 2 working",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+    "assumptions": [],
+    "notes": [
+     "pump-out only 60.0 min, information only"
+    ]
+   }
+  ],
+  "results_after": [
+   {
+    "rule_id": "R1",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "125",
+      "unit": "M3/HR.",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "WSWS TRANSFER PUMPS (3X50%) TYPE : VERTICAL CENTRIFUGAL CAP.: 125M3/HR. EACH",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "line_nb": {
+      "value": "200",
+      "unit": "NB",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "200NB",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "Effluent from WSWS",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 59,
+      "quote": "d)  Fluid to be handled Effluent from WSWS",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "3",
+      "unit": "nos.",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "working": {
+      "value": "3",
+      "unit": "count",
+      "file": "",
+      "page": 0,
+      "quote": "Run all three WSWS transfer pumps together when the sump level is high, with no standby.",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     },
+     "standby_required": {
+      "value": "false",
+      "unit": "",
+      "file": "",
+      "page": 0,
+      "quote": "Run all three WSWS transfer pumps together when the sump level is high, with no standby.",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     },
+     "arrangement": {
+      "values": [
+       {
+        "value": "2W+1S",
+        "unit": "",
+        "file": "bhel/Part1.pdf",
+        "page": 43,
+        "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc.",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "3X50%",
+        "unit": "",
+        "file": "bhel/Part3.pdf",
+        "page": 146,
+        "quote": "WSWS TRANSFER PUMPS (3X50%) TYPE : VERTICAL CENTRIFUGAL CAP.: 125M3/HR. EACH",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     }
+    },
+    "message": "R2 Standby available held: standby_required a number with no unit",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "250",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "WASTE SERVICE WATER SUMP  (WSWS) MOC: RCC (E12) (UNDER GROUND ,IN TWO COMPARTMENTS) CAPACITY :  250 M3 EACH  COMPARTMENT",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "q_out": {
+      "value": 375.0,
+      "unit": "m3/h",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "125 M3/HR. per pump x 3 working",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+    "assumptions": [],
+    "notes": [
+     "pump-out only 40.0 min, information only"
+    ]
+   }
+  ],
+  "clashes": [],
+  "verdict": {
+   "verdict": "BLOCK",
+   "label": "BLOCK",
+   "reasons": [
+    "documents disagree on arrangement: bhel/Part1.pdf p.43 = 2W+1S; bhel/Part3.pdf p.146 = 3X50%",
+    "held: R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+    "held: R2 Standby available held: standby_required a number with no unit",
+    "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+   ]
+  },
+  "headlines": [
+   "R1 Pipe velocity held: discharge line sharing not stated in text.",
+   "R2 Standby available held: standby_required is a number without a unit.",
+   "R3 Sump cycle time held: inflow (q_in) is not stated.",
+   "Arrangement disagreement: bhel/Part1.pdf p.43 says 2W+1S; bhel/Part3.pdf p.146 says 3X50%."
+  ],
+  "drawing": {
+   "found": false,
+   "reason": "no drawing page among the pages found",
+   "readings": []
+  }
+ }
+}

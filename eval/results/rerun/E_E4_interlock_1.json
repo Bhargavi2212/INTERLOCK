@@ -1,0 +1,921 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:59:50",
+ "seconds": 46.7,
+ "state": "done",
+ "error": null,
+ "output": {
+  "change_id": "eval-E4-1-1795294790",
+  "plant_id": "27d049ccd64f",
+  "text": "Add a third sludge sump transfer pump as a second standby (1 working + 2 standby).",
+  "understanding": {
+   "item": "sludge sump transfer pumps",
+   "names": [
+    "sludge sump transfer pumps",
+    "sludge sump transfer pump",
+    "sludge sump pumps",
+    "sludge sump pump",
+    "sludge transfer pumps",
+    "sludge transfer pump",
+    "sump transfer pumps",
+    "sump transfer pump",
+    "SST pumps",
+    "SSTP",
+    "SLDG SUMP XFER PUMP",
+    "SLDG SUMP XFER PUMPS",
+    "sludge sump"
+   ],
+   "system": "sludge sump",
+   "unit_tag": "",
+   "is_pump_item": true,
+   "changes": [
+    {
+     "input": "installed",
+     "from": "",
+     "to": "3",
+     "unit": "count"
+    },
+    {
+     "input": "working",
+     "from": "",
+     "to": "1",
+     "unit": "count"
+    },
+    {
+     "input": "standby_required",
+     "from": "",
+     "to": "2",
+     "unit": "count"
+    },
+    {
+     "input": "arrangement",
+     "from": "",
+     "to": "1W+2S",
+     "unit": ""
+    }
+   ]
+  },
+  "seconds_total": 46.7,
+  "steps": [
+   {
+    "name": "understand",
+    "state": "done",
+    "seconds": 7.8
+   },
+   {
+    "name": "long_read",
+    "state": "done",
+    "seconds": 13.9
+   },
+   {
+    "name": "search",
+    "state": "done",
+    "seconds": 0.1
+   },
+   {
+    "name": "same_item",
+    "state": "done",
+    "seconds": 1.0
+   },
+   {
+    "name": "values",
+    "state": "done",
+    "seconds": 25.5
+   },
+   {
+    "name": "drawing",
+    "seconds": 0.0,
+    "state": "no drawing page among the pages found"
+   },
+   {
+    "name": "evidence",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "rules",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "clash",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "explain",
+    "state": "done",
+    "seconds": 5.9
+   },
+   {
+    "name": "headlines",
+    "state": "done",
+    "seconds": 4.4
+   },
+   {
+    "name": "verdict",
+    "state": "done",
+    "seconds": 0.0
+   }
+  ],
+  "page_count": 851,
+  "pages_read": 805,
+  "pages_unreadable": 46,
+  "token_count": {
+   "value": 593301,
+   "estimated": false
+  },
+  "long_read": "done",
+  "long_read_message": null,
+  "long_read_usage": {
+   "input": 593674,
+   "cached": 591620,
+   "output": 240,
+   "thought": 0
+  },
+  "same_item_mode": "decisions",
+  "same_item_note": "",
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 44,
+    "found_by": "both",
+    "same_item_p": 0.9486200299512532,
+    "uncertain": false,
+    "why": "Lists two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS under the Effluent Treatment Plant scope of supply (item 7.1.26).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "found_by": "search",
+    "same_item_p": 0.43054498173912,
+    "uncertain": true,
+    "why": null,
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 92,
+    "found_by": "search",
+    "same_item_p": 0.3310363417322347,
+    "uncertain": false,
+    "why": null,
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "found_by": "both",
+    "same_item_p": 0.8925719449905839,
+    "uncertain": false,
+    "why": "P&ID of the Effluent Treatment Plant showing SLUDGE SUMP TRANSFER PUMPS (2X100%) at Sludge Sump (E14).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "found_by": "both",
+    "same_item_p": 0.9631909121988016,
+    "uncertain": false,
+    "why": "Datasheet A for Effluent Treatment Plant specifying Two (1W+1S) nos. for SLUDGE SUMP TRANSFER PUMPS (item 34).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 97,
+    "found_by": "search",
+    "same_item_p": 0.9074891730583687,
+    "uncertain": false,
+    "why": null,
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "found_by": "design basis",
+    "same_item_p": null,
+    "uncertain": false,
+    "why": "design-basis limit used (evidence checked)",
+    "look_alike": false
+   }
+  ],
+  "pages_rejected": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 46,
+    "same_item_p": 0.19604471567238949
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 74,
+    "same_item_p": 0.06444718197838221
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 76,
+    "same_item_p": 0.05402024656350776
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 77,
+    "same_item_p": 0.04400405798384395
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 79,
+    "same_item_p": 0.07128655864562532
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 80,
+    "same_item_p": 0.05441841074112454
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 81,
+    "same_item_p": 0.05570829609273055
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 86,
+    "same_item_p": 0.05653088181809645
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 91,
+    "same_item_p": 0.09091637407220497
+   },
+   {
+    "file": "bhel/Part2.pdf",
+    "page": 4,
+    "same_item_p": 0.021201163269922135
+   },
+   {
+    "file": "bhel/Part2.pdf",
+    "page": 7,
+    "same_item_p": 0.037224737175136746
+   },
+   {
+    "file": "bhel/Part2.pdf",
+    "page": 137,
+    "same_item_p": 0.020220109837070052
+   },
+   {
+    "file": "bhel/Part2.pdf",
+    "page": 145,
+    "same_item_p": 0.09992184069770159
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 3,
+    "same_item_p": 0.06838657535698854
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 4,
+    "same_item_p": 0.08599715349163482
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 63,
+    "same_item_p": 0.0687809802293138
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 65,
+    "same_item_p": 0.24014218893406605
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 91,
+    "same_item_p": 0.05926794474215651
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 101,
+    "same_item_p": 0.08857479618840261
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 62,
+    "same_item_p": 0.03200156049365651
+   }
+  ],
+  "design_basis_pages": [
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 76
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 34
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 88
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 78
+   }
+  ],
+  "values": [
+   {
+    "input": "installed",
+    "value": "2",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 44,
+    "quote": "7.1.26 Two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "1",
+    "unit": "count",
+    "file": "bhel/Part1.pdf",
+    "page": 44,
+    "quote": "7.1.26 Two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "unit": "",
+    "file": "bhel/Part1.pdf",
+    "page": 44,
+    "quote": "7.1.26 Two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "6.25",
+    "unit": "M3",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "SLUDGE SUMP (E14) (TWO COMPARTMENT) CAPACITY:6.25M3 EACH",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "2X100%",
+    "unit": "",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "SLUDGE SUMP TRANSFER PUMPS (2X100%)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "12.5",
+    "unit": "M3/H",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "SLUDGE SUMP TRANSFER PUMPS (2X100%) TYPE : VERTICAL CENTRIFUGAL CAP.: 12.5M3/H",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "line_nb",
+    "value": "50",
+    "unit": "NB",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "50NB",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "6.25",
+    "unit": "m3",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "b) Effective Capacity, m3 (each compartment) 6.25m3",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "1",
+    "unit": "nos.",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "a) Number required Two (1W+1S) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "a) Number required Two (1W+1S) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "service",
+    "value": "Effluent from WSWS",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "d) Fluid to be handled Effluent from WSWS",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "12.5",
+    "unit": "m3/ hr.",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "f) Rated capacity, each m3/ hr. 12.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "limits": [
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.5,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_from_nb": 0,
+    "applies_to_nb": 49,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.8,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.5,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.5,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "shared_discharge": [],
+  "disagreements": [
+   {
+    "attribute": "arrangement",
+    "values": [
+     {
+      "file": "bhel/Part1.pdf",
+      "page": 44,
+      "value": "1W+1S"
+     },
+     {
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "value": "2X100%"
+     }
+    ]
+   }
+  ],
+  "explanations": [
+   {
+    "attribute": "arrangement",
+    "likely_right_file": "bhel/Part1.pdf",
+    "likely_right_page": 44,
+    "why": "Both Part1.pdf and Part4.pdf explicitly specify the arrangement as 1W+1S (one working, one standby), which matches the proposed change to add a second standby. In engineering notation, 2X100% in Part3.pdf means two 100%-capacity pumps, which describes the same physical setup using a different label rather than a true conflict, though 1W+1S explicitly defines the operating philosophy.",
+    "consequence": "If 2X100% is misinterpreted to mean both pumps run simultaneously, downstream piping, valves, and electrical systems could be oversized, or control logic might run multiple pumps at once and cause overpressure or pump dry-running."
+   }
+  ],
+  "results_issued": [
+   {
+    "rule_id": "R1",
+    "status": "OK",
+    "value": 1.7683882565766147,
+    "unit": "m/s",
+    "limit": 2.4,
+    "limit_source": "bhel/Part5.pdf p.200: '(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5'",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "12.5",
+      "unit": "M3/H",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "SLUDGE SUMP TRANSFER PUMPS (2X100%) TYPE : VERTICAL CENTRIFUGAL CAP.: 12.5M3/H",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "line_nb": {
+      "value": "50",
+      "unit": "NB",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "50NB",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "Effluent from WSWS",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 61,
+      "quote": "d) Fluid to be handled Effluent from WSWS",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "pumps_into_line": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 44,
+      "quote": "7.1.26 Two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity: v = 1.77 m/s vs limit 2.40 m/s (bhel/Part5.pdf p.200: '(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5'); inputs bhel/Part1.pdf p.44, bhel/Part3.pdf p.146",
+    "assumptions": [
+     "nominal bore used as internal diameter (slightly over-states velocity for Sch 40, under-states it for Sch 80 and heavier)",
+     "line assumed to be pump discharge"
+    ],
+    "notes": [
+     "below the documents' lower value 1.80 m/s, information only"
+    ]
+   },
+   {
+    "rule_id": "R2",
+    "status": "OK",
+    "value": 2.0,
+    "unit": "count",
+    "limit": 2.0,
+    "limit_source": "documents disagree on the standby requirement (bhel/Part1.pdf p.44 = 1W+1S; bhel/Part3.pdf p.146 = 2X100%); the stricter value, standby 1 (bhel/Part1.pdf p.44), is used",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "2",
+      "unit": "nos.",
+      "file": "bhel/Part1.pdf",
+      "page": 44,
+      "quote": "7.1.26 Two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "working": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 44,
+      "quote": "7.1.26 Two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "arrangement": {
+      "values": [
+       {
+        "value": "1W+1S",
+        "unit": "",
+        "file": "bhel/Part1.pdf",
+        "page": 44,
+        "quote": "7.1.26 Two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "2X100%",
+        "unit": "",
+        "file": "bhel/Part3.pdf",
+        "page": 146,
+        "quote": "SLUDGE SUMP TRANSFER PUMPS (2X100%)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     }
+    },
+    "message": "R2 Standby available: installed 2 >= working 1 + standby 1; standby from documents disagree on the standby requirement (bhel/Part1.pdf p.44 = 1W+1S; bhel/Part3.pdf p.146 = 2X100%); the stricter value, standby 1 (bhel/Part1.pdf p.44), is used; inputs bhel/Part1.pdf p.44",
+    "assumptions": [
+     "documents disagree on the standby requirement (bhel/Part1.pdf p.44 = 1W+1S; bhel/Part3.pdf p.146 = 2X100%); the stricter value, standby 1 (bhel/Part1.pdf p.44), is used"
+    ],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "6.25",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "SLUDGE SUMP (E14) (TWO COMPARTMENT) CAPACITY:6.25M3 EACH",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "q_out": {
+      "value": 12.5,
+      "unit": "m3/h",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "12.5 M3/H per pump x 1 working",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+    "assumptions": [],
+    "notes": [
+     "pump-out only 30.0 min, information only"
+    ]
+   }
+  ],
+  "results_after": [
+   {
+    "rule_id": "R1",
+    "status": "OK",
+    "value": 1.7683882565766147,
+    "unit": "m/s",
+    "limit": 2.4,
+    "limit_source": "bhel/Part5.pdf p.200: '(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5'",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "12.5",
+      "unit": "M3/H",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "SLUDGE SUMP TRANSFER PUMPS (2X100%) TYPE : VERTICAL CENTRIFUGAL CAP.: 12.5M3/H",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "line_nb": {
+      "value": "50",
+      "unit": "NB",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "50NB",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "Effluent from WSWS",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 61,
+      "quote": "d) Fluid to be handled Effluent from WSWS",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "pumps_into_line": {
+      "value": "1",
+      "unit": "count",
+      "file": "",
+      "page": 0,
+      "quote": "Add a third sludge sump transfer pump as a second standby (1 working + 2 standby).",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity: v = 1.77 m/s vs limit 2.40 m/s (bhel/Part5.pdf p.200: '(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5'); inputs bhel/Part3.pdf p.146, change text",
+    "assumptions": [
+     "nominal bore used as internal diameter (slightly over-states velocity for Sch 40, under-states it for Sch 80 and heavier)",
+     "line assumed to be pump discharge"
+    ],
+    "notes": [
+     "below the documents' lower value 1.80 m/s, information only"
+    ]
+   },
+   {
+    "rule_id": "R2",
+    "status": "OK",
+    "value": 3.0,
+    "unit": "count",
+    "limit": 3.0,
+    "limit_source": "stated (change text)",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "3",
+      "unit": "count",
+      "file": "",
+      "page": 0,
+      "quote": "Add a third sludge sump transfer pump as a second standby (1 working + 2 standby).",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     },
+     "working": {
+      "value": "1",
+      "unit": "count",
+      "file": "",
+      "page": 0,
+      "quote": "Add a third sludge sump transfer pump as a second standby (1 working + 2 standby).",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     },
+     "standby_required": {
+      "value": "2",
+      "unit": "count",
+      "file": "",
+      "page": 0,
+      "quote": "Add a third sludge sump transfer pump as a second standby (1 working + 2 standby).",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     },
+     "arrangement": {
+      "values": [
+       {
+        "value": "1W+1S",
+        "unit": "",
+        "file": "bhel/Part1.pdf",
+        "page": 44,
+        "quote": "7.1.26 Two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "2X100%",
+        "unit": "",
+        "file": "bhel/Part3.pdf",
+        "page": 146,
+        "quote": "SLUDGE SUMP TRANSFER PUMPS (2X100%)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     }
+    },
+    "message": "R2 Standby available: installed 3 >= working 1 + standby 2; standby from stated (change text); inputs change text",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "6.25",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "SLUDGE SUMP (E14) (TWO COMPARTMENT) CAPACITY:6.25M3 EACH",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "q_out": {
+      "value": 12.5,
+      "unit": "m3/h",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "12.5 M3/H per pump x 1 working",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+    "assumptions": [],
+    "notes": [
+     "pump-out only 30.0 min, information only"
+    ]
+   }
+  ],
+  "clashes": [],
+  "verdict": {
+   "verdict": "BLOCK",
+   "label": "BLOCK",
+   "reasons": [
+    "documents disagree on arrangement: bhel/Part1.pdf p.44 = 1W+1S; bhel/Part3.pdf p.146 = 2X100%",
+    "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+   ]
+  },
+  "headlines": [
+   "R3 Sump cycle time held because q_in inflow is not stated.",
+   "Arrangement disagrees: bhel/Part1.pdf p.44 states 1W+1S while bhel/Part3.pdf p.146 states 2X100%."
+  ],
+  "drawing": {
+   "found": false,
+   "reason": "no drawing page among the pages found",
+   "readings": []
+  }
+ }
+}
