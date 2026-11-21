@@ -39,8 +39,9 @@ What the system is made of and how a change flows through it. What we build and 
                                         |
                           engineer asks for a fix
                                         v
- [10 Managed Agent] (Neon) in the plant's persistent sandbox: searches for a fix,
-     runs the rules on each candidate, up to 8 tries, proposes one or refuses with reasons
+ [10 Managed Agent] (Neon) in the plant's persistent sandbox (rules bundle mounted read-only;
+     smoke test + write must fail): tries levers only, runs the rules on each candidate,
+     up to 8 tries, proposes one or refuses with reasons (app/agent/)
                                         |
  [11 Server re-check] the server re-runs the rules AND the register check on the proposed fix.
      "Proven" is shown only if the server agrees. The agent never decides.
@@ -170,9 +171,9 @@ Argon's input limit is 1,048,576 tokens. Before the long read, count tokens. **T
 | Cloud Storage `plants/{plant_id}/files/` | Uploaded PDFs |
 | Cloud Storage `plants/{plant_id}/pages/{n}.json` and `{n}.png` | Page text with word positions; PNG for drawing pages only (too large for Firestore's 1 MiB document limit) |
 | Cloud Storage `plants/{plant_id}/changes/{change_id}/drawing.png` | Highlighted drawing |
-| Firestore `plants/{plant_id}` | Name, files (relative path, size, hash, status), page count, ingest status, agent sandbox id (`environment_id`) and last interaction id |
+| Firestore `plants/{plant_id}` | Name, files (relative path, size, hash, status), page count, pages read / unreadable, ingest status, token count, `agent: {environment_id, last_interaction_id, bundle_hash, persistent}` (a changed bundle hash renews the sandbox) |
 | Firestore `plants/{plant_id}/changes/{change_id}` | Change text, found pages, values with quotes, rule results, verdict |
-| Firestore `plants/{plant_id}/register/{entry_id}` | Approved changes. **Only source of truth.** The agent sandbox gets a read-only copy per run |
+| Firestore `plants/{plant_id}/register/{entry_id}` | Approved changes: item, names, system, unit_tag, attribute, value, unit, approved_at, change_id, fix, resolved_disagreements. **Only source of truth.** The agent gets a copy for awareness only; the register check runs only on the server |
 | Firestore `jobs/{id}` | Job type, state, progress, steps with seconds, result |
 | Firestore `change_index/{change_id}` | `plant_id`, so `/changes/{id}` needs no plant id |
 

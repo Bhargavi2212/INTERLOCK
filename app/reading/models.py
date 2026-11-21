@@ -28,8 +28,10 @@ ROLE_MODEL = {
     "headlines": "MODEL_HYDROGEN",
     "drawing": "MODEL_ARGON",
     "one_call": "MODEL_ARGON",
+    "agent_answer": "MODEL_HYDROGEN",
 }
 RETRY_CODES = {429, 500, 502, 503, 504}
+EXTRACT_PROMPT = "Turn this agent report into the JSON schema. Copy, never invent.\n\n"
 RETRY_WAIT_S = 2
 CALL_TIMEOUT_S = 180
 
@@ -112,6 +114,42 @@ class Models:
             usage.update({"input": u.total_input_tokens, "cached": u.total_cached_tokens,
                           "output": u.total_output_tokens})
         return json.loads(interaction.output_text or "{}")
+
+    def agent(self, prompt: str, environment, previous_id: str | None, schema: dict, cfg: dict) -> dict:
+        """Managed Agent run (v1beta). environment: {"type": "remote", "sources": [...]} for a new
+        sandbox, or an environment_id string to reuse one. Structured answer via response_format;
+        if the agent call refuses it, one Hydrogen structured call reads the final text instead.
+        Polls to cfg timeout_s. -> {answer, environment_id, interaction_id}."""
+        _, beta = self._clients()
+        settings = get_settings()
+        kwargs = dict(agent=settings.require("MANAGED_AGENT"), environment=environment, input=prompt,
+                      agent_config={"type": "antigravity", "model": settings.require(cfg["model_env"]),
+                                    "max_total_tokens": cfg["max_total_tokens"]},
+                      timeout=cfg["timeout_s"])
+        if previous_id:
+            kwargs["previous_interaction_id"] = previous_id
+        structured = True
+        try:
+            inter = self._retry("agent", lambda: beta.interactions.create(
+                **kwargs, response_format=schema, response_mime_type="application/json"))
+        except Exception as e:
+            if _code(e) != 400:
+                raise
+            structured = False
+            inter = self._retry("agent", lambda: beta.interactions.create(**kwargs))
+        deadline = time.monotonic() + cfg["timeout_s"]
+        while str(inter.status).lower().endswith("in_progress"):
+            if time.monotonic() > deadline:
+                raise TimeoutError("agent did not finish in time")
+            time.sleep(cfg["poll_s"])
+            inter = beta.interactions.get(inter.id, timeout=cfg["timeout_s"])
+        text = (inter.output_text or "").strip()
+        if structured:
+            answer = json.loads(text)
+        else:
+            answer = self.call("agent_answer", EXTRACT_PROMPT + text, schema, "low")
+        return {"answer": answer, "environment_id": getattr(inter, "environment_id", None),
+                "interaction_id": inter.id}
 
     def decide(self, text: str, questions: dict) -> dict:
         """Decisions API: {qid: {"noul": p_yes, "confidence": c}}."""

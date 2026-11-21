@@ -1,0 +1,13 @@
+# Managed Agent settings (PHASE_4 2.2). Model strings come from MODEL_* / MANAGED_AGENT env vars.
+version: 1
+model_env: MODEL_NEON
+max_total_tokens: 100000
+timeout_s: 300
+poll_s: 5
+max_tries: 8
+persistent: true        # 15:20 cut-line: false -> a fresh sandbox for every fix (recorded in the result)
+smoke:                  # a new sandbox must reproduce this before any fix is trusted
+  flow_m3h: 210
+  line_nb: 200
+  velocity: 1.86
+  tolerance: 0.01

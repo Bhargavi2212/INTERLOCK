@@ -241,6 +241,28 @@ def change_drawing(change_id: str, full: int = 0) -> Response:
     return Response(content=png, media_type="image/png", headers={"Cache-Control": "no-store"})
 
 
+@api.post("/changes/{change_id}/fix")
+def find_a_fix(change_id: str) -> dict:
+    """Start the Managed Agent on this change (steps prepare -> agent -> read answer -> server re-check)."""
+    from app.agent.run import find_fix
+    from app.reading.models import get_models
+
+    store = get_store()
+    change = store.get_change(change_id)
+    if change is None:
+        raise HTTPException(status_code=404, detail="change not found")
+    job_id = store.create_job({"type": "fix", "plant_id": change["plant_id"], "change_id": change_id,
+                               "step": "queued"})
+
+    def work():
+        res = find_fix(store, get_models(), change_id,
+                       progress=lambda step: store.update_job(job_id, {"step": step}))
+        return {"outcome": res["outcome"], "proven": bool((res.get("recheck") or {}).get("proven")),
+                "seconds": res["seconds"]}
+    runner.submit(job_id, work)
+    return {"job_id": job_id}
+
+
 class ApproveIn(BaseModel):
     resolved: list[str] = []
 

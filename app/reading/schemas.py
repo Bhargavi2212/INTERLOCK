@@ -100,3 +100,22 @@ ONE_CALL = {
     },
     "required": ["pages", "values", "verdict"],
 }
+
+AGENT_ANSWER = {
+    "type": "object",
+    "properties": {
+        "outcome": {"type": "string", "enum": ["proposed", "refused"]},
+        "fix": {"type": "array", "items": {"type": "object",
+                "properties": {"input": {"type": "string", "enum": ["line_nb", "installed"]},
+                               "from": STR, "to": STR, "unit": STR, "why": STR},
+                "required": ["input", "to", "unit", "why"]}},
+        "tries": {"type": "array", "items": {"type": "object",
+                  "properties": {"n": INT, "candidate": STR, "flagged": {"type": "array", "items": STR},
+                                 "newly_held": {"type": "array", "items": STR}, "note": STR},
+                  "required": ["n", "candidate", "flagged", "newly_held"]}},
+        "reasons": {"type": "array", "items": STR},
+        "smoke": {"type": "object",
+                  "properties": {"r1_velocity": NUM, "write_blocked": {"type": "boolean"}, "runs_listing": STR}},
+    },
+    "required": ["outcome", "fix", "tries", "reasons"],
+}
