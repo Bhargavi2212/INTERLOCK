@@ -287,6 +287,8 @@ From the phase 2 review and Bhargavi's decisions. Plan: `docs/specs/PHASE_2_PLAN
 
 **Arrangement text.** `parse_arrangement` searches anywhere in the text, first match wins: "Two (1W+1S) nos." → 1W+1S; "(2W)" → 2W; "3X100%" → installed 3, working 1, standby 2.
 
+**Store (independent review, 21 Nov; overrides §8).** `put_change` checks the whole record's size: over 900 KB, the full result goes to GCS `plants/{plant_id}/changes/{change_id}/result.json` and Firestore keeps a pointer (plus the verdict). Page text and word positions are never stored in a change record. `get_pages_all` returns a copy, so callers cannot change the per-plant cache.
+
 **C11 Rules per item.** For pump items, R1-R3 always run; Neon's `rules` list is ignored for them (a rule with nothing to check comes back held, visibly).
 
 **Trims.**

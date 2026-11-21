@@ -4,13 +4,14 @@ Layout:
   GCS       plants/{plant_id}/files/{relative_path}         uploaded PDFs
             plants/{plant_id}/pages/{n}.json, {n}.png       page text+words; PNG for drawings
             plants/{plant_id}/pages_all.json                every page {n, file, page, text} in n order
-            plants/{plant_id}/changes/{change_id}/...       large result fields
+            plants/{plant_id}/changes/{change_id}/result.json  whole change result when > 900 KB
   Firestore plants/{plant_id}, plants/{plant_id}/changes/{change_id},
             plants/{plant_id}/register/{entry_id}, change_index/{change_id}, jobs/{job_id}
 """
 
 from __future__ import annotations
 
+import copy
 import uuid
 from datetime import datetime, timezone
 from typing import Callable, Protocol
@@ -26,6 +27,20 @@ def now() -> str:
 
 def file_object(plant_id: str, relative_path: str) -> str:
     return f"plants/{plant_id}/files/{relative_path}"
+
+
+PAGE_TEXT_KEYS = ("text", "words")
+
+
+def strip_page_text(data: dict) -> dict:
+    """A copy of a change record with no page text: page entries keep their
+    citation ({file, page, ...}) but never their text or word positions."""
+    doc = copy.deepcopy(data)
+    for p in doc.get("pages", []) or []:
+        if isinstance(p, dict):
+            for k in PAGE_TEXT_KEYS:
+                p.pop(k, None)
+    return doc
 
 
 class Store(Protocol):

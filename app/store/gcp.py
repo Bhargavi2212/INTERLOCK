@@ -8,12 +8,13 @@ service account (no key file; needs roles/iam.serviceAccountTokenCreator).
 
 from __future__ import annotations
 
+import copy
 import json
 import threading
 from datetime import timedelta
 
 from app.config import get_settings
-from app.store.base import file_object, new_id, now
+from app.store.base import file_object, new_id, now, strip_page_text
 
 SIGNED_URL_MINUTES = 30
 FIELD_LIMIT_BYTES = 900_000  # Firestore documents are capped at 1 MiB
@@ -97,21 +98,24 @@ class GcpStore:
         self._pages_all_cache.pop(plant_id, None)
 
     def get_pages_all(self, plant_id):
-        """Every page {n, file, page, text} in n order; cached in memory per plant."""
+        """Every page {n, file, page, text} in n order; cached in memory per plant.
+        Returns a copy, so a caller cannot change the cache."""
         if plant_id not in self._pages_all_cache:
             blob = self.bucket.blob(f"plants/{plant_id}/pages_all.json")
             self._pages_all_cache[plant_id] = json.loads(blob.download_as_text()) if blob.exists() else []
-        return self._pages_all_cache[plant_id]
+        return copy.deepcopy(self._pages_all_cache[plant_id])
 
     # ------------------------------------------------------------ changes
     def put_change(self, plant_id, change_id, data):
-        doc = dict(data)
-        for key, value in data.items():
-            raw = json.dumps(value, ensure_ascii=False)
-            if len(raw.encode()) > FIELD_LIMIT_BYTES:
-                path = f"plants/{plant_id}/changes/{change_id}/{key}.json"
-                self.bucket.blob(path).upload_from_string(raw, content_type="application/json")
-                doc[key] = {"gcs": path}
+        """Whole record > 900 KB -> the full result goes to GCS, Firestore keeps a pointer.
+        Page text is never stored in a change record."""
+        doc = strip_page_text(data)
+        raw = json.dumps(doc, ensure_ascii=False)
+        if len(raw.encode()) > FIELD_LIMIT_BYTES:
+            path = f"plants/{plant_id}/changes/{change_id}/result.json"
+            self.bucket.blob(path).upload_from_string(raw, content_type="application/json")
+            doc = {"change_id": change_id, "plant_id": plant_id, "result_gcs": path,
+                   "verdict": doc.get("verdict")}
         self._plant_ref(plant_id).collection("changes").document(change_id).set(doc)
         self.db.collection("change_index").document(change_id).set({"plant_id": plant_id})
 
@@ -124,9 +128,8 @@ class GcpStore:
         if not snap.exists:
             return None
         doc = snap.to_dict()
-        for key, value in list(doc.items()):
-            if isinstance(value, dict) and set(value) == {"gcs"}:
-                doc[key] = json.loads(self.bucket.blob(value["gcs"]).download_as_text())
+        if "result_gcs" in doc:
+            return json.loads(self.bucket.blob(doc["result_gcs"]).download_as_text())
         return doc
 
     # ------------------------------------------------------------ jobs

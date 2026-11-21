@@ -5,7 +5,7 @@ from __future__ import annotations
 import copy
 import threading
 
-from app.store.base import file_object, new_id, now
+from app.store.base import file_object, new_id, now, strip_page_text
 
 
 class MemoryStore:
@@ -71,7 +71,7 @@ class MemoryStore:
 
     # changes
     def put_change(self, plant_id, change_id, data):
-        self.changes[change_id] = copy.deepcopy(data)
+        self.changes[change_id] = strip_page_text(data)
         self.change_index[change_id] = plant_id
 
     def get_change(self, change_id):
