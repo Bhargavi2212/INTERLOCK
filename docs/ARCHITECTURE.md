@@ -111,6 +111,7 @@ INTERLOCK/
 ├── requirements.txt       pinned versions
 ├── pytest.ini             pythonpath = . so tests import app
 ├── .gcloudignore          keeps .env, .venv, data, PDFs out of the deploy upload
+├── .gitattributes         LF line endings (files run in Linux)
 ├── .gitignore
 └── .env.example           names only (.env is git-ignored)
 ```

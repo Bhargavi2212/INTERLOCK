@@ -24,8 +24,32 @@ Video: added in phase 6 (recorded from the live URL at tag `phase-6-ship`).
 
 ## Run it
 
-Added in phase 0.
+Windows PowerShell, from the repo root. Python 3.13 (python.org).
+
+```powershell
+conda deactivate                      # only if a conda env is active
+py -3.13 -m venv .venv                # once
+.venv\Scripts\activate
+pip install -r requirements.txt
+pytest -q                             # tests
+uvicorn app.api.main:app --reload --env-file .env   # local, http://127.0.0.1:8000
+```
+
+Copy `.env.example` to `.env` and fill it in yourself; it is git-ignored. Check every model answers: `python scripts/check_models.py`.
+
+Deploy: [`deploy/COMMANDS.md`](deploy/COMMANDS.md).
 
 ## Libraries
 
-Added as they are used.
+Pinned in `requirements.txt`.
+
+| Library | Used for |
+|---|---|
+| fastapi | HTTP API |
+| uvicorn[standard] | Server |
+| google-genai | Gemini models |
+| google-cloud-firestore | Plants, changes, register, jobs |
+| google-cloud-storage | Uploaded PDFs, page text and images |
+| pyyaml | `rules.yaml` |
+| python-dotenv | Loads `.env` for local scripts |
+| pytest, httpx | Tests |

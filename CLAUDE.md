@@ -39,12 +39,15 @@ Instructions for Claude Code in this repo. This file points to the docs; it does
 
 ## Commands
 
-Filled in during phase 0.
+Inside `.venv` (`.venv\Scripts\activate`):
 
 ```
 # tests
 pytest -q
 
 # run locally (development only)
-# deploy
+uvicorn app.api.main:app --reload --env-file .env
+
+# deploy (Bhargavi runs it)
+see deploy/COMMANDS.md, block 6
 ```

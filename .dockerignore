@@ -1,6 +1,7 @@
 # secrets
 .env
 .env.*
+**/.env
 !.env.example
 *.key
 *credentials*.json
@@ -11,9 +12,10 @@ service-account*.json
 .venv/
 data/
 *.pdf
+**/*.pdf
 eval/results/
-__pycache__/
-.pytest_cache/
+**/__pycache__/
+**/.pytest_cache/
 docs/DECISIONS.md
 .qodo/
 .vscode/
