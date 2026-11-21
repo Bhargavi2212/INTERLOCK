@@ -21,13 +21,13 @@ If N1 or N2 is not available, those two checks print `not configured` and the do
 | Tool | Found | Use |
 |---|---|---|
 | `python` on PATH | Anaconda 3.12.7 | **Not used** for the venv |
-| `py` launcher | python.org 3.13 (default) and 3.12 | `py -3.12 -m venv .venv` |
+| `py` launcher | python.org 3.13 (default); its "3.12" is the Anaconda install | `py -3.13 -m venv .venv` |
 | git | 2.50, `core.autocrlf` converts to CRLF | see 2.3 |
 | gcloud | 562.0.0 | Bhargavi deploys |
 | docker | 29.4.3 | local container check (step 6) |
 | gh | not installed | repo created in browser |
 
-Python 3.12 chosen: matches the `python:3.12-slim` image, and is widely supported by the Google client libraries.
+**Changed during step 3:** Python 3.13 (python.org), not 3.12. `py -3.12` turned out to be the Anaconda interpreter, which the plan rules out; 3.13 is the only python.org one here. The Dockerfile uses `python:3.13-slim` to match. All 9 pins install on 3.13.
 
 ---
 
@@ -65,8 +65,8 @@ Commit 2: `phase 0: repo layout, pytest config, ignore files`.
 
 ### Step 3 — Virtual environment and requirements (spec items 1a, 2) · ~5 min
 
-1. `py -3.12 --version` → record exact version.
-2. `py -3.12 -m venv .venv`.
+1. `py -3.13 --version` → 3.13.2 (python.org).
+2. `py -3.13 -m venv .venv`.
 3. `.venv/Scripts/python -m pip install --upgrade pip`.
 4. Install the 9 packages unpinned: `fastapi`, `uvicorn[standard]`, `google-genai`, `google-cloud-firestore`, `google-cloud-storage`, `pyyaml`, `pytest`, `httpx`, `python-dotenv`.
 5. Write `requirements.txt` with **only those 9**, each pinned `==` to the version pip installed (read via `pip show`), not a full `pip freeze`. **Exception:** `google-genai` is pinned to the version the builder resources specify, if they name one.
@@ -131,7 +131,7 @@ Commit 4: `phase 0: check_models script`.
 
 **`Dockerfile`**
 ```
-FROM python:3.12-slim
+FROM python:3.13-slim
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /srv
 COPY requirements.txt .
