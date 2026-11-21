@@ -77,7 +77,7 @@ Detailed spec: `docs/specs/PHASE_2.md` (with its Amendments); plan: `docs/specs/
 
 ## Phase 3 — Drawing (14:15-14:45)
 
-Status: in progress
+Status: done (phase-3-drawing). Evidence: rotated-page words fixed and tested, BHEL re-ingested live (`9eeb30bca0d5`); box format calibrated on ESP Unit-1 (yx/1000); set B 5/5 (`eval/results/b_141730.json`); A1 live: red box on SG Unit-1 (A4 unit-tag check passed), 5 readings verified against the text layer, R1 after = 1.86 m/s OK under the D5-200 header row 2.4 m/s with the drawing citation, BLOCK, 86.5 s; no-drawing path tested; evidence rule in CLAUDE.md, RULES.md, ARCHITECTURE.md.
 
 Detailed spec: `docs/specs/PHASE_3.md` (with its Amendments); plan: `docs/specs/PHASE_3_PLAN.md`.
 
