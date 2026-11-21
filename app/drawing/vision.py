@@ -32,10 +32,12 @@ found=false and give no boxes.
 - item_box: the pump symbols of this item together with their printed label.
 - label_box: the printed label text of this item only.
 - readings (each with label_text copied exactly as printed on the drawing, and the box of that printed text):
-  * line_nb: the size label of the line these pumps discharge into (e.g. "200NB"), value "200", unit "NB",
-    role "pump discharge", "discharge header" or "pump suction".
+  * line_nb: the size label printed NEAREST to THIS item's own pumps on the line leaving them (the first size
+    label you meet following the discharge from these pumps), e.g. "200NB": value "200", unit "NB", role
+    "pump discharge", "discharge header" or "pump suction". Not a size label further downstream, not one printed
+    next to another item's pumps or label.
   * shared_discharge: value "true" if these pumps discharge into one common line/header, "false" if separate;
-    its label_text and box are the size label of that line.
+    its label_text and box are that same nearest size label.
   * flow_per_pump and arrangement if printed in the item's label (e.g. "105M3/HR (2W)").
 Boxes are [{order_hint}] scaled 0-{scale} relative to this image.
 why: one sentence.
