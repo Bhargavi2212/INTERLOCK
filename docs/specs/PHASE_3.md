@@ -158,7 +158,7 @@ From the phase 3 review and Bhargavi's decisions. Plan: `docs/specs/PHASE_3_PLAN
 
 **B6 Store.** Both stores gain `get_page_png`, `put_change_png`, `get_change_png`.
 
-**B7 Crop.** `drawing.crop_fraction` 0.40 in `reading.yaml`; when a needed reading (line size, shared discharge) is missing from the crop, one more call on the whole sheet (downscaled) fills it.
+**B7 Crop.** `drawing.crop_fraction` 0.40 in `reading.yaml`. (Whole-sheet fallback removed 21 Nov: no line size in the crop → R1 held, and the drawing step note says so.)
 
 **B8 Box format calibration.** Calibrate once on **ESP Unit-1 waste water transfer pumps** (Part3 p.146; not in set B): compare Argon's label box with its text-layer box, set the conversion in `reading.yaml` (`drawing.box_format`), record the result in `vision.py`'s docstring. **Never calibrate on a B item.**
 

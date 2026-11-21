@@ -11,8 +11,8 @@ Unit-1 waste water transfer pumps (Part3 p.146; never a set B item).
   eval/results/calibration_esp_unit1.json.
 
 Flow per drawing page: text-layer anchor -> crop (0.40 of the page around it, or the
-whole page) -> Argon -> boxes to page coordinates -> verify (code). If the line size or
-the shared header is missing from the crop, one more call on the whole sheet fills it.
+whole page) -> Argon -> boxes to page coordinates -> verify (code). No whole-sheet
+fallback: no line size in the crop -> R1 held, and the step note says so.
 """
 
 from __future__ import annotations
@@ -40,7 +40,6 @@ found=false and give no boxes.
 Boxes are [{order_hint}] scaled 0-{scale} relative to this image.
 why: one sentence.
 """
-NEEDED = ("line_nb", "shared_discharge")
 
 
 def _prompt(u: dict, fmt: dict) -> str:
@@ -68,12 +67,8 @@ def look_on_page(models, u: dict, page_rec: dict, page_png: bytes) -> dict:
     crop = crop_png(page_png, window)
     seen = _converted(models.see("drawing", _prompt(u, fmt), crop, schemas.DRAWING, cfg.get("thinking", "low")),
                       fmt, window)
-    have = {r.get("input") for r in seen["readings"]}
-    if seen["found"] and window != [0.0, 0.0, 1.0, 1.0] and any(n not in have for n in NEEDED):
-        whole = [0.0, 0.0, 1.0, 1.0]
-        more = _converted(models.see("drawing", _prompt(u, fmt), crop_png(page_png, whole), schemas.DRAWING,
-                                     cfg.get("thinking", "low")), fmt, whole)
-        seen["readings"] += [r for r in more["readings"] if r.get("input") in NEEDED and r.get("input") not in have]
+    # No whole-sheet fallback (Bhargavi, 21 Nov): a line not in the crop around the item's own
+    # label is not trusted; R1 stays held and the step says so.
     file, page = page_rec["file"], page_rec["page"]
 
     if seen["found"]:
@@ -86,7 +81,9 @@ def look_on_page(models, u: dict, page_rec: dict, page_png: bytes) -> dict:
             r["evidence_ok"] = False
             r["evidence_reason"] = f"item not verified ({why})"
     readings += line_role_values(readings)
-    return {"file": file, "page": page, "n": page_rec["n"], "found": ok, "model_found": seen["found"],
+    have_line = any(r["input"] == "line_nb" and r["evidence_ok"] for r in readings)
+    note = "" if have_line else "no line size in the crop around the item's label: R1 held"
+    return {"note": note,"file": file, "page": page, "n": page_rec["n"], "found": ok, "model_found": seen["found"],
             "anchor": "text layer" if anchor else "none", "anchor_text": anchor["text"] if anchor else None,
             "item_box": seen["item_box"], "label_box": seen["label_box"], "crop_box": window,
             "readings": readings, "verified": ok, "why": seen["why"], "check": why, "_crop": crop}

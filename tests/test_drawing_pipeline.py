@@ -111,3 +111,21 @@ def test_drawing_route_needs_access_code(api, store):
     r = api.get("/changes/c9/drawing.png")
     assert r.status_code == 200 and r.headers["content-type"] == "image/png"
     assert api.get("/changes/nope/drawing.png").status_code == 404
+
+
+class NoLineModels(SeeModels):
+    def see(self, role, prompt, png, schema, thinking="low", usage=None):
+        out = super().see(role, prompt, png, schema, thinking, usage)
+        self.calls.append("see")
+        out["readings"] = [r for r in out["readings"] if r["input"] not in ("line_nb", "shared_discharge")]
+        return out
+
+
+def test_no_line_in_crop_r1_held_one_call_only(plant):
+    m = NoLineModels()
+    res = run(plant, m)
+    assert m.calls.count("see") == 1                       # no whole-sheet fallback call
+    step = next(s for s in res["steps"] if s["name"] == "drawing")
+    assert "no line size in the crop" in step["state"]
+    r1 = next(r for r in res["results_after"] if r["rule_id"] == "R1")
+    assert r1["status"] == "held"

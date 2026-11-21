@@ -102,7 +102,8 @@ def check_change(store, models, plant_id: str, change_id: str, text: str, progre
         raw = {"values": [], "limits": [], "shared_discharge": [], "design_basis_pages": []}
     if d_err:
         drawing = {"found": False, "reason": f"drawing step failed: {type(d_err).__name__}", "readings": []}
-    steps.items.append({"name": "drawing", "seconds": d_s, "state": "done" if drawing.get("found") else
+    steps.items.append({"name": "drawing", "seconds": d_s,
+                        "state": (f"done; {drawing['note']}" if drawing.get("note") else "done") if drawing.get("found") else
                         (f"failed: {type(d_err).__name__}" if d_err else drawing.get("reason") or drawing.get("check")
                          or "item not verified on the drawing")})
     drawing_png = drawing.pop("png", None)

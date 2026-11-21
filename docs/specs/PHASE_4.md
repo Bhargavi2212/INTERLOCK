@@ -137,3 +137,29 @@ The agent changing rules, limits or the register; the agent reading the PDFs; fi
 - [ ] After approval, a clashing change is **BLOCKed** by the register check.
 - [ ] Second fix on the same plant reused the same `environment_id` (or the 15:20 switch recorded with its reason).
 - [ ] `pytest -q` green; `done (phase-4-agent)`, tag, deployed.
+
+---
+
+## Amendments (Bhargavi's review, 14:35; these override the text above)
+
+Found by re-reading this spec against the code at `f99d754`.
+
+**M1 Bundle imports.** `app/rules/*.py` import `app.rules.*` and `yaml`. The bundle keeps the package path: `/workspace/interlock/app/__init__.py` + `/workspace/interlock/app/rules/*` (read-only), runner run as `cd /workspace/interlock && python -m app.rules.check <try.json>`. The runner uses `rules.json` (the bundle converts `rules.yaml` to JSON at build time; `load_rules` accepts a `.json` path) so the sandbox needs no `pyyaml`. The smoke test in 2.2 proves it before any fix. No key, no `.env`, nothing outside `app/rules` goes into the sandbox.
+
+**M2 The sandbox checks rules only; the register is server-only.** `clash.py` depends on `app.reading`, so it is not bundled. The agent receives `register.json` for awareness ("never undo an approved entry"), but the register check runs **only in the server re-check**. §2.3's runner text changes accordingly; ARCHITECTURE §8's "the agent cannot change the rules or the register" stays true.
+
+**M3 What the agent edits.** `case.json` carries the after-change **rule inputs per rule** (`inputs_by_rule`, every Value/Disputed serialised with its citation) and the checked limits. A lever maps 1:1 to a rule input (`line_nb` → R1; `installed` → R2). The runner applies the candidate's overrides to those inputs and calls `run_rules`. `model.py` gains `to_dict`/`from_dict` for `Value`, `Disputed`, `DocLimit` (round-trip tested).
+
+**M4 Server re-check rebuilds, it does not reuse.** The change result does not store `after_values` (they are objects). `recheck.py` rebuilds the scenario from the stored checked values, drawing readings, shared-discharge values, limits and the understanding's changes, with the **current** register (item- and unit-tag-matched, per the pre-phase-4 fix 7a), then overlays the fix values (`source "fix"`), then rules + clash + `proven`. Test: rebuild without a fix reproduces the stored `results_after` exactly.
+
+**M5 Register entry fields.** Each entry also stores `unit_tag`, so overlay and clash match on item **and** unit tag (fixes 7a/7b).
+
+**M6 The engineer stays in control of the disagreement.** Approve is allowed only when the fix is proven **and** the engineer ticks "I have resolved the document disagreement: <attribute> (<pages>)" for every disagreement listed. The tick and its text are stored on each register entry (`resolved_disagreements`). Without the tick: 409 "documents disagree; resolve before approving".
+
+**M7 Keyword baseline input.** EVAL §3 says "the item name as typed". Free-text changes have no fixed item field, so the baseline searches for Neon's `item` string exactly as Neon returned it, with no names expansion, no long read, no same-item check. Disclose this in EVAL §3 in the same commit. It measures what the long read, names and same-item check add.
+
+**M8 Tries are the agent's report.** The server cannot see the sandbox's runs. Screen label: "agent's tries (reported by the agent from its sandbox)". The agent writes each try and runner output under `/workspace/runs/<id>/`; the second fix on the plant asks it to list that folder, which shows the persistence on screen.
+
+**M9 Demo timing.** An agent run can take 1-3 minutes. Record one full run of demo cases 1-3 on the live URL as soon as they pass (it is also phase 6's fallback). Live, start "Find a fix" and talk over the progress.
+
+**M10 Eval runs and the live demo share one key.** `eval_run.py` runs one change at a time with a 5 s pause, and stops (writing what it has) by 16:00 so the demo and the video never queue behind it.
