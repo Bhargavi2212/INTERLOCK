@@ -80,39 +80,33 @@ def test_proven_ignores_notes():
 
 
 def test_demo_case_end_to_end():
-    """PROJECT.md §4: the change is BLOCKed; the 200 NB + third pump fix is proven."""
+    """PROJECT.md section 4 (200 NB, as the P&ID shows): BLOCK from the disagreement and R2;
+    the third-pump fix is proven; a later change removing it clashes with the register."""
     bands = bhel_bands()
     sump = {"volume": v(105, "m3"), "q_out": v(210, "m3/h")}  # inflow not stated -> held
-
     change = {
         "R1": {"flow_per_pump": v(105, "m3/h"), "pumps_into_line": v(2, "count", source="change"),
-               "line_nb": v(100, "NB")},
+               "line_nb": v(200, "NB")},
         "R2": {"installed": v(2, "count"), "arrangement": v("2W+1S", source="change")},
         "R3": sump,
     }
     before = run_rules(change, bands)
-    assert {r.rule_id: r.status for r in before} == {"R1": "flagged", "R2": "flagged", "R3": "held"}
-    assert round(before[0].value, 2) == 7.43
+    assert {r.rule_id: r.status for r in before} == {"R1": "OK", "R2": "flagged", "R3": "held"}
+    assert round(before[0].value, 2) == 1.86
+    assert any("information" in n or "lower value" in n for n in before[0].notes)
     assert verdict(before, DISAGREE, [], 851)["verdict"] == BLOCK
+    assert verdict(before, [], [], 851)["verdict"] == BLOCK  # R2 alone also blocks
 
-    fix = {
-        "R1": {**change["R1"], "line_nb": v(200, "NB", source="fix")},
-        "R2": {**change["R2"], "installed": v(3, "count", source="fix")},
-        "R3": sump,
-    }
+    fix = {**change, "R2": {**change["R2"], "installed": v(3, "count", source="fix")}}
     after = run_rules(fix, bands)
     assert {r.rule_id: r.status for r in after} == {"R1": "OK", "R2": "OK", "R3": "held"}
-    assert round(after[0].value, 2) == 1.86
     assert proven(before, after, [])["proven"]
 
-    # 150 NB is still flagged (3.30 m/s): not proven
-    fix150 = {**fix, "R1": {**change["R1"], "line_nb": v(150, "NB", source="fix")}}
-    after150 = run_rules(fix150, bands)
-    assert round(after150[0].value, 2) == 3.30
-    assert not proven(before, after150, [])["proven"]
-
-    # A later change back to a 100 NB header clashes with the approved one: BLOCK
-    assert verdict(run_rules(fix, bands), [], CLASH, 851)["verdict"] == BLOCK
+    # Later change removing the third pump: clash with the approved register entry -> BLOCK
+    clash = [{"entry_id": "reg-1", "attribute": "installed pumps", "approved": 3, "proposed": 2}]
+    later = run_rules(change, bands)
+    assert verdict(later, [], clash, 851)["verdict"] == BLOCK
+    assert any("reg-1" in r for r in verdict(later, [], clash, 851)["reasons"])
 
 
 def test_rule_results_serialise():

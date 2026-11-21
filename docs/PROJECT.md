@@ -39,17 +39,17 @@ Input: the plant's documents, uploaded as **a whole folder or several individual
 
 ## 4. The demo case (one story, start to finish)
 
-The BHEL floor-wash change above. Expected behaviour (each number is a `RULES.md` test case):
+The BHEL floor-wash change above. Expected behaviour (rules and numbers from `RULES.md`; pages from `EVAL.md` key A1):
 
 - **Pages found:** scope (1W+1S), data sheet (2W), P&ID (2W). The documents already disagree.
-- **Velocity limit comes from the tender itself:** BHEL D5-200 limits pump discharge lines of 50-150 mm to 2.4 m/s.
-- **The issued design may already fail it:** one pump at 105 m3/h through the 100 NB discharge line is 3.71 m/s. This must be confirmed on the drawing in phase 2 (is the 100 NB line this pump's discharge, and is it shared?). If confirmed, it is a real finding in the issued tender; if not, the demo uses the line size the drawing shows.
-- **The change:** two pumps running into a shared 100 NB line is 7.43 m/s (an upper bound for parallel pumps): **flagged**. If the drawing does not show whether the line is shared: **held**.
-- **Standby:** the data sheet as issued (2 working, 2 installed) fails the standby check. The change as written (2W+1S) needs a third pump installed; the rules check that the documents show it.
+- **Velocity limit comes from the tender itself:** BHEL D5-200 limits pump discharge lines of 200 mm and above to 2.5 m/s (2.1 m/s lower value, information only).
+- **The drawing decides the line:** the P&ID (drawing D3-146, `Part3.pdf` p.146) shows both pump discharges joining one 200 NB header; there is no 100 NB line on this system.
+- **The change:** two pumps running into the shared 200 NB header is 1.86 m/s (an upper bound for parallel pumps): **OK**, with an information note that it is below the 2.1 m/s lower value. Velocity does not block this change.
+- **Standby:** the data sheet as issued has 2 pumps installed. The change as written (2W+1S) needs 3 installed: 2 < 2 + 1 → **flagged**.
 - **Sump:** inflow is not stated: **held**, with pump-out time shown as information.
-- **Verdict: BLOCK.**
-- **The fix:** the agent proposes a 200 NB discharge header (1.86 m/s) and a third pump; the server re-runs the rules and it is proven. 150 NB would still be flagged (3.30 m/s).
-- **The register:** after approval, a second change that goes back to a 100 NB header is BLOCKed by the register check.
+- **Verdict: BLOCK**, from the documents that disagree (scope 1W+1S vs data sheet and P&ID 2W) and the standby check.
+- **The fix:** the agent proposes a third pump (3 installed); the header is already 200 NB. The server re-runs the rules: velocity OK, standby OK, sump still held as before → **proven**.
+- **The register:** after approval, a later change that removes the third pump is BLOCKed by the register check.
 
 ## 5. What we are NOT building today
 

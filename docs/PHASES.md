@@ -131,7 +131,7 @@ Status: not started
 |---|---|
 | 0:00-0:20 | The real BHEL contradiction: same pumps, 1W+1S on one page, 2W on another |
 | 0:20-1:50 | Judge types a change. Progress, pages found, pump boxed on the P&ID, calc sheet with flags and their sources, verdict |
-| 1:50-2:30 | Agent proposes a fix, server re-check proves it. A clashing change is BLOCKed by the register |
+| 1:50-2:30 | Agent proposes a third pump, server re-check proves it. A later change that removes the third pump is BLOCKed by the register |
 | 2:30-3:00 | Results table (set E first) and where it still fails |
 
 Fallback: the recorded run from phase 6, labelled with its time.
