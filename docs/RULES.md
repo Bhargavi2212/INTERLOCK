@@ -22,7 +22,7 @@ Live in the demo today: **R1, R2, R3**. R4-R6 are built and unit-tested; wired l
 
 Every result carries: `rule_id`, `status`, `value`, `unit`, `limit`, `limit_source`, `formula`, `inputs`, `message`, `assumptions`, `notes` (information only; never changes the status).
 
-**Inputs.** Each input carries `source`, `file`, `page`, `quote`, `unit`. `source` is `document` (read from a page; must pass the evidence check), `change` (from the change text) or `fix` (from an agent fix); for `change` and `fix`, `quote` is that text and `file`/`page` are empty. Text and yes/no inputs (`service`, `line_role`, `schedule`, `arrangement`, `volume_is_total`) may have an empty unit, and so may `sg` (specific gravity, dimensionless); any other number with an empty unit is **held**.
+**Inputs.** Each input carries `source`, `file`, `page`, `quote`, `unit`. `source` is `document` (read from a page; must pass the evidence check), `change` (from the change text), `fix` (from an agent fix) or `register` (an approved change, overlaid on the as-issued values); for `change`, `fix` and `register`, `quote` is that text (or the register entry) and `file`/`page` are empty. Text and yes/no inputs (`service`, `line_role`, `schedule`, `arrangement`, `volume_is_total`) may have an empty unit, and so may `sg` (specific gravity, dimensionless); any other number with an empty unit is **held**.
 
 **Phrase lists** (`solids_services`, `water_services`, the pump-discharge line role) match case-insensitively as **whole phrases** bounded by word boundaries, never as bare substrings (`ash` does not match `wash`).
 

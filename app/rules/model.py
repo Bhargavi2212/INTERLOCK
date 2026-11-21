@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 
-SOURCES = ("document", "change", "fix")
+SOURCES = ("document", "change", "fix", "register")
 
 
 @dataclass(frozen=True)
