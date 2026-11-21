@@ -17,7 +17,7 @@ Each phase has a **Status** line: `not started` / `in progress` / `done (tag)`. 
 
 ## Phase 0 — Setup, production skeleton, unseen changes (11:30-12:10)
 
-Status: in progress
+Status: done (phase-0-setup) — open item: set E keys (≥3), due before phase 2 runs anything. Evidence: live `/health` returned version `54c95db` (12:16); `check_models.py` 6 of 6 answered.
 
 Detailed spec: `docs/specs/PHASE_0.md`.
 
@@ -63,6 +63,7 @@ Status: not started
 - Token count before the long read; over-limit sets refused with a message.
 
 **Done when:**
+- Set E keys (≥3) committed before any change is run on the plant (carried from phase 0).
 - The 5 BHEL PDFs upload on the live URL as a folder **and** as individual files, and ingest reports 851 pages.
 - All three set A changes return every key page and the right values, confirmed by Bhargavi against the pages.
 - Every returned value's quote passes the evidence check.
