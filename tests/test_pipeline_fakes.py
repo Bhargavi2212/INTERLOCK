@@ -34,7 +34,7 @@ class FakeModels:
         return {q: {"noul": 0.1 if "p.58" in text.split(f"[{q}]")[1][:40] else 0.9, "confidence": 0.9}
                 for q in questions}
 
-    def call(self, role, prompt, schema=None, thinking="low"):
+    def call(self, role, prompt, schema=None, thinking="low", usage=None):
         self.calls.append(role)
         assert thinking == "low"
         if role == "understand":
@@ -45,6 +45,8 @@ class FakeModels:
                                 {"input": "arrangement", "from": "1W+1S", "to": "2W+1S", "unit": ""}]}
         if role == "long_read":
             assert prompt.startswith("=== Part1.pdf p.43 ===")  # pages block first (cache)
+            if usage is not None:
+                usage.update({"input": 1000, "cached": 900, "output": 50, "thought": 0})
             return {"pages": [{"file": "Part4.pdf", "page": 57, "why": "data sheet"},
                               {"file": "Nope.pdf", "page": 1, "why": "hallucinated"}]}
         if role == "values":
@@ -135,3 +137,21 @@ def test_explain_failure_keeps_verdict(plant):
 def test_long_read_prompt_byte_identical(plant):
     s, pid = plant
     assert longread.pages_block(s.get_pages_all(pid)) == longread.pages_block(s.get_pages_all(pid))
+
+
+def test_token_count_stored_on_plant_once(plant):
+    s, pid = plant
+
+    class Counting(FakeModels):
+        n = 0
+
+        def count_tokens(self, text):
+            Counting.n += 1
+            return 1234
+
+    run(plant, Counting())
+    assert s.get_plant(pid)["token_count"] == {"value": 1234, "estimated": False}
+    longread._token_cache.clear()            # a new process: memory cache empty
+    res = run(plant, Counting())
+    assert Counting.n == 1                   # not recounted: read from the plant
+    assert res["long_read_usage"]["cached"] == 900

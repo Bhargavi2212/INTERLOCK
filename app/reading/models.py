@@ -69,7 +69,8 @@ class Models:
                 log.warning("model %s failed: %s", label, type(e).__name__)
                 raise
 
-    def call(self, role: str, prompt: str, schema: dict | None = None, thinking: str = "low"):
+    def call(self, role: str, prompt: str, schema: dict | None = None, thinking: str = "low",
+             usage: dict | None = None):
         """One model call. With a schema the reply is parsed JSON (structured output).
         Structured output (response_format + response_mime_type) is only accepted by the
         v1beta API (live error, 21 Nov), so schema calls use the v1beta client."""
@@ -81,6 +82,13 @@ class Models:
         if schema is not None:
             kwargs.update(response_format=schema, response_mime_type="application/json")
         interaction = self._retry(role, lambda: client.interactions.create(**kwargs))
+        u = getattr(interaction, "usage", None)
+        if u is not None:
+            counts = {"input": u.total_input_tokens, "cached": u.total_cached_tokens,
+                      "output": u.total_output_tokens, "thought": u.total_thought_tokens}
+            log.info("model %s tokens %s", role, counts)
+            if usage is not None:
+                usage.update(counts)
         text = interaction.output_text or ""
         return json.loads(text) if schema is not None else text
 

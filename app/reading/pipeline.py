@@ -74,7 +74,7 @@ def check_change(store, models, plant_id: str, change_id: str, text: str, progre
     steps.progress(steps.items, "understand + long_read")
     with ThreadPoolExecutor(max_workers=2) as ex:
         fu = ex.submit(_timed, lambda: understand(models, text))
-        fl = ex.submit(_timed, lambda: long_read(models, plant_id, pages_all, text))
+        fl = ex.submit(_timed, lambda: long_read(models, plant_id, pages_all, text, store))
         (u, u_err, u_s), (lr, lr_err, lr_s) = fu.result(), fl.result()
     steps.items.append({"name": "understand", "state": "done" if not u_err else f"failed: {type(u_err).__name__}",
                         "seconds": u_s})
@@ -128,6 +128,7 @@ def check_change(store, models, plant_id: str, change_id: str, text: str, progre
         "seconds_total": round(time.monotonic() - t0, 1), "steps": steps.items,
         "page_count": plant["page_count"],
         "token_count": lr.get("token_count"), "long_read": lr["status"], "long_read_message": lr.get("message"),
+        "long_read_usage": lr.get("usage"),
         "same_item_mode": mode, "same_item_note": mode_note,
         "pages": [{k: c.get(k) for k in ("file", "page", "found_by", "same_item_p", "uncertain", "why", "look_alike")}
                   for c in kept] + [

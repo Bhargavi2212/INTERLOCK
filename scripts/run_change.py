@@ -44,6 +44,7 @@ def main() -> int:
     print(f"\nVERDICT: {res['verdict']['label']}   ({res['seconds_total']} s total)")
     print("steps:", ", ".join(f"{s['name']} {s['seconds']}s{'' if s['state'] == 'done' else ' [' + s['state'] + ']'}"
                               for s in res["steps"]))
+    print(f"long read usage (input / cached / output / thought tokens): {res.get('long_read_usage')}")
     print(f"long read: {res['long_read']}; tokens {res['token_count']}; same-item: {res['same_item_mode']} "
           f"{res['same_item_note']}")
     print(f"\nPAGES kept ({len(res['pages'])}):")
