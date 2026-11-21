@@ -51,9 +51,22 @@ def _comparable(name: str, v: Value):
         return (norm(v.value), norm(v.unit))
 
 
+LINE_FACTS = {"line_nb", "line_role", "shared_discharge"}
+
+
 def _doc_value(d: dict) -> Value:
     return Value(value=d["value"], unit=d.get("unit", "") or "", file=d["file"], page=int(d["page"]),
-                 quote=d.get("quote", ""), evidence_ok=bool(d.get("evidence_ok", True)), source="document")
+                 quote=d.get("quote", ""), evidence_ok=bool(d.get("evidence_ok", True)),
+                 source=d.get("source", "document"), box=tuple(d["box"]) if d.get("box") else None)
+
+
+def drop_text_line_facts(values: list[dict], drawing_pages: set) -> list[dict]:
+    """On a drawing page, line size, line role and shared discharge come only from verified
+    drawing readings: a bare size label in the text layer does not say which line it is
+    (PHASE_3 Amendment A3; EVAL.md section 6, A3)."""
+    return [d for d in values
+            if not (d.get("input") in LINE_FACTS and d.get("source", "document") != "drawing"
+                    and (d.get("file"), int(d.get("page") or 0)) in drawing_pages)]
 
 
 def merge_values(checked: list[dict], touched: set[str]) -> tuple[dict, list[dict], dict]:
@@ -189,7 +202,12 @@ def doc_limits(checked_limits: list[dict]) -> list[DocLimit]:
 
 
 def build_scenario(checked_values: list[dict], checked_shared: list[dict], changes: list[dict],
-                   change_text: str, register_entries: list[dict] | None = None) -> dict:
+                   change_text: str, register_entries: list[dict] | None = None,
+                   drawing_pages: set | None = None) -> dict:
+    if drawing_pages:
+        checked_values = drop_text_line_facts(checked_values, drawing_pages)
+        checked_shared = drop_text_line_facts([{**s, "input": "shared_discharge"} for s in checked_shared],
+                                              drawing_pages)
     touched = {c.get("input") for c in changes}
     if touched & {"working", "arrangement"}:  # the same thing said two ways
         touched |= {"working", "arrangement"}

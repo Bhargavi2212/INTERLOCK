@@ -121,7 +121,7 @@ INTERLOCK/
 |---|---|---|---|
 | `app/ingest/` | Files to pages: text per page (with word positions), PNG for drawing pages, drawing detection, content hash | No | PyMuPDF. Drawings = large sheets or near-empty text layer; other page images on demand |
 | `app/reading/` | Steps 1-5 | Yes | Every value carries `page`, `quote`, `unit`; design-basis limits too (`RULES.md`). Extraction uses structured outputs (response schema), never hand-parsed JSON |
-| `app/drawing/` | Step 6 | Yes (Argon) | Where the PDF has a text layer, code confirms the box lands on the printed label |
+| `app/drawing/` | Step 6 | Yes (Argon, image) | `locate` finds the item's printed label in the text layer and crops around it; Argon boxes the item and reads line size, role and shared header from the image; `verify` (code) accepts a reading only if its box holds the printed label in the text layer (`RULES.md`, Drawing values). No text layer: nothing reaches the rules |
 | `app/rules/` | Step 7, rule engine; `rules.yaml` mirrors `RULES.md` | **Never** | |
 | `app/register/` | Step 7b, register clash check | No | Firestore is the only source of truth |
 | `app/explain/` | Step 8 | Yes (Carbon) | Explains; never changes a status |

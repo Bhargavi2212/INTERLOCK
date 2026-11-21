@@ -22,7 +22,7 @@ Instructions for Claude Code in this repo. This file points to the docs; it does
 ## Hard rules
 
 - **No model calls in `app/rules/`.** Rules are data in `app/rules/rules.yaml` and must match `docs/RULES.md`. Never hard-code a limit in Python.
-- **Every value read from a document carries `file`, `page`, `quote` and `unit`,** and the evidence check confirms the quote is on that page before the value reaches the rules.
+- **Every value read from a document carries `file`, `page`, `unit` and either a `quote` (text) or a `box` on a drawing whose text-layer label the code has verified,** and the evidence check confirms it before the value reaches the rules.
 - **Unknown or missing input → held.** Never guess a value or a unit.
 - **The agent never decides.** The server re-runs the rules and the register check on every agent fix.
 - **Measured numbers** live only in `docs/EVAL.md`; limits only in `docs/RULES.md`. Other files point to them, never copy them.

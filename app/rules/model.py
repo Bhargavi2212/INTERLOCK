@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 
-SOURCES = ("document", "change", "fix", "register")
+SOURCES = ("document", "drawing", "change", "fix", "register")
 
 
 @dataclass(frozen=True)
@@ -23,6 +23,7 @@ class Value:
     quote: str = ""
     evidence_ok: bool = True
     source: str = "document"
+    box: tuple | None = None  # drawing values: page-normalised [x0, y0, x1, y1] the code verified
 
 
 @dataclass(frozen=True)

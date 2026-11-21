@@ -58,6 +58,8 @@ class HeldInput(Exception):
 def _cite(v: Value) -> str:
     if v.source == "document":
         return f"{v.file} p.{v.page}"
+    if v.source == "drawing":
+        return f"{v.file} p.{v.page} (drawing)"
     return f"{v.source} text"
 
 
@@ -80,7 +82,7 @@ class Inputs:
         if isinstance(v, Disputed):
             listed = "; ".join(f"{_cite(x)} = {x.value} {x.unit}".strip() for x in v.values)
             raise HeldInput(name, f"documents disagree ({listed})")
-        if v.source == "document" and not v.evidence_ok:
+        if v.source in ("document", "drawing") and not v.evidence_ok:
             raise HeldInput(name, f"evidence check failed ({_cite(v)})")
         self.used[name] = v
         return v

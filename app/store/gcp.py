@@ -95,6 +95,21 @@ class GcpStore:
     def put_page_png(self, plant_id, n, png):
         self.bucket.blob(f"plants/{plant_id}/pages/{n}.png").upload_from_string(png, content_type="image/png")
 
+    def get_page_png(self, plant_id, n):
+        blob = self.bucket.blob(f"plants/{plant_id}/pages/{n}.png")
+        return blob.download_as_bytes() if blob.exists() else None
+
+    def put_change_png(self, plant_id, change_id, png):
+        self.bucket.blob(f"plants/{plant_id}/changes/{change_id}/drawing.png").upload_from_string(
+            png, content_type="image/png")
+
+    def get_change_png(self, change_id):
+        idx = self.db.collection("change_index").document(change_id).get()
+        if not idx.exists:
+            return None
+        blob = self.bucket.blob(f"plants/{idx.to_dict()['plant_id']}/changes/{change_id}/drawing.png")
+        return blob.download_as_bytes() if blob.exists() else None
+
     def put_pages_all(self, plant_id, pages):
         self.bucket.blob(f"plants/{plant_id}/pages_all.json").upload_from_string(
             json.dumps(pages, ensure_ascii=False), content_type="application/json")

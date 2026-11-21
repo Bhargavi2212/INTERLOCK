@@ -22,9 +22,19 @@ long_read:
   chars_per_token_estimate: 4
 values:
   design_basis_pages: 5            # top pages with 'velocity' and 'm/s' added to the values call
+drawing:
+  max_pages: 2
+  crop_fraction: 0.40              # window around the text-layer anchor (PHASE_3 Amendments B7)
+  max_image_px: 3072
+  box_margin: 0.01                 # of the page, around a box when collecting text-layer words
+  box_format: {order: yx, scale: 1000}   # PLACEHOLDER until calibrated on ESP Unit-1 (Amendment B8)
+  min_name_words: 2                # name words a label must contain (besides the unit tag)
+  abbreviations: {flr: floor, wtr: water, wwtr: water, pp: pump, pumps: pump, xfer: transfer, trf: transfer, tr: transfer}
+  stop_words: [the, and, of, for, sg, unit, no, nos]
 thinking:                          # every call starts low (PHASE_2 Amendments A4)
   understand: low
   long_read: low
   values: low
   explain: low
   headlines: low
+  drawing: low

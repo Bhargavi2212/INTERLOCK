@@ -14,6 +14,7 @@ class MemoryStore:
         self.blobs: dict[str, bytes] = {}
         self.pages: dict[tuple[str, int], dict] = {}
         self.pngs: dict[tuple[str, int], bytes] = {}
+        self.change_pngs: dict[str, bytes] = {}
         self.pages_all: dict[str, list[dict]] = {}
         self.changes: dict[str, dict] = {}
         self.change_index: dict[str, str] = {}
@@ -65,6 +66,16 @@ class MemoryStore:
 
     def put_page_png(self, plant_id, n, png):
         self.pngs[(plant_id, n)] = png
+
+    def get_page_png(self, plant_id, n):
+        return self.pngs.get((plant_id, n))
+
+    def put_change_png(self, plant_id, change_id, png):
+        self.change_pngs[change_id] = png
+        self.change_index.setdefault(change_id, plant_id)
+
+    def get_change_png(self, change_id):
+        return self.change_pngs.get(change_id)
 
     def put_pages_all(self, plant_id, pages):
         self.pages_all[plant_id] = copy.deepcopy(pages)
