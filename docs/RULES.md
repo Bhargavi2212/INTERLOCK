@@ -161,7 +161,7 @@ Unknown units make the input **held**, never guessed. Superscripts and spacing a
 | Concentration | mg/L, ppm | x1 mg/L |
 | Strength | % w/w, % w/v | fraction (10% → 0.10). A % with neither w/w nor w/v stated → **held** |
 | Density | kg/L | x1 kg/L |
-| Velocity | m/s | x1 m/s |
+| Velocity | m/s, m/sec | x1 m/s |
 
 ## Adding a rule
 

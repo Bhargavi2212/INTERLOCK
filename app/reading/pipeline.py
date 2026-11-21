@@ -130,7 +130,11 @@ def check_change(store, models, plant_id: str, change_id: str, text: str, progre
         "token_count": lr.get("token_count"), "long_read": lr["status"], "long_read_message": lr.get("message"),
         "same_item_mode": mode, "same_item_note": mode_note,
         "pages": [{k: c.get(k) for k in ("file", "page", "found_by", "same_item_p", "uncertain", "why", "look_alike")}
-                  for c in kept],
+                  for c in kept] + [
+            {"file": f, "page": p, "found_by": "design basis", "same_item_p": None, "uncertain": False,
+             "why": "design-basis limit used (evidence checked)", "look_alike": False}
+            for f, p in sorted({(lim["file"], int(lim["page"])) for lim in limits if lim.get("evidence_ok")})
+            if (f, p) not in {(c["file"], c["page"]) for c in kept}],
         "pages_rejected": [{"file": c["file"], "page": c["page"], "same_item_p": c.get("same_item_p")}
                            for c in judged if not c["kept"]],
         "design_basis_pages": raw.get("design_basis_pages", []),

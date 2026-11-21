@@ -145,7 +145,7 @@ UNIT_ROWS = {
     "m3, cum": [("volume", "m3"), ("volume", "cum")],
     "mg/L, ppm": [("concentration", "mg/l"), ("concentration", "ppm")],
     "kg/L": [("density", "kg/l")],
-    "m/s": [("velocity", "m/s")],
+    "m/s, m/sec": [("velocity", "m/s"), ("velocity", "m/sec")],
 }
 NO_FACTOR_ROWS = ("NPS inches", "count", "% w/w, % w/v")
 

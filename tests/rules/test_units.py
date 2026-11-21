@@ -52,6 +52,7 @@ TABLE_ROWS = [
     ("strength", 10, "% w/w", 0.10),
     ("density", 1.2, "kg/L", 1.2),
     ("velocity", 2.4, "m/s", 2.4),
+    ("velocity", 2.4, "m/sec", 2.4),
 ]
 
 

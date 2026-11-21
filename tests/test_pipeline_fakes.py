@@ -104,6 +104,8 @@ def test_pipeline_end_to_end(plant):
     assert any(d["attribute"] == "working" for d in res["disagreements"])
     assert res["verdict"]["verdict"] == "BLOCK"
     assert res["page_count"] == len(PAGES) and res["same_item_mode"] == "decisions"
+    basis = [p for p in res["pages"] if p["found_by"] == "design basis"]
+    assert [(p["file"], p["page"]) for p in basis] == [("Part5.pdf", 200)]
 
 
 def test_decisions_failure_falls_back_to_names(plant):
