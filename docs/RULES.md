@@ -178,5 +178,5 @@ Unknown units make the input **held**, never guessed. Superscripts and spacing a
 | R3 max pump starts per hour | 6 (10 min cycle) | 6 (10 min cycle) | Typical motor starting limit for small and medium pump motors |
 | R4 operating / set margin | 0.90 | 0.90 | Keeps relief valves from simmering in normal operation |
 | R5 margin factor / adder | 1.10 / 1.0 bar | 1.10 / 1.0 bar | The greater of 10% or 1 bar above operating |
-| R1 solids-bearing services | slurry, sludge, ash, waste water, backwash | slurry, sludge, ash, waste water, backwash | Services carrying suspended solids that settle at low velocity |
+| R1 solids-bearing services | slurry, sludge, ash, waste water, backwash | slurry, sludge, ash slurry, waste water, backwash | Services carrying suspended solids that settle at low velocity. "ash" replaced by "ash slurry": ash traces in floor wash do not settle at pump discharge velocities; settling applies to ash slurry service |
 | R5 water services (SG 1.0) | water | water, raw water, clarified water, filtered water, DM water, service water, fire water, floor wash water | Water services where SG 1.0 is accurate |

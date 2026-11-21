@@ -54,6 +54,21 @@ def test_below_lower_value_solids_is_flagged():
     assert "solids" in r.message
 
 
+def test_ash_traces_in_floor_wash_are_not_solids():
+    # Confirmed 21 Nov: "ash slurry" is solids; ash traces in floor wash are not.
+    r = run_rule("R1", {"flow_total": v(210, "m3/h"), "line_nb": v(200, "NB"),
+                        "service": v("Floor wash from ESP UNIT 1 containing ash traces")}, bhel_bands())
+    assert r.status == "OK"
+    assert round(r.value, 2) == 1.86
+    assert any("information only" in n for n in r.notes)
+
+
+def test_ash_slurry_is_solids():
+    r = run_rule("R1", {"flow_total": v(210, "m3/h"), "line_nb": v(200, "NB"),
+                        "service": v("bottom ash slurry")}, bhel_bands())
+    assert r.status == "flagged"
+
+
 def test_low_side_never_held_even_if_service_disputed():
     from app.rules.model import Disputed
     svc = Disputed((v("water", page=1), v("sludge", page=2)))
