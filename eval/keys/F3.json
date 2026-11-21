@@ -1,0 +1,30 @@
+{
+ "id": "F3",
+ "author": "Claude (drafted from text search and the PDF text layer, no Gemini; confirmed by Bhargavi)",
+ "written_at": "12:55",
+ "calculation": "R2 standby, WSWS transfer pumps as issued",
+ "inputs": [
+  {
+   "name": "installed",
+   "value": 3,
+   "unit": "count",
+   "file": "Part1.pdf",
+   "page": 43,
+   "quote": "Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS"
+  },
+  {
+   "name": "arrangement",
+   "value": "2W+1S",
+   "unit": "",
+   "file": "Part1.pdf",
+   "page": 43,
+   "quote": "Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS"
+  }
+ ],
+ "expected": {
+  "value": null,
+  "unit": "count",
+  "status": "OK",
+  "work": "installed 3 >= working 2 + standby 1 = 3 -> OK"
+ }
+}

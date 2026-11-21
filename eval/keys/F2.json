@@ -1,0 +1,30 @@
+{
+ "id": "F2",
+ "author": "Claude (drafted from text search and the PDF text layer, no Gemini; confirmed by Bhargavi)",
+ "written_at": "12:55",
+ "calculation": "R3 sump, SG Unit-1 floor wash sump E8 as issued: pump-out time with 2 working pumps, inflow not stated",
+ "inputs": [
+  {
+   "name": "volume",
+   "value": 105,
+   "unit": "m3",
+   "file": "Part4.pdf",
+   "page": 57,
+   "quote": "Effective Capacity, m3 105 M3"
+  },
+  {
+   "name": "q_out",
+   "value": 210,
+   "unit": "m3/h",
+   "file": "Part4.pdf",
+   "page": 57,
+   "quote": "Rated capacity, each m3/ hr. 105 (Two (2W) nos.)"
+  }
+ ],
+ "expected": {
+  "value": 30.0,
+  "unit": "min",
+  "status": "held",
+  "work": "q_in missing -> held; pump-out only 105/210 x 60 = 30.0 min"
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "id": "B3",
+ "author": "Claude (drafted from text search and the PDF text layer, no Gemini; confirmed by Bhargavi)",
+ "written_at": "12:55",
+ "item": "MRS Unit-1 waste water transfer pumps",
+ "file": "Part3.pdf",
+ "page": 146,
+ "label_text": "MRS UNIT-1 WASTE WATER TRANSFER PUMPS",
+ "found": true,
+ "box": [
+  0.2774,
+  0.7582,
+  0.3106,
+  0.7665
+ ],
+ "notes": "Box from scripts/label_positions.py on the PDF text layer (rotated page frame, normalised 0-1); union of the label's two text lines. Page 146 of Part3.pdf is drawing D3-146 (A0, text layer)."
+}

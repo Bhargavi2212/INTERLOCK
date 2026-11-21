@@ -1,0 +1,67 @@
+{
+ "id": "A3",
+ "author": "Claude (drafted from text search and the PDF text layer, no Gemini; confirmed by Bhargavi)",
+ "written_at": "12:55",
+ "change": "MRS Unit-1 waste water transfer pumps: increase each pump from 10 m3/h to 20 m3/h.",
+ "expected_pages": [
+  {
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "file": "Part4.pdf",
+   "page": 56
+  },
+  {
+   "file": "Part3.pdf",
+   "page": 146
+  }
+ ],
+ "expected_values": [
+  {
+   "attribute": "arrangement",
+   "value": "1W+1S",
+   "unit": "",
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "attribute": "arrangement (data sheet, named 'MRS UNIT-1 OILY WASTE WATER TRANSFER PUMPS')",
+   "value": "1W+1S",
+   "unit": "",
+   "file": "Part4.pdf",
+   "page": 56
+  },
+  {
+   "attribute": "rated capacity, each",
+   "value": "10",
+   "unit": "m3/h",
+   "file": "Part4.pdf",
+   "page": 56
+  },
+  {
+   "attribute": "sump effective capacity (E6)",
+   "value": "10",
+   "unit": "m3",
+   "file": "Part4.pdf",
+   "page": 56
+  },
+  {
+   "attribute": "rated capacity",
+   "value": "10",
+   "unit": "m3/h",
+   "file": "Part3.pdf",
+   "page": 146
+  },
+  {
+   "attribute": "arrangement",
+   "value": "1W+1S",
+   "unit": "",
+   "file": "Part3.pdf",
+   "page": 146
+  }
+ ],
+ "documents_disagree": false,
+ "expected_verdict": "REVIEW",
+ "notes": "Name differs between scope ('waste water') and data sheet ('oily waste water'): a same-item test. Look-alike: MRS Unit-2 pumps on the same pages. Line size for this pump not confirmed from the drawing -> R1 held unless found; R3 held (inflow not stated); R2 OK."
+}

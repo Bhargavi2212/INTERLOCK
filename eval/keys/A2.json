@@ -1,0 +1,39 @@
+{
+ "id": "A2",
+ "author": "Claude (drafted from text search and the PDF text layer, no Gemini; confirmed by Bhargavi)",
+ "written_at": "12:55",
+ "change": "PT filter backwash pumps: reduce from three pumps to two.",
+ "expected_pages": [
+  {
+   "file": "Part1.pdf",
+   "page": 85
+  },
+  {
+   "file": "Part1.pdf",
+   "page": 92
+  },
+  {
+   "file": "Part4.pdf",
+   "page": 4
+  }
+ ],
+ "expected_values": [
+  {
+   "attribute": "installed pumps",
+   "value": "3",
+   "unit": "count",
+   "file": "Part1.pdf",
+   "page": 85
+  },
+  {
+   "attribute": "arrangement",
+   "value": "3X100%",
+   "unit": "",
+   "file": "Part4.pdf",
+   "page": 4
+  }
+ ],
+ "documents_disagree": false,
+ "expected_verdict": "REVIEW",
+ "notes": "Look-alike to decide: Part4 p.107 item 19.2 'Gravity Filter Back wash water pumps Two (2X100%)' (DM plant section). If Bhargavi judges it the same pumps, add the page and set documents_disagree true (3 vs 2) and verdict BLOCK. No pump flow or line size stated, so R1 held; 2 installed with 1 working, 1 standby -> R2 OK; R3 held."
+}

@@ -1,0 +1,106 @@
+{
+ "id": "A1",
+ "author": "Claude (drafted from text search and the PDF text layer, no Gemini; confirmed by Bhargavi)",
+ "written_at": "12:55",
+ "change": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby.",
+ "expected_pages": [
+  {
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "file": "Part4.pdf",
+   "page": 57
+  },
+  {
+   "file": "Part3.pdf",
+   "page": 146
+  },
+  {
+   "file": "Part5.pdf",
+   "page": 200
+  }
+ ],
+ "expected_values": [
+  {
+   "attribute": "arrangement (scope, named 'SG UNIT-1 WASTE WATER TRANSFER PUMPS')",
+   "value": "1W+1S",
+   "unit": "",
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "attribute": "installed pumps",
+   "value": "2",
+   "unit": "count",
+   "file": "Part1.pdf",
+   "page": 43
+  },
+  {
+   "attribute": "working pumps",
+   "value": "2",
+   "unit": "count",
+   "file": "Part4.pdf",
+   "page": 57
+  },
+  {
+   "attribute": "installed pumps",
+   "value": "2",
+   "unit": "count",
+   "file": "Part4.pdf",
+   "page": 57
+  },
+  {
+   "attribute": "rated capacity, each",
+   "value": "105",
+   "unit": "m3/h",
+   "file": "Part4.pdf",
+   "page": 57
+  },
+  {
+   "attribute": "sump effective capacity (E8)",
+   "value": "105",
+   "unit": "m3",
+   "file": "Part4.pdf",
+   "page": 57
+  },
+  {
+   "attribute": "working pumps",
+   "value": "2",
+   "unit": "count",
+   "file": "Part3.pdf",
+   "page": 146
+  },
+  {
+   "attribute": "rated capacity",
+   "value": "105",
+   "unit": "m3/h",
+   "file": "Part3.pdf",
+   "page": 146
+  },
+  {
+   "attribute": "sump capacity (E8)",
+   "value": "105",
+   "unit": "m3",
+   "file": "Part3.pdf",
+   "page": 146
+  },
+  {
+   "attribute": "shared discharge header line size (to ash slurry sump unit-1)",
+   "value": "200",
+   "unit": "NB",
+   "file": "Part3.pdf",
+   "page": 146
+  },
+  {
+   "attribute": "pump discharge velocity, 200 mm and above",
+   "value": "2.1-2.5",
+   "unit": "m/s",
+   "file": "Part5.pdf",
+   "page": 200
+  }
+ ],
+ "documents_disagree": true,
+ "expected_verdict": "BLOCK",
+ "notes": "Disagreement: scope 1W+1S vs data sheet and P&ID 2W. R2 after change: installed 2 < 2+1 -> flagged. R1: 2 x 105 m3/h in 200NB = 1.86 m/s, OK (below 2.1, information). R3 held (inflow not stated). The P&ID shows both pump discharges joining one 200NB header; no 100NB line on this system."
+}

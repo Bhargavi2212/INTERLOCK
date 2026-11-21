@@ -1,0 +1,46 @@
+{
+ "id": "F1",
+ "author": "Claude (drafted from text search and the PDF text layer, no Gemini; confirmed by Bhargavi)",
+ "written_at": "12:55",
+ "calculation": "R1 velocity, SG Unit-1 floor wash discharge header as issued: 2 working pumps into one 200NB header",
+ "inputs": [
+  {
+   "name": "flow_per_pump",
+   "value": 105,
+   "unit": "m3/h",
+   "file": "Part4.pdf",
+   "page": 57,
+   "quote": "Rated capacity, each m3/ hr. 105"
+  },
+  {
+   "name": "pumps_into_line",
+   "value": 2,
+   "unit": "count",
+   "file": "Part4.pdf",
+   "page": 57,
+   "quote": "Number required Two (2W) nos."
+  },
+  {
+   "name": "line_nb",
+   "value": 200,
+   "unit": "NB",
+   "file": "Part3.pdf",
+   "page": 146,
+   "quote": "200NB"
+  },
+  {
+   "name": "velocity_band",
+   "value": "2.1-2.5",
+   "unit": "m/s",
+   "file": "Part5.pdf",
+   "page": 200,
+   "quote": "Pump discharge ... 200 mm ... 2.1-2.5"
+  }
+ ],
+ "expected": {
+  "value": 1.86,
+  "unit": "m/s",
+  "status": "OK",
+  "work": "(210/3600)/(pi/4 x 0.200^2) = 0.058333/0.031416 = 1.857; below 2.1 -> information only"
+ }
+}
