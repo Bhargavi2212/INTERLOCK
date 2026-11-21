@@ -69,6 +69,9 @@ class MemoryStore:
     def put_pages_all(self, plant_id, pages):
         self.pages_all[plant_id] = copy.deepcopy(pages)
 
+    def forget_pages_cache(self, plant_id):
+        pass  # no cache: every read is a copy of the stored list
+
     def get_pages_all(self, plant_id):
         return copy.deepcopy(self.pages_all.get(plant_id, []))
 

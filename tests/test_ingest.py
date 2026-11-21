@@ -56,7 +56,7 @@ def test_pages_all_in_n_order(api, store, inline_jobs):
     assert [p["n"] for p in pages] == list(range(5))
     assert [(p["file"], p["page"]) for p in pages] == [("a.pdf", 1), ("a.pdf", 2), ("a.pdf", 3),
                                                        ("b.pdf", 1), ("b.pdf", 2)]
-    assert set(pages[0]) == {"n", "file", "page", "text"}
+    assert set(pages[0]) == {"n", "file", "page", "text", "is_drawing"}
 
 
 def test_corrupt_pdf_fails_that_file_only(api, store, inline_jobs):
@@ -90,3 +90,45 @@ def test_restart_marks_unfinished_failed(store):
     j = store.create_job({"type": "ingest"})
     assert runner.fail_unfinished_on_startup() == 1
     assert store.get_job(j)["state"] == "failed" and store.get_job(j)["error"] == "server restarted"
+
+
+def test_rotated_page_words_in_displayed_frame():
+    from app.ingest.ingest import word_box
+    doc = pymupdf.open()
+    page = doc.new_page(width=A1[0], height=A1[1])
+    page.insert_text((100, 150), "200NB")
+    page.set_rotation(270)
+    x0, y0, x1, y1, t, *_ = [w for w in page.get_text("words") if w[4] == "200NB"][0]
+    got = word_box(page, x0, y0, x1, y1)
+    r = pymupdf.Rect(x0, y0, x1, y1) * page.rotation_matrix   # scripts/label_positions.py method
+    r.normalize()
+    w, h = page.rect.width, page.rect.height
+    expected = [r.x0 / w, r.y0 / h, r.x1 / w, r.y1 / h]
+    assert all(abs(a - b) < 1e-4 for a, b in zip(got, expected))
+    assert all(0 <= v <= 1 for v in got)
+
+
+def test_pages_all_has_is_drawing(api, store, inline_jobs):
+    pid = upload(api, store, [("a.pdf", make_pdf([(A4, BODY), (A1, "P&ID")]))])
+    api.post(f"/plants/{pid}/ingest")
+    assert [p["is_drawing"] for p in store.get_pages_all(pid)] == [False, True]
+
+
+def test_reingest_same_plant_rebuilds_from_zero(api, store, inline_jobs):
+    pid = upload(api, store, [("a.pdf", make_pdf([(A4, BODY)] * 2)), ("b.pdf", make_pdf([(A1, "P&ID")]))])
+    api.post(f"/plants/{pid}/ingest")
+    store.mutate_plant(pid, lambda d: d.update(token_count={"value": 999, "estimated": False}))
+    job = api.post(f"/plants/{pid}/reingest").json()["job_id"]
+    assert store.get_job(job)["state"] == "done"
+    plant = store.get_plant(pid)
+    assert plant["plant_id"] == pid and plant["page_count"] == 3
+    pages = store.get_pages_all(pid)
+    assert [p["n"] for p in pages] == [0, 1, 2] and all("is_drawing" in p for p in pages)
+    assert plant["token_count"] == {"value": 999, "estimated": False}     # real count kept
+    assert all(f["status"] == "ingested" for f in plant["files"])
+
+
+def test_reingest_refused_while_running(api, store):
+    pid = api.post("/plants", json={"name": "t"}).json()["plant_id"]
+    store.mutate_plant(pid, lambda d: d.update(ingest_status="running"))
+    assert api.post(f"/plants/{pid}/reingest").status_code == 409

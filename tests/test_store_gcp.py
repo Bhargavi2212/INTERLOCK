@@ -102,3 +102,14 @@ def test_large_change_goes_to_gcs_with_pointer():
     assert stored["result_gcs"] == "plants/p/changes/c2/result.json"
     assert stored["verdict"] == {"verdict": "REVIEW"} and "values" not in stored
     assert s.get_change("c2")["values"] == big["values"]
+
+
+def test_reingest_cache_cleared_and_new_pages_carry_is_drawing():
+    s = fake_store()
+    s.put_pages_all("p", [{"n": 0, "file": "a.pdf", "page": 1, "text": "x"}])   # old, no is_drawing
+    assert "is_drawing" not in s.get_pages_all("p")[0]
+    s.bucket.data["plants/p/pages_all.json"] = json.dumps([{"n": 0, "file": "a.pdf", "page": 1, "text": "x",
+                                                           "is_drawing": True}])
+    assert "is_drawing" not in s.get_pages_all("p")[0]     # still the cached copy
+    s.forget_pages_cache("p")
+    assert s.get_pages_all("p")[0]["is_drawing"] is True

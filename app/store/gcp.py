@@ -100,6 +100,9 @@ class GcpStore:
             json.dumps(pages, ensure_ascii=False), content_type="application/json")
         self._pages_all_cache.pop(plant_id, None)
 
+    def forget_pages_cache(self, plant_id):
+        self._pages_all_cache.pop(plant_id, None)
+
     def get_pages_all(self, plant_id):
         """Every page {n, file, page, text} in n order; cached in memory per plant.
         Returns a copy, so a caller cannot change the cache."""

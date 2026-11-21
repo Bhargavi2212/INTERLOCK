@@ -178,8 +178,13 @@ async function uploadAll(items) {
   if (r.accepted.length) await ingest(failed);
 }
 
-async function ingest(failed) {
-  const { job_id } = await api(`/plants/${plantId}/ingest`, { method: "POST" });
+$("reingest").onclick = async () => {
+  if (!plantId || !confirm("Rebuild this plant's pages from the files already uploaded?")) return;
+  try { await ingest(0, "reingest"); } catch (e) { $("ingest-status").textContent = `Error: ${e.message}`; }
+};
+
+async function ingest(failed, route = "ingest") {
+  const { job_id } = await api(`/plants/${plantId}/${route}`, { method: "POST" });
   $("ingest-status").textContent = `Ingest started${failed ? ` (${failed} uploads failed)` : ""}…`;
   for (;;) {
     await new Promise((r) => setTimeout(r, 2000));

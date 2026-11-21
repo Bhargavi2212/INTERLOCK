@@ -202,6 +202,31 @@ def get_change(change_id: str) -> dict:
     return res
 
 
+@api.post("/plants/{plant_id}/reingest")
+def reingest(plant_id: str) -> dict:
+    """Re-ingest the files already in the bucket into the same plant (pages rebuilt from n = 0).
+    Clears the plant's in-memory pages cache and anything derived from it."""
+    plant = _plant_or_404(plant_id)
+    if plant.get("ingest_status") == "running":
+        raise HTTPException(status_code=409, detail="an ingest is already running")
+    from app.ingest.ingest import ingest_plant
+    from app.reading import longread
+
+    store = get_store()
+
+    def back_to_uploading(d):
+        for f in d["files"]:
+            if f.get("status") in ("ingested", "failed"):
+                f["status"] = "uploading"
+    store.mutate_plant(plant_id, back_to_uploading)
+    store.forget_pages_cache(plant_id)
+    longread._token_cache.pop(plant_id, None)
+    job_id = store.create_job({"type": "ingest", "plant_id": plant_id, "step": "queued",
+                               "progress": {"files_done": 0, "files_total": 0, "pages_done": 0}})
+    runner.submit(job_id, lambda: ingest_plant(store, plant_id, job_id, reset=True))
+    return {"job_id": job_id}
+
+
 @api.get("/jobs/{job_id}")
 def get_job(job_id: str) -> dict:
     job = get_store().get_job(job_id)
