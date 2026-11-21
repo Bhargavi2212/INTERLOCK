@@ -9,6 +9,8 @@ ingest:
   progress_every_pages: 10
 evidence:
   table_row_word_fraction: 0.9
+scenario:
+  service_quote_marker: fluid to be handled   # service only from the data sheet's Fluid to be handled value
 same_item:
   mode: decisions                 # decisions | names (fallback)
   threshold: 0.5                  # set once on set A, frozen for set E

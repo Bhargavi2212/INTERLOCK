@@ -20,6 +20,7 @@ For pump items R1-R3 always run.
 from __future__ import annotations
 
 from app.reading.evidence import norm
+from app.reading.settings import reading_settings
 from app.rules.engine import INPUT_QUANTITY, load_rules
 from app.rules.model import Disputed, DocLimit, Value
 from app.rules.units import UnknownUnit, parse_arrangement, to_base
@@ -58,9 +59,14 @@ def _doc_value(d: dict) -> Value:
 def merge_values(checked: list[dict], touched: set[str]) -> tuple[dict, list[dict], dict]:
     """-> (input -> Value | Disputed, disagreements, input -> [sources])."""
     groups: dict[str, list[Value]] = {}
+    marker = norm(reading_settings()["scenario"]["service_quote_marker"])
     for d in checked:
-        if d.get("evidence_ok") and d.get("input") in INPUT_QUANTITY:
-            groups.setdefault(d["input"], []).append(_doc_value(d))
+        if not (d.get("evidence_ok") and d.get("input") in INPUT_QUANTITY):
+            continue
+        # service only from the data sheet's "Fluid to be handled" value, never the item name
+        if d["input"] == "service" and marker not in norm(d.get("quote", "")):
+            continue
+        groups.setdefault(d["input"], []).append(_doc_value(d))
 
     merged, disagreements, sources = {}, [], {}
     for name, vals in groups.items():

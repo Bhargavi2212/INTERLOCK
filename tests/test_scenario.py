@@ -131,3 +131,17 @@ def test_one_working_pump_is_one_pump_into_the_line():
     assert sc["issued"]["R1"]["pumps_into_line"].value in ("1", 1)
     r1 = next(r for r in run_rules(sc["issued"], LIMITS) if r.rule_id == "R1")
     assert r1.status == "flagged" and round(r1.value, 2) == 2.83  # 20 m3/h in 50 NB
+
+
+def test_service_only_from_fluid_to_be_handled():
+    item_name = d("service", "SG UNIT-1 WASTE WATER TRANSFER PUMPS", "", "Part1.pdf", 43,
+                  quote="SG UNIT-1 WASTE WATER TRANSFER PUMPS")
+    sc = build_scenario(VALUES + [item_name], SHARED, CHANGES, CHANGE)
+    assert "service" not in sc["after"]["R1"]  # the item name never reaches R1
+
+    fluid = d("service", "Floor wash from ESP UNIT 1 containing ash traces", "", "Part4.pdf", 57,
+              quote="Fluid to be handled Floor wash from ESP UNIT 1 containing ash traces")
+    sc = build_scenario(VALUES + [item_name, fluid], SHARED, CHANGES, CHANGE)
+    assert sc["after"]["R1"]["service"].value.startswith("Floor wash")
+    r1 = next(r for r in run_rules(sc["after"], LIMITS) if r.rule_id == "R1")
+    assert r1.status == "OK" and round(r1.value, 2) == 1.86   # 210 m3/h in 200 NB

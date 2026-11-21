@@ -139,7 +139,7 @@ def test_arrangement(text, expected):
     assert parse_arrangement(text) == expected
 
 
-@pytest.mark.parametrize("text", ["two working", "1W+1", "W+S", "1S+1W"])
+@pytest.mark.parametrize("text", ["two working", "W+S", "one plus one", "200NB"])
 def test_arrangement_unknown(text):
     with pytest.raises(UnknownUnit):
         parse_arrangement(text)
@@ -179,3 +179,15 @@ def test_percent_arrangement(text, expected):
 def test_percent_arrangement_cannot_cover(text):
     with pytest.raises(UnknownUnit):
         parse_arrangement(text)
+
+
+@pytest.mark.parametrize("text,expected", [
+    ("Two (1W+1S) nos.", {"working": 1, "standby": 1}),
+    ("Number required Two (2W) nos.", {"working": 2, "standby": 0}),
+    ("(2W)", {"working": 2, "standby": 0}),
+    ("2W+1S nos.", {"working": 2, "standby": 1}),
+    ("Filter backwash transfer pumps (3X100%)", {"installed": 3, "working": 1, "standby": 2}),
+    ("3X100% then 2W+1S", {"installed": 3, "working": 1, "standby": 2}),   # first match wins
+])
+def test_arrangement_found_anywhere(text, expected):
+    assert parse_arrangement(text) == expected

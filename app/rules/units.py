@@ -161,26 +161,28 @@ def to_base(quantity: str, value, unit: str, cfg: dict) -> tuple[float, list[str
     raise UnknownUnit(f"unknown quantity '{quantity}'")
 
 
-ARRANGEMENT = re.compile(r"^(\d+)w(?:\+(\d+)s)?$")
-PERCENT_ARRANGEMENT = re.compile(r"^(\d+)x(\d+(?:\.\d+)?)%$")
+# Searched anywhere in the printed text (lower case); the first match wins.
+ARRANGEMENT = re.compile(r"(?<![a-z0-9.])(\d+)\s*w(?:\s*\+\s*(\d+)\s*s)?(?![a-z0-9])")
+PERCENT_ARRANGEMENT = re.compile(r"(?<![a-z0-9.])(\d+)\s*x\s*(\d+(?:\.\d+)?)\s*%")
 
 
 def parse_arrangement(text) -> dict[str, int]:
-    """'2W+1S' -> {'working': 2, 'standby': 1}; '3W' -> standby 0;
+    """Find an arrangement anywhere in the text; the first match wins.
+    'Two (1W+1S) nos.' -> {'working': 1, 'standby': 1}; '(2W)' -> standby 0;
     'NXP%' (e.g. '3X100%', '2X50%') -> installed N, working ceil(100/P), standby N - working.
-    Else UnknownUnit."""
-    s = re.sub(r"\s", "", str(text)).lower()
-    m = ARRANGEMENT.match(s)
-    if m:
+    None found -> UnknownUnit."""
+    s = str(text).lower()
+    hits = [m for m in (ARRANGEMENT.search(s), PERCENT_ARRANGEMENT.search(s)) if m]
+    if not hits:
+        raise UnknownUnit(f"arrangement '{text}' has no NW+MS, NW or NXP%")
+    m = min(hits, key=lambda h: h.start())
+    if m.re is ARRANGEMENT:
         return {"working": int(m.group(1)), "standby": int(m.group(2) or 0)}
-    m = PERCENT_ARRANGEMENT.match(s)
-    if m:
-        installed, pct = int(m.group(1)), float(m.group(2))
-        working = math.ceil(100 / pct) if pct > 0 else installed + 1
-        if working > installed:
-            raise UnknownUnit(f"arrangement '{text}': {installed} pumps of {pct:g}% cannot cover 100%")
-        return {"installed": installed, "working": working, "standby": installed - working}
-    raise UnknownUnit(f"arrangement '{text}' is not NW+MS, NW or NXP%")
+    installed, pct = int(m.group(1)), float(m.group(2))
+    working = math.ceil(100 / pct) if pct > 0 else installed + 1
+    if working > installed:
+        raise UnknownUnit(f"arrangement '{text}': {installed} pumps of {pct:g}% cannot cover 100%")
+    return {"installed": installed, "working": working, "standby": installed - working}
 
 
 def matches_phrase(text, phrases) -> str | None:

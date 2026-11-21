@@ -283,6 +283,10 @@ From the phase 2 review and Bhargavi's decisions. Plan: `docs/specs/PHASE_2_PLAN
 
 **R2 standby (independent review, 21 Nov; overrides §6.6).** `standby_required` comes only from the documents' arrangement or the default, never from the change: a changed arrangement sets only the working count.
 
+**Service (independent review, 21 Nov; overrides §6.6).** `service` comes only from the data sheet's "Fluid to be handled" value, quoted; never from the item name. The values prompt says so, and `scenario.py` drops any service value whose quote lacks "Fluid to be handled" (marker in `reading.yaml`).
+
+**Arrangement text.** `parse_arrangement` searches anywhere in the text, first match wins: "Two (1W+1S) nos." → 1W+1S; "(2W)" → 2W; "3X100%" → installed 3, working 1, standby 2.
+
 **C11 Rules per item.** For pump items, R1-R3 always run; Neon's `rules` list is ignored for them (a rule with nothing to check comes back held, visibly).
 
 **Trims.**

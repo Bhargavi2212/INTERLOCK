@@ -157,7 +157,7 @@ Unknown units make the input **held**, never guessed. Superscripts and spacing a
 | Diameter | stated internal diameter in inches | x0.0254 m |
 | | stated internal diameter in mm | ÷1000 m |
 | Volume | m3, cum | x1 m3 |
-| Count | count, nos, nos., no, number (case and dots ignored); a count is stated in its quote as digits or as a number word one to twelve ("Two" = 2), and when the quote has an arrangement NW+MS, installed = N + M ("Three (2W+1S) nos." → installed 3); arrangements `NW+MS` or `NW` for any N, M (e.g. 1W+2S, 3W) give working and standby counts; `NXP%` (e.g. 3X100%, 2X50%) gives installed N, working ceil(100/P), standby N − working, parsed only when the arrangement is needed; anything else is unknown | dimensionless |
+| Count | count, nos, nos., no, number (case and dots ignored); a count is stated in its quote as digits or as a number word one to twelve ("Two" = 2), and when the quote has an arrangement NW+MS, installed = N + M ("Three (2W+1S) nos." → installed 3); arrangements `NW+MS` or `NW` for any N, M (e.g. 1W+2S, 3W) give working and standby counts (found anywhere in the printed text, first match wins: "Two (1W+1S) nos." → 1W+1S); `NXP%` (e.g. 3X100%, 2X50%) gives installed N, working ceil(100/P), standby N − working, parsed only when the arrangement is needed; anything else is unknown | dimensionless |
 | Concentration | mg/L, ppm | x1 mg/L |
 | Strength | % w/w, % w/v | fraction (10% → 0.10). A % with neither w/w nor w/v stated → **held** |
 | Density | kg/L | x1 kg/L |
