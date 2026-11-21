@@ -1,0 +1,20 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.key
+*credentials*.json
+service-account*.json
+
+# local only
+.git
+.venv/
+data/
+*.pdf
+eval/results/
+__pycache__/
+.pytest_cache/
+docs/DECISIONS.md
+.qodo/
+.vscode/
+.idea/
