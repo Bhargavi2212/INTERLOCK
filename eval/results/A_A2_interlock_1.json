@@ -1,0 +1,572 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:03:34",
+ "seconds": 55.1,
+ "state": "done",
+ "error": null,
+ "output": {
+  "change_id": "eval-A2-1-1795291414",
+  "plant_id": "27d049ccd64f",
+  "text": "PT filter backwash pumps: reduce from three pumps to two.",
+  "understanding": {
+   "item": "PT filter backwash pumps",
+   "names": [
+    "PT filter backwash pumps",
+    "PT filter backwash pump",
+    "PT backwash pumps",
+    "PT backwash pump",
+    "filter backwash pumps",
+    "filter backwash pump",
+    "PT BW pumps",
+    "PT BW pump",
+    "PT FLTR BW pumps",
+    "PT FLTR BW pump",
+    "pretreatment filter backwash pumps",
+    "pretreatment filter backwash pump",
+    "PT filter backwash"
+   ],
+   "system": "PT filter backwash",
+   "unit_tag": "",
+   "is_pump_item": true,
+   "changes": [
+    {
+     "input": "installed",
+     "from": "3",
+     "to": "2",
+     "unit": "count"
+    }
+   ]
+  },
+  "seconds_total": 55.1,
+  "steps": [
+   {
+    "name": "understand",
+    "state": "done",
+    "seconds": 21.0
+   },
+   {
+    "name": "long_read",
+    "state": "done",
+    "seconds": 34.6
+   },
+   {
+    "name": "search",
+    "state": "done",
+    "seconds": 0.1
+   },
+   {
+    "name": "same_item",
+    "state": "done",
+    "seconds": 0.3
+   },
+   {
+    "name": "values",
+    "state": "done",
+    "seconds": 13.5
+   },
+   {
+    "name": "drawing",
+    "seconds": 0.0,
+    "state": "no drawing page among the pages found"
+   },
+   {
+    "name": "evidence",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "rules",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "clash",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "explain",
+    "state": "done",
+    "seconds": 6.4
+   },
+   {
+    "name": "headlines",
+    "state": "done",
+    "seconds": 4.6
+   },
+   {
+    "name": "verdict",
+    "state": "done",
+    "seconds": 0.0
+   }
+  ],
+  "page_count": 851,
+  "pages_read": 805,
+  "pages_unreadable": 46,
+  "token_count": {
+   "value": 593301,
+   "estimated": false
+  },
+  "long_read": "done",
+  "long_read_message": null,
+  "long_read_usage": {
+   "input": 593668,
+   "cached": 0,
+   "output": 246,
+   "thought": 0
+  },
+  "same_item_mode": "decisions",
+  "same_item_note": "",
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 85,
+    "found_by": "both",
+    "same_item_p": 0.9270559827893734,
+    "uncertain": false,
+    "why": "Scope of supply for Pre-Treatment Plant (item 11.1.30) specifies Three (3) nos. Filter Backwash Pumps.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 4,
+    "found_by": "both",
+    "same_item_p": 0.8854906608904293,
+    "uncertain": false,
+    "why": "P&I Diagram for Pre-Treatment Plant (Sheet 1 of 2) shows 'FILTER BACKWASH TRANSFER PUMPS (3X100%) (2W+1S)'.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 107,
+    "found_by": "longread",
+    "same_item_p": 0.915143030864743,
+    "uncertain": false,
+    "why": "Datasheet A for Pre-Treatment Plant (item 19.2) specifies 'Gravity Filter Back wash water pumps' quantity as 'Two (2X100%)'.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "found_by": "design basis",
+    "same_item_p": null,
+    "uncertain": false,
+    "why": "design-basis limit used (evidence checked)",
+    "look_alike": false
+   }
+  ],
+  "pages_rejected": [],
+  "design_basis_pages": [
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 76
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 34
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 88
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 78
+   }
+  ],
+  "values": [
+   {
+    "input": "installed",
+    "value": "3",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 85,
+    "quote": "11.1.30 Three (3) nos. Filter Backwash Pumps with piping, valves, fittings and instrumentation up to Stilling Chambers of PT-CW & PT-DM Clarifiers.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "2W+1S",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 4,
+    "quote": "(2W+1S)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "3X100%",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 4,
+    "quote": "FILTER BACKWASH TRANSFER PUMPS (3X100%)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "installed",
+    "value": "2",
+    "unit": "count",
+    "file": "bhel/Part4.pdf",
+    "page": 107,
+    "quote": "19.2 Gravity Filter Back wash water pumps Two (2X100%)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "2X100%",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 107,
+    "quote": "19.2 Gravity Filter Back wash water pumps Two (2X100%)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "limits": [
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.5,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_to_nb": 49,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.8,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.5,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.5,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "shared_discharge": [],
+  "disagreements": [
+   {
+    "attribute": "installed",
+    "values": [
+     {
+      "file": "bhel/Part1.pdf",
+      "page": 85,
+      "value": "3"
+     },
+     {
+      "file": "bhel/Part4.pdf",
+      "page": 107,
+      "value": "2"
+     }
+    ]
+   }
+  ],
+  "explanations": [
+   {
+    "attribute": "installed",
+    "likely_right_file": "bhel/Part1.pdf",
+    "likely_right_page": 85,
+    "why": "Part1.pdf explicitly names PT-CW and PT-DM clarifiers and lists three pumps, which matches the baseline before the proposed reduction from three to two. Part4.pdf might already reflect the change or describe a different gravity filter system, though it is somewhat unclear from the short quotes alone.",
+    "consequence": "If three pumps are built instead of the intended two, the plant wastes capital and space on an extra pump, piping, valves, and instruments. If two pumps are built when three were actually needed for capacity, the filters may not get enough water to backwash properly, causing filter fouling and reduced plant water output."
+   }
+  ],
+  "results_issued": [
+   {
+    "rule_id": "R1",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {},
+    "message": "R1 Pipe velocity held: flow missing (flow_total or flow_per_pump)",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "values": [
+       {
+        "value": "3",
+        "unit": "nos.",
+        "file": "bhel/Part1.pdf",
+        "page": 85,
+        "quote": "11.1.30 Three (3) nos. Filter Backwash Pumps with piping, valves, fittings and instrumentation up to Stilling Chambers of PT-CW & PT-DM Clarifiers.",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "2",
+        "unit": "count",
+        "file": "bhel/Part4.pdf",
+        "page": 107,
+        "quote": "19.2 Gravity Filter Back wash water pumps Two (2X100%)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     },
+     "arrangement": {
+      "values": [
+       {
+        "value": "2W+1S",
+        "unit": "",
+        "file": "bhel/Part4.pdf",
+        "page": 4,
+        "quote": "(2W+1S)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "3X100%",
+        "unit": "",
+        "file": "bhel/Part4.pdf",
+        "page": 4,
+        "quote": "FILTER BACKWASH TRANSFER PUMPS (3X100%)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "2X100%",
+        "unit": "",
+        "file": "bhel/Part4.pdf",
+        "page": 107,
+        "quote": "19.2 Gravity Filter Back wash water pumps Two (2X100%)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     }
+    },
+    "message": "R2 Standby available held: installed documents disagree (bhel/Part1.pdf p.85 = 3 nos.; bhel/Part4.pdf p.107 = 2 count)",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {},
+    "message": "R3 Sump cycle time held: volume missing",
+    "assumptions": [],
+    "notes": []
+   }
+  ],
+  "results_after": [
+   {
+    "rule_id": "R1",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {},
+    "message": "R1 Pipe velocity held: flow missing (flow_total or flow_per_pump)",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "2",
+      "unit": "count",
+      "file": "",
+      "page": 0,
+      "quote": "PT filter backwash pumps: reduce from three pumps to two.",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     },
+     "arrangement": {
+      "values": [
+       {
+        "value": "2W+1S",
+        "unit": "",
+        "file": "bhel/Part4.pdf",
+        "page": 4,
+        "quote": "(2W+1S)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "3X100%",
+        "unit": "",
+        "file": "bhel/Part4.pdf",
+        "page": 4,
+        "quote": "FILTER BACKWASH TRANSFER PUMPS (3X100%)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "2X100%",
+        "unit": "",
+        "file": "bhel/Part4.pdf",
+        "page": 107,
+        "quote": "19.2 Gravity Filter Back wash water pumps Two (2X100%)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     }
+    },
+    "message": "R2 Standby available held: working missing",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {},
+    "message": "R3 Sump cycle time held: volume missing",
+    "assumptions": [],
+    "notes": []
+   }
+  ],
+  "clashes": [],
+  "verdict": {
+   "verdict": "BLOCK",
+   "label": "BLOCK",
+   "reasons": [
+    "documents disagree on installed: bhel/Part1.pdf p.85 = 3; bhel/Part4.pdf p.107 = 2",
+    "held: R1 Pipe velocity held: flow missing (flow_total or flow_per_pump)",
+    "held: R2 Standby available held: working missing",
+    "held: R3 Sump cycle time held: volume missing"
+   ]
+  },
+  "headlines": [
+   "R1 Pipe velocity held: flow missing (flow_total or flow_per_pump).",
+   "R2 Standby available held: working missing.",
+   "R3 Sump cycle time held: volume missing.",
+   "Documents disagree on installed: bhel/Part1.pdf p.85 = 3; bhel/Part4.pdf p.107 = 2."
+  ],
+  "drawing": {
+   "found": false,
+   "reason": "no drawing page among the pages found",
+   "readings": []
+  }
+ }
+}

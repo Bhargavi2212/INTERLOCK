@@ -1,0 +1,20 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:07:15",
+ "seconds": 10.3,
+ "state": "done",
+ "error": null,
+ "output": {
+  "item": "WSWS transfer pumps",
+  "pages": [
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 59
+   }
+  ]
+ }
+}

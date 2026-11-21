@@ -1,0 +1,738 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:04:34",
+ "seconds": 70.1,
+ "state": "done",
+ "error": null,
+ "output": {
+  "change_id": "eval-A3-1-1795291474",
+  "plant_id": "27d049ccd64f",
+  "text": "MRS Unit-1 waste water transfer pumps: increase each pump from 10 m3/h to 20 m3/h.",
+  "understanding": {
+   "item": "MRS Unit-1 waste water transfer pumps",
+   "names": [
+    "MRS Unit-1 waste water transfer pumps",
+    "MRS Unit-1 waste water transfer pump",
+    "MRS Unit-1 wastewater transfer pumps",
+    "MRS Unit-1 wastewater transfer pump",
+    "MRS Unit-1 WW transfer pumps",
+    "MRS Unit-1 WWT pumps",
+    "Unit-1 waste water transfer pumps",
+    "waste water transfer pumps",
+    "waste water transfer pump",
+    "wastewater transfer pumps",
+    "WW transfer pumps",
+    "WWT pumps",
+    "MRS Unit-1 waste water"
+   ],
+   "system": "MRS Unit-1 waste water",
+   "unit_tag": "Unit-1",
+   "is_pump_item": true,
+   "changes": [
+    {
+     "input": "flow_per_pump",
+     "from": "10",
+     "to": "20",
+     "unit": "m3/h"
+    }
+   ]
+  },
+  "seconds_total": 70.1,
+  "steps": [
+   {
+    "name": "understand",
+    "state": "done",
+    "seconds": 8.2
+   },
+   {
+    "name": "long_read",
+    "state": "done",
+    "seconds": 40.1
+   },
+   {
+    "name": "search",
+    "state": "done",
+    "seconds": 0.2
+   },
+   {
+    "name": "same_item",
+    "state": "done",
+    "seconds": 0.3
+   },
+   {
+    "name": "values",
+    "state": "done",
+    "seconds": 25.5
+   },
+   {
+    "name": "drawing",
+    "seconds": 0.0,
+    "state": "no drawing page among the pages found"
+   },
+   {
+    "name": "evidence",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "rules",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "clash",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "explain",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "headlines",
+    "state": "done",
+    "seconds": 3.8
+   },
+   {
+    "name": "verdict",
+    "state": "done",
+    "seconds": 0.0
+   }
+  ],
+  "page_count": 851,
+  "pages_read": 805,
+  "pages_unreadable": 46,
+  "token_count": {
+   "value": 593301,
+   "estimated": false
+  },
+  "long_read": "done",
+  "long_read_message": null,
+  "long_read_usage": {
+   "input": 593684,
+   "cached": 0,
+   "output": 204,
+   "thought": 0
+  },
+  "same_item_mode": "decisions",
+  "same_item_note": "",
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "found_by": "both",
+    "same_item_p": 0.6828095686859555,
+    "uncertain": false,
+    "why": "Lists Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS under Scope of Supply for Effluent Treatment Plant (Clause 7.1.8).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "found_by": "both",
+    "same_item_p": 0.812119998309433,
+    "uncertain": false,
+    "why": "P&ID for Effluent Treatment Plant (PE-DG-508-164-W001) showing MRS UNIT-1 WASTE WATER TRANSFER PUMPS with CAP.- 10 M3/HR (1W+1S).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "found_by": "both",
+    "same_item_p": 0.9361602470649141,
+    "uncertain": false,
+    "why": "Datasheet A for Effluent Treatment Plant (Item 16: MRS UNIT-1 OILY WASTE WATER TRANSFER PUMPS) specifying rated capacity of 10 m3/hr each.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "found_by": "design basis",
+    "same_item_p": null,
+    "uncertain": false,
+    "why": "design-basis limit used (evidence checked)",
+    "look_alike": false
+   }
+  ],
+  "pages_rejected": [
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "same_item_p": 0.03950661921011938
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "same_item_p": 0.08051438672834413
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 71,
+    "same_item_p": 0.03212494980917115
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 75,
+    "same_item_p": 0.03346436104070614
+   }
+  ],
+  "design_basis_pages": [
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 76
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 34
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 88
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 78
+   }
+  ],
+  "values": [
+   {
+    "input": "installed",
+    "value": "2",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "unit": "",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "1",
+    "unit": "count",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "10",
+    "unit": "M3",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "MRS WASTE WATER SUMP UNIT-1 MOC: RCC (E6) (UNDER GROUND) CAPACITY : 10 M3",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "10",
+    "unit": "M3/HR",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "MRS UNIT-1 WASTE WATER TRANSFER PUMPS TYPE : VERTICAL CENTRIFUGAL CAP.- 10 M3/HR (1W+1S)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "unit": "",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "MRS UNIT-1 WASTE WATER TRANSFER PUMPS TYPE : VERTICAL CENTRIFUGAL CAP.- 10 M3/HR (1W+1S)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "1",
+    "unit": "count",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "MRS UNIT-1 WASTE WATER TRANSFER PUMPS TYPE : VERTICAL CENTRIFUGAL CAP.- 10 M3/HR (1W+1S)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "line_nb",
+    "value": "50",
+    "unit": "NB",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "50NB",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "10",
+    "unit": "m3",
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "quote": "b) Effective Capacity, m3 10 m3",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "quote": "a) Number required Two (1W+1S) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "1",
+    "unit": "nos.",
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "quote": "a) Number required Two (1W+1S) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "service",
+    "value": "1. Floor wash waste (containing coal laden particles) from MRS area Unit‐1 2. Waste water (containing coal laden particles) from Feeder and Tripper Floor Unit‐1",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "quote": "d) Fluid to be handled 1. Floor wash waste (containing coal laden particles) from MRS area Unit‐1 2. Waste water (containing coal laden particles) from Feeder and Tripper Floor Unit‐1",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "10",
+    "unit": "m3/ hr.",
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "quote": "f) Rated capacity, each m3/ hr. 10",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "limits": [
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.5,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_from_nb": 0,
+    "applies_to_nb": 49,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.8,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.5,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.5,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "shared_discharge": [],
+  "disagreements": [],
+  "explanations": [],
+  "results_issued": [
+   {
+    "rule_id": "R1",
+    "status": "flagged",
+    "value": 1.4147106052612919,
+    "unit": "m/s",
+    "limit": 2.4,
+    "limit_source": "bhel/Part5.pdf p.200: '(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5'",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "10",
+      "unit": "M3/HR",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "MRS UNIT-1 WASTE WATER TRANSFER PUMPS TYPE : VERTICAL CENTRIFUGAL CAP.- 10 M3/HR (1W+1S)",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "line_nb": {
+      "value": "50",
+      "unit": "NB",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "50NB",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "1. Floor wash waste (containing coal laden particles) from MRS area Unit‐1 2. Waste water (containing coal laden particles) from Feeder and Tripper Floor Unit‐1",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 56,
+      "quote": "d) Fluid to be handled 1. Floor wash waste (containing coal laden particles) from MRS area Unit‐1 2. Waste water (containing coal laden particles) from Feeder and Tripper Floor Unit‐1",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "pumps_into_line": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity: v = 1.41 m/s vs limit 2.40 m/s (bhel/Part5.pdf p.200: '(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5'); inputs bhel/Part1.pdf p.43, bhel/Part3.pdf p.146; below the documents' lower value 1.80 m/s for solids-bearing service '1. Floor wash waste (containing coal laden particles) from MRS area Unit‐1 2. Waste water (containing coal laden particles) from Feeder and Tripper Floor Unit‐1'",
+    "assumptions": [
+     "nominal bore used as internal diameter (slightly over-states velocity for Sch 40, under-states it for Sch 80 and heavier)",
+     "line assumed to be pump discharge"
+    ],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "OK",
+    "value": 2.0,
+    "unit": "count",
+    "limit": 2.0,
+    "limit_source": "arrangement '1W+1S' (bhel/Part1.pdf p.43)",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "2",
+      "unit": "nos.",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "working": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "arrangement": {
+      "value": "1W+1S",
+      "unit": "",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R2 Standby available: installed 2 >= working 1 + standby 1; standby from arrangement '1W+1S' (bhel/Part1.pdf p.43); inputs bhel/Part1.pdf p.43",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "10",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "MRS WASTE WATER SUMP UNIT-1 MOC: RCC (E6) (UNDER GROUND) CAPACITY : 10 M3",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "q_out": {
+      "value": 10.0,
+      "unit": "m3/h",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "10 M3/HR per pump x 1 working",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+    "assumptions": [],
+    "notes": [
+     "pump-out only 60.0 min, information only"
+    ]
+   }
+  ],
+  "results_after": [
+   {
+    "rule_id": "R1",
+    "status": "flagged",
+    "value": 2.8294212105225838,
+    "unit": "m/s",
+    "limit": 2.4,
+    "limit_source": "bhel/Part5.pdf p.200: '(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5'",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "20",
+      "unit": "m3/h",
+      "file": "",
+      "page": 0,
+      "quote": "MRS Unit-1 waste water transfer pumps: increase each pump from 10 m3/h to 20 m3/h.",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     },
+     "line_nb": {
+      "value": "50",
+      "unit": "NB",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "50NB",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "1. Floor wash waste (containing coal laden particles) from MRS area Unit‐1 2. Waste water (containing coal laden particles) from Feeder and Tripper Floor Unit‐1",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 56,
+      "quote": "d) Fluid to be handled 1. Floor wash waste (containing coal laden particles) from MRS area Unit‐1 2. Waste water (containing coal laden particles) from Feeder and Tripper Floor Unit‐1",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "pumps_into_line": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity: v = 2.83 m/s vs limit 2.40 m/s (bhel/Part5.pdf p.200: '(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5'); inputs bhel/Part1.pdf p.43, bhel/Part3.pdf p.146, change text",
+    "assumptions": [
+     "nominal bore used as internal diameter (slightly over-states velocity for Sch 40, under-states it for Sch 80 and heavier)",
+     "line assumed to be pump discharge"
+    ],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "OK",
+    "value": 2.0,
+    "unit": "count",
+    "limit": 2.0,
+    "limit_source": "arrangement '1W+1S' (bhel/Part1.pdf p.43)",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "2",
+      "unit": "nos.",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "working": {
+      "value": "1",
+      "unit": "count",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "arrangement": {
+      "value": "1W+1S",
+      "unit": "",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R2 Standby available: installed 2 >= working 1 + standby 1; standby from arrangement '1W+1S' (bhel/Part1.pdf p.43); inputs bhel/Part1.pdf p.43",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "10",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "MRS WASTE WATER SUMP UNIT-1 MOC: RCC (E6) (UNDER GROUND) CAPACITY : 10 M3",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "q_out": {
+      "value": 20.0,
+      "unit": "m3/h",
+      "file": "",
+      "page": 0,
+      "quote": "20 m3/h per pump x 1 working",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+    "assumptions": [],
+    "notes": [
+     "pump-out only 30.0 min, information only"
+    ]
+   }
+  ],
+  "clashes": [],
+  "verdict": {
+   "verdict": "BLOCK",
+   "label": "BLOCK",
+   "reasons": [
+    "flagged: R1 Pipe velocity: v = 2.83 m/s vs limit 2.40 m/s (bhel/Part5.pdf p.200: '(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5'); inputs bhel/Part1.pdf p.43, bhel/Part3.pdf p.146, change text",
+    "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+   ]
+  },
+  "headlines": [
+   "Pipe velocity v = 2.83 m/s exceeds 2.40 m/s limit.",
+   "Sump cycle time held: q_in missing (inflow not stated)."
+  ],
+  "drawing": {
+   "found": false,
+   "reason": "no drawing page among the pages found",
+   "readings": []
+  }
+ }
+}

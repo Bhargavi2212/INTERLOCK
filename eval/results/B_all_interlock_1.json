@@ -1,0 +1,89 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:05:49",
+ "seconds": 80.6,
+ "state": "done",
+ "error": null,
+ "output": [
+  {
+   "id": "B1",
+   "query": "SG Unit-1 floor wash water transfer pumps",
+   "hit": false,
+   "distance": null,
+   "found": false,
+   "check": "the model did not find the item on this sheet",
+   "label_box": null,
+   "key_box": [
+    0.7694,
+    0.7809,
+    0.802,
+    0.7891
+   ],
+   "anchor": "UNIT-1 PUMPS FLR",
+   "why": "The image shows TG Unit-1A/1B/2A floor wash water transfer pumps, MRS Unit-1/2 waste water transfer pumps, and ESP waste water sumps, but not SG Unit-1 floor wash water transfer pumps."
+  },
+  {
+   "id": "B2",
+   "query": "SG Unit-2 floor wash water transfer pumps",
+   "hit": false,
+   "distance": null,
+   "found": false,
+   "check": "the model did not find the item on this sheet",
+   "label_box": null,
+   "key_box": [
+    0.9006,
+    0.7815,
+    0.9333,
+    0.7899
+   ],
+   "anchor": "105M3/HR PUMPS FLR (9587-001-163-PVM-L-004) TO ASH SLURRY SUMP UNIT-2",
+   "why": "The image shows TG Unit-1A, TG Unit-1B, and TG Unit-2A floor wash water transfer pumps, as well as MRS Unit-1 and Unit-2 waste water transfer pumps, and ESP Unit-1/Unit-2 sumps, but SG Unit-2 floor wash water transfer pumps are not present in this crop."
+  },
+  {
+   "id": "B3",
+   "query": "MRS Unit-1 waste water transfer pumps",
+   "hit": false,
+   "distance": null,
+   "found": false,
+   "check": "the model did not find the item on this sheet",
+   "label_box": null,
+   "key_box": [
+    0.2774,
+    0.7582,
+    0.3106,
+    0.7665
+   ],
+   "anchor": "10 : UNIT-1 PG PUMPS WASTE",
+   "why": "The image shows Transformer Yard Unit-2 Oily Waste Transfer Pumps, TG Unit-2B FLR Wash Wtr Transfer Pumps, and WSWS Transfer Pumps, but MRS Unit-1 waste water transfer pumps are not present."
+  },
+  {
+   "id": "B4",
+   "query": "Transformer yard Unit-2 oily waste transfer pumps",
+   "hit": false,
+   "distance": null,
+   "found": false,
+   "check": "the model did not find the item on this sheet",
+   "label_box": null,
+   "key_box": [
+    0.1137,
+    0.2457,
+    0.1522,
+    0.254
+   ],
+   "anchor": ": 10 WASTE TRANSFORMER UNIT-2",
+   "why": "The image shows Central Monitoring Basin Transfer Pumps and COT/DOT Waste Water Transfer Pumps, not Transformer yard Unit-2 oily waste transfer pumps."
+  },
+  {
+   "id": "B5",
+   "query": "SG Unit-3 floor wash water transfer pumps",
+   "hit": true,
+   "distance": null,
+   "found": false,
+   "check": "the model did not find the item on this sheet",
+   "label_box": null,
+   "key_box": null,
+   "anchor": null,
+   "why": "The drawing only shows SG Unit-1 and SG Unit-2 floor wash water transfer pumps (in the bottom-right corner), as the plant is a 2x800MW project with only Units 1 and 2."
+  }
+ ]
+}

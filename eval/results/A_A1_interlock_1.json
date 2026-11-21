@@ -1,0 +1,855 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:01:50",
+ "seconds": 99.0,
+ "state": "done",
+ "error": null,
+ "output": {
+  "change_id": "eval-A1-1-1795291310",
+  "plant_id": "27d049ccd64f",
+  "text": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby.",
+  "understanding": {
+   "item": "SG Unit-1 floor wash water transfer pumps",
+   "names": [
+    "SG Unit-1 floor wash water transfer pumps",
+    "SG Unit-1 floor wash water transfer pump",
+    "Unit-1 floor wash water transfer pumps",
+    "floor wash water transfer pumps",
+    "floor wash water transfer pump",
+    "SG U1 floor wash water transfer pumps",
+    "SG Unit-1 FWW transfer pumps",
+    "FWW transfer pumps",
+    "FWW transfer pump",
+    "FLR WASH WTR transfer pumps",
+    "floor wash water pumps",
+    "SG Unit-1 floor wash pumps",
+    "SG Unit-1 floor wash"
+   ],
+   "system": "SG Unit-1 floor wash",
+   "unit_tag": "Unit-1",
+   "is_pump_item": true,
+   "changes": [
+    {
+     "input": "arrangement",
+     "from": "1W+1S",
+     "to": "2W+1S",
+     "unit": ""
+    },
+    {
+     "input": "working",
+     "from": "1",
+     "to": "2",
+     "unit": "count"
+    }
+   ]
+  },
+  "seconds_total": 99.0,
+  "steps": [
+   {
+    "name": "understand",
+    "state": "done",
+    "seconds": 9.5
+   },
+   {
+    "name": "long_read",
+    "state": "done",
+    "seconds": 65.3
+   },
+   {
+    "name": "search",
+    "state": "done",
+    "seconds": 0.3
+   },
+   {
+    "name": "same_item",
+    "state": "done",
+    "seconds": 0.4
+   },
+   {
+    "name": "values",
+    "state": "done",
+    "seconds": 25.3
+   },
+   {
+    "name": "drawing",
+    "seconds": 0.0,
+    "state": "no drawing page among the pages found"
+   },
+   {
+    "name": "evidence",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "rules",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "clash",
+    "state": "done",
+    "seconds": 0.0
+   },
+   {
+    "name": "explain",
+    "state": "done",
+    "seconds": 7.5
+   },
+   {
+    "name": "headlines",
+    "state": "done",
+    "seconds": 5.0
+   },
+   {
+    "name": "verdict",
+    "state": "done",
+    "seconds": 0.0
+   }
+  ],
+  "page_count": 851,
+  "pages_read": 805,
+  "pages_unreadable": 46,
+  "token_count": {
+   "value": 593301,
+   "estimated": false
+  },
+  "long_read": "done",
+  "long_read_message": null,
+  "long_read_usage": {
+   "input": 593683,
+   "cached": 0,
+   "output": 325,
+   "thought": 0
+  },
+  "same_item_mode": "decisions",
+  "same_item_note": "",
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "found_by": "both",
+    "same_item_p": 0.3854179540831502,
+    "uncertain": false,
+    "why": "Row 15 of the ETP piping distance table lists the piping from SG Unit-1 Floor Wash Water Sump to Ash Slurry Sump Unit-1.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "found_by": "both",
+    "same_item_p": 0.8832851747891584,
+    "uncertain": false,
+    "why": "P&ID for the Effluent Treatment Plant shows the SG UNIT-1 FLR WASH WTR TRANSFER PUMPS (currently labeled CAPACITY: 105M3/HR (2W)) and sump E8.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "found_by": "both",
+    "same_item_p": 0.8566254642398096,
+    "uncertain": false,
+    "why": "Datasheet A for the Effluent Treatment Plant (Item 20) specifies the SG UNIT-1 FLOOR WASH WATER TRANSFER PUMPS, including number required (currently Two (2W) nos.).",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "found_by": "longread",
+    "same_item_p": 0.6138411829686142,
+    "uncertain": false,
+    "why": "Clause 7.1.12 in the Effluent Treatment Plant scope of supply specifies Two (2) nos. (1W+1S) SG UNIT-1 WASTE WATER TRANSFER PUMPS.",
+    "look_alike": false
+   },
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "found_by": "design basis",
+    "same_item_p": null,
+    "uncertain": false,
+    "why": "design-basis limit used (evidence checked)",
+    "look_alike": false
+   }
+  ],
+  "pages_rejected": [
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 53,
+    "same_item_p": 0.0152143173446715
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "same_item_p": 0.03227131708957789
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 55,
+    "same_item_p": 0.03675544809920347
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 58,
+    "same_item_p": 0.0593486874808984
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "same_item_p": 0.03727151660753213
+   }
+  ],
+  "design_basis_pages": [
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 76
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 34
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 88
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 78
+   }
+  ],
+  "values": [
+   {
+    "input": "installed",
+    "value": "2",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.12 Two (2) nos. (1W+1S) SG UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "1",
+    "unit": "count",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.12 Two (2) nos. (1W+1S) SG UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "unit": "",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.12 Two (2) nos. (1W+1S) SG UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "105",
+    "unit": "M3/HR",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "SG UNIT-1  FLR WASH WTR TRANSFER PUMPS TYPE : VERTICAL SCREW CAPACITY : 105M3/HR (2W)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "2",
+    "unit": "count",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "SG UNIT-1  FLR WASH WTR TRANSFER PUMPS TYPE : VERTICAL SCREW CAPACITY : 105M3/HR (2W)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "2W",
+    "unit": "",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "SG UNIT-1  FLR WASH WTR TRANSFER PUMPS TYPE : VERTICAL SCREW CAPACITY : 105M3/HR (2W)",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "105",
+    "unit": "M3",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "SG UNIT-1  FLR WASH WTR SUMP (E8) M.O.C.-RCC (UNDER GROUND) CAPACITY: 105M3",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "line_nb",
+    "value": "200",
+    "unit": "NB",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "200NB",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "schedule",
+    "value": "80",
+    "unit": "SCH.",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "3. CPVC PIPES SHALL BE MINIMUM SCH.80 OR AS PER SYSTEM REQUIREMENT WHICH EVER IS HIGHER.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "volume",
+    "value": "105",
+    "unit": "M3",
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "quote": "b) Effective Capacity, m3 105 M3",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "installed",
+    "value": "2",
+    "unit": "nos.",
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "quote": "a) Number required Two (2W) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "working",
+    "value": "2",
+    "unit": "nos.",
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "quote": "a) Number required Two (2W) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "arrangement",
+    "value": "2W",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "quote": "a) Number required Two (2W) nos.",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "service",
+    "value": "1. Floor wash from SG UNIT 1 containing oil traces 2. Floor wash from APH UNIT 1 containing ash traces",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "quote": "d) Fluid to be handled 1. Floor wash from SG UNIT 1 containing oil traces 2. Floor wash from APH UNIT 1 containing ash traces",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "105",
+    "unit": "m3/ hr.",
+    "file": "bhel/Part4.pdf",
+    "page": 57,
+    "quote": "f) Rated capacity, each m3/ hr. 105",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "limits": [
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.5,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump suction",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(a) Pump suction ------ 1.2-1.5 1.2-1.8",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.2,
+    "high": 1.8,
+    "unit": "m/sec",
+    "applies_to_nb": 49,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.8,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.5,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "pump discharge",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation 1.2-1.8 1.8-2.4 2.1-2.5",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 1.5,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 50,
+    "applies_to_nb": 150,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   },
+   {
+    "rule_id": "R1",
+    "name": "velocity_band",
+    "low": 2.1,
+    "high": 2.4,
+    "unit": "m/sec",
+    "applies_from_nb": 200,
+    "applies_to": "discharge header",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(c) Header ------ 1.5-2.4 2.1-2.4",
+    "evidence_ok": true,
+    "evidence_reason": "ok"
+   }
+  ],
+  "shared_discharge": [],
+  "disagreements": [
+   {
+    "attribute": "working",
+    "values": [
+     {
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "value": "1"
+     },
+     {
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "value": "2"
+     }
+    ]
+   },
+   {
+    "attribute": "arrangement",
+    "values": [
+     {
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "value": "1W+1S"
+     },
+     {
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "value": "2W"
+     }
+    ]
+   }
+  ],
+  "explanations": [
+   {
+    "attribute": "working",
+    "likely_right_file": "bhel/Part3.pdf",
+    "likely_right_page": 146,
+    "why": "Part 3 explicitly names the SG Unit-1 floor wash water transfer pumps and matches Part 4 page 57, while Part 1 page 43 refers to waste water transfer pumps. However, it is slightly unclear since the proposed change assumes 1 working pump currently exists.",
+    "consequence": "If the wrong number of working pumps is built, the plant will either lack sufficient pumping capacity for floor wash water or install unnecessary equipment and oversized piping."
+   },
+   {
+    "attribute": "arrangement",
+    "likely_right_file": "bhel/Part3.pdf",
+    "likely_right_page": 146,
+    "why": "Part 3 specifically covers the floor wash water transfer pumps and agrees with Part 4 page 57 on the 2W arrangement, whereas Part 1 page 43 describes waste water transfer pumps. Still, there is some uncertainty because the proposed change assumes a 1W+1S starting arrangement.",
+    "consequence": "Building the wrong arrangement leaves the system without a backup standby pump during a failure, or misaligns the control logic and piping for parallel pump operation."
+   }
+  ],
+  "results_issued": [
+   {
+    "rule_id": "R1",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "105",
+      "unit": "M3/HR",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "SG UNIT-1  FLR WASH WTR TRANSFER PUMPS TYPE : VERTICAL SCREW CAPACITY : 105M3/HR (2W)",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "line_nb": {
+      "value": "200",
+      "unit": "NB",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "200NB",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "schedule": {
+      "value": "80",
+      "unit": "SCH.",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "3. CPVC PIPES SHALL BE MINIMUM SCH.80 OR AS PER SYSTEM REQUIREMENT WHICH EVER IS HIGHER.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "1. Floor wash from SG UNIT 1 containing oil traces 2. Floor wash from APH UNIT 1 containing ash traces",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 57,
+      "quote": "d) Fluid to be handled 1. Floor wash from SG UNIT 1 containing oil traces 2. Floor wash from APH UNIT 1 containing ash traces",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "2",
+      "unit": "nos.",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.12 Two (2) nos. (1W+1S) SG UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "working": {
+      "values": [
+       {
+        "value": "1",
+        "unit": "count",
+        "file": "bhel/Part1.pdf",
+        "page": 43,
+        "quote": "7.1.12 Two (2) nos. (1W+1S) SG UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "2",
+        "unit": "count",
+        "file": "bhel/Part3.pdf",
+        "page": 146,
+        "quote": "SG UNIT-1  FLR WASH WTR TRANSFER PUMPS TYPE : VERTICAL SCREW CAPACITY : 105M3/HR (2W)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     },
+     "arrangement": {
+      "values": [
+       {
+        "value": "1W+1S",
+        "unit": "",
+        "file": "bhel/Part1.pdf",
+        "page": 43,
+        "quote": "7.1.12 Two (2) nos. (1W+1S) SG UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "2W",
+        "unit": "",
+        "file": "bhel/Part3.pdf",
+        "page": 146,
+        "quote": "SG UNIT-1  FLR WASH WTR TRANSFER PUMPS TYPE : VERTICAL SCREW CAPACITY : 105M3/HR (2W)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     }
+    },
+    "message": "R2 Standby available held: working documents disagree (bhel/Part1.pdf p.43 = 1 count; bhel/Part3.pdf p.146 = 2 count)",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "105",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "SG UNIT-1  FLR WASH WTR SUMP (E8) M.O.C.-RCC (UNDER GROUND) CAPACITY: 105M3",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_out missing",
+    "assumptions": [],
+    "notes": []
+   }
+  ],
+  "results_after": [
+   {
+    "rule_id": "R1",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "v = (Q / 3600) / (pi/4 * D^2)",
+    "inputs": {
+     "flow_per_pump": {
+      "value": "105",
+      "unit": "M3/HR",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "SG UNIT-1  FLR WASH WTR TRANSFER PUMPS TYPE : VERTICAL SCREW CAPACITY : 105M3/HR (2W)",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "line_nb": {
+      "value": "200",
+      "unit": "NB",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "200NB",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "schedule": {
+      "value": "80",
+      "unit": "SCH.",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "3. CPVC PIPES SHALL BE MINIMUM SCH.80 OR AS PER SYSTEM REQUIREMENT WHICH EVER IS HIGHER.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "service": {
+      "value": "1. Floor wash from SG UNIT 1 containing oil traces 2. Floor wash from APH UNIT 1 containing ash traces",
+      "unit": "",
+      "file": "bhel/Part4.pdf",
+      "page": 57,
+      "quote": "d) Fluid to be handled 1. Floor wash from SG UNIT 1 containing oil traces 2. Floor wash from APH UNIT 1 containing ash traces",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     }
+    },
+    "message": "R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+    "assumptions": [],
+    "notes": []
+   },
+   {
+    "rule_id": "R2",
+    "status": "flagged",
+    "value": 2.0,
+    "unit": "count",
+    "limit": 3.0,
+    "limit_source": "documents disagree on the standby requirement (bhel/Part1.pdf p.43 = 1W+1S; bhel/Part3.pdf p.146 = 2W); the stricter value, standby 1 (bhel/Part1.pdf p.43), is used",
+    "formula": "installed >= working + standby_required",
+    "inputs": {
+     "installed": {
+      "value": "2",
+      "unit": "nos.",
+      "file": "bhel/Part1.pdf",
+      "page": 43,
+      "quote": "7.1.12 Two (2) nos. (1W+1S) SG UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "working": {
+      "value": "2",
+      "unit": "count",
+      "file": "",
+      "page": 0,
+      "quote": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby.",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     },
+     "arrangement": {
+      "values": [
+       {
+        "value": "1W+1S",
+        "unit": "",
+        "file": "bhel/Part1.pdf",
+        "page": 43,
+        "quote": "7.1.12 Two (2) nos. (1W+1S) SG UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc.",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       },
+       {
+        "value": "2W",
+        "unit": "",
+        "file": "bhel/Part3.pdf",
+        "page": 146,
+        "quote": "SG UNIT-1  FLR WASH WTR TRANSFER PUMPS TYPE : VERTICAL SCREW CAPACITY : 105M3/HR (2W)",
+        "evidence_ok": true,
+        "source": "document",
+        "box": null
+       }
+      ]
+     }
+    },
+    "message": "R2 Standby available: This change needs 3 pumps installed; the documents show 2. installed 2 < working 2 + standby 1; standby from documents disagree on the standby requirement (bhel/Part1.pdf p.43 = 1W+1S; bhel/Part3.pdf p.146 = 2W); the stricter value, standby 1 (bhel/Part1.pdf p.43), is used; inputs bhel/Part1.pdf p.43, change text",
+    "assumptions": [
+     "documents disagree on the standby requirement (bhel/Part1.pdf p.43 = 1W+1S; bhel/Part3.pdf p.146 = 2W); the stricter value, standby 1 (bhel/Part1.pdf p.43), is used"
+    ],
+    "notes": []
+   },
+   {
+    "rule_id": "R3",
+    "status": "held",
+    "value": null,
+    "unit": "",
+    "limit": null,
+    "limit_source": "",
+    "formula": "t_cycle_min = (V / Q_in + V / (Q_out - Q_in)) * 60 >= 60 / max_starts_per_hour",
+    "inputs": {
+     "volume": {
+      "value": "105",
+      "unit": "M3",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "SG UNIT-1  FLR WASH WTR SUMP (E8) M.O.C.-RCC (UNDER GROUND) CAPACITY: 105M3",
+      "evidence_ok": true,
+      "source": "document",
+      "box": null
+     },
+     "q_out": {
+      "value": 210.0,
+      "unit": "m3/h",
+      "file": "bhel/Part3.pdf",
+      "page": 146,
+      "quote": "105 M3/HR per pump x 2 working",
+      "evidence_ok": true,
+      "source": "change",
+      "box": null
+     }
+    },
+    "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+    "assumptions": [],
+    "notes": [
+     "pump-out only 30.0 min, information only"
+    ]
+   }
+  ],
+  "clashes": [],
+  "verdict": {
+   "verdict": "BLOCK",
+   "label": "BLOCK",
+   "reasons": [
+    "flagged: R2 Standby available: This change needs 3 pumps installed; the documents show 2. installed 2 < working 2 + standby 1; standby from documents disagree on the standby requirement (bhel/Part1.pdf p.43 = 1W+1S; bhel/Part3.pdf p.146 = 2W); the stricter value, standby 1 (bhel/Part1.pdf p.43), is used; inputs bhel/Part1.pdf p.43, change text",
+    "documents disagree on working: bhel/Part1.pdf p.43 = 1; bhel/Part3.pdf p.146 = 2",
+    "documents disagree on arrangement: bhel/Part1.pdf p.43 = 1W+1S; bhel/Part3.pdf p.146 = 2W",
+    "held: R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+    "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+   ]
+  },
+  "headlines": [
+   "R1 Pipe velocity held: pumps_into_line missing; shared discharge line not stated in text.",
+   "R2 Standby available flagged: needs 3 pumps installed, but documents show 2.",
+   "R3 Sump cycle time held: q_in missing (inflow not stated).",
+   "Documents disagree on working: bhel/Part1.pdf p.43 = 1; bhel/Part3.pdf p.146 = 2.",
+   "Documents disagree on arrangement: bhel/Part1.pdf p.43 = 1W+1S; bhel/Part3.pdf p.146 = 2W."
+  ],
+  "drawing": {
+   "found": false,
+   "reason": "no drawing page among the pages found",
+   "readings": []
+  }
+ }
+}

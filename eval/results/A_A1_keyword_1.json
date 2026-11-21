@@ -1,0 +1,16 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:08:25",
+ "seconds": 23.0,
+ "state": "done",
+ "error": null,
+ "output": {
+  "item": "SG Unit-1 floor wash water transfer pumps",
+  "pages": [
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 57
+   }
+  ]
+ }
+}

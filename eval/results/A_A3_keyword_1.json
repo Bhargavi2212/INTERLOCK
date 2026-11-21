@@ -1,0 +1,20 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:09:06",
+ "seconds": 7.2,
+ "state": "done",
+ "error": null,
+ "output": {
+  "item": "MRS Unit-1 waste water transfer pumps",
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146
+   }
+  ]
+ }
+}

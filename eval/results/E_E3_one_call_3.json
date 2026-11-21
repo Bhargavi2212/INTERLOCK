@@ -1,0 +1,126 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:19:51",
+ "seconds": 21.2,
+ "state": "done",
+ "error": null,
+ "output": {
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "why": "Lists the scope of supply for the COT/DOT waste water transfer pumps (2 nos., 1W+1S)."
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "why": "Lists the piping distance from COT/DOT PIT to TG Unit-1B Floor Wash Water Sump (144 m)."
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "why": "P&ID for Effluent Treatment Plant showing COT/DOT waste water collection sump (E1C, 1 m3), COT/DOT waste water transfer pumps (2 m3/hr, 1W+1S), and 65NB discharge piping to TG Unit-1B floor wash water sump (12 m3, 25 m3/hr pumps)."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 53,
+    "why": "Datasheet A for TG Unit-1B Floor Wash Water Sump (E1B) and its transfer pumps, which receive oily effluent from the COT/DOT area."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "why": "Datasheet A for COT/DOT Waste Water Collection Sump (E1C) and COT/DOT Waste Water Transfer Pumps."
+   }
+  ],
+  "values": [
+   {
+    "attribute": "COT/DOT waste water transfer pumps quantity",
+    "value": "Two (2) nos. (1W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc."
+   },
+   {
+    "attribute": "Piping distance from COT/DOT PIT to TG Unit-1B Floor Wash Water Sump",
+    "value": "144",
+    "unit": "Meters",
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "quote": "1. COT/DOT PIT | TG Unit-1B Floor Wash Water Sump | 144"
+   },
+   {
+    "attribute": "COT/DOT waste water transfer pumps capacity",
+    "value": "2",
+    "unit": "M3/HR",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "COT/DOT WASTE WATER TRANSFER PUMPS CAP.- 2 M3/HR (1W+1S) TYPE : HORIZONTAL SCREW"
+   },
+   {
+    "attribute": "COT/DOT waste water collection sump (E1C) capacity",
+    "value": "1",
+    "unit": "M3",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "COT/DOT WASTE WATER COLLECTION SUMP (E1C) CAP.- 1 M3 M.O.C.-RCC (UNDER GROUND)"
+   },
+   {
+    "attribute": "COT/DOT pump discharge line size",
+    "value": "65",
+    "unit": "NB",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "65NB"
+   },
+   {
+    "attribute": "TG Unit-1B Floor Wash Water Sump (E1B) effective capacity",
+    "value": "12",
+    "unit": "m3",
+    "file": "bhel/Part4.pdf",
+    "page": 53,
+    "quote": "3. TG UNIT-1B FLOOR WASH WATER SUMP (E1B) ... b) Effective Capacity, m3: 12 m3"
+   },
+   {
+    "attribute": "TG Unit-1B Floor Wash Water Transfer Pumps rated capacity",
+    "value": "25",
+    "unit": "m3/hr",
+    "file": "bhel/Part4.pdf",
+    "page": 53,
+    "quote": "4. TG UNIT-1B FLOOR WASH WATER TRANSFER PUMPS ... f) Rated capacity, each m3/ hr.: 25"
+   },
+   {
+    "attribute": "COT/DOT Waste Water Collection Sump (E1C) effective capacity",
+    "value": "1",
+    "unit": "m3",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "5. COT/DOT WASTE WATER COLLECTION SUMP (E1C) ... b) Effective Capacity, m3: 1 m3"
+   },
+   {
+    "attribute": "COT/DOT Waste Water Transfer Pumps rated capacity",
+    "value": "2",
+    "unit": "m3/hr",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "6. COT/DOT WASTE WATER TRANSFER PUMPS ... f) Rated capacity, each m3/ hr.: 2"
+   },
+   {
+    "attribute": "COT/DOT Waste Water Transfer Pumps type",
+    "value": "Horizontal Screw type",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "b) Type: Horizontal Screw type"
+   }
+  ],
+  "verdict": "REVIEW",
+  "why": "Increasing the COT/DOT waste water transfer pump capacity from 2 m3/hr to 5 m3/hr reduces the retention/emptying time of the 1 m3 upstream collection sump (E1C) from 30 minutes to 12 minutes, which may cause frequent pump cycling and affect NPSH/suction conditions. Additionally, the pump head, motor rating, and level switch setpoints are not specified in the tender documents (listed as 'As per System Requirements') and must be verified during detailed engineering.",
+  "usage": {
+   "input": 593915,
+   "cached": 591861,
+   "output": 1509,
+   "thought": 0
+  }
+ }
+}

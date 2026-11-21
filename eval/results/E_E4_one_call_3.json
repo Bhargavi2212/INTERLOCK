@@ -1,0 +1,121 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:20:18",
+ "seconds": 43.1,
+ "state": "done",
+ "error": null,
+ "output": {
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 44,
+    "why": "Specifies the scope of supply for the Effluent Treatment Plant, including two (1W+1S) Sludge Sump Transfer Pumps."
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "why": "P&ID of the Effluent Treatment Plant showing the Sludge Sump Transfer Pumps (2x100%)."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "why": "Datasheet A for Effluent Treatment Plant detailing the quantity, type, capacity, and speed of the Sludge Sump Transfer Pumps."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 62,
+    "why": "Continuation of Datasheet A for Effluent Treatment Plant detailing the materials of construction for the Sludge Sump Transfer Pumps."
+   }
+  ],
+  "values": [
+   {
+    "attribute": "Quantity / Configuration",
+    "value": "Two (2) nos. (1W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 44,
+    "quote": "7.1.26 Two (2) nos. (1W+1S) SLUDGE SUMP TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc."
+   },
+   {
+    "attribute": "Configuration",
+    "value": "2X100%",
+    "unit": "",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "SLUDGE SUMP TRANSFER PUMPS (2X100%)"
+   },
+   {
+    "attribute": "Type",
+    "value": "VERTICAL CENTRIFUGAL",
+    "unit": "",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "TYPE : VERTICAL CENTRIFUGAL"
+   },
+   {
+    "attribute": "Capacity",
+    "value": "12.5",
+    "unit": "M3/H",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "CAP.: 12.5M3/H"
+   },
+   {
+    "attribute": "Number required",
+    "value": "Two (1W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "a) Number required Two (1W+1S) nos."
+   },
+   {
+    "attribute": "Type",
+    "value": "Vertical sump type (Open Impeller, Non-clog type)",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "b) Type Vertical sump type (Open Impeller, Non-clog type)"
+   },
+   {
+    "attribute": "Location",
+    "value": "Outdoor",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "c) Location Outdoor"
+   },
+   {
+    "attribute": "Duty",
+    "value": "Intermittent",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "e) Duty Intermittent"
+   },
+   {
+    "attribute": "Rated capacity, each",
+    "value": "12.5",
+    "unit": "m3/hr",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "f) Rated capacity, each m3/ hr. 12.5"
+   },
+   {
+    "attribute": "Pump Speed (max.)",
+    "value": "1500",
+    "unit": "RPM",
+    "file": "bhel/Part4.pdf",
+    "page": 61,
+    "quote": "g) Pump Speed, RPM (max.) 1500"
+   }
+  ],
+  "verdict": "BLOCK",
+  "why": "The proposed change to add a third sludge sump transfer pump (1W+2S) directly conflicts with the technical specification (Clause 7.1.26), Datasheet A (Item 34), and the ETP P&ID (PE-DG-508-164-W001), which all mandate two (2x100%, 1W+1S) pumps. Furthermore, the RCC Sludge Sump (E14) civil works are in BHEL's scope and are sized for two pumps.",
+  "usage": {
+   "input": 593909,
+   "cached": 0,
+   "output": 1195,
+   "thought": 0
+  }
+ }
+}

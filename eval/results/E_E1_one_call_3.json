@@ -1,0 +1,120 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:18:07",
+ "seconds": 49.6,
+ "state": "done",
+ "error": null,
+ "output": {
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "why": "Specifies scope of supply for WSWS transfer pumps as 2 working + 1 standby."
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 46,
+    "why": "Specifies ETP hydraulics can only take an occasional overloading of 20% of design flow rate."
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 48,
+    "why": "Specifies ETP operation and control philosophy requiring automatic starting of standby pumps upon failure/tripping of running pumps."
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 26,
+    "why": "Lists mandatory spares for Waste Service water transfer pump motor."
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "why": "P&ID of Effluent Treatment Plant showing WSWS transfer pumps (3X50%, 125 m3/hr each) feeding the Lamella Clarifier/Tube Settler (250 m3/hr each, 1W+1S)."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "why": "Datasheet A for ETP specifying WSWS transfer pumps quantity (2W+1S) and rated capacity (125 m3/hr each)."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 60,
+    "why": "Datasheet A for ETP specifying downstream Lamella Clarifier/Tube Settler design flow (250 m3/hr net output, 1W+1S)."
+   }
+  ],
+  "values": [
+   {
+    "attribute": "WSWS Transfer Pumps Quantity & Configuration",
+    "value": "3 (2W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc."
+   },
+   {
+    "attribute": "ETP Hydraulics Overloading Limit",
+    "value": "20",
+    "unit": "%",
+    "file": "bhel/Part1.pdf",
+    "page": 46,
+    "quote": "7.4.4 Hydraulics of the Effluent Treatment Plant shall be such as to take an occasional overloading of 20% of the 7.4.5 design flow rate."
+   },
+   {
+    "attribute": "Standby Pump Control Requirement",
+    "value": "Automatic starting of standby pumps",
+    "unit": "",
+    "file": "bhel/Part1.pdf",
+    "page": 48,
+    "quote": "(vii) Automatic starting of standby pumps upon failure of starting of selected pump or tripping of running pump as the case may be."
+   },
+   {
+    "attribute": "WSWS Transfer Pumps Capacity (P&ID)",
+    "value": "125",
+    "unit": "M3/HR",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "WSWS TRANSFER PUMPS (3X50%) TYPE : VERTICAL CENTRIFUGAL CAP.: 125M3/HR. EACH"
+   },
+   {
+    "attribute": "Lamella Clarifier/Tube Settler Capacity (P&ID)",
+    "value": "250",
+    "unit": "M3/HR",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "LAMELLA CLARIFIER/TUBE SETTLER CAPACITY: 250 M3/HR. (EACH) (1W+1S)"
+   },
+   {
+    "attribute": "WSWS Transfer Pumps Number Required",
+    "value": "Three (2W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "quote": "28. WSWS TRANSFER PUMPS a) Number required Three (2W+1S) nos."
+   },
+   {
+    "attribute": "WSWS Transfer Pumps Rated Capacity",
+    "value": "125",
+    "unit": "m3/ hr.",
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "quote": "f) Rated capacity, each m3/ hr. 125"
+   },
+   {
+    "attribute": "Lamella Clarifier/Tube Settler Design Flow",
+    "value": "250",
+    "unit": "m3/hr",
+    "file": "bhel/Part4.pdf",
+    "page": 60,
+    "quote": "29. LAMELLA CLARIFIER/ TUBE SETTLER a) Number required Two (1W+1S) nos. ... c) Design Flow (Net Output of each clarifier), m3/hr 250"
+   }
+  ],
+  "verdict": "BLOCK",
+  "why": "The WSWS transfer pumps are explicitly specified as 3 x 50% (2W+1S) at 125 m3/hr each to match the 250 m3/hr design capacity of the single working downstream Lamella Clarifier/Tube Settler (1W+1S). Running all three pumps together without a standby violates the mandatory 2W+1S redundancy requirement and produces 375 m3/hr (150% of design flow), which exceeds the ETP hydraulic overloading limit of 20% (300 m3/hr).",
+  "usage": {
+   "input": 593909,
+   "cached": 0,
+   "output": 1452,
+   "thought": 0
+  }
+ }
+}

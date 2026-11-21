@@ -1,0 +1,24 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:07:45",
+ "seconds": 7.0,
+ "state": "done",
+ "error": null,
+ "output": {
+  "item": "COT/DOT waste water transfer pumps",
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 54
+   }
+  ]
+ }
+}

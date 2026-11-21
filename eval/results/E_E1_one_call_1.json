@@ -1,0 +1,128 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:09:19",
+ "seconds": 54.6,
+ "state": "done",
+ "error": null,
+ "output": {
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "why": "Specifies scope of supply for WSWS transfer pumps (2W+1S) and Lamella Clarifiers (1W+1S)."
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 46,
+    "why": "Specifies that the hydraulics of the ETP are designed to take an occasional overloading of 20% of the design flow rate."
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 48,
+    "why": "Specifies ETP operation and control philosophy requiring automatic starting of standby pumps upon failure/tripping of running pump."
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "why": "P&ID of Effluent Treatment Plant showing WSWS Transfer Pumps (3x50%, 125 m3/hr each) feeding Lamella Clarifier/Tube Settler (250 m3/hr each, 1W+1S)."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "why": "Datasheet A for ETP specifying WSWS Transfer Pumps as Three (2W+1S) nos. with rated capacity of 125 m3/hr each."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 60,
+    "why": "Datasheet A for ETP specifying Lamella Clarifier/Tube Settler as Two (1W+1S) nos. with design flow of 250 m3/hr each."
+   },
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 221,
+    "why": "General technical requirement for pumps stating motor rating is selected for parallel operation considering overloading in the event of tripping of operating pumps, not simultaneous operation of standby."
+   }
+  ],
+  "values": [
+   {
+    "attribute": "WSWS Transfer Pumps quantity and configuration",
+    "value": "Three (2W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.17 Three (3) nos. (2W+1S) WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line for full flow, etc."
+   },
+   {
+    "attribute": "ETP Hydraulics maximum occasional overloading",
+    "value": "20",
+    "unit": "%",
+    "file": "bhel/Part1.pdf",
+    "page": 46,
+    "quote": "7.4.4 Hydraulics of the Effluent Treatment Plant shall be such as to take an occasional overloading of 20% of the 7.4.5 design flow rate."
+   },
+   {
+    "attribute": "Standby pump control philosophy",
+    "value": "Automatic starting of standby pumps",
+    "unit": "",
+    "file": "bhel/Part1.pdf",
+    "page": 48,
+    "quote": "(vii) Automatic starting of standby pumps upon failure of starting of selected pump or tripping of running pump as the case may be."
+   },
+   {
+    "attribute": "WSWS Transfer Pumps capacity and configuration on P&ID",
+    "value": "3X50%, 125",
+    "unit": "M3/HR.",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "WSWS TRANSFER PUMPS (3X50%) TYPE : VERTICAL CENTRIFUGAL CAP.: 125M3/HR. EACH"
+   },
+   {
+    "attribute": "Lamella Clarifier/Tube Settler capacity and configuration on P&ID",
+    "value": "250 (1W+1S)",
+    "unit": "M3/HR.",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "LAMELLA CLARIFIER/TUBE SETTLER CAPACITY: 250 M3/HR. (EACH) (1W+1S)"
+   },
+   {
+    "attribute": "WSWS Transfer Pumps Number required",
+    "value": "Three (2W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "quote": "28. WSWS TRANSFER PUMPS a) Number required Three (2W+1S) nos."
+   },
+   {
+    "attribute": "WSWS Transfer Pumps Rated capacity",
+    "value": "125",
+    "unit": "m3/ hr.",
+    "file": "bhel/Part4.pdf",
+    "page": 59,
+    "quote": "f) Rated capacity, each m3/ hr. 125"
+   },
+   {
+    "attribute": "Lamella Clarifier/Tube Settler Number required",
+    "value": "Two (1W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part4.pdf",
+    "page": 60,
+    "quote": "29. LAMELLA CLARIFIER/ TUBE SETTLER a) Number required Two (1W+1S) nos."
+   },
+   {
+    "attribute": "Lamella Clarifier/Tube Settler Design Flow",
+    "value": "250",
+    "unit": "m3/hr",
+    "file": "bhel/Part4.pdf",
+    "page": 60,
+    "quote": "c) Design Flow (Net Output of each clarifier), m3/hr 250"
+   }
+  ],
+  "verdict": "BLOCK",
+  "why": "The three WSWS transfer pumps are configured as 2 working + 1 standby (3 x 50% at 125 m3/hr each) to match the single working downstream Lamella Clarifier's design flow of 250 m3/hr. Running all three pumps simultaneously without a standby violates the 2W+1S redundancy requirement and delivers 375 m3/hr (a 50% overload), exceeding the ETP's maximum occasional hydraulic overload limit of 20% (300 m3/hr) and the 200 NB discharge header sizing.",
+  "usage": {
+   "input": 593909,
+   "cached": 0,
+   "output": 1588,
+   "thought": 0
+  }
+ }
+}

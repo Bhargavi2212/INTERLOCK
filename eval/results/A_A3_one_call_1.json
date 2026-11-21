@@ -1,0 +1,134 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:24:56",
+ "seconds": 47.8,
+ "state": "done",
+ "error": null,
+ "output": {
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "why": "Scope of supply for ETP listing MRS UNIT-1 WASTE WATER TRANSFER PUMPS."
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "why": "Piping table listing distance from MRS Waste Water Sump Unit-1 to Node 5."
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "why": "P&ID for Effluent Treatment Plant showing MRS UNIT-1 WASTE WATER TRANSFER PUMPS capacity, sump capacity, and discharge pipe size (65NB / 80NB to TP-18)."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "why": "Datasheet A for Effluent Treatment Plant specifying MRS WASTE WATER SUMP UNIT-1 (E6) and MRS UNIT-1 OILY WASTE WATER TRANSFER PUMPS parameters."
+   },
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "why": "General Technical Requirements for Low Pressure Piping specifying maximum allowable water velocity in pump discharge and header pipes."
+   }
+  ],
+  "values": [
+   {
+    "attribute": "Number of pumps",
+    "value": "Two (1W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.8 Two (2) nos. (1W+1S) MRS UNIT-1 WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling etc."
+   },
+   {
+    "attribute": "Piping distance from MRS Waste Water Sump Unit-1 to Node 5",
+    "value": "77",
+    "unit": "Meters",
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "quote": "11. MRS Waste Water Sump Unit-1 | Node 5 (As indicated in P&ID) | 77"
+   },
+   {
+    "attribute": "Rated capacity (P&ID)",
+    "value": "10",
+    "unit": "M3/HR",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "MRS UNIT-1 WASTE WATER TRANSFER PUMPS TYPE : VERTICAL CENTRIFUGAL CAP.- 10 M3/HR (1W+1S)"
+   },
+   {
+    "attribute": "Sump capacity (P&ID)",
+    "value": "10",
+    "unit": "M3",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "MRS WASTE WATER SUMP UNIT-1 MOC: RCC (E6) (UNDER GROUND) CAPACITY : 10 M3"
+   },
+   {
+    "attribute": "Discharge pipe size to Node 5 (P&ID)",
+    "value": "65",
+    "unit": "NB",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "65NB"
+   },
+   {
+    "attribute": "Common header pipe size from Node 5 to TP-18 (P&ID)",
+    "value": "80",
+    "unit": "NB",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "80NB"
+   },
+   {
+    "attribute": "Sump effective capacity (Datasheet)",
+    "value": "10",
+    "unit": "m3",
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "quote": "15. MRS WASTE WATER SUMP UNIT-1 (E6) ... b) Effective Capacity, m3: 10 m3"
+   },
+   {
+    "attribute": "Rated capacity (Datasheet)",
+    "value": "10",
+    "unit": "m3/ hr.",
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "quote": "16. MRS UNIT-1 OILY WASTE WATER TRANSFER PUMPS ... f) Rated capacity, each m3/ hr.: 10"
+   },
+   {
+    "attribute": "Pump type",
+    "value": "Vertical Centrifugal type",
+    "unit": "",
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "quote": "b) Type: Vertical Centrifugal type"
+   },
+   {
+    "attribute": "Pump speed (max.)",
+    "value": "1500",
+    "unit": "RPM",
+    "file": "bhel/Part4.pdf",
+    "page": 56,
+    "quote": "g) Pump Speed, RPM (max.): 1500"
+   },
+   {
+    "attribute": "Water velocity limit for pump discharge and header (50-150 mm pipe size)",
+    "value": "1.8-2.4 (discharge), 1.5-2.4 (header)",
+    "unit": "m/sec",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "(b) Pump discharge and recirculation: 50-150 mm: 1.8-2.4; (c) Header: 50-150 mm: 1.5-2.4"
+   }
+  ],
+  "verdict": "REVIEW",
+  "why": "Increasing the MRS Unit-1 pump capacity to 20 m3/h keeps the velocity in the 65 NB discharge line (~1.67 m/s) and the 80 NB common header to TP-18 (~1.66 m/s combined with Unit-2's 10 m3/h) within the 2.4 m/s limit on Part5.pdf p.200. However, the downstream receiving capacity at CHP TP-18 is not detailed in this specification and must be verified to accept the increased flow.",
+  "usage": {
+   "input": 593919,
+   "cached": 0,
+   "output": 1534,
+   "thought": 0
+  }
+ }
+}

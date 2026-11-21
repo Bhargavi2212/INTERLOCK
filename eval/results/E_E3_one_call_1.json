@@ -1,0 +1,139 @@
+{
+ "plant_id": "27d049ccd64f",
+ "started_at": "2026-11-21T15:11:22",
+ "seconds": 50.1,
+ "state": "done",
+ "error": null,
+ "output": {
+  "pages": [
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "why": "Lists the scope of supply for the COT/DOT waste water transfer pumps (2 nos., 1W+1S)."
+   },
+   {
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "why": "Specifies the piping distance from COT/DOT PIT to TG Unit-1B Floor Wash Water Sump (144 m)."
+   },
+   {
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "why": "P&ID for the Effluent Treatment Plant showing the COT/DOT waste water collection sump (1 m3), transfer pumps (2 m3/hr, 1W+1S), and discharge piping (50 NB) to TG Unit-1B floor wash water sump."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 53,
+    "why": "Datasheet for TG Unit-1B floor wash water sump and transfer pumps, which receive oily effluent from the COT/DOT area."
+   },
+   {
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "why": "Datasheet A for Effluent Treatment Plant specifying parameters for the COT/DOT waste water collection sump (E1C) and COT/DOT waste water transfer pumps."
+   },
+   {
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "why": "General Technical Requirements for Low Pressure Piping specifying water velocity limits for pump discharge piping."
+   }
+  ],
+  "values": [
+   {
+    "attribute": "COT/DOT waste water transfer pumps quantity",
+    "value": "2 (1W+1S)",
+    "unit": "nos.",
+    "file": "bhel/Part1.pdf",
+    "page": 43,
+    "quote": "7.1.14 Two (2) nos. (1W+1S) COT/DOT WASTE WATER TRANSFER PUMPS complete with all instrumentation, valves, piping, fittings, motor, base plate, coupling, re-circulation line etc."
+   },
+   {
+    "attribute": "Piping distance from COT/DOT PIT to TG Unit-1B Floor Wash Water Sump",
+    "value": "144",
+    "unit": "Meters",
+    "file": "bhel/Part1.pdf",
+    "page": 45,
+    "quote": "1. COT/DOT PIT | TG Unit-1B Floor Wash Water Sump | 144"
+   },
+   {
+    "attribute": "COT/DOT waste water transfer pumps capacity",
+    "value": "2",
+    "unit": "M3/HR",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "COT/DOT WASTE WATER TRANSFER PUMPS CAP.- 2 M3/HR (1W+1S) TYPE : HORIZONTAL SCREW"
+   },
+   {
+    "attribute": "COT/DOT waste water collection sump (E1C) capacity",
+    "value": "1",
+    "unit": "M3",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "COT/DOT WASTE WATER COLLECTION SUMP (E1C) CAP.- 1 M3 M.O.C.-RCC (UNDER GROUND)"
+   },
+   {
+    "attribute": "COT/DOT pump discharge header pipe size",
+    "value": "50",
+    "unit": "NB",
+    "file": "bhel/Part3.pdf",
+    "page": 146,
+    "quote": "50NB"
+   },
+   {
+    "attribute": "TG Unit-1B Floor Wash Water Sump (E1B) effective capacity",
+    "value": "12",
+    "unit": "m3",
+    "file": "bhel/Part4.pdf",
+    "page": 53,
+    "quote": "3. TG UNIT-1B FLOOR WASH WATER SUMP (E1B) ... b) Effective Capacity, m3: 12 m3"
+   },
+   {
+    "attribute": "TG Unit-1B Floor Wash Water Transfer Pumps rated capacity",
+    "value": "25",
+    "unit": "m3/hr",
+    "file": "bhel/Part4.pdf",
+    "page": 53,
+    "quote": "4. TG UNIT-1B FLOOR WASH WATER TRANSFER PUMPS ... f) Rated capacity, each m3/ hr.: 25"
+   },
+   {
+    "attribute": "COT/DOT waste water collection sump (E1C) effective capacity",
+    "value": "1",
+    "unit": "m3",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "5. COT/DOT WASTE WATER COLLECTION SUMP (E1C) a) Number required: One (1) nos. b) Effective Capacity, m3: 1 m3"
+   },
+   {
+    "attribute": "COT/DOT waste water transfer pumps rated capacity",
+    "value": "2",
+    "unit": "m3/hr",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "6. COT/DOT WASTE WATER TRANSFER PUMPS ... a) Number required: Two (1W+1S) nos. b) Type: Horizontal Screw type ... f) Rated capacity, each m3/ hr.: 2"
+   },
+   {
+    "attribute": "COT/DOT waste water transfer pumps speed",
+    "value": "1500",
+    "unit": "RPM (max.)",
+    "file": "bhel/Part4.pdf",
+    "page": 54,
+    "quote": "g) Pump Speed, RPM (max.): 1500"
+   },
+   {
+    "attribute": "Pump discharge and recirculation water velocity limit (50-150 mm pipe size)",
+    "value": "1.8-2.4",
+    "unit": "m/sec",
+    "file": "bhel/Part5.pdf",
+    "page": 200,
+    "quote": "Water Velocity in m/sec | Pipe Size 50-150 mm | (b) Pump discharge and recirculation: 1.8-2.4"
+   }
+  ],
+  "verdict": "REVIEW",
+  "why": "Increasing the COT/DOT waste water transfer pump capacity from 2 m3/hr to 5 m3/hr reduces the retention/pumping time of the 1 m3 collection sump (E1C) from 30 minutes to 12 minutes, and yields a velocity of ~0.71 m/s in the 50 NB discharge line (well below the 2.4 m/s limit). However, the pump motor rating, head calculation for the 144 m discharge line, and inflow rate to sump E1C to prevent frequent pump cycling are not yet specified and must be verified during detailed engineering.",
+  "usage": {
+   "input": 593915,
+   "cached": 0,
+   "output": 1723,
+   "thought": 0
+  }
+ }
+}
