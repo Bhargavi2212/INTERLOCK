@@ -36,7 +36,7 @@ $("access").onsubmit = (e) => {
   store.set("access_code", code, true);
   $("access-code").value = "";
   $("access").hidden = true;
-  showPlant().then(loadPlants).then(loadRegister);
+  showPlant().then(loadPlants);
 };
 
 async function api(path, opts = {}) {
@@ -65,7 +65,6 @@ $("plant-pick").onchange = (e) => {
   store.set("plant_id", plantId);
   $("result").hidden = true;
   showPlant();
-  loadRegister();
 };
 
 async function showPlant() {
@@ -278,16 +277,6 @@ async function showDrawing(res) {
   }
 }
 
-async function loadRegister() {
-  if (!plantId) return;
-  try {
-    const entries = await api(`/plants/${plantId}/register`);
-    $("register").innerHTML = entries.length ? "<b>Register</b> (approved changes): " + entries.map((e) =>
-      `${esc(e.item)} · ${esc(e.attribute)} = ${esc(e.value)} ${esc(e.unit || "")} (${esc(e.approved_at)})`).join("; ")
-      : "Register: no approved changes.";
-  } catch (e) { $("register").textContent = ""; }
-}
-
 function renderFix(res) {
   const el = $("fix");
   const v = (res.verdict || {}).verdict;
@@ -334,7 +323,6 @@ function renderFix(res) {
           body: JSON.stringify({ resolved: boxes.map((b) => b.value) }) });
         $("approve-status").textContent = `Added to the register: ${r.entries.map((e) => e.entry_id).join(", ")}`;
         ap.disabled = true;
-        loadRegister();
       } catch (e) { $("approve-status").textContent = `Not approved: ${e.message}`; }
     };
   }
@@ -428,4 +416,4 @@ function showError(e) { $("upload-status").textContent = `Error: ${e.message}`; 
 fetch("/health").then((r) => r.json()).then((d) => { $("version").textContent = d.version; })
   .catch(() => { $("version").textContent = "unavailable"; });
 if (!store.get("access_code", true)) askForCode();
-else showPlant().then(loadPlants).then(loadRegister);
+else showPlant().then(loadPlants);
