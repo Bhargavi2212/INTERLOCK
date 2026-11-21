@@ -1,0 +1,314 @@
+{
+ "plant": "9eeb30bca0d5",
+ "fix_jobs": [
+  {
+   "job_id": "4e69c81575bb",
+   "change_id": "ec9c58e1d8b4",
+   "state": "done",
+   "created_at": "2026-11-21T20:06:28+00:00",
+   "updated_at": "2026-11-21T20:08:03+00:00",
+   "result": {
+    "seconds": 95.7,
+    "proven": false,
+    "outcome": "refused"
+   },
+   "error": null
+  },
+  {
+   "job_id": "3a074e4a77f8",
+   "change_id": "634093a7edaa",
+   "state": "failed",
+   "created_at": "2026-11-21T20:16:10+00:00",
+   "updated_at": "2026-11-21T20:17:17+00:00",
+   "result": null,
+   "error": "JSONDecodeError"
+  },
+  {
+   "job_id": "260ee18e741c",
+   "change_id": "9e5b8db428c8",
+   "state": "done",
+   "created_at": "2026-11-21T20:21:59+00:00",
+   "updated_at": "2026-11-21T20:23:25+00:00",
+   "result": {
+    "seconds": 85.9,
+    "proven": false,
+    "outcome": "refused"
+   },
+   "error": null
+  },
+  {
+   "job_id": "8dc640991ba5",
+   "change_id": "347e1a279fe0",
+   "state": "failed",
+   "created_at": "2026-11-21T20:31:05+00:00",
+   "updated_at": "2026-11-21T20:33:02+00:00",
+   "result": null,
+   "error": "TypeError"
+  },
+  {
+   "job_id": "10e4b042f88f",
+   "change_id": "e21951cfa434",
+   "state": "done",
+   "created_at": "2026-11-21T20:38:28+00:00",
+   "updated_at": "2026-11-21T20:39:46+00:00",
+   "result": {
+    "seconds": 78.7,
+    "proven": true,
+    "outcome": "proposed"
+   },
+   "error": null
+  },
+  {
+   "job_id": "45378dc235e0",
+   "change_id": "e21951cfa434",
+   "state": "done",
+   "created_at": "2026-11-21T20:40:48+00:00",
+   "updated_at": "2026-11-21T20:42:42+00:00",
+   "result": {
+    "seconds": 113.9,
+    "proven": false,
+    "outcome": "refused"
+   },
+   "error": null
+  }
+ ],
+ "register": [
+  {
+   "attribute": "arrangement",
+   "change_id": "e21951cfa434",
+   "item": "SG Unit-1 floor wash water transfer pumps",
+   "unit_tag": "Unit-1",
+   "value": "2W+1S",
+   "unit": "",
+   "entry_id": "1dae83691a44",
+   "resolved_disagreements": [
+    "working (Part1.pdf p.43 = 1; Part3.pdf p.146 = 2)",
+    "arrangement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W)"
+   ],
+   "names": [
+    "SG Unit-1 floor wash water transfer pumps",
+    "SG Unit-1 floor wash water transfer pump",
+    "Unit-1 floor wash water transfer pumps",
+    "floor wash water transfer pumps",
+    "floor wash water transfer pump",
+    "SG Unit-1 FWW transfer pumps",
+    "FWW transfer pumps",
+    "SG Unit-1 FLR WASH WTR transfer pumps",
+    "FLR WASH WTR transfer pumps",
+    "floor wash transfer pumps",
+    "SG Unit-1 floor wash"
+   ],
+   "system": "SG Unit-1 floor wash",
+   "approved_at": "2026-11-21T20:40:20+00:00",
+   "fix": false
+  },
+  {
+   "attribute": "working",
+   "change_id": "e21951cfa434",
+   "item": "SG Unit-1 floor wash water transfer pumps",
+   "unit_tag": "Unit-1",
+   "value": "2",
+   "unit": "count",
+   "entry_id": "7b64f99a12bd",
+   "resolved_disagreements": [
+    "working (Part1.pdf p.43 = 1; Part3.pdf p.146 = 2)",
+    "arrangement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W)"
+   ],
+   "names": [
+    "SG Unit-1 floor wash water transfer pumps",
+    "SG Unit-1 floor wash water transfer pump",
+    "Unit-1 floor wash water transfer pumps",
+    "floor wash water transfer pumps",
+    "floor wash water transfer pump",
+    "SG Unit-1 FWW transfer pumps",
+    "FWW transfer pumps",
+    "SG Unit-1 FLR WASH WTR transfer pumps",
+    "FLR WASH WTR transfer pumps",
+    "floor wash transfer pumps",
+    "SG Unit-1 floor wash"
+   ],
+   "system": "SG Unit-1 floor wash",
+   "approved_at": "2026-11-21T20:40:20+00:00",
+   "fix": false
+  },
+  {
+   "attribute": "installed",
+   "change_id": "e21951cfa434",
+   "item": "SG Unit-1 floor wash water transfer pumps",
+   "unit_tag": "Unit-1",
+   "value": "3",
+   "unit": "count",
+   "entry_id": "93a42c41cf6f",
+   "resolved_disagreements": [
+    "working (Part1.pdf p.43 = 1; Part3.pdf p.146 = 2)",
+    "arrangement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W)"
+   ],
+   "names": [
+    "SG Unit-1 floor wash water transfer pumps",
+    "SG Unit-1 floor wash water transfer pump",
+    "Unit-1 floor wash water transfer pumps",
+    "floor wash water transfer pumps",
+    "floor wash water transfer pump",
+    "SG Unit-1 FWW transfer pumps",
+    "FWW transfer pumps",
+    "SG Unit-1 FLR WASH WTR transfer pumps",
+    "FLR WASH WTR transfer pumps",
+    "floor wash transfer pumps",
+    "SG Unit-1 floor wash"
+   ],
+   "system": "SG Unit-1 floor wash",
+   "approved_at": "2026-11-21T20:40:20+00:00",
+   "fix": true
+  }
+ ],
+ "changes": {
+  "14435300e29c": {
+   "text": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby",
+   "state": null,
+   "verdict": {
+    "reasons": [
+     "flagged: R2 Standby available: installed 2 < working 2 + standby 1; standby from documents disagree on the standby requirement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W); the stricter value, standby 1 (Part1.pdf p.43), is used; inputs Part1.pdf p.43, change text",
+     "documents disagree on arrangement: Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W",
+     "documents disagree on working: Part1.pdf p.43 = 1; Part3.pdf p.146 = 2",
+     "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+    ],
+    "label": "BLOCK",
+    "verdict": "BLOCK"
+   },
+   "clashes": null,
+   "fix_outcome": null,
+   "fix_proven": null
+  },
+  "347e1a279fe0": {
+   "text": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby.",
+   "state": null,
+   "verdict": {
+    "reasons": [
+     "flagged: R2 Standby available: This change needs 3 pumps installed; the documents show 2. installed 2 < working 2 + standby 1; standby from documents disagree on the standby requirement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W); the stricter value, standby 1 (Part1.pdf p.43), is used; inputs Part1.pdf p.43, change text",
+     "documents disagree on working: Part1.pdf p.43 = 1; Part3.pdf p.146 = 2",
+     "documents disagree on arrangement: Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W",
+     "held: R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+     "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+    ],
+    "label": "BLOCK",
+    "verdict": "BLOCK"
+   },
+   "clashes": null,
+   "fix_outcome": null,
+   "fix_proven": null
+  },
+  "634093a7edaa": {
+   "text": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby.",
+   "state": null,
+   "verdict": {
+    "reasons": [
+     "flagged: R2 Standby available: This change needs 3 pumps installed; the documents show 2. installed 2 < working 2 + standby 1; standby from documents disagree on the standby requirement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W); the stricter value, standby 1 (Part1.pdf p.43), is used; inputs Part1.pdf p.43, change text",
+     "documents disagree on working: Part1.pdf p.43 = 1; Part3.pdf p.146 = 2",
+     "documents disagree on arrangement: Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W",
+     "held: R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+     "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+    ],
+    "label": "BLOCK",
+    "verdict": "BLOCK"
+   },
+   "clashes": null,
+   "fix_outcome": null,
+   "fix_proven": null
+  },
+  "794acae02f78": {
+   "text": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby.",
+   "state": null,
+   "verdict": {
+    "reasons": [
+     "flagged: R2 Standby available: installed 2 < working 2 + standby 1; standby from documents disagree on the standby requirement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W); the stricter value, standby 1 (Part1.pdf p.43), is used; inputs Part1.pdf p.43, change text",
+     "documents disagree on working: Part1.pdf p.43 = 1; Part3.pdf p.146 = 2",
+     "documents disagree on arrangement: Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W",
+     "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+    ],
+    "label": "BLOCK",
+    "verdict": "BLOCK"
+   },
+   "clashes": null,
+   "fix_outcome": null,
+   "fix_proven": null
+  },
+  "9e5b8db428c8": {
+   "text": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby.",
+   "state": null,
+   "verdict": {
+    "reasons": [
+     "flagged: R2 Standby available: This change needs 3 pumps installed; the documents show 2. installed 2 < working 2 + standby 1; standby from documents disagree on the standby requirement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W); the stricter value, standby 1 (Part1.pdf p.43), is used; inputs Part1.pdf p.43, change text",
+     "documents disagree on arrangement: Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W",
+     "documents disagree on working: Part1.pdf p.43 = 1; Part3.pdf p.146 = 2",
+     "held: R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+     "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+    ],
+    "label": "BLOCK",
+    "verdict": "BLOCK"
+   },
+   "clashes": null,
+   "fix_outcome": "refused",
+   "fix_proven": null
+  },
+  "e21951cfa434": {
+   "text": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby.",
+   "state": null,
+   "verdict": {
+    "reasons": [
+     "flagged: R2 Standby available: This change needs 3 pumps installed; the documents show 2. installed 2 < working 2 + standby 1; standby from documents disagree on the standby requirement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W); the stricter value, standby 1 (Part1.pdf p.43), is used; inputs Part1.pdf p.43, change text",
+     "documents disagree on working: Part1.pdf p.43 = 1; Part3.pdf p.146 = 2",
+     "documents disagree on arrangement: Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W",
+     "held: R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+     "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+    ],
+    "label": "BLOCK",
+    "verdict": "BLOCK"
+   },
+   "clashes": null,
+   "fix_outcome": "refused",
+   "fix_proven": null
+  },
+  "ec9c58e1d8b4": {
+   "text": "SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby.",
+   "state": null,
+   "verdict": {
+    "reasons": [
+     "flagged: R2 Standby available: This change needs 3 pumps installed; the documents show 2. installed 2 < working 2 + standby 1; standby from documents disagree on the standby requirement (Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W); the stricter value, standby 1 (Part1.pdf p.43), is used; inputs Part1.pdf p.43, change text",
+     "documents disagree on working: Part1.pdf p.43 = 1; Part3.pdf p.146 = 2",
+     "documents disagree on arrangement: Part1.pdf p.43 = 1W+1S; Part3.pdf p.146 = 2W",
+     "held: R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+     "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+    ],
+    "label": "BLOCK",
+    "verdict": "BLOCK"
+   },
+   "clashes": null,
+   "fix_outcome": "refused",
+   "fix_proven": null
+  },
+  "f488daddc35c": {
+   "text": "SG Unit-1 floor wash pumps: remove the third pump",
+   "state": null,
+   "verdict": {
+    "reasons": [
+     "flagged: R2 Standby available: installed 2 < working 2 + standby 1; standby from arrangement '2W+1S' (register); inputs change text, register text",
+     "clashes with approved change 93a42c41cf6f: installed approved 3, proposed 2",
+     "held: R1 Pipe velocity held: pumps_into_line missing: documents do not state in text whether the pumps share one discharge line",
+     "held: R3 Sump cycle time held: q_in missing (inflow not stated)"
+    ],
+    "label": "BLOCK",
+    "verdict": "BLOCK"
+   },
+   "clashes": [
+    {
+     "attribute": "installed",
+     "approved": "3",
+     "proposed": "2",
+     "entry_id": "93a42c41cf6f"
+    }
+   ],
+   "fix_outcome": null,
+   "fix_proven": null
+  }
+ }
+}
