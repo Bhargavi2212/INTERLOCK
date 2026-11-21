@@ -4,30 +4,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Interlock</title>
-  <style>
-    :root { color-scheme: light dark; }
-    body {
-      margin: 0; min-height: 100vh; display: grid; place-items: center;
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      background: #f6f7f9; color: #1b1f24;
-    }
-    @media (prefers-color-scheme: dark) { body { background: #14171b; color: #e6e8eb; } }
-    main { padding: 0 16px; max-width: 34rem; text-align: center; }
-    h1 { font-size: 2.2rem; margin: 0 0 .5rem; letter-spacing: .02em; }
-    p { line-height: 1.5; margin: .5rem 0; }
-    .version { font-size: .85rem; opacity: .6; font-family: ui-monospace, monospace; }
-  </style>
+  <link rel="stylesheet" href="/static/app.css">
 </head>
 <body>
-  <main>
+  <header>
     <h1>Interlock</h1>
-    <p>No plant change is signed off until every document agrees, and the numbers still work.</p>
+    <p class="tagline">No plant change is signed off until every document agrees, and the numbers still work.</p>
     <p class="version">version <span id="version">…</span></p>
+  </header>
+
+  <main>
+    <section id="plant">
+      <h2>Plant</h2>
+      <div class="row">
+        <input id="plant-name" placeholder="Plant name, e.g. BHEL Lara" autocomplete="off">
+        <button id="new-plant">New plant</button>
+        <span id="plant-info" class="muted">No plant selected.</span>
+      </div>
+    </section>
+
+    <section id="upload">
+      <h2>Documents</h2>
+      <div id="drop" class="drop">
+        Drop a folder or PDF files here, or
+        <label class="button">Choose folder<input id="pick-folder" type="file" webkitdirectory multiple hidden></label>
+        <label class="button">Choose files<input id="pick-files" type="file" multiple hidden></label>
+      </div>
+      <p id="upload-status" class="muted"></p>
+      <table id="files"><thead><tr><th>File</th><th>Status</th><th>Progress</th></tr></thead><tbody></tbody></table>
+      <p id="ingest-status"></p>
+    </section>
+
+    <section id="change">
+      <h2>Change</h2>
+      <p class="muted">The change check arrives in this phase's next step.</p>
+    </section>
   </main>
-  <script>
-    fetch("/health").then(r => r.json())
-      .then(d => { document.getElementById("version").textContent = d.version; })
-      .catch(() => { document.getElementById("version").textContent = "unavailable"; });
-  </script>
+
+  <script src="/static/app.js"></script>
 </body>
 </html>
