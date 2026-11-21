@@ -73,3 +73,15 @@ def test_crop_png_window_and_cap():
     out = crop_png(pix.tobytes("png"), [0.5, 0.5, 1.0, 1.0], max_px=1000)
     small = pymupdf.Pixmap(out)
     assert max(small.width, small.height) <= 1000 and small.width == 2 * small.height
+
+
+def test_calibration_numbers_reproduce():
+    """The ESP Unit-1 calibration (eval/results/calibration_esp_unit1.json): yx and xy tie on centre
+    distance, IoU separates them, yx wins."""
+    from app.drawing.boxes import iou
+    text = [0.4214, 0.604, 0.4541, 0.6123]
+    crop, raw = [0.2377, 0.4081, 0.6377, 0.8081], [489, 459, 535, 539]
+    yx = to_page(raw, {"order": "yx", "scale": 1000}, crop)
+    xy = to_page(raw, {"order": "xy", "scale": 1000}, crop)
+    assert round(distance(yx, text), 4) == round(distance(xy, text), 4) == 0.0048
+    assert round(iou(yx, text), 2) == 0.44 and round(iou(xy, text), 2) == 0.22

@@ -1,0 +1,86 @@
+{
+ "raw": {
+  "found": true,
+  "item_box": [
+   387,
+   349,
+   550,
+   540
+  ],
+  "label_box": [
+   489,
+   459,
+   535,
+   539
+  ],
+  "readings": [
+   {
+    "input": "line_nb",
+    "value": "100",
+    "unit": "NB",
+    "label_text": "100NB",
+    "box": [
+     361,
+     631,
+     369,
+     649
+    ],
+    "role": "discharge header"
+   },
+   {
+    "input": "shared_discharge",
+    "value": "true",
+    "label_text": "100NB",
+    "box": [
+     361,
+     631,
+     369,
+     649
+    ]
+   },
+   {
+    "input": "flow_per_pump",
+    "value": "50",
+    "unit": "M3/HR",
+    "label_text": "CAP.- 50 M3/HR (1W+1S)",
+    "box": [
+     512,
+     460,
+     520,
+     530
+    ]
+   },
+   {
+    "input": "arrangement",
+    "value": "1W+1S",
+    "label_text": "CAP.- 50 M3/HR (1W+1S)",
+    "box": [
+     512,
+     460,
+     520,
+     530
+    ]
+   }
+  ],
+  "why": "Located ESP UNIT-1 WASTE WATER TRANSFER PUMPS with capacity 50 M3/HR (1W+1S) discharging into a shared 100NB header."
+ },
+ "anchor": [
+  0.42141,
+  0.60399,
+  0.45406,
+  0.61226
+ ],
+ "window": [
+  0.23773499999999997,
+  0.408125,
+  0.6377349999999999,
+  0.808125
+ ],
+ "best": {
+  "format": {
+   "order": "xy",
+   "scale": 1000
+  },
+  "distance": 0.004811655120641951
+ }
+}

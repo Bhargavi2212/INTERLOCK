@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 load_dotenv(ROOT / ".env")
 
-from app.drawing.boxes import distance, to_page  # noqa: E402
+from app.drawing.boxes import distance, iou, to_page  # noqa: E402
 from app.drawing.locate import crop_png, crop_window, find_anchor  # noqa: E402
 from app.drawing.vision import _prompt  # noqa: E402
 from app.reading import schemas  # noqa: E402
@@ -57,13 +57,21 @@ def main() -> int:
     print("text-layer label:", anchor["text"], [round(v, 4) for v in anchor["box"]])
     print("crop window:", [round(v, 4) for v in window])
     print("model raw label_box:", raw, "| found:", out.get("found"), "| why:", out.get("why"))
-    best = None
+    scored = []
     for fmt in FORMATS:
         box = to_page(raw, fmt, window)
         dist = distance(box, anchor["box"]) if box else None
-        print(f"  {fmt}: {box}  distance {None if dist is None else round(dist, 4)}")
-        if dist is not None and (best is None or dist < best[1]):
-            best = (fmt, dist)
+        ov = iou(box, anchor["box"]) if box else 0.0
+        print(f"  {fmt}: {box}  distance {None if dist is None else round(dist, 4)}  IoU {round(ov, 2)}")
+        if dist is not None:
+            scored.append((round(dist, 3), -ov, fmt, dist))
+    # smallest centre distance; a tie (to 0.001 of the page) is broken by the larger IoU
+    best = None
+    if scored:
+        scored.sort(key=lambda s: (s[0], s[1]))
+        best = (scored[0][2], scored[0][3])
+        if len(scored) > 1 and scored[1][0] == scored[0][0]:
+            print(f"  tie on centre distance; broken by IoU ({round(-scored[0][1], 2)} vs {round(-scored[1][1], 2)})")
     result = {"raw": out, "anchor": anchor["box"], "window": window,
               "best": best and {"format": best[0], "distance": best[1]}}
     (ROOT / "eval" / "results" / "calibration_esp_unit1.json").write_text(json.dumps(result, indent=1), encoding="utf-8")

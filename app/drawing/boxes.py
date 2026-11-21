@@ -23,6 +23,15 @@ def centre(box) -> tuple[float, float]:
     return ((box[0] + box[2]) / 2, (box[1] + box[3]) / 2)
 
 
+def iou(a, b) -> float:
+    """Intersection over union of two [x0, y0, x1, y1] boxes."""
+    ix = max(0.0, min(a[2], b[2]) - max(a[0], b[0]))
+    iy = max(0.0, min(a[3], b[3]) - max(a[1], b[1]))
+    inter = ix * iy
+    union = (a[2] - a[0]) * (a[3] - a[1]) + (b[2] - b[0]) * (b[3] - b[1]) - inter
+    return inter / union if union > 0 else 0.0
+
+
 def distance(a, b) -> float:
     (ax, ay), (bx, by) = centre(a), centre(b)
     return ((ax - bx) ** 2 + (ay - by) ** 2) ** 0.5

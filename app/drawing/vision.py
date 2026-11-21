@@ -3,7 +3,12 @@
 Box format: Argon returns boxes in the format set by reading.yaml drawing.box_format.
 CALIBRATION (PHASE_3 Amendment B8): set once from scripts/calibrate_box.py on ESP
 Unit-1 waste water transfer pumps (Part3 p.146; never a set B item).
-  Result: NOT YET CALIBRATED (placeholder {order: yx, scale: 1000}).
+  Result (21 Nov, Bhargavi confirmed): {order: yx, scale: 1000}, i.e. [ymin, xmin, ymax, xmax] 0-1000.
+  Text-layer label [0.4214, 0.6040, 0.4541, 0.6123]; model raw [489, 459, 535, 539] in crop
+  [0.2377, 0.4081, 0.6377, 0.8081]. Centre distance 0.0048 for both yx and xy (a near-centre box
+  in a square crop cannot separate axis order); IoU yx 0.44 vs xy 0.22; yx matches the label's
+  left edge, top edge and width (0.032 vs 0.033), xy turns the wide label tall. Raw output:
+  eval/results/calibration_esp_unit1.json.
 
 Flow per drawing page: text-layer anchor -> crop (0.40 of the page around it, or the
 whole page) -> Argon -> boxes to page coordinates -> verify (code). If the line size or

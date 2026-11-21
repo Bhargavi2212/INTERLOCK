@@ -27,7 +27,7 @@ drawing:
   crop_fraction: 0.40              # window around the text-layer anchor (PHASE_3 Amendments B7)
   max_image_px: 3072
   box_margin: 0.01                 # of the page, around a box when collecting text-layer words
-  box_format: {order: yx, scale: 1000}   # PLACEHOLDER until calibrated on ESP Unit-1 (Amendment B8)
+  box_format: {order: yx, scale: 1000}   # CALIBRATED 21 Nov on ESP Unit-1 (Part3 p.146; not a B item): centre distance 0.0048 (yx and xy tie), IoU yx 0.44 vs xy 0.22, yx matches the label's left/top edge and width; eval/results/calibration_esp_unit1.json
   min_name_words: 2                # name words a label must contain (besides the unit tag)
   abbreviations: {flr: floor, wtr: water, wwtr: water, pp: pump, pumps: pump, xfer: transfer, trf: transfer, tr: transfer}
   stop_words: [the, and, of, for, sg, unit, no, nos]
