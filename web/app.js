@@ -287,6 +287,7 @@ function renderFix(res) {
     html += `<p class="small">Sandbox: ${esc(f.environment_id || "none")} · ${f.reused_sandbox ? "this plant's sandbox, reused" : "new sandbox"}
       ${f.sandbox_note ? " · " + esc(f.sandbox_note) : ""} ${f.persistent === false ? " · fresh sandbox per fix" : ""}
       ${f.runs_listing ? " · earlier runs: " + esc(f.runs_listing) : ""} · ${esc(f.seconds)} s</p>
+      ${f.bundle_note ? `<p class="small">${esc(f.bundle_note)}${f.bundle_sha256_reported ? " (" + esc(f.bundle_sha256_reported.slice(0, 12)) + "…)" : ""}</p>` : ""}
       <p class="small">Agent's tries (reported by the agent from its sandbox):</p>
       <table><thead><tr><th>#</th><th>Candidate</th><th>Flagged</th><th>Newly held</th></tr></thead><tbody>${tries ||
         "<tr><td colspan=4 class='muted'>none reported</td></tr>"}</tbody></table>

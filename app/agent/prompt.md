@@ -29,4 +29,5 @@ Approved changes in the plant's register (for awareness: never undo one): {regis
 3. Stop at the first candidate with no flagged rule and no rule held that was not held in the case's
    "failing" list. If none of the allowed candidates works, refuse and say why.
 4. Answer in the required JSON: outcome "proposed" (with the fix) or "refused" (with reasons), every
-   try you ran (candidate, flagged, newly held), and the smoke results below.
+   try you ran (candidate, flagged, newly held), the smoke results, and bundle_sha256: the value the
+   checker printed on your last run, copied exactly.

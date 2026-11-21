@@ -114,8 +114,8 @@ AGENT_ANSWER = {
                                  "newly_held": {"type": "array", "items": STR}, "note": STR},
                   "required": ["n", "candidate", "flagged", "newly_held"]}},
         "reasons": {"type": "array", "items": STR},
-        "smoke": {"type": "object",
-                  "properties": {"r1_velocity": NUM, "write_blocked": {"type": "boolean"}, "runs_listing": STR}},
+        "smoke": {"type": "object", "properties": {"r1_velocity": NUM, "runs_listing": STR}},
+        "bundle_sha256": STR,
     },
-    "required": ["outcome", "fix", "tries", "reasons"],
+    "required": ["outcome", "fix", "tries", "reasons", "bundle_sha256"],
 }

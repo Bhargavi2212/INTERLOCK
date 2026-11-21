@@ -10,7 +10,7 @@ from app.agent import bundle, run as agent_run
 from tests.test_agent_recheck import stored  # noqa: F401  (fixture)
 from tests.test_drawing_pipeline import plant  # noqa: F401  (fixture)
 
-GOOD_SMOKE = {"r1_velocity": 1.86, "write_blocked": True}
+GOOD_SMOKE = {"r1_velocity": 1.86}
 THIRD_PUMP = {"outcome": "proposed",
               "fix": [{"input": "installed", "from": "2", "to": "3", "unit": "count", "why": "add a third pump"}],
               "tries": [{"n": 1, "candidate": "installed 3", "flagged": [], "newly_held": []}], "reasons": []}
@@ -34,7 +34,7 @@ class FakeAgent:
 
 
 def ans(base, smoke=GOOD_SMOKE, **kw):
-    return {**base, "smoke": smoke, **kw}
+    return {**base, "smoke": smoke, "bundle_sha256": bundle.bundle_hash(), **kw}
 
 
 def test_first_fix_new_sandbox_then_reuse(stored):
@@ -78,8 +78,9 @@ def test_persistent_off_fresh_every_time(stored, monkeypatch):
     (ans({**THIRD_PUMP, "fix": [{"input": "installed", "to": "9", "unit": "count", "why": "x"}]}), "outside the allowed levers"),
     (ans({**THIRD_PUMP, "fix": [{"input": "line_role", "to": "pump discharge", "unit": "", "why": "x"}]}), "outside the allowed levers"),
     ({"something": "else"}, "agent answer unreadable"),
-    (ans(THIRD_PUMP, smoke={"r1_velocity": 1.86, "write_blocked": False}), "bundle not read-only"),
-    (ans(THIRD_PUMP, smoke={"r1_velocity": 3.71, "write_blocked": True}), "smoke test failed"),
+    (ans(THIRD_PUMP, bundle_sha256="0" * 64), "bundle changed in the sandbox"),
+    (ans(THIRD_PUMP, bundle_sha256=""), "bundle hash not reported by the agent"),
+    (ans(THIRD_PUMP, smoke={"r1_velocity": 3.71}), "smoke test failed"),
 ])
 def test_bad_answers_refused(stored, answer, reason):
     s, change = stored
@@ -113,8 +114,15 @@ def test_bundle_only_rule_files_and_runner_works_alone(tmp_path):
     out = subprocess.run([sys.executable, "-m", "app.rules.check", str(smoke)], cwd=tmp_path,
                          capture_output=True, text=True, env={"PATH": "", "SYSTEMROOT": __import__("os").environ.get("SYSTEMROOT", "")})
     assert out.returncode == 0, out.stderr
-    r1 = json.loads(out.stdout)["results"][0]
+    printed = json.loads(out.stdout)
+    r1 = printed["results"][0]
     assert r1["rule_id"] == "R1" and round(r1["value"], 2) == 1.86
+    assert printed["bundle_sha256"] == bundle.bundle_hash()          # sandbox hash == server hash
+    (tmp_path / "app" / "rules" / "checks.py").write_bytes(fs["app/rules/checks.py"] + b"# edited")
+    edited = subprocess.run([sys.executable, "-m", "app.rules.check", str(smoke)], cwd=tmp_path,
+                            capture_output=True, text=True,
+                            env={"PATH": "", "SYSTEMROOT": __import__("os").environ.get("SYSTEMROOT", "")})
+    assert json.loads(edited.stdout)["bundle_sha256"] != bundle.bundle_hash()   # an edit is visible
 
 
 def test_fix_route_needs_access_code(api, store):
@@ -133,6 +141,7 @@ def test_off_schema_answer_is_copied_into_the_schema_then_validated(stored):
     m = FakeAgent(off_schema, copied=ans(THIRD_PUMP))
     res = agent_run.find_fix(s, m, change["change_id"])
     assert res["answer_read_by"] and res["outcome"] == "proposed" and res["recheck"]["proven"]
+    assert res["bundle_note"] == "bundle hash reported by the agent; the server re-check decides"
     assert res["raw_answer"] and "fix found" in res["raw_answer"]
     assert isinstance(res["tries"][0]["candidate"], str)
 
@@ -160,3 +169,19 @@ def test_prose_answer_goes_to_the_copy(stored):
     m = FakeAgent(None, copied=ans(THIRD_PUMP))
     res = agent_run.find_fix(s, m, change["change_id"])
     assert res["outcome"] == "proposed" and res["recheck"]["proven"]
+
+
+def test_fenced_json_is_parsed():
+    from app.reading.models import Models
+    import types
+    m = Models()
+    fenced = "```json" + chr(10) + '{"outcome": "refused"}' + chr(10) + "```"
+    inter = types.SimpleNamespace(status="completed", output_text=fenced, id="i1", environment_id="e1")
+    m._stable = m._beta = types.SimpleNamespace(interactions=types.SimpleNamespace(create=lambda **k: inter))
+    import os
+    os.environ.setdefault("MANAGED_AGENT", "agent-test"); os.environ.setdefault("MODEL_NEON", "neon-test")
+    from app import config
+    config.get_settings.cache_clear()
+    out = m.agent("p", {"type": "remote"}, None, {}, {"model_env": "MODEL_NEON", "max_total_tokens": 1,
+                                                       "timeout_s": 5, "poll_s": 1})
+    assert out["answer"] == {"outcome": "refused"}

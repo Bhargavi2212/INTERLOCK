@@ -9,10 +9,10 @@ The hash (sha256 over paths and bytes) decides sandbox renewal: a changed hash -
 from __future__ import annotations
 
 import base64
-import hashlib
 import json
 from pathlib import Path
 
+from app.rules.check import hash_files
 from app.rules.engine import load_rules
 
 APP = Path(__file__).resolve().parents[1]
@@ -29,11 +29,8 @@ def files() -> dict[str, bytes]:
 
 
 def bundle_hash(fs: dict[str, bytes] | None = None) -> str:
-    fs = fs or files()
-    h = hashlib.sha256()
-    for path in sorted(fs):
-        h.update(path.encode() + b"\0" + fs[path] + b"\0")
-    return h.hexdigest()
+    """The same algorithm the runner prints in the sandbox (app/rules/check.py hash_files)."""
+    return hash_files(fs or files())
 
 
 def sources(fs: dict[str, bytes] | None = None) -> list[dict]:

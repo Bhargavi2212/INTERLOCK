@@ -144,6 +144,9 @@ class Models:
             time.sleep(cfg["poll_s"])
             inter = beta.interactions.get(inter.id, timeout=cfg["timeout_s"])
         text = (inter.output_text or "").strip()
+        if text.startswith("```"):   # the agent fenced its JSON despite response_format (live, 21 Nov)
+            text = text.strip("`").split("\n", 1)[-1] if text.lower().startswith("```json") else text.strip("`")
+            text = text.rsplit("```", 1)[0].strip()
         if structured:
             try:
                 answer = json.loads(text)
