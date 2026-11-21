@@ -56,7 +56,9 @@ Detailed spec: `docs/specs/PHASE_1.md` (with its Amendments); plan: `docs/specs/
 
 ## Phase 2 — Upload and reading (12:50-14:15, lunch at 13:00 while things run)
 
-Status: not started
+Status: in progress
+
+Detailed spec: `docs/specs/PHASE_2.md` (with its Amendments); plan: `docs/specs/PHASE_2_PLAN.md`. **Cut-line 14:00:** anything not working moves to the first 15 minutes of phase 3; the drawing starts by 14:30.
 
 **Build:**
 - Upload screen: whole folder or several files, drag or pick; PDFs accepted, others listed as skipped with reason; per-file progress; direct to Cloud Storage by signed URL (IAM role and bucket CORS from `ARCHITECTURE.md` §1a).

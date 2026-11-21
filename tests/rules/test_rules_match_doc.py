@@ -184,6 +184,13 @@ def test_flow_aliases_normalise_to_yaml_keys():
         assert normalise(alias) in U["flow"]
 
 
+def test_count_units_match():
+    row = next(c for c in unit_rows() if c[1].startswith("count"))
+    listed = row[1].split("(")[0]
+    doc = {normalise(x) for x in listed.split(",") if x.strip()}
+    assert doc == set(U["count_units"])
+
+
 def test_atmosphere_matches():
     subtracts = re.findall(r"subtract (\d+(?:\.\d+)?)", DOC)
     assert subtracts and all(float(s) == U["atm_bar"] for s in subtracts)

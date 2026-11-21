@@ -133,8 +133,8 @@ def to_base(quantity: str, value, unit: str, cfg: dict) -> tuple[float, list[str
         return n * cfg["percent_to_fraction"], assumptions
 
     if quantity == "count":
-        if u != "count":
-            raise UnknownUnit(f"count unit '{unit}' is not 'count'")
+        if u not in cfg["count_units"]:
+            raise UnknownUnit(f"count unit '{unit}' is not one of {cfg['count_units']}")
         if not n.is_integer() or n < 0:
             raise UnknownUnit(f"count {value} is not a whole number")
         return n, assumptions

@@ -88,6 +88,7 @@ def test_pumps_into_line_missing_is_held():
     r = run_rule("R1", {"flow_per_pump": v(105, "m3/h"), "line_nb": v(100, "NB")}, bhel_bands())
     assert r.status == "held"
     assert "pumps_into_line" in r.message
+    assert "do not state in text whether the pumps share one discharge line" in r.message
 
 
 def test_role_stated_other_uses_default():

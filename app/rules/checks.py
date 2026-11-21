@@ -68,7 +68,7 @@ def r1_velocity(ins, rule_cfg, rules, doc_limits):
     elif ins.has("flow_per_pump"):
         per = ins.num("flow_per_pump")
         if not ins.has("pumps_into_line"):
-            raise HeldInput("pumps_into_line", "missing: documents do not show how many pumps run into this line")
+            raise HeldInput("pumps_into_line", "missing: documents do not state in text whether the pumps share one discharge line")
         n = ins.num("pumps_into_line")
         q = per * n
         if n > 1:

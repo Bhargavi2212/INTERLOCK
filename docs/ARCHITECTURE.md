@@ -119,7 +119,7 @@ INTERLOCK/
 
 | Path | Component | Uses a model? | Notes |
 |---|---|---|---|
-| `app/ingest/` | Files to pages: text per page, page image, drawing detection, content hash | No | PyMuPDF. Drawings = large sheets or near-empty text layer |
+| `app/ingest/` | Files to pages: text per page (with word positions), PNG for drawing pages, drawing detection, content hash | No | PyMuPDF. Drawings = large sheets or near-empty text layer; other page images on demand |
 | `app/reading/` | Steps 1-5 | Yes | Every value carries `page`, `quote`, `unit`; design-basis limits too (`RULES.md`). Extraction uses structured outputs (response schema), never hand-parsed JSON |
 | `app/drawing/` | Step 6 | Yes (Argon) | Where the PDF has a text layer, code confirms the box lands on the printed label |
 | `app/rules/` | Step 7, rule engine; `rules.yaml` mirrors `RULES.md` | **Never** | |
@@ -128,7 +128,7 @@ INTERLOCK/
 | `app/verdict/` | Step 9 | No (Hydrogen writes headlines only) | Pure function of rule results, disagreements, clashes |
 | `app/agent/` | Steps 10-11 | Yes (Managed Agent, Neon) | Sandbox per plant; agent config sets `max_total_tokens`; server re-check mandatory |
 | `app/jobs/` | Background jobs and progress | No | In-process; state in Firestore |
-| `app/store/` | Firestore + Cloud Storage access | No | |
+| `app/store/` | Firestore + Cloud Storage access | No | Backends chosen by `STORE`: `gcp` (default) and `memory` (tests) |
 | `app/api/` | HTTP API | No | FastAPI |
 | `web/` | One screen | No | Served by the same service |
 | `tests/` | pytest; `tests/rules/` mirrors every `RULES.md` test case | | |
@@ -168,12 +168,13 @@ Argon's input limit is 1,048,576 tokens. Before the long read, count tokens. **T
 | Store | What |
 |---|---|
 | Cloud Storage `plants/{plant_id}/files/` | Uploaded PDFs |
-| Cloud Storage `plants/{plant_id}/pages/{n}.json` and `{n}.png` | Page text and page image (too large for Firestore's 1 MiB document limit) |
+| Cloud Storage `plants/{plant_id}/pages/{n}.json` and `{n}.png` | Page text with word positions; PNG for drawing pages only (too large for Firestore's 1 MiB document limit) |
 | Cloud Storage `plants/{plant_id}/changes/{change_id}/drawing.png` | Highlighted drawing |
 | Firestore `plants/{plant_id}` | Name, files (relative path, size, hash, status), page count, ingest status, agent sandbox id (`environment_id`) and last interaction id |
 | Firestore `plants/{plant_id}/changes/{change_id}` | Change text, found pages, values with quotes, rule results, verdict |
 | Firestore `plants/{plant_id}/register/{entry_id}` | Approved changes. **Only source of truth.** The agent sandbox gets a read-only copy per run |
-| Firestore `jobs/{id}` | Job type, state, progress, result |
+| Firestore `jobs/{id}` | Job type, state, progress, steps with seconds, result |
+| Firestore `change_index/{change_id}` | `plant_id`, so `/changes/{id}` needs no plant id |
 
 Every value record: `{item, attribute, value, unit, source, file, page, quote, evidence_ok}`. `source` is `document`, `change` or `fix` (`RULES.md`, Inputs).
 

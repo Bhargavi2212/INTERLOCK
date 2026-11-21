@@ -1,5 +1,7 @@
 # Phase 2 spec — Upload and reading
 
+**The Amendments section at the end overrides the text above it.**
+
 Owner docs: `ARCHITECTURE.md` §1, §1a, §3, §4, §5, §6, §7, §8 (flow, upload, model jobs, size limit, data, API, deployment, security), `RULES.md` (inputs, verdict), `EVAL.md` §1-§2 (keys before runs), `PHASES.md` (phase 2), `CLAUDE.md`. Engine contract: `docs/specs/PHASE_1.md` §1-§2 and its Amendments. Time: 12:50-14:15 (lunch 13:00 while things run).
 
 ## Goal
@@ -251,3 +253,39 @@ Step 6 drawing (phase 3); the agent, fix, approve and register writes (phase 4);
 - [ ] A BHEL change returns a verdict in under 90 s on the live URL (time in the commit message; the number itself goes to `EVAL.md` §5 in phase 5).
 - [ ] The floor-wash change shows the scope/data-sheet disagreement and BLOCK.
 - [ ] `pytest -q` green; no key in code, logs or commits; `PHASES.md` phase 2 `done (phase-2-reading)`, tag pushed, deployed, `/health` shows the tag's sha.
+
+
+---
+
+## Amendments (approved 21 Nov; these override the text above)
+
+From the phase 2 review and Bhargavi's decisions. Plan: `docs/specs/PHASE_2_PLAN.md`.
+
+**A1 Shared discharge (R1).** In phase 2 the shared header is not taken from text: with no checked `shared_discharge` value, `pumps_into_line` is missing and R1 is **held** with the message "documents do not state in text whether the pumps share one discharge line". Phase 3 adds drawing evidence: a value read from a P&ID carries `{file, page, box}`, and the code evidence check passes only if the box is on that page and contains the matching text-layer label (e.g. "200NB"). CLAUDE.md and RULES.md get that rule in phase 3, not now. **No values from answer keys in code, ever.**
+
+**A2 Counts.** RULES.md Units: count units `count`, `nos`, `nos.`, `no`, `number` (case and dots ignored). Argon gives a count as the digits printed in the quote (e.g. "2" from "Two (2W) nos."), so the value-in-quote check passes; a count with no digits in its quote is left out.
+
+**A3 Demo scenario test (§10) uses the 200 NB case** from fake checked values: 1W+1S on Part1 p.43; 2 working, 2 installed, 105 m3/h on Part4 p.57; 200 NB; D5-200 bands; change 2W+1S. Expected: disagreement on working/arrangement; R1 after 1.86 m/s OK with the information note **when a checked shared_discharge value is supplied** (test fake), and **held** with the A1 message when it is absent; R2 after flagged (installed 2 < 2 + 1); R3 held; verdict BLOCK (from the disagreement and R2). §6.9: "as issued" results are shown alongside for the engineer, with no named finding.
+
+**A4 Time.** The long read runs on the **raw change text** in parallel with Neon's understanding (it does not wait for it); code search starts when the understanding returns. Carbon and Hydrogen run in parallel. Every model call starts at thinking `low`; a level is raised only if set A needs it, recorded in the commit. Seconds per step are recorded in `steps[]` and printed by `run_change.py`.
+
+**B5 Docs.** `ARCHITECTURE.md`: PNG for drawing pages only (others on demand); Firestore `change_index/{change_id} -> plant_id`; store backends chosen by `STORE`.
+
+**B6 Config.** `config.py` gains `get_access_code()` **and** `STORE` (default `gcp`); `.env.example` gains `STORE`.
+
+**B7 Token count.** Use the installed SDK's `client.models.count_tokens` for `MODEL_ARGON`; if it fails, characters ÷ 4 marked "estimated". (No docs MCP is connected.)
+
+**B8 Thresholds.** The evidence check's word-match fraction (start 0.9) lives in `reading.yaml` with the drawing thresholds, not in Python.
+
+**C9 Note for phase 4.** Approved changes must shape the plant's current state, not only the clash check.
+
+**C (register overlay).** `scenario.py` takes approved register values as an **overlay on the as-issued inputs** (source `register`, citing the entry); empty in phase 2, used in phase 4.
+
+**C11 Rules per item.** For pump items, R1-R3 always run; Neon's `rules` list is ignored for them (a rule with nothing to check comes back held, visibly).
+
+**Trims.**
+- `app/store/local.py` dropped. Backends: `gcp` and `memory`. `scripts/ingest_local.py` and `scripts/run_change.py` use the **gcp store with Bhargavi's ADC login** (`gcloud auth application-default login`); "local" means the code runs on her laptop, the data lives in her project.
+- The screen is built **last and plain**: it shows the change result clearly; polish waits for phase 6.
+- **Phase 2 cut-line 14:00:** anything not working then moves to the first 15 minutes of phase 3; the drawing starts by 14:30.
+
+**Build order** (replaces §11): 1 store (memory, gcp), access code, `/plants`, `/files`, ingest job, minimal upload page → deploy by ~13:20; 2 search, evidence, scenario, clash with tests; 3 `models.py`, understand, long read, same-item, values, `run_change.py`; 4 explain, headlines, pipeline job, `/changes`, `/jobs`, result screen (plain) → deploy; 5 tune on set A only.
