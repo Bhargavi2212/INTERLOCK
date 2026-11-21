@@ -212,7 +212,8 @@ def doc_limits(checked_limits: list[dict]) -> list[DocLimit]:
 
 def build_scenario(checked_values: list[dict], checked_shared: list[dict], changes: list[dict],
                    change_text: str, register_entries: list[dict] | None = None,
-                   drawing_pages: set | None = None, understanding: dict | None = None) -> dict:
+                   drawing_pages: set | None = None, understanding: dict | None = None,
+                   fix_values: dict | None = None) -> dict:
     if drawing_pages:
         checked_values = drop_text_line_facts(checked_values, drawing_pages)
         checked_shared = drop_text_line_facts([{**s, "input": "shared_discharge"} for s in checked_shared],
@@ -223,7 +224,7 @@ def build_scenario(checked_values: list[dict], checked_shared: list[dict], chang
     merged, disagreements, sources = merge_values(checked_values, touched)
 
     issued_vals = {**merged, **register_values(register_entries or [], understanding)}
-    after_vals = {**issued_vals, **change_values(changes, change_text)}
+    after_vals = {**issued_vals, **change_values(changes, change_text), **(fix_values or {})}
 
     shared, shared_src = _shared(checked_shared)
     return {
@@ -234,3 +235,19 @@ def build_scenario(checked_values: list[dict], checked_shared: list[dict], chang
         "sources": sources,
         "shared_discharge": shared,
     }
+
+
+def add_drawing_assumption(results: list, shared_readings: list[dict], sc: dict) -> list:
+    """When R1 used the drawing's shared header, say so on R1 (pipeline and server re-check alike)."""
+    used = [r for r in shared_readings if r.get("evidence_ok") and r.get("assumption")]
+    if sc.get("shared_discharge") is not None and used:
+        for r in results:
+            if r.rule_id == "R1" and r.status != "held" and used[0]["assumption"] not in r.assumptions:
+                r.assumptions.append(used[0]["assumption"])
+    return results
+
+
+def fix_values_from(fix: list[dict]) -> dict:
+    """A proposed fix ([{input, to, unit, why}]) as rule inputs with source "fix"."""
+    return {f["input"]: Value(f["to"], f.get("unit", "") or "", quote=f.get("why", "agent fix"), source="fix")
+            for f in fix}

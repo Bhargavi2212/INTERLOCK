@@ -16,7 +16,7 @@ from app.drawing.vision import run_drawing
 from app.reading.evidence import check_limit, check_value, page_texts, quote_on_page
 from app.reading.longread import long_read
 from app.reading.sameitem import same_item
-from app.reading.scenario import build_scenario, doc_limits
+from app.reading.scenario import add_drawing_assumption, build_scenario, doc_limits
 from app.reading.search import merge_candidates, search_pages
 from app.reading.settings import reading_settings
 from app.reading.understand import understand
@@ -129,11 +129,7 @@ def check_change(store, models, plant_id: str, change_id: str, text: str, progre
         sc = build_scenario(values, shared, u["changes"], text, register, drawing_pages, u)
         lims = doc_limits(limits)
         issued_r, after_r = run_rules(sc["issued"], lims), run_rules(sc["after"], lims)
-        used = [r for r in d_shared if r.get("evidence_ok") and r.get("assumption")]
-        if sc.get("shared_discharge") is not None and used:
-            for r in issued_r + after_r:
-                if r.rule_id == "R1" and r.status != "held":
-                    r.assumptions.append(used[0]["assumption"])
+        add_drawing_assumption(issued_r + after_r, d_shared, sc)
         return sc, issued_r, after_r
     sc, issued, after = steps.run("rules", rules)
     clashes = steps.run("clash", lambda: find_clashes(register, u, sc["after_values"]))
