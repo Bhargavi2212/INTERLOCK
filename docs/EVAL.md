@@ -11,8 +11,9 @@ How we know Interlock works, measured against simple baselines, on inputs we did
 3. **Same input, same scoring for every system.**
 4. **Repeat runs:** set E runs 3 times per case for Interlock and for the one-call baseline; we report the worst run and the spread. Sets A, B and F run once.
 5. **When runs happen:** the eval runner starts in the background at the start of phase 4, so phase 5 only collects results and fills the table.
-6. **Raw outputs** of every run are committed to `eval/results/` as small JSON, so the evidence behind each number can be checked. The table in §5 is the only home of the results.
-7. **Report failures in the table**, not in a footnote.
+6. **Eval plant ≠ demo plant.** All measured runs use plant "BHEL files" (`27d049ccd64f`, re-ingested after the pre-phase-4 fixes); its register must be empty (the runner refuses otherwise), and every result file carries `plant_id`. Demos and approvals happen on another plant (`9eeb30bca0d5`), so approved changes never shape a measured run.
+7. **Raw outputs** of every run are committed to `eval/results/` as small JSON, so the evidence behind each number can be checked. The table in §5 is the only home of the results.
+8. **Report failures in the table**, not in a footnote.
 
 ## 2. Test sets
 
@@ -75,7 +76,7 @@ Counts use `"unit": "count"`. `expected_verdict` is BLOCK, REVIEW or no conflict
 
 | Baseline | What it is |
 |---|---|
-| **Keyword search** | Find the change's item name as typed, on every page |
+| **Keyword search** | Find the change's item name on every page. A free-text change has no item field, so the item string is Neon's `item` exactly as returned (spaces and case ignored), with no other names, no long read and no same-item check. It measures what the long read, names and same-item check add |
 | **One Gemini call** | One Argon call with all pages and the change: "list every page about this item, its values, and whether the change is safe" |
 | **One Gemini call doing the math** | The same call asked to compute the set F calculations |
 | **By hand** | Bhargavi does one set-A change with a PDF reader and Ctrl-F, timed. One expert, one change, disclosed as the builder |
