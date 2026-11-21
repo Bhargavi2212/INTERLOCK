@@ -1,0 +1,58 @@
+# Every limit, default and unit factor the rule engine uses.
+# Mirrors docs/RULES.md exactly; tests/rules/test_rules_match_doc.py enforces it.
+# confirm: true = default not yet confirmed by Bhargavi (RULES.md confirmed table).
+version: 1
+tolerance_rel: 1.0e-9
+rules:
+  R1:
+    name: Pipe velocity
+    live: true
+    defaults:
+      max_velocity: {value: 3.0, unit: m/s, confirm: true}
+    band_line_role: pump discharge
+    solids_services: {value: [slurry, sludge, ash, waste water, backwash], confirm: true}
+    schedule_id_mm:
+      100: {sch40: 102.3, sch80: 97.2}
+      150: {sch40: 154.1, sch80: 146.3}
+      200: {sch40: 202.7, sch80: 193.7}
+  R2:
+    name: Standby available
+    live: true
+    defaults:
+      standby_required: {value: 1, unit: count, confirm: true}
+  R3:
+    name: Sump cycle time
+    live: true
+    defaults:
+      max_starts_per_hour: {value: 6, unit: 1/h, confirm: true}
+  R4:
+    name: Relief valve setting
+    live: false
+    defaults:
+      operating_to_set_max: {value: 0.90, unit: ratio, confirm: true}
+  R5:
+    name: Design pressure
+    live: false
+    defaults:
+      margin_factor: {value: 1.10, unit: ratio, confirm: true}
+      margin_adder: {value: 1.0, unit: bar, confirm: true}
+    water_services: {value: [water], confirm: true}
+  R6:
+    name: Chemical dose within pump range
+    live: false
+    defaults: {}
+units:
+  atm_bar: 1.013
+  head_m_to_bar_per_sg: 0.0981
+  # keys are normalised: lower-case, no spaces or dots, "hr" -> "h"
+  flow: {m3/h: 1, cum/h: 1, m3/d: 0.041666666666667, l/s: 3.6, l/min: 0.06, l/h: 0.001}
+  pressure: {bar: 1, kg/cm2: 0.980665, kpa: 0.01, mpa: 10, psi: 0.0689476}
+  nb_to_m: 0.001
+  mm_to_m: 0.001
+  inch_to_m: 0.0254
+  nps_to_nb: {2: 50, 3: 80, 4: 100, 6: 150, 8: 200, 10: 250, 12: 300}
+  volume: {m3: 1, cum: 1}
+  concentration: {mg/l: 1, ppm: 1}
+  density: {kg/l: 1}
+  velocity: {m/s: 1}
+  percent_to_fraction: 0.01

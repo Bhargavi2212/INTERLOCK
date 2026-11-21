@@ -51,5 +51,6 @@ Pinned in `requirements.txt`.
 | google-cloud-firestore | Plants, changes, register, jobs |
 | google-cloud-storage | Uploaded PDFs, page text and images |
 | pyyaml | `rules.yaml` |
+| pymupdf | PDF text, page images, text positions |
 | python-dotenv | Loads `.env` for local scripts |
 | pytest, httpx | Tests |
