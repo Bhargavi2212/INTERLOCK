@@ -122,3 +122,12 @@ def test_change_arrangement_never_sets_standby():
     assert sc["after"]["R2"]["working"].value == 3
     r2 = next(r for r in run_rules(sc["after"], []) if r.rule_id == "R2")
     assert r2.status == "flagged"
+
+
+def test_one_working_pump_is_one_pump_into_the_line():
+    vals = [d("arrangement", "1W+1S", "", "Part1.pdf", 43), d("working", "1", "nos", "Part4.pdf", 56),
+            d("flow_per_pump", "20", "m3/hr", "Part4.pdf", 56), d("line_nb", "50", "NB", "Part3.pdf", 146)]
+    sc = build_scenario(vals, [], [], "")  # no shared_discharge value at all
+    assert sc["issued"]["R1"]["pumps_into_line"].value in ("1", 1)
+    r1 = next(r for r in run_rules(sc["issued"], LIMITS) if r.rule_id == "R1")
+    assert r1.status == "flagged" and round(r1.value, 2) == 2.83  # 20 m3/h in 50 NB

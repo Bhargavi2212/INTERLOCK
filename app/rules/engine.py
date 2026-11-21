@@ -33,6 +33,12 @@ INPUT_QUANTITY = {
 }
 
 
+# Physical quantities that must be > 0 (else held, naming the input). Gauge pressure
+# (0 bar(g) and vacuum are real) and counts (0 standby is real) are not in this set.
+POSITIVE_QUANTITIES = {"flow", "nb", "diameter", "volume", "concentration", "strength", "density",
+                       "velocity", "head"}
+
+
 @lru_cache(maxsize=4)
 def load_rules(path: str | None = None) -> dict:
     with open(path or RULES_PATH, encoding="utf-8") as f:
@@ -93,15 +99,20 @@ class Inputs:
         quantity = quantity or INPUT_QUANTITY[name]
         if quantity == "ratio":
             try:
-                return float(v.value)
+                number = float(v.value)
             except (TypeError, ValueError):
                 raise HeldInput(name, f"'{v.value}' is not a number") from None
+            if number <= 0:
+                raise HeldInput(name, f"must be > 0 (got {number:g})")
+            return number
         if not str(v.unit or "").strip():
             raise HeldInput(name, "a number with no unit")
         try:
             number, assumptions = to_base(quantity, v.value, v.unit, self.cfg)
         except UnknownUnit as e:
             raise HeldInput(name, f"unit '{v.unit}' not usable ({e})") from None
+        if quantity in POSITIVE_QUANTITIES and number <= 0:
+            raise HeldInput(name, f"must be > 0 (got {number:g} {v.unit})")
         self.assumptions.extend(f"{name}: {a}" for a in assumptions)
         return number
 

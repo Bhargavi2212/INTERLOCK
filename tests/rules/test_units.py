@@ -164,3 +164,18 @@ def test_counts_in_text(ucfg):
     from app.rules.units import counts_in_text
     assert counts_in_text("Number required Two (1W+1S) nos.", ucfg) >= {1.0, 2.0}
     assert 3.0 in counts_in_text("Three (2W+1S) nos.", ucfg)
+
+
+@pytest.mark.parametrize("text,expected", [
+    ("3X100%", {"installed": 3, "working": 1, "standby": 2}),
+    ("2x50%", {"installed": 2, "working": 2, "standby": 0}),
+    ("3 X 50 %", {"installed": 3, "working": 2, "standby": 1}),
+])
+def test_percent_arrangement(text, expected):
+    assert parse_arrangement(text) == expected
+
+
+@pytest.mark.parametrize("text", ["2X40%", "1X0%"])
+def test_percent_arrangement_cannot_cover(text):
+    with pytest.raises(UnknownUnit):
+        parse_arrangement(text)

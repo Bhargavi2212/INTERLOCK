@@ -50,8 +50,11 @@ def proven(before, after, clashes) -> dict:
     Notes never block.
     """
     held_before = {r.rule_id for r in before if r.status == "held"}
+    after_ids = {r.rule_id for r in after}
+    missing = [f"{rid} was not re-run on the fix" for rid in sorted({r.rule_id for r in before} - after_ids)]
     reasons = [f"still flagged: {r.message}" for r in after if r.status == "flagged"]
     reasons += [f"newly held: {r.message}" for r in after
                 if r.status == "held" and r.rule_id not in held_before]
     reasons += [_clash_reason(c) for c in clashes]
+    reasons += missing
     return {"proven": not reasons, "reasons": reasons}

@@ -122,8 +122,10 @@ def build_inputs(values: dict, shared, shared_src: dict | None) -> dict:
         except UnknownUnit:
             working = None
 
-    # R1 pumps into the line
-    if shared is True and working is not None:
+    # R1 pumps into the line (one working pump: one pump, sharing does not matter)
+    if _count(working) == 1:
+        by_rule["R1"]["pumps_into_line"] = working
+    elif shared is True and working is not None:
         by_rule["R1"]["pumps_into_line"] = working
     elif shared is False and shared_src:
         by_rule["R1"]["pumps_into_line"] = Value(1, "count", file=shared_src["file"], page=int(shared_src["page"]),

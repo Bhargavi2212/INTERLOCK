@@ -112,3 +112,8 @@ def test_demo_case_end_to_end():
 def test_rule_results_serialise():
     r = run_rule("R1", {"flow_total": v(105, "m3/h"), "line_nb": v(100, "NB")}, bhel_bands())
     json.dumps(r.to_dict())
+
+
+def test_proven_refuses_rule_missing_after_fix():
+    out = proven([rr("R1", "flagged"), rr("R3", "held")], [rr("R1", "OK")], [])
+    assert not out["proven"] and any("R3 was not re-run" in r for r in out["reasons"])

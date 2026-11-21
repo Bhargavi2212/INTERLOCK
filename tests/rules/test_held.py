@@ -1,3 +1,5 @@
+import pytest
+
 from app.rules import run_rule, run_rules
 from app.rules.model import Disputed
 from tests.rules.conftest import bhel_bands, v
@@ -59,3 +61,37 @@ def test_run_rules_live_only():
 def test_no_guessing_every_result_has_formula_and_inputs():
     r = run_rule("R1", BASE, bhel_bands())
     assert r.formula and r.inputs == BASE
+
+
+@pytest.mark.parametrize("rule,inputs,name", [
+    ("R1", {"flow_total": v(0, "m3/h"), "line_nb": v(100, "NB")}, "flow_total"),
+    ("R1", {"flow_total": v(105, "m3/h"), "line_nb": v(0, "NB")}, "line_nb"),
+    ("R1", {"flow_total": v(105, "m3/h"), "line_id": v(-5, "mm")}, "line_id"),
+    ("R3", {"volume": v(0, "m3"), "q_out": v(60, "m3/h"), "q_in": v(30, "m3/h")}, "volume"),
+    ("R6", {"dose": v(2, "mg/L"), "flow": v(500, "m3/h"), "strength": v(0, "% w/v"),
+            "pump_min": v(1, "L/h"), "pump_max": v(5, "L/h")}, "strength"),
+    ("R6", {"dose": v(2, "mg/L"), "flow": v(500, "m3/h"), "strength": v(10, "% w/w"), "density": v(0, "kg/L"),
+            "pump_min": v(1, "L/h"), "pump_max": v(5, "L/h")}, "density"),
+])
+def test_non_positive_physical_quantity_is_held(rule, inputs, name):
+    r = run_rule(rule, inputs)  # never ZeroDivisionError
+    assert r.status == "held" and name in r.message and "must be > 0" in r.message
+
+
+def test_zero_gauge_pressure_and_zero_standby_allowed():
+    r = run_rule("R5", {"max_suction": v(0, "bar(g)"), "shutoff_head": v(9.0, "bar(g)"), "design": v(10, "bar(g)")})
+    assert r.status == "OK"
+    r = run_rule("R2", {"installed": v(2, "count"), "working": v(2, "count"), "standby_required": v(0, "count")})
+    assert r.status == "OK"
+
+
+def test_percent_arrangement_gives_installed_when_missing():
+    r = run_rule("R2", {"arrangement": v("3X100%")})
+    assert r.status == "OK"  # installed 3 >= working 1 + standby 2
+    assert any("installed count taken from the arrangement" in a for a in r.assumptions)
+
+
+def test_arrangement_not_parsed_when_not_needed():
+    r = run_rule("R2", {"installed": v(2, "count"), "working": v(1, "count"),
+                        "standby_required": v(1, "count"), "arrangement": v("not an arrangement")})
+    assert r.status == "OK"

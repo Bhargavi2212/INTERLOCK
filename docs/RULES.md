@@ -22,7 +22,7 @@ Live in the demo today: **R1, R2, R3**. R4-R6 are built and unit-tested; wired l
 
 Every result carries: `rule_id`, `status`, `value`, `unit`, `limit`, `limit_source`, `formula`, `inputs`, `message`, `assumptions`, `notes` (information only; never changes the status).
 
-**Inputs.** Each input carries `source`, `file`, `page`, `quote`, `unit`. `source` is `document` (read from a page; must pass the evidence check), `change` (from the change text), `fix` (from an agent fix) or `register` (an approved change, overlaid on the as-issued values); for `change`, `fix` and `register`, `quote` is that text (or the register entry) and `file`/`page` are empty. Text and yes/no inputs (`service`, `line_role`, `schedule`, `arrangement`, `volume_is_total`) may have an empty unit, and so may `sg` (specific gravity, dimensionless); any other number with an empty unit is **held**.
+**Inputs.** Each input carries `source`, `file`, `page`, `quote`, `unit`. `source` is `document` (read from a page; must pass the evidence check), `change` (from the change text), `fix` (from an agent fix) or `register` (an approved change, overlaid on the as-issued values); for `change`, `fix` and `register`, `quote` is that text (or the register entry) and `file`/`page` are empty. Text and yes/no inputs (`service`, `line_role`, `schedule`, `arrangement`, `volume_is_total`) may have an empty unit, and so may `sg` (specific gravity, dimensionless); any other number with an empty unit is **held**. A physical quantity ≤ 0 (flow, size, diameter, volume, concentration, strength, density, velocity, head, SG) is **held**, naming the input; gauge pressure and counts may be 0.
 
 **Phrase lists** (`solids_services`, `water_services`, the pump-discharge line role) match case-insensitively as **whole phrases** bounded by word boundaries, never as bare substrings (`ash` does not match `wash`).
 
@@ -32,7 +32,7 @@ Every result carries: `rule_id`, `status`, `value`, `unit`, `limit`, `limit_sour
 - Otherwise any **held** result → **REVIEW**
 - Otherwise → **No conflicts found in N pages checked** (never "PASS")
 
-**Proven (a proposed fix):** the server re-runs every live rule and the register check on the fixed values. Proven = no **flagged** results, no **new held** results (held results that were already held before the fix may remain), and no register clash. Information-only notes (such as velocity below a range's lower value) never block.
+**Proven (a proposed fix):** the server re-runs every live rule and the register check on the fixed values. Proven = no **flagged** results, no **new held** results (held results that were already held before the fix may remain), and no register clash. Information-only notes (such as velocity below a range's lower value) never block. A rule that ran before the fix but not after it is a reason, so the fix is not proven.
 
 ## Numbers
 
@@ -157,7 +157,7 @@ Unknown units make the input **held**, never guessed. Superscripts and spacing a
 | Diameter | stated internal diameter in inches | x0.0254 m |
 | | stated internal diameter in mm | ÷1000 m |
 | Volume | m3, cum | x1 m3 |
-| Count | count, nos, nos., no, number (case and dots ignored); a count is stated in its quote as digits or as a number word one to twelve ("Two" = 2), and when the quote has an arrangement NW+MS, installed = N + M ("Three (2W+1S) nos." → installed 3); arrangements `NW+MS` or `NW` for any N, M (e.g. 1W+2S, 3W) give working and standby counts; anything else is unknown | dimensionless |
+| Count | count, nos, nos., no, number (case and dots ignored); a count is stated in its quote as digits or as a number word one to twelve ("Two" = 2), and when the quote has an arrangement NW+MS, installed = N + M ("Three (2W+1S) nos." → installed 3); arrangements `NW+MS` or `NW` for any N, M (e.g. 1W+2S, 3W) give working and standby counts; `NXP%` (e.g. 3X100%, 2X50%) gives installed N, working ceil(100/P), standby N − working, parsed only when the arrangement is needed; anything else is unknown | dimensionless |
 | Concentration | mg/L, ppm | x1 mg/L |
 | Strength | % w/w, % w/v | fraction (10% → 0.10). A % with neither w/w nor w/v stated → **held** |
 | Density | kg/L | x1 kg/L |

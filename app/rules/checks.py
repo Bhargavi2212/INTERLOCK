@@ -144,15 +144,20 @@ def r1_velocity(ins, rule_cfg, rules, doc_limits):
 def r2_standby(ins, rule_cfg, rules, doc_limits):
     tol = _tol(rules)
     assumptions = []
-    installed = ins.num("installed")
-
     arr = None
-    if ins.has("arrangement"):
+    needed = not (ins.has("installed") and ins.has("working") and ins.has("standby_required"))
+    if ins.has("arrangement") and needed:
         text = ins.text("arrangement")
         try:
             arr = parse_arrangement(text)
         except UnknownUnit as e:
             raise HeldInput("arrangement", str(e)) from None
+
+    if ins.has("installed") or arr is None or "installed" not in arr:
+        installed = ins.num("installed")
+    else:
+        installed = float(arr["installed"])
+        assumptions.append("installed count taken from the arrangement")
 
     if ins.has("working"):
         working = ins.num("working")

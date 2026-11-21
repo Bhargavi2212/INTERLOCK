@@ -4,6 +4,7 @@ this file holds only parsing. Unknown unit -> UnknownUnit (the engine makes it h
 
 from __future__ import annotations
 
+import math
 import re
 
 SUPERSCRIPTS = str.maketrans({"³": "3", "²": "2", "¹": "1"})
@@ -161,15 +162,25 @@ def to_base(quantity: str, value, unit: str, cfg: dict) -> tuple[float, list[str
 
 
 ARRANGEMENT = re.compile(r"^(\d+)w(?:\+(\d+)s)?$")
+PERCENT_ARRANGEMENT = re.compile(r"^(\d+)x(\d+(?:\.\d+)?)%$")
 
 
 def parse_arrangement(text) -> dict[str, int]:
-    """'2W+1S' -> {'working': 2, 'standby': 1}; '3W' -> standby 0. Else UnknownUnit."""
+    """'2W+1S' -> {'working': 2, 'standby': 1}; '3W' -> standby 0;
+    'NXP%' (e.g. '3X100%', '2X50%') -> installed N, working ceil(100/P), standby N - working.
+    Else UnknownUnit."""
     s = re.sub(r"\s", "", str(text)).lower()
     m = ARRANGEMENT.match(s)
-    if not m:
-        raise UnknownUnit(f"arrangement '{text}' is not NW+MS or NW")
-    return {"working": int(m.group(1)), "standby": int(m.group(2) or 0)}
+    if m:
+        return {"working": int(m.group(1)), "standby": int(m.group(2) or 0)}
+    m = PERCENT_ARRANGEMENT.match(s)
+    if m:
+        installed, pct = int(m.group(1)), float(m.group(2))
+        working = math.ceil(100 / pct) if pct > 0 else installed + 1
+        if working > installed:
+            raise UnknownUnit(f"arrangement '{text}': {installed} pumps of {pct:g}% cannot cover 100%")
+        return {"installed": installed, "working": working, "standby": installed - working}
+    raise UnknownUnit(f"arrangement '{text}' is not NW+MS, NW or NXP%")
 
 
 def matches_phrase(text, phrases) -> str | None:
