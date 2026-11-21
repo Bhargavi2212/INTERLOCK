@@ -1,7 +1,7 @@
 {
  "id": "A2",
  "author": "Claude (drafted from text search and the PDF text layer, no Gemini; confirmed by Bhargavi)",
- "written_at": "12:55",
+ "written_at": "12:42",
  "change": "PT filter backwash pumps: reduce from three pumps to two.",
  "expected_pages": [
   {
@@ -15,6 +15,10 @@
   {
    "file": "Part4.pdf",
    "page": 4
+  },
+  {
+   "file": "Part4.pdf",
+   "page": 107
   }
  ],
  "expected_values": [
@@ -31,9 +35,23 @@
    "unit": "",
    "file": "Part4.pdf",
    "page": 4
+  },
+  {
+   "attribute": "arrangement (data sheet 19.2, 'Gravity Filter Back wash water pumps')",
+   "value": "2X100%",
+   "unit": "",
+   "file": "Part4.pdf",
+   "page": 107
+  },
+  {
+   "attribute": "installed pumps",
+   "value": "2",
+   "unit": "count",
+   "file": "Part4.pdf",
+   "page": 107
   }
  ],
- "documents_disagree": false,
- "expected_verdict": "REVIEW",
- "notes": "Look-alike to decide: Part4 p.107 item 19.2 'Gravity Filter Back wash water pumps Two (2X100%)' (DM plant section). If Bhargavi judges it the same pumps, add the page and set documents_disagree true (3 vs 2) and verdict BLOCK. No pump flow or line size stated, so R1 held; 2 installed with 1 working, 1 standby -> R2 OK; R3 held."
+ "documents_disagree": true,
+ "expected_verdict": "BLOCK",
+ "notes": "Same item, traced by function: p.107 sits in the Pretreatment Plant section (Part4 p.101) and its pumps evacuate the backwash pit; scope p.85 pumps run from the backwash pit to the clarifier stilling chambers; flow diagram p.4 shows FILTER BACKWASH TRANSFER PUMPS (3X100%) to the stilling chamber. Backwash supply is by gravity from the overhead filtered water tank (Part1 p.91), so no other backwash pump exists. Scope and diagram say 3, data sheet says 2: documents disagree on the count the change touches -> BLOCK. No flow or line size stated -> R1 held; R3 held."
 }
