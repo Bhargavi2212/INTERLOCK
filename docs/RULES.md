@@ -6,7 +6,7 @@ The rule engine never calls a model. Same inputs, same outputs, every run.
 
 **Where a limit comes from, in order:**
 1. **The plant's own documents**, when they state it (the result cites that page). Example: BHEL D5-200 sets pump discharge velocity at 1.8-2.4 m/s for 50-150 mm pipe. Argon reads these design-basis limits in phase 2 as values with `page`, `quote` and `unit`, through the same evidence check as every other value.
-2. **The default here**, marked **CONFIRM** until Bhargavi confirms or corrects it in phase 1 (recorded in the table at the end of this file). Used only when no document limit is found for that rule, and the result says so.
+2. **The default here**, marked **CONFIRM** until Bhargavi confirms or corrects it in phase 1 (recorded in the table at the end of this file). Used only when no document limit is found for that rule and that case (e.g. no band covers the line size), and the result says so.
 
 Live in the demo today: **R1, R2, R3**. R4-R6 are built and unit-tested; wired live only if phase 2 finishes early.
 
@@ -20,11 +20,15 @@ Live in the demo today: **R1, R2, R3**. R4-R6 are built and unit-tested; wired l
 | **flagged** | All inputs present, check failed. Message cites the rule, the limit's source and the input pages |
 | **held** | A required input is missing or ambiguous. Message names it |
 
-Every result carries: `rule_id`, `status`, `value`, `limit`, `limit_source`, `formula`, `inputs` (each with `page`, `quote`, `unit`), `message`, `assumptions`.
+Every result carries: `rule_id`, `status`, `value`, `unit`, `limit`, `limit_source`, `formula`, `inputs`, `message`, `assumptions`, `notes` (information only; never changes the status).
+
+**Inputs.** Each input carries `source`, `file`, `page`, `quote`, `unit`. `source` is `document` (read from a page; must pass the evidence check), `change` (from the change text) or `fix` (from an agent fix); for `change` and `fix`, `quote` is that text and `file`/`page` are empty. Text and yes/no inputs (`service`, `line_role`, `schedule`, `arrangement`, `volume_is_total`) may have an empty unit; a number with an empty unit is **held**.
+
+**Phrase lists** (`solids_services`, `water_services`, the pump-discharge line role) match case-insensitively as **whole phrases** bounded by word boundaries, never as bare substrings (`ash` does not match `wash`).
 
 ## Verdict
 
-- Any **flagged** result, documents that disagree about a changed value, or a **clash with an approved change in the register** → **BLOCK**
+- Any **flagged** result, documents that disagree about a changed value (the caller passes only disagreements about values the change touches), or a **clash with an approved change in the register** → **BLOCK**
 - Otherwise any **held** result → **REVIEW**
 - Otherwise → **No conflicts found in N pages checked** (never "PASS")
 
@@ -52,7 +56,8 @@ Every result carries: `rule_id`, `status`, `value`, `limit`, `limit_source`, `fo
 - **Limits:**
   - From the plant's documents when stated (BHEL D5-200, pump discharge: 50-150 mm 1.8-2.4 m/s; 200 mm and above 2.1-2.5 m/s). The **upper value is the check**; below the lower value is shown as information only.
   - Default when the documents state none: max 3.0 m/s (**CONFIRM**).
-  - Low velocity is flagged only for solids-bearing service (service type is a required input for the low check; unstated → low check held).
+  - Document bands apply to **pump discharge** lines (input `line_role`). Role unstated → the band is applied anyway (stricter), with the assumption "line assumed to be pump discharge". The default is used only when the role is stated as something else, or no band covers the line size.
+  - **Low side:** service matching a `solids_services` phrase and v below the band's lower value → **flagged**. Not solids → note "below the documents' lower value, information only". Service unstated → the note gives both facts (below the lower value; solids check not run, service not stated). The low side never makes the result held.
 - **Held if:** flow or line size missing; or the documents do not show whether the pumps share one discharge line.
 - **Test cases (limit 2.4 m/s for 50-150 mm, 2.5 m/s for 200 mm and above, nominal bore as D):**
   - 105 m3/h, 100 NB → 3.71 m/s → **flagged**
@@ -66,7 +71,8 @@ Every result carries: `rule_id`, `status`, `value`, `limit`, `limit_source`, `fo
 ## R2 Standby available
 
 - **Rule:** `installed >= working + standby_required`.
-- **standby_required:** from the documents when stated (e.g. "1W+1S"); default 1 for continuous-duty pumps (**CONFIRM**).
+- **standby_required:** from the documents when stated (`arrangement`, e.g. "1W+1S"); otherwise default 1 (**CONFIRM**) with the assumption "continuous duty assumed".
+- **arrangement** (`NW+MS` or `NW`) supplies the standby count, and the working count only when `working` is missing. When the two disagree, that is a disagreement the caller passes to the verdict; R2 does not decide it.
 - **Held if:** installed or working count missing.
 - **Test cases:**
   - installed 2, working 2 → **flagged**
@@ -80,7 +86,7 @@ Every result carries: `rule_id`, `status`, `value`, `limit`, `limit_source`, `fo
   - Q_in = inflow, Q_out = pumping rate, m3/h.
 - **Flagged if:** Q_in >= Q_out ("pumps cannot keep up with inflow"), or t_cycle below the limit.
 - **Limit:** `t_cycle >= 60 / max_starts_per_hour`. Default 6 starts/h → 10 min (**CONFIRM**).
-- **Held if:** volume or Q_out missing; or Q_in missing (then show pump-out-only time `V / Q_out * 60` as information).
+- **Held if:** volume or Q_out missing; or Q_in missing (then show pump-out-only time `V / Q_out * 60` as information); or Q_in ≤ 0 or Q_out ≤ 0 (the input is named).
 - **Test cases:**
   - V 105, Q_out 210, Q_in missing → **held** (pump-out only 30.0 min)
   - V 105, Q_out 210, Q_in 100 → 63.0 + 57.3 = 120.3 min → **OK**
@@ -140,18 +146,21 @@ Unknown units make the input **held**, never guessed. Superscripts and spacing a
 | | kg/cm2(g) | x0.980665 bar(g) |
 | | kg/cm2(a) | x0.980665, then subtract 1.013 → bar(g) |
 | | kg/cm2 (no g/a marking) | x0.980665 bar(g), assumed gauge, stated |
-| | kPa | x0.01 bar |
-| | MPa | x10 bar |
-| | psi | x0.0689476 bar |
-| Head | m (liquid column) | bar = m x 0.0981 x SG. SG 1.0 only for water service, stated as an assumption; any other service without a stated SG → **held** |
+| | kPa (no g/a marking) | x0.01 bar(g), assumed gauge, stated |
+| | MPa (no g/a marking) | x10 bar(g), assumed gauge, stated |
+| | psi, psig | x0.0689476 bar(g); psi with no marking assumed gauge, stated |
+| | Absolute: an `(a)` marker, a separate `a` token ("bar a", "kPa a"), or the units bara, kpaa, kpa(a), psia | convert, then subtract 1.013 → bar(g) |
+| Head | m (liquid column) | bar = m x 0.0981 x SG. SG 1.0 only when the service matches a `water_services` phrase and no `solids_services` phrase, stated as an assumption; otherwise, without a stated SG → **held** |
 | Pipe size | NB / DN (mm) | ÷1000 m (nominal) |
 | | NPS inches | by table: 2"=50, 3"=80, 4"=100, 6"=150, 8"=200, 10"=250, 12"=300 NB |
 | Diameter | stated internal diameter in inches | x0.0254 m |
+| | stated internal diameter in mm | ÷1000 m |
 | Volume | m3, cum | x1 m3 |
-| Count | count (pumps, "1W+1S" parsed to working and standby counts) | dimensionless |
+| Count | count; arrangements `NW+MS` or `NW` for any N, M (e.g. 1W+2S, 3W) give working and standby counts; anything else is unknown | dimensionless |
 | Concentration | mg/L, ppm | x1 mg/L |
 | Strength | % w/w, % w/v | fraction (10% → 0.10). A % with neither w/w nor w/v stated → **held** |
 | Density | kg/L | x1 kg/L |
+| Velocity | m/s | x1 m/s |
 
 ## Adding a rule
 
@@ -169,3 +178,5 @@ Unknown units make the input **held**, never guessed. Superscripts and spacing a
 | R3 max pump starts per hour | 6 (10 min cycle) | | |
 | R4 operating / set margin | 0.90 | | |
 | R5 margin factor / adder | 1.10 / 1.0 bar | | |
+| R1 solids-bearing services | slurry, sludge, ash, waste water, backwash | | |
+| R5 water services (SG 1.0) | water | | |

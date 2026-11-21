@@ -50,7 +50,24 @@ One JSON file per case in `eval/keys/` (`A1.json`, `B1.json`, `E1.json`, `F1.jso
  "expected_verdict": "BLOCK"}
 ```
 
-Counts use `"unit": "count"`. `expected_verdict` is BLOCK, REVIEW or no conflicts found (`RULES.md`).
+Counts use `"unit": "count"`. `expected_verdict` is BLOCK, REVIEW or no conflicts found (`RULES.md`). Sets A and E use this format (set A: `"author": "Bhargavi"`).
+
+**Set B** (one per item; box normalised 0-1 from the PDF text layer by `scripts/label_positions.py`, checked by a person):
+
+```json
+{"id": "B1", "item": "SG Unit-1 floor wash pumps", "file": "Part3.pdf", "page": 0,
+ "label_text": "...", "found": true, "box": [0.41, 0.22, 0.47, 0.24]}
+```
+
+`page` is the page of the file where drawing D3-146 appears (the drawing number is not the page number). The absent item has `"found": false` and no `box`.
+
+**Set F** (inputs read from the pages by a person, worked by hand):
+
+```json
+{"id": "F1", "calculation": "R1 velocity, floor-wash discharge vs D5-200",
+ "inputs": [{"name": "flow_per_pump", "value": 105, "unit": "m3/h", "file": "Part4.pdf", "page": 57, "quote": "..."}],
+ "expected": {"value": 3.71, "unit": "m/s", "status": "flagged"}}
+```
 
 ## 3. Baselines
 

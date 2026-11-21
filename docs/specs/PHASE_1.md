@@ -1,5 +1,7 @@
 # Phase 1 spec — Rule engine
 
+**The Amendments section at the end overrides the text above it.**
+
 Owner docs: `RULES.md` (every formula, limit, unit factor, test case), `PHASES.md` (phase 1), `ARCHITECTURE.md` §2 (`app/rules/`, `app/verdict/`), `EVAL.md` §2 (keys A, B, F). Time: 12:10-12:50.
 
 ## Goal
@@ -234,3 +236,92 @@ Reading documents, the evidence check itself, the register store, Firestore, any
 - [ ] Every CONFIRM value confirmed or corrected by Bhargavi and recorded in the RULES.md table; `confirm: false` in `rules.yaml` for each.
 - [ ] `eval/keys/A1-A3`, `B1-B5`, `F1-F3` committed by Bhargavi, before phase 2.
 - [ ] `PHASES.md` phase 1 Status `done (phase-1-rules)`; tag pushed.
+
+
+---
+
+## Amendments (approved 21 Nov; these override the text above)
+
+From the phase 1 review and Bhargavi's decisions. Plan: `docs/specs/PHASE_1_PLAN.md`.
+
+**Data model**
+- `Value` gains `source: str = "document"` (`"document" | "change" | "fix"`). For `change` / `fix`, `quote` is the change or fix text, `file` = "" and `page` = 0; `evidence_ok` applies to document values only.
+- `DocLimit` gains `applies_to: str` (e.g. "pump discharge") and `evidence_ok: bool = True`; the engine ignores a DocLimit with `evidence_ok=False`.
+- Empty unit is allowed only for the text / yes-no inputs `service`, `line_role`, `schedule`, `arrangement`, `volume_is_total`. A number with an empty unit → held.
+
+**R1**
+- New optional input `line_role`. A DocLimit band (`applies_to` "pump discharge") applies when `line_role` matches "pump discharge", **or is unstated** (assumption "line assumed to be pump discharge"). The default is used only when the role is stated as something else, or no band covers the line size.
+- Low side: solids service and v < band low → flagged. Not solids → note "below the documents' lower value, information only". Service unstated → one note with both facts: below the lower value X, and solids check not run because service is not stated. Never held.
+
+**R2**
+- Default `standby_required` 1 always, with the assumption "continuous duty assumed".
+- `arrangement` matches `NW+MS` or `NW` for any N, M. It supplies the standby count, and the working count only when `working` is missing. A conflict between them is a disagreement the caller passes to `verdict()`; R2 does not decide it.
+
+**R3**
+- `q_in <= 0` or `q_out <= 0` → held, naming the input.
+
+**R5**
+- SG 1.0 only when the service matches a `water_services` phrase **and** no `solids_services` phrase. Otherwise, without a stated `sg`, R5 is held. ("sludge water" → held.)
+
+**Units**
+- Absolute marker only: `(a)`; a separate `a` token before normalising ("bar a", "kPa a"); or the whole units `bara`, `kpaa`, `kpa(a)`, `psia`. Absolute → convert, then subtract 1.013 → bar(g). Gauge marker: `(g)`, a separate `g` token, or `barg`, `psig`. Unmarked bar, kg/cm2, kPa, MPa, psi → gauge, with the assumption stated.
+- Diameter in mm (÷1000 m); velocity m/s (x1).
+- Phrase lists match whole phrases, case-insensitive; solids checked first.
+
+**Verdict**
+- `disagreements` passed by the caller are only those about values the change touches; `verdict()` does not filter them.
+
+**`rules.yaml`** (replaces §6). Keys under `units:` are normalised forms (lower-case, no spaces or dots, `hr` → `h`), so the aliases m3/hr, cum/hr, cu.m/hr all reduce to listed keys.
+
+```yaml
+version: 1
+tolerance_rel: 1.0e-9
+rules:
+  R1:
+    name: Pipe velocity
+    live: true
+    defaults:
+      max_velocity: {value: 3.0, unit: m/s, confirm: true}
+    band_line_role: pump discharge
+    solids_services: {value: [slurry, sludge, ash, waste water, backwash], confirm: true}
+    schedule_id_mm:
+      100: {sch40: 102.3, sch80: 97.2}
+      150: {sch40: 154.1, sch80: 146.3}
+      200: {sch40: 202.7, sch80: 193.7}
+  R2: {name: Standby available, live: true, defaults: {standby_required: {value: 1, unit: count, confirm: true}}}
+  R3: {name: Sump cycle time, live: true, defaults: {max_starts_per_hour: {value: 6, unit: 1/h, confirm: true}}}
+  R4: {name: Relief valve setting, live: false, defaults: {operating_to_set_max: {value: 0.90, unit: ratio, confirm: true}}}
+  R5:
+    name: Design pressure
+    live: false
+    defaults:
+      margin_factor: {value: 1.10, unit: ratio, confirm: true}
+      margin_adder: {value: 1.0, unit: bar, confirm: true}
+    water_services: {value: [water], confirm: true}
+  R6: {name: Chemical dose within pump range, live: false, defaults: {}}
+units:
+  atm_bar: 1.013
+  head_m_to_bar_per_sg: 0.0981
+  flow: {m3/h: 1, cum/h: 1, m3/d: 0.041666666666667, l/s: 3.6, l/min: 0.06, l/h: 0.001}
+  pressure: {bar: 1, kg/cm2: 0.980665, kpa: 0.01, mpa: 10, psi: 0.0689476}
+  nb_to_m: 0.001
+  mm_to_m: 0.001
+  inch_to_m: 0.0254
+  nps_to_nb: {2: 50, 3: 80, 4: 100, 6: 150, 8: 200, 10: 250, 12: 300}
+  volume: {m3: 1, cum: 1}
+  concentration: {mg/l: 1, ppm: 1}
+  density: {kg/l: 1}
+  velocity: {m/s: 1}
+  percent_to_fraction: 0.01
+```
+
+**Tests** (added to §7)
+- Allowed numeric literals in `checks.py` / `units.py`: 0, 1, 2, 4, 60, 100, 1000, 3600.
+- Units: "5 kPa" and "0.5 MPa" → gauge with assumption; "kPa(a)", "psia", "bar a" → absolute (−1.013); arrangements `1W+2S`, `3W`, `2 W + 1 S` parse, "two working" → unknown; `ash` does not match "floor wash water".
+- R5: "sludge water" with no `sg` → held; "clarified water" head in m → SG 1.0 with assumption.
+- R1: role suction → default; role unstated → band + assumption; 175 NB → default; DocLimit `evidence_ok=False` ignored; solids below low → flagged.
+- Held: a `change`-source value with no file/page is accepted.
+
+**Order** (replaces "Build order"): C3 model/units/yaml → C4 engine + R1-R3 → C8 `find_pages.py`, `label_positions.py` → C5 verdict/proven → C6 R4-R6 → C7 guard tests.
+
+**Set B key example:** `"page"` is the page of `Part3.pdf` where drawing D3-146 appears (look it up; the drawing number is not the page number).

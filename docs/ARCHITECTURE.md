@@ -98,7 +98,7 @@ INTERLOCK/
 │   ├── baselines/         keyword, one-call, one-call-math scripts
 │   └── results/           raw run outputs, small JSON, committed as evidence
 ├── data/                  local copies of test PDFs (git-ignored)
-├── scripts/               check_models.py, local ingest, eval runner
+├── scripts/               check_models.py, find_pages.py, label_positions.py, local ingest, eval runner
 ├── deploy/
 │   └── COMMANDS.md        gcloud commands Bhargavi runs
 ├── docs/
@@ -175,7 +175,7 @@ Argon's input limit is 1,048,576 tokens. Before the long read, count tokens. **T
 | Firestore `plants/{plant_id}/register/{entry_id}` | Approved changes. **Only source of truth.** The agent sandbox gets a read-only copy per run |
 | Firestore `jobs/{id}` | Job type, state, progress, result |
 
-Every value record: `{item, attribute, value, unit, page, quote, evidence_ok}`.
+Every value record: `{item, attribute, value, unit, source, file, page, quote, evidence_ok}`. `source` is `document`, `change` or `fix` (`RULES.md`, Inputs).
 
 One path scheme everywhere: `plants/{plant_id}/changes/{change_id}`, in Firestore and in Cloud Storage. Change ids are globally unique, so the API can use `/changes/{id}` without the plant id.
 

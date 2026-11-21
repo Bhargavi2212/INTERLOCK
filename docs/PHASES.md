@@ -40,9 +40,11 @@ Detailed spec: `docs/specs/PHASE_0.md`.
 
 ## Phase 1 — Rule engine (12:10-12:50)
 
-Status: not started
+Status: in progress
 
-**Build:** `app/rules/` with R1-R6 from `RULES.md`; units; OK / flagged / held; verdict function (including the register clash input).
+Detailed spec: `docs/specs/PHASE_1.md` (with its Amendments); plan: `docs/specs/PHASE_1_PLAN.md`.
+
+**Build:** `app/rules/` with R1-R6 from `RULES.md`; units; OK / flagged / held; `app/verdict/` with `verdict()` (including the register clash input) and `proven()`; `scripts/find_pages.py` and `scripts/label_positions.py` for writing keys A and B.
 
 **Done when:**
 - Every test case in `RULES.md` passes in `tests/rules/`.

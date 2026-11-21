@@ -1,6 +1,6 @@
 # Phase 1 — build plan (for approval)
 
-Implements `docs/specs/PHASE_1.md` plus the 20 review fixes and Bhargavi's changes (a), (b), (c) of 21 Nov. **No code until Bhargavi approves this plan.** Every step ends in a commit; `pytest -q` passes before each commit.
+Implements `docs/specs/PHASE_1.md` plus the 20 review fixes and Bhargavi's changes (a), (b), (c) of 21 Nov. **Approved 21 Nov** with four changes, applied in the docs and the spec's Amendments: (1) absolute marker only `(a)`, a separate `a` token, or bara / kpaa / kpa(a) / psia; plain kPa and MPa are gauge with the assumption; (2) SG 1.0 only when a water phrase matches and no solids phrase does ("sludge water" → held); (3) docs-first OK; (4) order C3, C4, C8, C5, C6, C7. Every step ends in a commit; `pytest -q` passes before each commit.
 
 Time box: phase 1 is 12:10-12:50 and this plan starts about 12:20. The spec's build order decides what waits if time runs short (§6).
 
