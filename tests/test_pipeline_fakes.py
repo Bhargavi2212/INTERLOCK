@@ -93,7 +93,8 @@ def run(plant, models, **kw):
 def test_pipeline_end_to_end(plant):
     res = run(plant, FakeModels())
     assert [s["name"] for s in res["steps"]] == ["understand", "long_read", "search", "same_item", "values",
-                                                 "evidence", "rules", "clash", "verdict"]
+                                                 "drawing", "evidence", "rules", "clash", "verdict"]
+    assert res["drawing"]["found"] is False and "no drawing page" in res["drawing"]["reason"]
     kept = {(p["file"], p["page"]) for p in res["pages"]}
     assert ("Part4.pdf", 57) in kept and ("Part3.pdf", 146) in kept and ("Part4.pdf", 58) not in kept
     assert all(p["file"] != "Nope.pdf" for p in res["pages"])          # hallucinated page dropped

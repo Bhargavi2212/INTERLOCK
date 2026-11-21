@@ -67,3 +67,22 @@ HEADLINES = {
         "type": "object", "properties": {"ref": STR, "headline": STR}, "required": ["ref", "headline"]}}},
     "required": ["headlines"],
 }
+
+_BOX = {"type": "array", "items": NUM}
+DRAWING = {
+    "type": "object",
+    "properties": {
+        "found": {"type": "boolean"},
+        "item_box": _BOX,
+        "label_box": _BOX,
+        "readings": {"type": "array", "items": {
+            "type": "object",
+            "properties": {"input": {"type": "string",
+                                     "enum": ["line_nb", "line_role", "shared_discharge", "flow_per_pump", "arrangement"]},
+                           "value": STR, "unit": STR, "label_text": STR, "box": _BOX,
+                           "role": {"type": "string", "enum": ["pump discharge", "discharge header", "pump suction"]}},
+            "required": ["input", "value", "label_text", "box"]}},
+        "why": STR,
+    },
+    "required": ["found", "readings", "why"],
+}

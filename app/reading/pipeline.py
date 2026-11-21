@@ -12,6 +12,7 @@ from __future__ import annotations
 import time
 from concurrent.futures import ThreadPoolExecutor
 
+from app.drawing.vision import run_drawing
 from app.reading.evidence import check_limit, check_value, page_texts, quote_on_page
 from app.reading.longread import long_read
 from app.reading.sameitem import same_item
@@ -23,7 +24,7 @@ from app.register.clash import find_clashes
 from app.rules import run_rules
 from app.verdict import verdict
 
-STEP_NAMES = ["understand", "long_read", "search", "same_item", "values", "evidence", "rules",
+STEP_NAMES = ["understand", "long_read", "search", "same_item", "values", "drawing", "evidence", "rules",
               "clash", "explain", "headlines", "verdict"]
 
 
@@ -89,23 +90,49 @@ def check_change(store, models, plant_id: str, change_id: str, text: str, progre
     judged, mode, mode_note = steps.run("same_item", lambda: same_item(models, cands, texts, u))
     kept = [c for c in judged if c["kept"]]
 
-    try:
-        raw = steps.run("values", lambda: pull_values(models, u, kept, pages_all))
-    except Exception:
+    # values || drawing (both need only the kept pages)
+    steps.progress(steps.items, "values + drawing")
+    with ThreadPoolExecutor(max_workers=2) as ex:
+        fv = ex.submit(_timed, lambda: pull_values(models, u, kept, pages_all))
+        fd = ex.submit(_timed, lambda: run_drawing(store, models, plant_id, u, kept, pages_all))
+        (raw, v_err, v_s), (drawing, d_err, d_s) = fv.result(), fd.result()
+    steps.items.append({"name": "values", "state": "done" if not v_err else f"failed: {type(v_err).__name__}",
+                        "seconds": v_s})
+    if v_err:
         raw = {"values": [], "limits": [], "shared_discharge": [], "design_basis_pages": []}
+    if d_err:
+        drawing = {"found": False, "reason": f"drawing step failed: {type(d_err).__name__}", "readings": []}
+    steps.items.append({"name": "drawing", "seconds": d_s, "state": "done" if drawing.get("found") else
+                        (f"failed: {type(d_err).__name__}" if d_err else drawing.get("reason") or drawing.get("check")
+                         or "item not verified on the drawing")})
+    drawing_png = drawing.pop("png", None)
+    if drawing_png:
+        store.put_change_png(plant_id, change_id, drawing_png)
+        drawing["image"] = "drawing.png"
+    d_readings = [r for r in drawing.get("readings", []) if r.get("input") != "shared_discharge"]
+    d_shared = [r for r in drawing.get("readings", []) if r.get("input") == "shared_discharge"]
+    drawing_pages = {(p["file"], p["page"]) for p in pages_all if p.get("is_drawing")}
 
     def evidence():
         return ([check_value(v, texts) for v in raw.get("values", [])],
                 [check_limit(lim, texts) for lim in raw.get("limits", [])],
                 check_shared(raw.get("shared_discharge", []), texts))
     values, limits, shared = steps.run("evidence", evidence)
+    values = values + d_readings          # already checked by drawing/verify.py
+    shared = shared + d_shared
 
     register = store.list_register(plant_id)
 
     def rules():
-        sc = build_scenario(values, shared, u["changes"], text, register)
+        sc = build_scenario(values, shared, u["changes"], text, register, drawing_pages)
         lims = doc_limits(limits)
-        return sc, run_rules(sc["issued"], lims), run_rules(sc["after"], lims)
+        issued_r, after_r = run_rules(sc["issued"], lims), run_rules(sc["after"], lims)
+        used = [r for r in d_shared if r.get("evidence_ok") and r.get("assumption")]
+        if sc.get("shared_discharge") is not None and used:
+            for r in issued_r + after_r:
+                if r.rule_id == "R1" and r.status != "held":
+                    r.assumptions.append(used[0]["assumption"])
+        return sc, issued_r, after_r
     sc, issued, after = steps.run("rules", rules)
     clashes = steps.run("clash", lambda: find_clashes(register, u, sc["after_values"]))
 
@@ -142,5 +169,5 @@ def check_change(store, models, plant_id: str, change_id: str, text: str, progre
         "values": values, "limits": limits, "shared_discharge": shared,
         "disagreements": sc["disagreements"], "explanations": explanations,
         "results_issued": [r.to_dict() for r in issued], "results_after": [r.to_dict() for r in after],
-        "clashes": clashes, "verdict": v, "headlines": headlines,
+        "clashes": clashes, "verdict": v, "headlines": headlines, "drawing": drawing,
     }

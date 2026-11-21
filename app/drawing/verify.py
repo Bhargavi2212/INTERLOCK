@@ -71,7 +71,7 @@ def check_reading(r: dict, words: list, file: str, page: int) -> dict:
             reason = "" if ok else f"unit '{out['unit']}' not usable: {why}"
     out["evidence_ok"] = not reason
     out["evidence_reason"] = reason or "label verified in the text layer"
-    if r.get("input") == "shared_discharge" and not reason:
+    if r.get("input") == "shared_discharge" and not reason and str(r.get("value")).strip().lower() in ("true", "yes"):
         out["assumption"] = (f"pumps share one header: read from the drawing by Argon; header label "
                              f"'{r.get('label_text')}' verified in the text layer at {file} p.{page}")
     return out

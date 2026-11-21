@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import APIRouter, Depends, FastAPI, HTTPException
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -225,6 +225,20 @@ def reingest(plant_id: str) -> dict:
                                "progress": {"files_done": 0, "files_total": 0, "pages_done": 0}})
     runner.submit(job_id, lambda: ingest_plant(store, plant_id, job_id, reset=True))
     return {"job_id": job_id}
+
+
+@api.get("/changes/{change_id}/drawing.png")
+def change_drawing(change_id: str, full: int = 0) -> Response:
+    store = get_store()
+    if full:
+        res = store.get_change(change_id)
+        d = (res or {}).get("drawing") or {}
+        png = store.get_page_png(res["plant_id"], d["n"]) if res and d.get("n") is not None else None
+    else:
+        png = store.get_change_png(change_id)
+    if png is None:
+        raise HTTPException(status_code=404, detail="no drawing for this change")
+    return Response(content=png, media_type="image/png", headers={"Cache-Control": "no-store"})
 
 
 @api.get("/jobs/{job_id}")

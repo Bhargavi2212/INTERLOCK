@@ -26,6 +26,7 @@ ROLE_MODEL = {
     "values": "MODEL_ARGON",
     "explain": "MODEL_CARBON",
     "headlines": "MODEL_HYDROGEN",
+    "drawing": "MODEL_ARGON",
 }
 RETRY_CODES = {429, 500, 502, 503, 504}
 RETRY_WAIT_S = 2
@@ -91,6 +92,25 @@ class Models:
                 usage.update(counts)
         text = interaction.output_text or ""
         return json.loads(text) if schema is not None else text
+
+    def see(self, role: str, prompt: str, png: bytes, schema: dict, thinking: str = "low",
+            usage: dict | None = None):
+        """Text + one PNG (inline base64; the bucket stays private) -> parsed JSON.
+        Input part shape from the installed SDK's ImageContent: {"type": "image", "data", "mime_type"}."""
+        import base64
+
+        _, beta = self._clients()
+        model = get_settings().require(ROLE_MODEL[role])
+        parts = [{"type": "text", "text": prompt},
+                 {"type": "image", "data": base64.b64encode(png).decode("ascii"), "mime_type": "image/png"}]
+        interaction = self._retry(role, lambda: beta.interactions.create(
+            model=model, input=parts, generation_config={"thinking_level": thinking}, timeout=CALL_TIMEOUT_S,
+            response_format=schema, response_mime_type="application/json"))
+        u = getattr(interaction, "usage", None)
+        if u is not None and usage is not None:
+            usage.update({"input": u.total_input_tokens, "cached": u.total_cached_tokens,
+                          "output": u.total_output_tokens})
+        return json.loads(interaction.output_text or "{}")
 
     def decide(self, text: str, questions: dict) -> dict:
         """Decisions API: {qid: {"noul": p_yes, "confidence": c}}."""
