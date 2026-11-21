@@ -1,5 +1,7 @@
 # Phase 5 spec — Proof
 
+**The Amendments section at the end overrides the text above it.**
+
 Owner docs: `EVAL.md` (§1 rules, §2 sets and keys, §3 baselines, §4 metrics, §5 the only home of results, §6 where it fails), `PHASES.md` (phase 5), `CLAUDE.md` (measured numbers live only in EVAL.md). Builds on `42de01d`. Time: 15:50-16:15. **Every number in §5 comes from code run on today's committed raw outputs.** Nothing is typed by hand into §5 except "n/a".
 
 ## 0. Ground rules (read first)
@@ -85,3 +87,36 @@ In this order, stop at 16:10:
 - [ ] §6 holds every miss the scorer printed, the E5 note, and the items in §6 above.
 - [ ] Set F scored (code at least); demo outcomes collected.
 - [ ] `pytest -q` green; `done (phase-5-proof)`, tag pushed. (No deploy needed unless §7 fixes went in.)
+
+
+---
+
+## Amendments (approved 21 Nov ~15:55; these override the text above)
+
+**G1 Eval plant without the drawing step.** All 18 Interlock E/A runs say "no drawing page among the pages found", and B on `27d049ccd64f` scored 1/5 (5/5 on the demo plant): the eval plant was never re-ingested after phase 3 (its `pages_all` had no `is_drawing`). Bhargavi re-ingests it, then reruns `eval_run.py --sets E,A,B --repeat-e 3 --systems interlock --stop-at 16:20` **from a git worktree at `fc7dadb`** (the original runs' code: no set E tuning), with the project `.venv`; outputs copied to `eval/results/rerun/`. **Both are scored. §5 reports the rerun; §6 explains the first runs ("drawing step inactive: plant not re-ingested after the phase 3 fix") and keeps their numbers visible.**
+
+**G2 Set F limits.** `run_f.py` turns each F key's `velocity_band` into a `DocLimit` with `applies_to` from the key (else from the quote's role words; never silently the 3.0 m/s default). F1's 200NB line is a header (2.1-2.4 m/s) on the drawing; with no role in the key the band applies as pump discharge (2.1-2.5); the result (1.86 m/s OK) is unchanged and §6 says so.
+
+**G3 Generous value matching.** EVAL §4 states that value matching is generous to the one-call baseline (its strings like "Three (2W+1S)" contain several numbers, any of which can match).
+
+**1 Design-basis pages** count toward recall when the key lists them (A1 lists Part5 p.200); they never count as wrong pages.
+
+**2 Interlock values** counted for value accuracy: `evidence_ok` only (the values it uses). One-call values: all returned; the Evidence row applies the same `quote_on_page` code to them. Stated in EVAL §4.
+
+**3 Units without a quantity** (e.g. "545 m" pipe run) are compatible when equal after normalising; ranges ("2.1-2.5") are compared as their numbers.
+
+**4 Cold / warm.** Cold = the first run on a plant by `started_at` (eval plant: E1 run 1; demo plant: 102.1 s, already in §6). Warm = median of the rest. The cache showed no hits (`cached` 0) in the eval runs; stated.
+
+**5 Same-item row** recomputed from the eval A runs at the frozen 0.25 by the scorer; the hand-entered row from phase 2 is replaced.
+
+**6 Demo 2** was not run live (D1 (b)): the fix row is demo 1 (live) + demo 2 (tests only), labelled so.
+
+**7 Demo 1's proven fix** was overwritten on the change by the second "Find a fix"; `collect_demo` reads the fix **job** records and the register (approval writes entries only after a server re-check). Product follow-up: keep every fix attempt.
+
+**8 `collect_demo`** reads Firestore with ADC (no access code, no Gemini key); Claude Code runs it.
+
+**9 E5 wording:** "set standby_required to 'no'/'false', which R2 could not read, so R2 was held and the verdict REVIEW" (not 0).
+
+**10 Unreadable pages:** "cannot be searched or quoted" (not "never read").
+
+**11 Note under §5:** runs made 14:46-15:25 by Anaconda's Python (conda base), not the project `.venv`; the rerun used `.venv`.

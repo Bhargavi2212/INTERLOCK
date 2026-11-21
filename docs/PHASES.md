@@ -106,7 +106,9 @@ Detailed spec: `docs/specs/PHASE_4.md` (with its Amendments M1-M10); plan: `docs
 
 ## Phase 5 — Proof (15:45-16:15)
 
-Status: not started
+Status: in progress
+
+Detailed spec: `docs/specs/PHASE_5.md` (with its Amendments).
 
 **Build:** collect the background runs started in phase 4; run the one-call-math baseline and set F; time one set-A change by hand; commit raw outputs to `eval/results/`; fill `EVAL.md` §5 and §6.
 
