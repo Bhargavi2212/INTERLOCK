@@ -137,6 +137,56 @@ def ingest(plant_id: str) -> dict:
     return {"job_id": job_id}
 
 
+class ChangeIn(BaseModel):
+    text: str
+
+
+def run_change_job(store, plant_id: str, change_id: str, text: str, job_id: str) -> dict:
+    """Steps 1-9 as a background job; the result is stored under the change id."""
+    from app.explain.carbon import explain
+    from app.explain.headlines import headlines
+    from app.reading.models import get_models
+    from app.reading.pipeline import check_change
+
+    models = get_models()
+
+    def progress(steps, name):
+        store.update_job(job_id, {"step": name, "steps": list(steps)})
+
+    res = check_change(store, models, plant_id, change_id, text, progress=progress,
+                       explain_fn=lambda dis, values: explain(models, text, dis, values),
+                       headlines_fn=lambda after, dis, clashes: headlines(models, after, dis, clashes))
+    store.put_change(plant_id, change_id, res)
+    store.update_job(job_id, {"step": "done", "steps": res["steps"]})
+    return {"change_id": change_id, "verdict": res["verdict"]["verdict"], "seconds_total": res["seconds_total"]}
+
+
+@api.post("/plants/{plant_id}/changes")
+def check_change_route(plant_id: str, body: ChangeIn) -> dict:
+    plant = _plant_or_404(plant_id)
+    if plant.get("ingest_status") != "done":
+        raise HTTPException(status_code=409, detail="plant ingest is not done")
+    text = body.text.strip()
+    if not text:
+        raise HTTPException(status_code=422, detail="change text is empty")
+    from app.store.base import new_id
+
+    store = get_store()
+    change_id = new_id()
+    job_id = store.create_job({"type": "change", "plant_id": plant_id, "change_id": change_id,
+                               "step": "queued", "steps": []})
+    runner.submit(job_id, lambda: run_change_job(store, plant_id, change_id, text, job_id))
+    return {"job_id": job_id, "change_id": change_id}
+
+
+@api.get("/changes/{change_id}")
+def get_change(change_id: str) -> dict:
+    res = get_store().get_change(change_id)
+    if res is None:
+        raise HTTPException(status_code=404, detail="change not found")
+    return res
+
+
 @api.get("/jobs/{job_id}")
 def get_job(job_id: str) -> dict:
     job = get_store().get_job(job_id)

@@ -173,6 +173,75 @@ async function ingest(failed) {
   }
 }
 
+// ------------------------------------------------------------ change check
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const cite = (o) => `${esc(o.file)} p.${esc(o.page)}`;
+
+function table(el, head, rows) {
+  $(el).innerHTML = `<thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead>` +
+    `<tbody>${rows.join("") || `<tr><td colspan="${head.length}" class="muted">none</td></tr>`}</tbody>`;
+}
+
+function calcRows(results, label) {
+  return results.map((r) => `<tr><td>${esc(label)}</td><td>${esc(r.rule_id)}</td>
+    <td class="st-${esc(r.status)}">${esc(r.status)}</td>
+    <td>${r.value == null ? "" : esc(Number(r.value).toFixed(2))} ${esc(r.unit)}</td>
+    <td>${r.limit == null ? "" : esc(Number(r.limit).toFixed(2))}<div class="small">${esc(r.limit_source)}</div></td>
+    <td><div>${esc(r.message)}</div><div class="small">${esc(r.formula)}</div>
+      ${(r.assumptions || []).map((a) => `<div class="small">assumes: ${esc(a)}</div>`).join("")}
+      ${(r.notes || []).map((n) => `<div class="small">note: ${esc(n)}</div>`).join("")}</td></tr>`).join("");
+}
+
+function showResult(res) {
+  $("result").hidden = false;
+  const v = res.verdict || {};
+  $("verdict").className = `verdict ${esc(v.verdict)}`;
+  $("verdict").innerHTML = `${esc(v.label)}<div class="verdict reasons">${(v.reasons || []).map(esc).join("<br>")}</div>`;
+  $("headlines").innerHTML = (res.headlines || []).map((h) => `<li>${esc(typeof h === "string" ? h : JSON.stringify(h))}</li>`).join("") || "<li class='muted'>none</li>";
+  table("pages", ["Page", "Found by", "Same item (P)", "Why"], (res.pages || []).map((p) =>
+    `<tr><td>${cite(p)}</td><td>${esc(p.found_by)}</td><td>${p.same_item_p == null ? "" : Number(p.same_item_p).toFixed(2)}${p.uncertain ? " uncertain" : ""}</td><td>${esc(p.why)}</td></tr>`));
+  table("values", ["Input", "Value", "Source", "Quote"], [...(res.values || []), ...(res.limits || []).map((l) => ({
+    input: `limit ${l.applies_to || ""}`, value: `${l.low ?? ""}-${l.high ?? ""}`, unit: l.unit, file: l.file, page: l.page,
+    quote: l.quote, evidence_ok: l.evidence_ok, evidence_reason: l.evidence_reason }))].map((x) =>
+    `<tr class="${x.evidence_ok ? "" : "struck"}"><td>${esc(x.input)}</td><td>${esc(x.value)} ${esc(x.unit)}</td><td>${cite(x)}</td>
+     <td>"${esc(x.quote)}"${x.evidence_ok ? "" : `<div class="small">evidence failed: ${esc(x.evidence_reason)}</div>`}</td></tr>`));
+  const expl = res.explanations || [];
+  $("disagreements").innerHTML = (res.disagreements || []).map((d) => `<p><b>${esc(d.attribute)}</b>: ${
+    d.values.map((x) => `${cite(x)} = ${esc(x.value)}`).join("; ")}</p>`).join("") +
+    expl.map((e) => `<p class="small">${esc(e.note || `${e.attribute}: likely right ${e.likely_right_file || "?"} p.${e.likely_right_page || "?"} — ${e.why} Consequence: ${e.consequence}`)}</p>`).join("") ||
+    "<p class='muted'>none</p>";
+  $("calc").innerHTML = `<table><thead><tr><th></th><th>Rule</th><th>Status</th><th>Value</th><th>Limit</th><th>Detail</th></tr></thead>
+    <tbody>${calcRows(res.results_after || [], "after change")}${calcRows(res.results_issued || [], "as issued")}</tbody></table>`;
+  $("clashes").innerHTML = (res.clashes || []).map((c) => `<p>${esc(c.entry_id)}: ${esc(c.attribute)} approved ${esc(c.approved)}, proposed ${esc(c.proposed)}</p>`).join("") || "<p class='muted'>none (register checked)</p>";
+  $("timing").textContent = `${res.seconds_total} s: ` + (res.steps || []).map((s) => `${s.name} ${s.seconds}s`).join(", ") +
+    ` · long read ${res.long_read} · same-item ${res.same_item_mode} ${res.same_item_note || ""}`;
+}
+
+$("check").onclick = async () => {
+  const text = $("change-text").value.trim();
+  if (!plantId) { alert("Create or pick a plant first."); return; }
+  if (!text) return;
+  $("result").hidden = true;
+  $("check").disabled = true;
+  const started = Date.now();
+  try {
+    const { job_id, change_id } = await api(`/plants/${plantId}/changes`, { method: "POST", body: JSON.stringify({ text }) });
+    for (;;) {
+      await new Promise((r) => setTimeout(r, 2000));
+      const j = await api(`/jobs/${job_id}`);
+      $("steps").innerHTML = (j.steps || []).map((s) => `<li>${esc(s.name)} — ${esc(s.state)} (${esc(s.seconds)} s)</li>`).join("") +
+        (j.state === "running" ? `<li>${esc(j.step)}…</li>` : "");
+      $("check-status").textContent = `${j.state} · ${Math.round((Date.now() - started) / 1000)} s`;
+      if (j.state === "done") { showResult(await api(`/changes/${change_id}`)); break; }
+      if (j.state === "failed") { $("check-status").textContent = `failed: ${j.error}`; break; }
+    }
+  } catch (e) {
+    $("check-status").textContent = `Error: ${e.message}`;
+  } finally {
+    $("check").disabled = false;
+  }
+};
+
 // ------------------------------------------------------------ wiring
 $("pick-folder").onchange = (e) => uploadAll(fromInput(e.target)).catch(showError);
 $("pick-files").onchange = (e) => uploadAll(fromInput(e.target)).catch(showError);

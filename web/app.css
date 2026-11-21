@@ -29,3 +29,15 @@ th, td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line
 td.path { word-break: break-all; }
 progress { width: 100%; }
 .accepted { color: var(--ok); } .skipped, .failed { color: var(--bad); } .duplicate { color: var(--warn); }
+
+textarea { width: 100%; font: inherit; padding: 8px; border: 1px solid var(--line); border-radius: 6px;
+           background: var(--bg); color: var(--fg); margin-bottom: 8px; }
+h3 { font-size: 1rem; margin: 16px 0 6px; }
+.steps { margin: 8px 0 0; padding-left: 20px; font-size: .9rem; color: var(--muted); }
+.verdict { padding: 12px 14px; border-radius: 8px; font-weight: 700; font-size: 1.2rem; border: 2px solid var(--line); }
+.verdict.BLOCK { border-color: var(--bad); color: var(--bad); }
+.verdict.REVIEW { border-color: var(--warn); color: var(--warn); }
+.verdict.reasons { font-weight: 400; font-size: .9rem; }
+.struck { text-decoration: line-through; color: var(--muted); }
+.st-OK { color: var(--ok); } .st-flagged { color: var(--bad); font-weight: 600; } .st-held { color: var(--warn); font-weight: 600; }
+.small { font-size: .82rem; color: var(--muted); }

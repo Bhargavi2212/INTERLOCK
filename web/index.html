@@ -37,7 +37,21 @@
 
     <section id="change">
       <h2>Change</h2>
-      <p class="muted">The change check arrives in this phase's next step.</p>
+      <textarea id="change-text" rows="3" placeholder="e.g. SG Unit-1 floor wash water transfer pumps: go from 1 working + 1 standby to 2 working + 1 standby."></textarea>
+      <div class="row"><button id="check">Check</button><span id="check-status" class="muted"></span></div>
+      <ol id="steps" class="steps"></ol>
+    </section>
+
+    <section id="result" hidden>
+      <div id="verdict" class="verdict"></div>
+      <h3>Headlines</h3><ul id="headlines"></ul>
+      <h3>Pages found</h3><table id="pages"></table>
+      <h3>Values (with their source)</h3><table id="values"></table>
+      <h3>Documents that disagree</h3><div id="disagreements"></div>
+      <h3>Calc sheet</h3><div id="calc"></div>
+      <h3>Register clashes</h3><div id="clashes"></div>
+      <h3>Drawing</h3><p class="muted">The P&amp;ID box arrives in phase 3.</p>
+      <p class="muted" id="timing"></p>
     </section>
   </main>
 
