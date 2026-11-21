@@ -41,7 +41,7 @@ VALUES = {
             "required": ["input", "value", "unit", "file", "page", "quote"]}},
         "limits": {"type": "array", "items": {
             "type": "object",
-            "properties": {"rule_id": STR, "name": STR, "low": NUM, "high": NUM, "unit": STR,
+            "properties": {"rule_id": {"type": "string", "enum": ["R1"]}, "name": STR, "low": NUM, "high": NUM, "unit": STR,
                            "applies_from_nb": INT, "applies_to_nb": INT, "applies_to": STR, **_CITE},
             "required": ["rule_id", "high", "unit", "applies_to", "file", "page", "quote"]}},
         "shared_discharge": {"type": "array", "items": {

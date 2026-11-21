@@ -193,7 +193,10 @@ def register_values(entries: list[dict]) -> dict:
 
 
 def doc_limits(checked_limits: list[dict]) -> list[DocLimit]:
-    return [DocLimit(rule_id=d.get("rule_id", "R1"), name=d.get("name", "velocity_band"),
+    """Design-basis limits read from the documents. Only R1 uses document limits (velocity
+    bands), so the rule id is set by code, never taken from the model: a live run had the
+    model number the rows "R1".."R7" and R1 silently fell back to its default."""
+    return [DocLimit(rule_id="R1", name="velocity_band",
                      low=d.get("low"), high=d.get("high"), unit=d.get("unit", "m/s"),
                      applies_from_nb=d.get("applies_from_nb"), applies_to_nb=d.get("applies_to_nb"),
                      file=d["file"], page=int(d["page"]), quote=d.get("quote", ""),

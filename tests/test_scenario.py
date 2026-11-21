@@ -168,3 +168,21 @@ def test_disputed_installed_count_stays_held():
     sc = build_scenario(vals, [], [{"input": "working", "to": "2", "unit": "count"}], CHANGE)
     r2 = next(r for r in run_rules(sc["after"], []) if r.rule_id == "R2")
     assert r2.status == "held" and "installed" in r2.message
+
+
+def test_doc_limit_rule_id_set_by_code_not_model():
+    """Live A1: the model numbered limit rows R1..R7; the header row must still reach R1."""
+    rows = [{"rule_id": f"R{i}", "low": lo, "high": hi, "unit": "m/sec", "applies_from_nb": f, "applies_to_nb": t,
+             "applies_to": role, "file": "Part5.pdf", "page": 200, "quote": "q", "evidence_ok": True}
+            for i, (role, lo, hi, f, t) in enumerate([("pump suction", 1.2, 1.5, 50, 150),
+                                                      ("pump discharge", 2.1, 2.5, 200, None),
+                                                      ("discharge header", 2.1, 2.4, 200, None)], start=1)]
+    lims = doc_limits(rows)
+    assert {l.rule_id for l in lims} == {"R1"}
+    from app.rules import run_rule
+    from app.rules.model import Value
+    r = run_rule("R1", {"flow_total": Value(210, "m3/h", file="a", page=1, quote="q"),
+                        "line_nb": Value(200, "NB", file="b", page=1, quote="200NB", source="drawing", box=(0, 0, 1, 1)),
+                        "line_role": Value("discharge header", "", file="b", page=1, quote="200NB", source="drawing",
+                                           box=(0, 0, 1, 1))}, lims)
+    assert r.limit == 2.4 and r.status == "OK" and r.notes      # header row, 1.86 below 2.1 -> note
