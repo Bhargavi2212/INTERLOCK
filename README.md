@@ -2,7 +2,7 @@
 
 **No plant change is signed off until every document agrees, and the numbers still work.**
 
-[**Live app**](https://interlock-67888742605.us-central1.run.app) · [**1-minute video**](VIDEO_LINK) · Built today at the Gemini 4 NYC Hackathon (21 Nov 2026) · Problem Statement One
+[**Live app**](https://interlock-67888742605.us-central1.run.app) · [**1-minute video**](https://youtu.be/XNRrCkPCmYc) · Built today at the Gemini 4 NYC Hackathon (21 Nov 2026) · Problem Statement One
 
 ![Interlock: a change checked against 851 pages, step by step, ending in a BLOCK verdict with its reasons](docs/img/10_screen.png)
 
