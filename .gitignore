@@ -1,0 +1,33 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.key
+*credentials*.json
+service-account*.json
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# node
+node_modules/
+web/dist/
+
+# data and outputs (large files and documents stay out of git)
+data/
+*.pdf
+cache/
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.qodo/
+
+# never committed
+docs/DECISIONS.md
