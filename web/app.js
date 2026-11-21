@@ -47,6 +47,7 @@ $("plant-pick").onchange = (e) => {
   store.set("plant_id", plantId);
   $("result").hidden = true;
   showPlant();
+  loadRegister();
 };
 
 async function showPlant() {
@@ -258,6 +259,89 @@ async function showDrawing(res) {
   }
 }
 
+async function loadRegister() {
+  if (!plantId) return;
+  try {
+    const entries = await api(`/plants/${plantId}/register`);
+    $("register").innerHTML = entries.length ? "<b>Register</b> (approved changes): " + entries.map((e) =>
+      `${esc(e.item)} · ${esc(e.attribute)} = ${esc(e.value)} ${esc(e.unit || "")} (${esc(e.approved_at)})`).join("; ")
+      : "Register: no approved changes.";
+  } catch (e) { $("register").textContent = ""; }
+}
+
+function renderFix(res) {
+  const el = $("fix");
+  const v = (res.verdict || {}).verdict;
+  if (v !== "BLOCK" && v !== "REVIEW") { el.innerHTML = ""; return; }
+  const f = res.fix;
+  let html = `<h3>Fix</h3><button id="find-fix">Find a fix</button> <span id="fix-status" class="muted"></span>`;
+  if (f) {
+    const tries = (f.tries || []).map((t) => `<tr><td>${esc(t.n)}</td><td>${esc(t.candidate)}</td>
+      <td>${esc((t.flagged || []).join(", ") || "-")}</td><td>${esc((t.newly_held || []).join(", ") || "-")}</td></tr>`).join("");
+    const proven = f.recheck && f.recheck.proven;
+    const stamp = proven ? `<div class="stamp proven">Proven by the server</div>`
+      : f.outcome === "proposed" ? `<div class="stamp not">Agent's fix not proven by the server</div>`
+      : `<div class="stamp not">Agent refused</div>`;
+    const reasons = [...(f.reasons || []), ...((f.recheck || {}).reasons || [])];
+    const dis = res.disagreements || [];
+    html += `<p class="small">Sandbox: ${esc(f.environment_id || "none")} · ${f.reused_sandbox ? "this plant's sandbox, reused" : "new sandbox"}
+      ${f.sandbox_note ? " · " + esc(f.sandbox_note) : ""} ${f.persistent === false ? " · fresh sandbox per fix" : ""}
+      ${f.runs_listing ? " · earlier runs: " + esc(f.runs_listing) : ""} · ${esc(f.seconds)} s</p>
+      <p class="small">Agent's tries (reported by the agent from its sandbox):</p>
+      <table><thead><tr><th>#</th><th>Candidate</th><th>Flagged</th><th>Newly held</th></tr></thead><tbody>${tries ||
+        "<tr><td colspan=4 class='muted'>none reported</td></tr>"}</tbody></table>
+      ${(f.fix || []).length ? "<p><b>Proposed fix:</b> " + f.fix.map((x) => `${esc(x.input)} ${esc(x.from || "")} → ${esc(x.to)} ${esc(x.unit || "")} (${esc(x.why || "")})`).join("; ") + "</p>" : ""}
+      ${stamp}${reasons.length ? "<ul>" + reasons.map((r) => `<li>${esc(r)}</li>`).join("") + "</ul>" : ""}`;
+    if (proven && !res.approved) {
+      html += dis.length ? `<p class="small">Still to resolve by the engineer: documents disagree. Tick each once resolved:</p>` +
+        dis.map((d, i) => `<label class="small"><input type="checkbox" class="resolve" value="${esc(d.attribute)}">
+          I have resolved the document disagreement: ${esc(d.attribute)} (${d.values.map((x) => `${cite(x)} = ${esc(x.value)}`).join("; ")})</label><br>`).join("") : "";
+      html += `<button id="approve">Approve</button> <span id="approve-status" class="small"></span>`;
+    }
+    if (res.approved) html += `<p class="ok-mark">Added to the plant's register: ${esc(res.approved.entry_ids.join(", "))}</p>`;
+  }
+  el.innerHTML = html;
+  $("find-fix").onclick = () => findFix(res.change_id);
+  const ap = $("approve");
+  if (ap) {
+    const boxes = [...document.querySelectorAll(".resolve")];
+    const sync = () => { ap.disabled = !boxes.every((b) => b.checked); };
+    boxes.forEach((b) => (b.onchange = sync));
+    sync();
+    ap.onclick = async () => {
+      try {
+        const r = await api(`/changes/${res.change_id}/approve`, { method: "POST",
+          body: JSON.stringify({ resolved: boxes.map((b) => b.value) }) });
+        $("approve-status").textContent = `Added to the register: ${r.entries.map((e) => e.entry_id).join(", ")}`;
+        ap.disabled = true;
+        loadRegister();
+      } catch (e) { $("approve-status").textContent = `Not approved: ${e.message}`; }
+    };
+  }
+}
+
+async function findFix(changeId) {
+  $("find-fix").disabled = true;
+  const started = Date.now();
+  try {
+    const { job_id } = await api(`/changes/${changeId}/fix`, { method: "POST" });
+    for (;;) {
+      await new Promise((r) => setTimeout(r, 3000));
+      const j = await api(`/jobs/${job_id}`);
+      $("fix-status").textContent = `${j.step === "agent" ? "Agent working in the plant's sandbox…" : esc(j.step)} ${Math.round((Date.now() - started) / 1000)} s`;
+      if (j.state === "done" || j.state === "failed") {
+        if (j.state === "failed") $("fix-status").textContent = `failed: ${j.error}`;
+        const res = await api(`/changes/${changeId}`);
+        renderFix(res);
+        return;
+      }
+    }
+  } catch (e) {
+    $("fix-status").textContent = `Error: ${e.message}`;
+    $("find-fix").disabled = false;
+  }
+}
+
 function showResult(res) {
   $("result").hidden = false;
   const v = res.verdict || {};
@@ -280,6 +364,7 @@ function showResult(res) {
     <tbody>${calcRows(res.results_after || [], "after change")}${calcRows(res.results_issued || [], "as issued")}</tbody></table>`;
   $("clashes").innerHTML = (res.clashes || []).map((c) => `<p>${esc(c.entry_id)}: ${esc(c.attribute)} approved ${esc(c.approved)}, proposed ${esc(c.proposed)}</p>`).join("") || "<p class='muted'>none (register checked)</p>";
   showDrawing(res);
+  renderFix(res);
   $("timing").textContent = `${res.seconds_total} s: ` + (res.steps || []).map((s) => `${s.name} ${s.seconds}s`).join(", ") +
     ` · long read ${res.long_read} · same-item ${res.same_item_mode} ${res.same_item_note || ""}`;
 }
@@ -322,4 +407,4 @@ function showError(e) { $("upload-status").textContent = `Error: ${e.message}`; 
 
 fetch("/health").then((r) => r.json()).then((d) => { $("version").textContent = d.version; })
   .catch(() => { $("version").textContent = "unavailable"; });
-showPlant().then(loadPlants);
+showPlant().then(loadPlants).then(loadRegister);

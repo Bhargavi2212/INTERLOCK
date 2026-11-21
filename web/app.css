@@ -43,3 +43,6 @@ h3 { font-size: 1rem; margin: 16px 0 6px; }
 .small { font-size: .82rem; color: var(--muted); }
 #drawing img { max-width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; }
 .ok-mark { color: var(--ok); } .bad-mark { color: var(--bad); }
+.stamp { padding: 8px 12px; border-radius: 6px; font-weight: 700; margin: 8px 0; border: 2px solid; }
+.stamp.proven { color: var(--ok); border-color: var(--ok); } .stamp.not { color: var(--warn); border-color: var(--warn); }
+#fix { margin: 12px 0; }
