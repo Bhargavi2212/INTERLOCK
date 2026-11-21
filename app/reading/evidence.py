@@ -14,7 +14,7 @@ import unicodedata
 
 from app.reading.settings import reading_settings
 from app.rules.engine import INPUT_QUANTITY, load_rules
-from app.rules.units import UnknownUnit, to_base
+from app.rules.units import UnknownUnit, counts_in_text, to_base
 
 DASHES = dict.fromkeys(map(ord, "‐‑‒–—―−"), "-")
 QUOTES = {ord("‘"): "'", ord("’"): "'", ord("“"): '"', ord("”"): '"'}
@@ -48,8 +48,15 @@ def quote_on_page(quote: str, page_text: str) -> tuple[bool, str]:
     return False, "quote not on the page"
 
 
-def value_in_quote(value, quote: str) -> bool:
+def value_in_quote(value, quote: str, input_name: str = "") -> bool:
     v = str(value).strip()
+    if INPUT_QUANTITY.get(input_name) == "count":
+        cfg = load_rules()["units"]
+        try:
+            n = to_base("count", v, "count", cfg)[0]
+        except UnknownUnit:
+            return False
+        return n in counts_in_text(quote, cfg)
     if NUMBER.fullmatch(v.replace(",", "")):
         return float(v.replace(",", "")) in numbers(quote)
     return norm(v) in norm(quote) or re.sub(r"\s", "", norm(v)) in re.sub(r"\s", "", norm(quote))
@@ -86,7 +93,7 @@ def check_value(v: dict, texts: dict) -> dict:
         ok, why = quote_on_page(v.get("quote", ""), text)
         if not ok:
             reason = why
-        elif not value_in_quote(v.get("value"), v.get("quote", "")):
+        elif not value_in_quote(v.get("value"), v.get("quote", ""), v.get("input", "")):
             reason = f"value '{v.get('value')}' is not in the quote"
         else:
             unit_ok, unit_why = unit_known(v.get("input", ""), v.get("value"), v.get("unit", ""))

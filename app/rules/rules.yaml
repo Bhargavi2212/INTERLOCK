@@ -55,5 +55,6 @@ units:
   concentration: {mg/l: 1, ppm: 1}
   density: {kg/l: 1}
   velocity: {m/s: 1}
-  count_units: [count, nos, "no", number]  # "no" quoted: bare no is YAML false
+  count_units: [count, nos, "no", number]
+  number_words: {one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12}  # "no" quoted: bare no is YAML false
   percent_to_fraction: 0.01

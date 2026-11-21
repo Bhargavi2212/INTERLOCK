@@ -30,13 +30,31 @@ def normalise(unit: str) -> str:
     return s.replace("hr", "h")
 
 
-def _number(value) -> float:
+def _number(value, words: dict | None = None) -> float:
+    """A number, or a number word from rules.yaml (one..twelve)."""
     if isinstance(value, bool):
         raise UnknownUnit("a yes/no value is not a number")
+    if isinstance(value, str) and words and value.strip().lower() in words:
+        return float(words[value.strip().lower()])
     try:
         return float(value)
     except (TypeError, ValueError):
         raise UnknownUnit(f"'{value}' is not a number") from None
+
+
+ARRANGEMENT_IN_TEXT = re.compile(r"(\d+)\s*w\s*\+\s*(\d+)\s*s", re.I)
+
+
+def counts_in_text(text: str, cfg: dict) -> set[float]:
+    """Counts a quote states: digits, number words (one..twelve), and for each
+    arrangement NW+MS also N+M (installed = working + standby)."""
+    s = str(text or "").lower()
+    found = {float(x) for x in re.findall(r"\d+", s)}
+    words = cfg.get("number_words", {})
+    found |= {float(words[w]) for w in re.findall(r"[a-z]+", s) if w in words}
+    for w, sb in ARRANGEMENT_IN_TEXT.findall(s):
+        found.add(float(int(w) + int(sb)))
+    return found
 
 
 def pressure_marking(unit: str) -> tuple[str, str | None]:
@@ -83,7 +101,7 @@ def to_base(quantity: str, value, unit: str, cfg: dict) -> tuple[float, list[str
     diameter m, volume m3, concentration mg/L, strength fraction,
     density kg/L, velocity m/s, count.
     """
-    n = _number(value)
+    n = _number(value, cfg.get("number_words"))
     u = normalise(unit)
     assumptions: list[str] = []
 

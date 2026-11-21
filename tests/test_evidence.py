@@ -63,3 +63,21 @@ def test_limit_checked_with_dash_variants():
            "quote": "50-150 mm 1.8-2.4 m/s"}
     assert check_limit(lim, TEXTS)["evidence_ok"]
     assert not check_limit({**lim, "high": 2.5}, TEXTS)["evidence_ok"]
+
+
+def _count(value, quote, input_name="installed"):
+    page = page_texts([{"file": "a.pdf", "page": 1, "text": quote}])
+    return check_value({"input": input_name, "value": value, "unit": "nos.", "file": "a.pdf", "page": 1,
+                        "quote": quote}, page)
+
+
+def test_count_words_and_arrangement_totals():
+    assert _count("2", "Number required Two (1W+1S) nos.")["evidence_ok"]      # word Two
+    assert _count("3", "Three (2W+1S) nos.")["evidence_ok"]                    # word and 2+1
+    assert _count("2", "Pumps (1W+1S) nos.")["evidence_ok"]                     # installed = W+S
+    assert _count("1", "Number required Two (1W+1S) nos.", "working")["evidence_ok"]
+    assert not _count("4", "Three (2W+1S) nos.")["evidence_ok"]
+
+
+def test_number_word_value_accepted():
+    assert _count("Two", "Number required Two (1W+1S) nos.")["evidence_ok"]

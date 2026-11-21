@@ -153,3 +153,14 @@ def test_phrase_whole_words():
     assert matches_phrase("sludge water", solids) == "sludge"
     assert matches_phrase("clarified water", ["water"]) == "water"
     assert matches_phrase("", ["water"]) is None
+
+
+@pytest.mark.parametrize("word,expected", [("Two", 2.0), ("three", 3.0), ("TWELVE", 12.0)])
+def test_number_words_as_counts(ucfg, word, expected):
+    assert to_base("count", word, "nos.", ucfg)[0] == expected
+
+
+def test_counts_in_text(ucfg):
+    from app.rules.units import counts_in_text
+    assert counts_in_text("Number required Two (1W+1S) nos.", ucfg) >= {1.0, 2.0}
+    assert 3.0 in counts_in_text("Three (2W+1S) nos.", ucfg)
