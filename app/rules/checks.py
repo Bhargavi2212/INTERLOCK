@@ -11,7 +11,7 @@ import math
 
 from app.rules.engine import HeldInput, default_limit
 from app.rules.model import RuleResult
-from app.rules.units import UnknownUnit, matches_phrase, parse_arrangement
+from app.rules.units import UnknownUnit, matches_phrase, normalise, parse_arrangement
 
 FORMULAS = {
     "R1": "v = (Q / 3600) / (pi/4 * D^2)",
@@ -97,20 +97,25 @@ def r1_velocity(ins, rule_cfg, rules, doc_limits):
 
     v = (q / 3600) / (math.pi / 4 * d ** 2)
 
-    # Limit: document band for pump discharge (role unstated -> band, with assumption)
-    band_role = rule_cfg["band_line_role"]
-    role = _optional_text(ins, "line_role")
-    role_ok = role is None or matches_phrase(role, [band_role]) is not None
+    # Limit: a document band whose applies_to matches the line's role (roles most
+    # specific first); role unstated -> assumed pump discharge (stricter).
+    roles = rule_cfg["line_roles"]
+    role_text = _optional_text(ins, "line_role")
+    role = rule_cfg["assumed_line_role"] if role_text is None else matches_phrase(role_text, roles)
     band = None
-    if role_ok and nb is not None:
+    if role is not None and nb is not None:
         for dl in doc_limits:
-            if dl.rule_id == "R1" and dl.evidence_ok and dl.high is not None and dl.covers_nb(nb):
+            if (dl.rule_id == "R1" and dl.evidence_ok and dl.high is not None and dl.covers_nb(nb)
+                    and normalise(dl.unit) in units["velocity"]
+                    and matches_phrase(dl.applies_to, roles) == role):
                 band = dl
                 break
     if band is not None:
         limit, source = band.high, band.citation()
-        if role is None:
-            assumptions.append(f"line assumed to be {band_role}")
+        if role_text is None:
+            assumptions.append(f"line assumed to be {role}")
+    elif role == rule_cfg["suction_line_role"]:
+        limit, source = default_limit(rule_cfg, "max_velocity_suction")
     else:
         limit, source = default_limit(rule_cfg, "max_velocity")
 

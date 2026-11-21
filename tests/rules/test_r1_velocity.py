@@ -93,15 +93,56 @@ def test_pumps_into_line_missing_is_held():
 
 def test_role_stated_other_uses_default():
     r = run_rule("R1", {"flow_total": v(105, "m3/h"), "line_nb": v(150, "NB"),
-                        "line_role": v("pump suction")}, bhel_bands())
+                        "line_role": v("drain line")}, bhel_bands())
     assert r.limit == 3.0
     assert r.limit_source.startswith("default")
     assert r.status == "OK"
 
 
+def _band(low, high, nb_from, nb_to, applies_to, unit="m/s", page=200):
+    from app.rules.model import DocLimit
+    return DocLimit(rule_id="R1", name="velocity_band", low=low, high=high, unit=unit,
+                    applies_from_nb=nb_from, applies_to_nb=nb_to, file="Part5.pdf", page=page,
+                    quote=f"{applies_to} {low}-{high}", applies_to=applies_to)
+
+
+MIXED = [  # mixed order: suction, header, discharge
+    _band(0.6, 1.5, 50, None, "pump suction", page=201),
+    _band(1.5, 2.0, 50, None, "pump discharge header", page=202),
+    _band(1.8, 2.4, 50, 150, "pump discharge", page=200),
+]
+
+
+@pytest.mark.parametrize("role,expected_limit,page", [
+    ("pump suction", 1.5, 201),
+    ("discharge header", 2.0, 202),
+    ("Pump Discharge header to sump", 2.0, 202),
+    ("pump discharge", 2.4, 200),
+    (None, 2.4, 200),
+])
+def test_band_by_line_role_mixed_order(role, expected_limit, page):
+    ins = {"flow_total": v(105, "m3/h"), "line_nb": v(150, "NB")}
+    if role:
+        ins["line_role"] = v(role)
+    r = run_rule("R1", ins, MIXED)
+    assert r.limit == expected_limit and f"p.{page}" in r.limit_source
+
+
+def test_suction_without_band_uses_suction_default():
+    r = run_rule("R1", {"flow_total": v(105, "m3/h"), "line_nb": v(150, "NB"),
+                        "line_role": v("pump suction")}, bhel_bands())
+    assert r.limit == 1.8 and r.limit_source.startswith("default")
+
+
+def test_band_with_non_velocity_unit_ignored():
+    r = run_rule("R1", {"flow_total": v(105, "m3/h"), "line_nb": v(100, "NB")},
+                 [_band(1.8, 2.4, 50, 150, "pump discharge", unit="ft/s")])
+    assert r.limit == 3.0
+
+
 def test_role_pump_discharge_uses_band_without_assumption():
     r = run_rule("R1", {"flow_total": v(105, "m3/h"), "line_nb": v(100, "NB"),
-                        "line_role": v("Pump Discharge header")}, bhel_bands())
+                        "line_role": v("Pump Discharge")}, bhel_bands())
     assert r.limit == 2.4
     assert not any("assumed to be" in a for a in r.assumptions)
 

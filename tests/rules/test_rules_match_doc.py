@@ -79,6 +79,7 @@ def test_every_doc_case_has_a_test(rule_id):
 
 DEFAULT_ROWS = {
     "R1 velocity max when documents state none": [("R1", "max_velocity")],
+    "R1 suction velocity max when documents state none": [("R1", "max_velocity_suction")],
     "R2 standby default": [("R2", "standby_required")],
     "R3 max pump starts per hour": [("R3", "max_starts_per_hour")],
     "R4 operating / set margin": [("R4", "operating_to_set_max")],

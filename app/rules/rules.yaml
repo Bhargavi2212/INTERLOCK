@@ -9,7 +9,10 @@ rules:
     live: true
     defaults:
       max_velocity: {value: 3.0, unit: m/s, confirm: false}
-    band_line_role: pump discharge
+      max_velocity_suction: {value: 1.8, unit: m/s, confirm: true}
+    line_roles: [discharge header, pump suction, pump discharge]  # most specific first
+    assumed_line_role: pump discharge
+    suction_line_role: pump suction
     solids_services: {value: [slurry, sludge, ash slurry, waste water, backwash], confirm: false}
     schedule_id_mm:
       100: {sch40: 102.3, sch80: 97.2}
