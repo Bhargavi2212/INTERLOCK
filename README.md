@@ -4,7 +4,7 @@
 
 [**Live app**](https://interlock-67888742605.us-central1.run.app) · [**1-minute video**](VIDEO_LINK) · Built today at the Gemini 4 NYC Hackathon (21 Nov 2026) · Problem Statement One
 
-![Interlock: a change checked against 851 pages, the pump boxed on the P&ID, the calc sheet and a BLOCK verdict](docs/img/10_screen.png)
+![Interlock: a change checked against 851 pages, step by step, ending in a BLOCK verdict with its reasons](docs/img/10_screen.png)
 
 ---
 
@@ -41,9 +41,9 @@ Three names for one pump set ("waste water", "floor wash water", "FLR WASH WTR")
 4. **Find a fix.** A Gemini Managed Agent searches for one in the plant's own sandbox; the **server re-checks it** before anything says proven.
 5. **Approve.** The plant's **register** remembers. A later change that undoes it is blocked.
 
-| The drawing, verified | The calc sheet | The fix, proven by the server | The register remembers |
-|---|---|---|---|
-| ![P&ID crop with the red box](docs/img/11_drawing.png) | ![Calc sheet with sources](docs/img/12_calc_sheet.png) | ![Agent tries and the server stamp](docs/img/13_fix_proven.png) | ![Second change BLOCKed by the register](docs/img/14_register_block.png) |
+| The documents, read | The drawing, verified | The calc sheet |
+|---|---|---|
+| ![Five PDFs ingested, 851 pages](docs/img/15_documents.png) | ![P&ID crop with the pumps boxed in red and the verified labels](docs/img/11_drawing.png) | ![Calc sheet: each rule's formula, inputs with their pages, limit and source](docs/img/12_calc_sheet.png) |
 
 ## The Managed Agent: it proposes, the server proves
 
