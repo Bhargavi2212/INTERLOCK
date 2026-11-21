@@ -38,7 +38,7 @@ class SeeModels(FakeModels):
         crop = crop_window(a["box"])
         item = [0.88, 0.70, 0.99, 0.80] if self.wrong_unit else [0.75, 0.70, 0.86, 0.80]
         label = [0.899, 0.779, 0.965, 0.79] if self.wrong_unit else [0.769, 0.779, 0.835, 0.79]
-        nb = [0.599, 0.699, 0.616, 0.705]
+        nb = [0.779, 0.739, 0.796, 0.745]
         return {"found": True, "item_box": to_model(item, crop), "label_box": to_model(label, crop),
                 "readings": [{"input": "line_nb", "value": "200", "unit": "NB", "label_text": "200NB",
                               "box": to_model(nb, crop), "role": "pump discharge"},

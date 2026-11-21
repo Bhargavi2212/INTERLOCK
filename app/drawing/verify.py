@@ -14,7 +14,8 @@ A page with no text layer: nothing is verifiable, nothing reaches the rules.
 
 from __future__ import annotations
 
-from app.drawing.locate import find_anchor
+from app.drawing.boxes import distance
+from app.drawing.locate import _below, box_of, find_anchor, segments, tokens
 from app.reading.evidence import unit_known, value_in_quote
 from app.reading.search import squash
 from app.reading.settings import reading_settings
@@ -84,3 +85,45 @@ def line_role_values(readings: list[dict]) -> list[dict]:
         if r["input"] == "line_nb" and r["evidence_ok"] and r.get("role"):
             out.append({**r, "input": "line_role", "value": r["role"], "unit": ""})
     return out
+
+
+LINE_INPUTS = ("line_nb", "line_role", "shared_discharge")
+
+
+def pump_labels(words: list, anchor: dict | None) -> list[tuple[str, list]]:
+    """Printed text runs containing 'PUMP' (abbreviations applied), except this item's own label."""
+    own = {tuple(w) for w in (anchor or {}).get("words", [])}
+    segs = segments(words)
+    out = []
+    for seg in segs:
+        if "pump" not in tokens(" ".join(w[4] for w in seg)) or all(tuple(w) in own for w in seg):
+            continue
+        above = next((a for a in segs if a is not seg and _below(a, seg)), None)   # label's first line
+        label = (above or []) + seg
+        if all(tuple(w) in own for w in label):
+            continue
+        out.append((" ".join(w[4] for w in label), box_of(label)))
+    return out
+
+
+def check_line_near_item(readings: list[dict], words: list, anchor: dict | None) -> list[dict]:
+    """A line reading passes only if its label's centre is nearer to this item's printed label
+    than to any other pump label on the sheet (Bhargavi, 21 Nov: stops a look-alike's line)."""
+    others = pump_labels(words, anchor)
+    for r in readings:
+        if r.get("input") not in LINE_INPUTS or not r.get("evidence_ok"):
+            continue
+        if anchor is None:
+            r["evidence_ok"] = False
+            r["evidence_reason"] = "no text-layer label for the item to measure the line against"
+            continue
+        mine = distance(r["box"], anchor["box"])
+        nearest = min(others, key=lambda o: distance(r["box"], o[1]), default=None)
+        if nearest is not None and distance(r["box"], nearest[1]) <= mine:
+            r["evidence_ok"] = False
+            r["evidence_reason"] = (f"line label is nearer to another pump label ('{nearest[0]}') "
+                                    f"than to this item's ('{anchor['text']}')")
+            r.pop("assumption", None)
+        else:
+            r["evidence_reason"] += f"; nearest pump label is this item's ({mine:.3f} of the page)"
+    return readings

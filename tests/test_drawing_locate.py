@@ -20,7 +20,8 @@ WORDS = (label(0.77, 0.78, "SG UNIT-1 FLR WASH WTR", "TRANSFER PUMPS")
          + label(0.90, 0.78, "SG UNIT-2 FLR WASH WTR", "TRANSFER PUMPS")
          + label(0.28, 0.76, "MRS UNIT-1 WASTE WATER", "TRANSFER PUMPS")
          + label(0.42, 0.60, "ESP UNIT-1 WASTE WATER", "TRANSFER PUMPS")
-         + label(0.60, 0.70, "200NB"))
+         + label(0.78, 0.74, "200NB")          # SG Unit-1 header
+         + label(0.91, 0.74, "200NB"))         # SG Unit-2 header
 
 
 def test_anchor_unit1_not_unit2():

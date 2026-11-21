@@ -20,7 +20,7 @@ from __future__ import annotations
 from app.drawing import render
 from app.drawing.boxes import to_page
 from app.drawing.locate import crop_png, crop_window, drawing_pages, find_anchor
-from app.drawing.verify import check_item, check_reading, line_role_values
+from app.drawing.verify import check_item, check_line_near_item, check_reading, line_role_values
 from app.reading import schemas
 from app.reading.settings import reading_settings
 
@@ -75,7 +75,7 @@ def look_on_page(models, u: dict, page_rec: dict, page_png: bytes) -> dict:
         ok, why = check_item(words, seen["item_box"], seen["label_box"], u)
     else:
         ok, why = False, "the model did not find the item on this sheet"
-    readings = [check_reading(r, words, file, page) for r in seen["readings"]]
+    readings = check_line_near_item([check_reading(r, words, file, page) for r in seen["readings"]], words, anchor)
     if not ok:
         for r in readings:
             r["evidence_ok"] = False

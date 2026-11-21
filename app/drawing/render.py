@@ -29,14 +29,19 @@ def draw(crop_png: bytes, drawing: dict) -> bytes:
         item = _to_crop(drawing.get("item_box"), crop, w, h)
         if item:
             page.draw_rect(item, color=RED if drawing.get("verified") else GREY, width=size / 2.5)
+        # one box per printed label (line size, shared header and role often share "200NB"),
+        # one caption per box: no overprinted text
+        groups: dict[tuple, list] = {}
         for r in drawing.get("readings", []):
-            rect = _to_crop(r.get("box"), crop, w, h)
-            if rect is None:
-                continue
-            ok = r.get("evidence_ok")
-            page.draw_rect(rect, color=RED if ok else GREY, width=size / 6, dashes=None if ok else "[4] 0")
-            text = f"{r.get('input')}: {r.get('value')} {r.get('unit') or ''}".strip()
-            page.insert_text((rect.x1 + 4, max(rect.y0 + size, size)), text, fontsize=size, color=RED if ok else GREY)
+            if r.get("box"):
+                groups.setdefault(tuple(round(v, 4) for v in r["box"]), []).append(r)
+        for box, rs in groups.items():
+            rect = _to_crop(list(box), crop, w, h)
+            ok = all(r.get("evidence_ok") for r in rs)
+            page.draw_rect(rect, color=RED if ok else GREY, width=size / 5, dashes=None if ok else "[4] 0")
+            text = "; ".join(f"{r.get('input')} {r.get('value')} {r.get('unit') or ''}".strip() for r in rs)
+            y = rect.y0 - size * 0.4 if rect.y0 > size * 1.5 else rect.y1 + size
+            page.insert_text((max(rect.x0, 2), y), text, fontsize=size * 0.8, color=RED if ok else GREY)
         out = page.get_pixmap().tobytes("png")
         doc.close()
         return out

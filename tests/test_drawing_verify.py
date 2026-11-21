@@ -9,7 +9,7 @@ U1 = {"item": "SG Unit-1 floor wash water transfer pumps", "names": ["floor wash
       "unit_tag": "Unit-1"}
 U1_LABEL = [0.769, 0.779, 0.835, 0.79]       # around the SG UNIT-1 label words
 U2_LABEL = [0.899, 0.779, 0.965, 0.79]
-NB200 = [0.599, 0.699, 0.616, 0.705]
+NB200 = [0.779, 0.739, 0.796, 0.745]
 
 
 def test_item_box_with_label_and_unit_tag_passes():
@@ -86,3 +86,27 @@ def test_text_shared_discharge_on_drawing_page_dropped():
     sc = build_scenario([d("working", "2", "count", "Part4.pdf", 57)], shared_text, [], "",
                         drawing_pages={("Part3.pdf", 146)})
     assert sc["shared_discharge"] is None
+
+
+def test_line_label_must_be_nearest_to_this_items_label():
+    from app.drawing.locate import find_anchor
+    from app.drawing.verify import check_line_near_item
+    a1 = find_anchor(WORDS, ["floor wash water transfer pump"], "Unit-1")
+    u1_nb = [0.779, 0.739, 0.796, 0.745]          # 200NB printed by the SG Unit-1 pumps
+    u2_nb = [0.909, 0.739, 0.926, 0.745]          # 200NB printed by the SG Unit-2 pumps
+    good = check_reading({"input": "line_nb", "value": "200", "unit": "NB", "label_text": "200NB", "box": u1_nb},
+                         WORDS, "Part3.pdf", 146)
+    bad = check_reading({"input": "shared_discharge", "value": "true", "label_text": "200NB", "box": u2_nb},
+                        WORDS, "Part3.pdf", 146)
+    assert good["evidence_ok"] and bad["evidence_ok"]           # both labels really say 200NB
+    out = check_line_near_item([good, bad], WORDS, a1)
+    assert out[0]["evidence_ok"] and "this item's" in out[0]["evidence_reason"]
+    assert not out[1]["evidence_ok"] and "SG UNIT-2" in out[1]["evidence_reason"]
+    assert "assumption" not in out[1]
+
+
+def test_line_reading_without_anchor_fails():
+    from app.drawing.verify import check_line_near_item
+    r = check_reading({"input": "line_nb", "value": "200", "unit": "NB", "label_text": "200NB",
+                       "box": [0.779, 0.739, 0.796, 0.745]}, WORDS, "Part3.pdf", 146)
+    assert not check_line_near_item([r], WORDS, None)[0]["evidence_ok"]
