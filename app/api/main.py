@@ -241,6 +241,33 @@ def change_drawing(change_id: str, full: int = 0) -> Response:
     return Response(content=png, media_type="image/png", headers={"Cache-Control": "no-store"})
 
 
+class ApproveIn(BaseModel):
+    resolved: list[str] = []
+
+
+@api.post("/changes/{change_id}/approve")
+def approve_change(change_id: str, body: ApproveIn) -> dict:
+    from app.register.write import NotApproved, approve
+
+    store = get_store()
+    change = store.get_change(change_id)
+    if change is None:
+        raise HTTPException(status_code=404, detail="change not found")
+    try:
+        entries = approve(store, change, body.resolved)
+    except NotApproved as e:
+        raise HTTPException(status_code=409, detail=str(e)) from None
+    change["approved"] = {"entry_ids": [e["entry_id"] for e in entries], "approved_at": entries[0]["approved_at"]}
+    store.put_change(change["plant_id"], change_id, change)
+    return {"entries": entries}
+
+
+@api.get("/plants/{plant_id}/register")
+def plant_register(plant_id: str) -> list[dict]:
+    _plant_or_404(plant_id)
+    return sorted(get_store().list_register(plant_id), key=lambda e: e.get("approved_at", ""), reverse=True)
+
+
 @api.get("/jobs/{job_id}")
 def get_job(job_id: str) -> dict:
     job = get_store().get_job(job_id)

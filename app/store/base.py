@@ -78,6 +78,7 @@ class Store(Protocol):
 
     # register (read in phase 2; written in phase 4)
     def list_register(self, plant_id: str) -> list[dict]: ...
+    def add_register_entries(self, plant_id: str, entries: list[dict]) -> None: ...
 
 
 _store: Store | None = None

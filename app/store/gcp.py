@@ -174,6 +174,12 @@ class GcpStore:
         return out
 
     # ------------------------------------------------------------ register
+    def add_register_entries(self, plant_id, entries):
+        batch = self.db.batch()
+        for e in entries:
+            batch.set(self._plant_ref(plant_id).collection("register").document(e["entry_id"]), e)
+        batch.commit()
+
     def list_register(self, plant_id):
         return [d.to_dict() | {"entry_id": d.id}
                 for d in self._plant_ref(plant_id).collection("register").stream()]

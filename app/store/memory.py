@@ -115,3 +115,6 @@ class MemoryStore:
     def list_register(self, plant_id):
         return copy.deepcopy(self.register.get(plant_id, []))
 
+    def add_register_entries(self, plant_id, entries):
+        self.register.setdefault(plant_id, []).extend(copy.deepcopy(entries))
+
