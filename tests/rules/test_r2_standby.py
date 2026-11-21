@@ -73,3 +73,15 @@ def test_change_3w_cannot_drop_standby():
     assert r.status == "flagged"
     r = run_rule("R2", {"installed": v(3, "count"), "arrangement": v("3W", source="change")})
     assert r.status == "flagged"
+
+
+def test_change_needing_more_pumps_says_so():
+    r = run_rule("R2", {"installed": v(2, "count"), "arrangement": v("1W+1S"),
+                        "working": v(2, "count", source="change")})
+    assert r.status == "flagged"
+    assert r.message.startswith("R2 Standby available: This change needs 3 pumps installed; the documents show 2.")
+
+
+def test_documents_alone_flagged_without_change_sentence():
+    r = run_rule("R2", {"installed": v(2, "count"), "working": v(2, "count")})
+    assert r.status == "flagged" and "This change needs" not in r.message

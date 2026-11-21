@@ -76,6 +76,7 @@ Every result carries: `rule_id`, `status`, `value`, `unit`, `limit`, `limit_sour
 - **Rule:** `installed >= working + standby_required`.
 - **standby_required:** from the documents' arrangement when stated (e.g. "1W+1S"); otherwise default 1 with the assumption "continuous duty assumed". **Never from the change or a fix**: a changed arrangement ("2W+1S", "3W") sets only the working count.
 - **arrangement** (`NW+MS` or `NW`) supplies the standby count, and the working count only when `working` is missing. When the two disagree, that is a disagreement the caller passes to the verdict; R2 does not decide it.
+- **Message:** when the change (or a fix) raises the working count so that installed < working + standby, the message starts "This change needs N pumps installed; the documents show M."
 - **Documents disagree on a requirement:** if documents disagree on a required count or limit (e.g. standby required), use the stricter value, state it as an assumption naming both pages, and still pass the disagreement to the verdict. Disputed measured values (flow, size, volume, installed count) remain held. **Applied to `standby_required` only for now.**
 - **Held if:** installed or working count missing.
 - **Test cases:**

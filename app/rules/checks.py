@@ -208,6 +208,10 @@ def r2_standby(ins, rule_cfg, rules, doc_limits):
     sign = "<" if status == "flagged" else ">="
     msg = (f"installed {installed:g} {sign} working {working:g} + standby {standby:g}; "
            f"standby from {source}; inputs {ins.pages()}")
+    w = ins.raw.get("working")
+    if status == "flagged" and getattr(w, "source", "") in ("change", "fix"):
+        # the change raises the pumps needed above what the documents show installed
+        msg = f"This change needs {required:g} pumps installed; the documents show {installed:g}. " + msg
     return _result("R2", rule_cfg, status, installed, "count", required, source, msg, assumptions)
 
 
