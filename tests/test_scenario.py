@@ -113,3 +113,12 @@ def test_always_r1_to_r3_for_pumps():
     sc = build_scenario([], [], [], "")
     assert set(sc["after"]) == {"R1", "R2", "R3"}
     assert all(r.status == "held" for r in run_rules(sc["after"], []))
+
+
+def test_change_arrangement_never_sets_standby():
+    vals = [d("installed", "3", "nos", "Part1.pdf", 43), d("arrangement", "2W+1S", "", "Part1.pdf", 43)]
+    sc = build_scenario(vals, [], [{"input": "arrangement", "from": "2W+1S", "to": "3W", "unit": ""}], "run all three")
+    assert sc["after"]["R2"]["arrangement"].value == "2W+1S"  # documents' arrangement kept
+    assert sc["after"]["R2"]["working"].value == 3
+    r2 = next(r for r in run_rules(sc["after"], []) if r.rule_id == "R2")
+    assert r2.status == "flagged"

@@ -150,10 +150,12 @@ def change_values(changes: list[dict], change_text: str) -> dict:
         name = c.get("input")
         if name in INPUT_QUANTITY and c.get("to") not in (None, ""):
             out[name] = Value(c["to"], c.get("unit", "") or "", quote=change_text, source="change")
-    # The change sets an arrangement but not the working count: take it from the arrangement.
-    if "arrangement" in out and "working" not in out:
+    # A changed arrangement gives the working count only; the standby requirement stays
+    # the documents' arrangement or the default (RULES.md R2), so it is not passed on.
+    arrangement = out.pop("arrangement", None)
+    if arrangement is not None and "working" not in out:
         try:
-            out["working"] = Value(parse_arrangement(out["arrangement"].value)["working"], "count",
+            out["working"] = Value(parse_arrangement(arrangement.value)["working"], "count",
                                    quote=change_text, source="change")
         except UnknownUnit:
             pass

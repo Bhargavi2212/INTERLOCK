@@ -281,6 +281,8 @@ From the phase 2 review and Bhargavi's decisions. Plan: `docs/specs/PHASE_2_PLAN
 
 **C (register overlay).** `scenario.py` takes approved register values as an **overlay on the as-issued inputs** (source `register`, citing the entry); empty in phase 2, used in phase 4.
 
+**R2 standby (independent review, 21 Nov; overrides §6.6).** `standby_required` comes only from the documents' arrangement or the default, never from the change: a changed arrangement sets only the working count.
+
 **C11 Rules per item.** For pump items, R1-R3 always run; Neon's `rules` list is ignored for them (a rule with nothing to check comes back held, visibly).
 
 **Trims.**

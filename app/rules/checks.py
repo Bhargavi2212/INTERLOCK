@@ -165,10 +165,12 @@ def r2_standby(ins, rule_cfg, rules, doc_limits):
     if ins.has("standby_required"):
         standby = ins.num("standby_required")
         source = f"stated ({ins.pages()})"
-    elif arr is not None:
+    elif arr is not None and ins.raw["arrangement"].source in ("document", "register"):
+        # standby comes only from the documents' (or an approved) arrangement, never a change or fix
         standby = float(arr["standby"])
         v = ins.raw["arrangement"]
-        source = f"arrangement '{v.value}' ({v.file} p.{v.page})" if v.source == "document" else f"arrangement '{v.value}' ({v.source} text)"
+        where = f"{v.file} p.{v.page}" if v.source == "document" else "register"
+        source = f"arrangement '{v.value}' ({where})"
     else:
         standby, source = default_limit(rule_cfg, "standby_required")
         assumptions.append("continuous duty assumed")

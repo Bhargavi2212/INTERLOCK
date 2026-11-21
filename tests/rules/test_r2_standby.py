@@ -63,4 +63,13 @@ def test_change_values_accepted():
     r = run_rule("R2", {"installed": v(2, "count"), "working": v(2, "count", source="change"),
                         "arrangement": v("2W+1S", source="change")})
     assert r.status == "flagged"
-    assert "change text" in r.limit_source
+    assert r.limit_source.startswith("default")  # standby never from the change
+
+
+def test_change_3w_cannot_drop_standby():
+    # installed 3, documents 2W+1S; change "3W": working 3, standby still 1 -> 3 < 4 flagged
+    r = run_rule("R2", {"installed": v(3, "count"), "arrangement": v("2W+1S"),
+                        "working": v(3, "count", source="change")})
+    assert r.status == "flagged"
+    r = run_rule("R2", {"installed": v(3, "count"), "arrangement": v("3W", source="change")})
+    assert r.status == "flagged"
