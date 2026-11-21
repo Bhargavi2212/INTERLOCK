@@ -1,0 +1,22 @@
+{
+ "id": "F2",
+ "system": "interlock",
+ "started_at": "2026-11-21T15:55:07",
+ "seconds": 0.0,
+ "state": "done",
+ "error": null,
+ "output": {
+  "rule_id": "R3",
+  "value": 30.0,
+  "unit": "min",
+  "status": "held",
+  "limit": null,
+  "limit_source": "",
+  "message": "R3 Sump cycle time held: q_in missing (inflow not stated)",
+  "notes": [
+   "pump-out only 30.0 min, information only"
+  ],
+  "assumptions": [],
+  "doc_limits": []
+ }
+}

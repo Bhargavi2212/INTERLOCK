@@ -72,3 +72,13 @@ def test_worst_of_three_and_key_before_run(tmp_path):
     flags = {k["file"]: k["ok"] for k in s["key_before_run"]}
     assert flags == {"E_E9_interlock_1.json": True, "E_E9_interlock_2.json": True, "E_E9_interlock_3.json": False}
     assert s["time"]["cold_started"] == "2026-11-21T12:00:00"
+
+
+def test_run_f_code_math_matches_f_keys():
+    import run_f
+    for kid, (val, status) in {"F1": (1.86, "OK"), "F2": (30.0, "held"), "F3": (3, "OK")}.items():
+        key = json.loads((ROOT / "eval" / "keys" / f"{kid}.json").read_text(encoding="utf-8"))
+        o = run_f.interlock(key)
+        assert o["status"] == status and abs(o["value"] - val) <= 0.01 * val
+    f1 = run_f.interlock(json.loads((ROOT / "eval" / "keys" / "F1.json").read_text(encoding="utf-8")))
+    assert f1["limit"] == 2.5 and f1["doc_limits"][0]["applies_to"] == "pump discharge"   # G2: band, not 3.0

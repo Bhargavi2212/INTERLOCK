@@ -1,0 +1,22 @@
+{
+ "id": "F3",
+ "system": "interlock",
+ "started_at": "2026-11-21T15:55:07",
+ "seconds": 0.0,
+ "state": "done",
+ "error": null,
+ "output": {
+  "rule_id": "R2",
+  "value": 3.0,
+  "unit": "count",
+  "status": "OK",
+  "limit": 3.0,
+  "limit_source": "arrangement '2W+1S' (Part1.pdf p.43)",
+  "message": "R2 Standby available: installed 3 >= working 2 + standby 1; standby from arrangement '2W+1S' (Part1.pdf p.43); inputs Part1.pdf p.43",
+  "notes": [],
+  "assumptions": [
+   "working count taken from the arrangement"
+  ],
+  "doc_limits": []
+ }
+}

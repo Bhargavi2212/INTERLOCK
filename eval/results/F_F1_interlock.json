@@ -1,0 +1,32 @@
+{
+ "id": "F1",
+ "system": "interlock",
+ "started_at": "2026-11-21T15:55:07",
+ "seconds": 0.0,
+ "state": "done",
+ "error": null,
+ "output": {
+  "rule_id": "R1",
+  "value": 1.8568076694054456,
+  "unit": "m/s",
+  "status": "OK",
+  "limit": 2.5,
+  "limit_source": "Part5.pdf p.200: 'Pump discharge ... 200 mm ... 2.1-2.5'",
+  "message": "R1 Pipe velocity: v = 1.86 m/s vs limit 2.50 m/s (Part5.pdf p.200: 'Pump discharge ... 200 mm ... 2.1-2.5'); inputs Part3.pdf p.146, Part4.pdf p.57",
+  "notes": [
+   "below the documents' lower value 2.10 m/s; solids check not run: service type not stated"
+  ],
+  "assumptions": [
+   "upper bound for parallel pumps on a shared header (real operating point is lower)",
+   "nominal bore used as internal diameter (slightly over-states velocity for Sch 40, under-states it for Sch 80 and heavier)",
+   "line assumed to be pump discharge"
+  ],
+  "doc_limits": [
+   {
+    "applies_to": "pump discharge",
+    "low": 2.1,
+    "high": 2.5
+   }
+  ]
+ }
+}
