@@ -152,7 +152,7 @@ Model strings come from the hackathon builder resources and live only in environ
 
 **How models are called** (hackathon builder guide, `google-genai` >= 3.2.0):
 
-- **Model calls:** stable client, `client.interactions.create(model=..., input=..., generation_config={"thinking_level": ...})`. Thinking levels: Neon and Hydrogen `low` / `medium` / `high` (default) / `xhigh`; Carbon and Argon `low` / `medium` (default) / `high`. **Never** pass temperature, top_p, top_k, a thinking budget, or `"minimal"`.
+- **Model calls:** `client.interactions.create(model=..., input=..., generation_config={"thinking_level": ...})`. Plain text on the stable client; **structured output only on the v1beta client** (the stable API rejects `response_mime_type`: live error, 21 Nov). Thinking levels: Neon and Hydrogen `low` / `medium` / `high` (default) / `xhigh`; Carbon and Argon `low` / `medium` (default) / `high`. **Never** pass temperature, top_p, top_k, a thinking budget, or `"minimal"`.
 - **Structured outputs:** every extraction uses a response schema; JSON is never hand-parsed.
 - **Decisions API:** v1beta client, `decisions.create(model=..., input=[text and image parts], questions={...})`. Question types `noul` (P(yes), 0.01-0.99, plus confidence), `choice` (keys sort alphabetically; always include an explicit `"other"` key) and `score`. Max input 262,144 tokens per call.
 - **Managed Agent:** v1beta client, `interactions.create(agent=..., environment="remote", agent_config={"type": "antigravity", "model": <Neon>, "max_total_tokens": ...}, input=...)`. Returns `environment_id` and `output_text`. The plant's sandbox is reused with `environment=<environment_id>` and `previous_interaction_id=<id>`.

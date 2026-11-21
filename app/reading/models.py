@@ -1,7 +1,8 @@
 """The only place that calls Gemini (CLAUDE.md, ARCHITECTURE.md section 3).
 
-- Model calls: stable client, interactions.create(model, input, generation_config
-  {"thinking_level"}, response_format=<JSON schema>, response_mime_type JSON).
+- Model calls: interactions.create(model, input, generation_config {"thinking_level"}).
+  Plain text on the stable client; structured output (response_format=<JSON schema>,
+  response_mime_type JSON) on the v1beta client: the stable API rejects those fields.
 - Decisions API: v1beta client, decisions.create.
 - Never temperature / top_p / top_k / a thinking budget / "minimal".
 - One retry on 429 / 5xx after 2 s. Logs role, seconds and token counts only:
@@ -69,14 +70,17 @@ class Models:
                 raise
 
     def call(self, role: str, prompt: str, schema: dict | None = None, thinking: str = "low"):
-        """One model call. With a schema the reply is parsed JSON (structured output)."""
-        stable, _ = self._clients()
+        """One model call. With a schema the reply is parsed JSON (structured output).
+        Structured output (response_format + response_mime_type) is only accepted by the
+        v1beta API (live error, 21 Nov), so schema calls use the v1beta client."""
+        stable, beta = self._clients()
+        client = stable if schema is None else beta
         model = get_settings().require(ROLE_MODEL[role])
         kwargs = dict(model=model, input=prompt, generation_config={"thinking_level": thinking},
                       timeout=CALL_TIMEOUT_S)
         if schema is not None:
             kwargs.update(response_format=schema, response_mime_type="application/json")
-        interaction = self._retry(role, lambda: stable.interactions.create(**kwargs))
+        interaction = self._retry(role, lambda: client.interactions.create(**kwargs))
         text = interaction.output_text or ""
         return json.loads(text) if schema is not None else text
 
