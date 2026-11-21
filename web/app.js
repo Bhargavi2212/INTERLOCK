@@ -220,7 +220,8 @@ function showResult(res) {
 $("check").onclick = async () => {
   const text = $("change-text").value.trim();
   if (!plantId) { alert("Create or pick a plant first."); return; }
-  if (!text) return;
+  if (!text) { $("check-status").textContent = "Type the change first (the grey text is only an example)."; return; }
+  $("check-status").textContent = "starting…";
   $("result").hidden = true;
   $("check").disabled = true;
   const started = Date.now();

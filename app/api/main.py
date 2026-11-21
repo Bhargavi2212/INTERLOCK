@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import APIRouter, Depends, FastAPI, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -41,9 +41,16 @@ def health() -> dict:
     return {"status": "ok", "version": get_settings().app_version}
 
 
+NO_CACHE = {"Cache-Control": "no-cache"}
+
+
 @app.get("/", include_in_schema=False)
-def index() -> FileResponse:
-    return FileResponse(WEB_DIR / "index.html")
+def index() -> HTMLResponse:
+    """The one screen. Static links carry the version, so a deploy is never served stale JS/CSS."""
+    v = get_settings().app_version
+    html = (WEB_DIR / "index.html").read_text(encoding="utf-8")
+    html = html.replace("/static/app.js", f"/static/app.js?v={v}").replace("/static/app.css", f"/static/app.css?v={v}")
+    return HTMLResponse(html, headers=NO_CACHE)
 
 
 # ---------------------------------------------------------------- plants and upload

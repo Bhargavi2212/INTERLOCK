@@ -47,3 +47,11 @@ def test_missing_setting_names_variable_only():
     s = config.Settings({})
     with pytest.raises(config.MissingSetting, match="GCS_BUCKET is not set"):
         s.require("GCS_BUCKET")
+
+
+def test_page_links_static_files_with_version(client, monkeypatch):
+    monkeypatch.setenv("APP_VERSION", "abc1234")
+    config.get_settings.cache_clear()
+    r = client.get("/")
+    assert "/static/app.js?v=abc1234" in r.text and "/static/app.css?v=abc1234" in r.text
+    assert r.headers["cache-control"] == "no-cache"
