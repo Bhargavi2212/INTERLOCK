@@ -1,8 +1,12 @@
 # Phase 3 — build plan (for approval)
 
-Implements `docs/specs/PHASE_3.md` **with its Amendments** (they override). No code until Bhargavi approves. Every step ends in a commit with `pytest -q` green. Claude Code never runs anything that needs the Gemini key; Bhargavi runs every live call and pastes back only printed output.
+Implements `docs/specs/PHASE_3.md` **with its Amendments** (they override). **Approved 21 Nov** with four changes:
+1. Reingest clears the plant's in-memory `pages_all` cache and anything derived from it (token-count memo); test: after reingest, `get_pages_all` entries carry `is_drawing`.
+2. Review item 6 (guard tests) is in **phase 5**.
+3. Calibration stop rule: if the best format's label centre is more than 0.01 of the page from the text-layer centre, **stop and show Bhargavi the raw output**; no format is set and set B is not run.
+4. `Value.box` is a tuple. Every step ends in a commit with `pytest -q` green. Claude Code never runs anything that needs the Gemini key; Bhargavi runs every live call and pastes back only printed output.
 
-Clock: starts ~14:05. Phase window 14:15-14:45; **never cut**. Review item 6 (stronger guard tests) waits for the start of phase 4 unless Bhargavi says otherwise.
+Clock: starts ~14:05. Phase window 14:15-14:45; **never cut**. Review item 6 (stronger guard tests) is in phase 5.
 
 Checked before writing (not guessed):
 - **Rotation bug is real:** Part3 p.146 has rotation 270; words stored by phase 2 ingest reach y = 1.408. `rect * page.rotation_matrix` puts them in 0-1.
@@ -79,7 +83,7 @@ For each reading and the item/label boxes:
 
 ## 5. Step D5 — calibrate, score set B, run A1 (Bhargavi runs; ~10 min)
 
-- `scripts/calibrate_box.py --plant <id>` (commit D5a): one vision call on the crop around **ESP UNIT-1 WASTE WATER TRANSFER PUMPS** (Part3 p.146); prints Argon's raw label box and the text-layer box, and the page-normalised result under each format (`yx/1000`, `xy/1000`, `yx/1`, `xy/1`) with its centre distance. Bhargavi pastes the output; I set `drawing.box_format` to the format with the smallest distance and record it in `vision.py`'s docstring (commit D5b). **Never a B item.**
+- `scripts/calibrate_box.py --plant <id>` (commit D5a): one vision call on the crop around **ESP UNIT-1 WASTE WATER TRANSFER PUMPS** (Part3 p.146); prints Argon's raw label box and the text-layer box, and the page-normalised result under each format (`yx/1000`, `xy/1000`, `yx/1`, `xy/1`) with its centre distance. Bhargavi pastes the output; I set `drawing.box_format` to the format with the smallest distance and record it in `vision.py`'s docstring (commit D5b), **only if that distance is ≤ 0.01 of the page**; otherwise I stop, show the raw output, set nothing, and set B is not run. **Never a B item.**
 - `scripts/score_b.py --plant <id>` (commit D5a): for each B key, understanding from **`item_query` only**; the drawing step alone on the key's page (matched by file basename); **label_box centre vs key box centre**, hit if ≤ 0.03; `found:false` keys hit if not found; writes `eval/results/b_<time>.json`; prints `B1 hit 0.004 | ... | n/5`.
 - Bhargavi: warm-up check, then A1 on the live URL (red box on SG Unit-1, not Unit-2; R1 1.86 m/s OK with the note, citing the drawing's 200NB); then `score_b.py`.
 - Commit raw results; misses to `EVAL.md` §6 (score to §5 in phase 5).
