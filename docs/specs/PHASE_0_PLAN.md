@@ -8,8 +8,8 @@ Implements `docs/specs/PHASE_0.md`. **Approved 21 Nov 2026** with four changes, 
 
 | # | Item | Why | Blocks |
 |---|---|---|---|
-| N1 | Builder-resources snippet for the **Decisions API** call (endpoint or SDK method, request shape, example response). No key. | `check_models.py` must ask it one question in the documented shape | Step 5 |
-| N2 | Builder-resources snippet for the **Managed Agent** call (create/run a task, poll or stream the result). No key. | `check_models.py` smoke check | Step 5 |
+| N1 | ✅ Received; recorded in `ARCHITECTURE.md` §3. Decisions API call shape. | `check_models.py` must ask it one question in the documented shape | Step 5 |
+| N2 | ✅ Received; recorded in `ARCHITECTURE.md` §3. Managed Agent call shape. | `check_models.py` smoke check | Step 5 |
 | N3 | ✅ `https://github.com/Bhargavi2212/INTERLOCK.git` | `origin` remote, pushed tag | Step 1 |
 | N4 | GCP **project id** (only the id; I put `<PROJECT_ID>` in the commands file either way) | Ready-to-paste commands | Step 7 (optional) |
 | N5 | ✅ `data/bhel/Part1.pdf`-`Part5.pdf`, 150/150/150/150/251 = 851 pages; in `EVAL.md` §2 | Set E keys use `{file, page}` | — |

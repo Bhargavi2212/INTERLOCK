@@ -15,13 +15,13 @@ What the system is made of and how a change flows through it. What we build and 
             |                                                  |
             +---------------------------+----------------------+
                                         v
- [2 Find the item]   Argon long read over the plant's pages (context-cached)
+ [2 Find the item]   Argon long read over the plant's pages (automatic cache, see §7)
                      + code search over every page (all names, spacing ignored)
                                         |
  [3 Same item?]      Decisions API on each candidate page (probability)
                                         |
- [4 Pull the values] Argon: value, unit, page, exact quote; also design-basis limits
-                     stated in the documents (e.g. a velocity table), same format
+ [4 Pull the values] Argon, structured output: value, unit, page, exact quote; also
+                     design-basis limits stated in the documents (e.g. a velocity table)
                                         |
  [5 Evidence check]  code: quote is on that page, value is in the quote, unit is known
                                         |
@@ -120,13 +120,13 @@ INTERLOCK/
 | Path | Component | Uses a model? | Notes |
 |---|---|---|---|
 | `app/ingest/` | Files to pages: text per page, page image, drawing detection, content hash | No | PyMuPDF. Drawings = large sheets or near-empty text layer |
-| `app/reading/` | Steps 1-5 | Yes | Every value carries `page`, `quote`, `unit`; design-basis limits too (`RULES.md`) |
+| `app/reading/` | Steps 1-5 | Yes | Every value carries `page`, `quote`, `unit`; design-basis limits too (`RULES.md`). Extraction uses structured outputs (response schema), never hand-parsed JSON |
 | `app/drawing/` | Step 6 | Yes (Argon) | Where the PDF has a text layer, code confirms the box lands on the printed label |
 | `app/rules/` | Step 7, rule engine; `rules.yaml` mirrors `RULES.md` | **Never** | |
 | `app/register/` | Step 7b, register clash check | No | Firestore is the only source of truth |
 | `app/explain/` | Step 8 | Yes (Carbon) | Explains; never changes a status |
 | `app/verdict/` | Step 9 | No (Hydrogen writes headlines only) | Pure function of rule results, disagreements, clashes |
-| `app/agent/` | Steps 10-11 | Yes (Managed Agent, Neon) | Sandbox per plant; server re-check mandatory |
+| `app/agent/` | Steps 10-11 | Yes (Managed Agent, Neon) | Sandbox per plant; agent config sets `max_total_tokens`; server re-check mandatory |
 | `app/jobs/` | Background jobs and progress | No | In-process; state in Firestore |
 | `app/store/` | Firestore + Cloud Storage access | No | |
 | `app/api/` | HTTP API | No | FastAPI |
@@ -150,6 +150,13 @@ Model strings come from the hackathon builder resources and live only in environ
 | **Gemini 4 Neon** | Understanding the change (step 1); the Managed Agent's model (step 10) | Near-Carbon quality, fast, strong at code |
 | **Decisions API** | "Is this page about the same item as the change?" with a probability; threshold chosen on Set A, applied unchanged to Set E (`EVAL.md`) | Narrow, measurable job |
 
+**How models are called** (hackathon builder guide, `google-genai` >= 3.2.0):
+
+- **Model calls:** stable client, `client.interactions.create(model=..., input=..., generation_config={"thinking_level": ...})`. Thinking levels: Neon and Hydrogen `low` / `medium` / `high` (default) / `xhigh`; Carbon and Argon `low` / `medium` (default) / `high`. **Never** pass temperature, top_p, top_k, a thinking budget, or `"minimal"`.
+- **Structured outputs:** every extraction uses a response schema; JSON is never hand-parsed.
+- **Decisions API:** v1beta client, `decisions.create(model=..., input=[text and image parts], questions={...})`. Question types `noul` (P(yes), 0.01-0.99, plus confidence), `choice` (keys sort alphabetically; always include an explicit `"other"` key) and `score`. Max input 262,144 tokens per call.
+- **Managed Agent:** v1beta client, `interactions.create(agent=..., environment="remote", agent_config={"type": "antigravity", "model": <Neon>, "max_total_tokens": ...}, input=...)`. Returns `environment_id` and `output_text`. The plant's sandbox is reused with `environment=<environment_id>` and `previous_interaction_id=<id>`.
+
 **Decisions API fallback:** if the same-item job is not working by the phase 2 cut-line, it moves to ranking flagged results by severity. It never leaves the product.
 
 ## 4. Size limit
@@ -163,7 +170,7 @@ Argon's input limit is 1,048,576 tokens. Before the long read, count tokens. **T
 | Cloud Storage `plants/{plant_id}/files/` | Uploaded PDFs |
 | Cloud Storage `plants/{plant_id}/pages/{n}.json` and `{n}.png` | Page text and page image (too large for Firestore's 1 MiB document limit) |
 | Cloud Storage `plants/{plant_id}/changes/{change_id}/drawing.png` | Highlighted drawing |
-| Firestore `plants/{plant_id}` | Name, files (relative path, size, hash, status), page count, ingest status, cache id, agent sandbox id |
+| Firestore `plants/{plant_id}` | Name, files (relative path, size, hash, status), page count, ingest status, agent sandbox id (`environment_id`) and last interaction id |
 | Firestore `plants/{plant_id}/changes/{change_id}` | Change text, found pages, values with quotes, rule results, verdict |
 | Firestore `plants/{plant_id}/register/{entry_id}` | Approved changes. **Only source of truth.** The agent sandbox gets a read-only copy per run |
 | Firestore `jobs/{id}` | Job type, state, progress, result |
@@ -194,7 +201,7 @@ One path scheme everywhere: `plants/{plant_id}/changes/{change_id}`, in Firestor
 - Flags: `--timeout=900 --memory=2Gi --cpu=2 --min-instances=1 --max-instances=1 --no-cpu-throttling` (background jobs run in-process, so today there is exactly one instance).
 - **Your own GCP project**, not the temporary hackathon account (deleted tonight).
 - **Secret Manager** holds `GEMINI_API_KEY` and `ACCESS_CODE`. Bhargavi creates the secrets herself; Claude Code never sees the key.
-- **Context caching** of each plant's pages for the long read, if the builder resources confirm it for Gemini 4; otherwise every change re-sends the pages (slower, still correct).
+- **Caching:** Gemini 4 caches automatically on prompts of 4,096+ tokens; the plant's pages are the identical first block of every long read so the cache is reused. No manual caching calls.
 - Deploy: `gcloud run deploy --source .` in a second terminal while coding continues; deploy after phases 0, 2, 3, 4 and 6. Each deploy sets `APP_VERSION` to the git short sha (shown by `/health`); exact commands in `deploy/COMMANDS.md`.
 - **After the event:** the hackathon key, Gemini 4 access, the Decisions API and agent sandboxes may stop working when the temporary account is deleted. The register and all results survive in Firestore; sandboxes are recreated on first use with a new key.
 

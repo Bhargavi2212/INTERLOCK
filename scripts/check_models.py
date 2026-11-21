@@ -3,10 +3,14 @@
     python scripts/check_models.py
 
 Reads .env (python-dotenv). Prints one line per check:
-    name | answered / failed / not configured | seconds | error type
+    name | answered / failed / not configured | seconds | detail
 Never prints the key, request headers, or error messages (they can echo
-request details); only the exception class name and at most 20 characters
-of a reply. Exit code 0 only if every check answered.
+request details); only the exception class name and a short reply excerpt.
+Exit code 0 only if every check answered.
+
+Call shapes follow the hackathon builder guide (google-genai >= 3.2.0):
+stable client + interactions.create for model calls; v1beta client for the
+Decisions API and the Managed Agent.
 """
 
 import sys
@@ -28,51 +32,92 @@ CHAT_MODELS = [
     ("Carbon", "MODEL_CARBON"),
     ("Neon", "MODEL_NEON"),
 ]
+# "low" is valid for all four models. Never pass temperature, top_p, top_k,
+# a thinking budget, or "minimal".
+SMOKE_THINKING_LEVEL = "low"
+DECISION_TEXT = (
+    "Page text: 'SG Unit-1 floor wash water transfer pumps, 2 nos.'\n"
+    "Change: 'SG Unit-1 floor wash pumps: go to 2 working + 1 standby.'"
+)
+DECISION_INSTRUCTIONS = "Is the page about the same equipment as the change?"
+AGENT_TASK = "Compute 2+2. Reply with the number only."
 AGENT_TIMEOUT_S = 300
+AGENT_MAX_TOTAL_TOKENS = 100_000
+AGENT_POLL_S = 5
 
 
 class NotConfigured(Exception):
-    """The setting or the call shape is not available yet."""
+    """A required setting is empty."""
 
 
-def make_client():
+def setting(name: str) -> str:
+    value = get_settings().get(name)
+    if not value:
+        raise NotConfigured(name)
+    return value
+
+
+def make_clients():
+    """Stable client for model calls; v1beta client for Decisions and Managed Agents."""
     from google import genai
-    from google.genai import types
 
     key = get_settings().require("GEMINI_API_KEY")
-    return genai.Client(api_key=key, http_options=types.HttpOptions(timeout=120_000))
+    stable = genai.Client(api_key=key)
+    beta = genai.Client(api_key=key, http_options={"api_version": "v1beta"})
+    return stable, beta
 
 
-def check_chat(client, env_name: str) -> str:
-    model = get_settings().get(env_name)
-    if not model:
-        raise NotConfigured(env_name)
-    response = client.models.generate_content(model=model, contents=PROMPT)
-    text = (response.text or "").strip()
+def check_chat(stable, env_name: str) -> str:
+    interaction = stable.interactions.create(
+        model=setting(env_name),
+        input=PROMPT,
+        generation_config={"thinking_level": SMOKE_THINKING_LEVEL},
+    )
+    text = (interaction.output_text or "").strip()
     if not text:
         raise RuntimeError("empty reply")
     return text
 
 
-def check_decisions(client) -> str:
-    if not get_settings().get("MODEL_DECISIONS"):
-        raise NotConfigured("MODEL_DECISIONS")
-    # Call shape comes from the builder resources (plan N1); wired when received.
-    raise NotConfigured("Decisions API call shape")
+def check_decisions(beta) -> str:
+    decision = beta.decisions.create(
+        model=setting("MODEL_DECISIONS"),
+        input=[{"type": "text", "text": DECISION_TEXT}],
+        questions={"q1": {"type": "noul", "instructions": DECISION_INSTRUCTIONS}},
+    )
+    answer = decision.answers["q1"]
+    return f"P(yes)={answer.noul:.2f} conf={answer.confidence:.2f}"
 
 
-def check_agent(client) -> str:
-    if not get_settings().get("MANAGED_AGENT"):
-        raise NotConfigured("MANAGED_AGENT")
-    # Call shape comes from the builder resources (plan N2); wired when received.
-    raise NotConfigured("Managed Agent call shape")
+def check_agent(beta) -> str:
+    deadline = time.monotonic() + AGENT_TIMEOUT_S
+    interaction = beta.interactions.create(
+        agent=setting("MANAGED_AGENT"),
+        environment="remote",
+        agent_config={
+            "type": "antigravity",
+            "model": setting("MODEL_NEON"),
+            "max_total_tokens": AGENT_MAX_TOTAL_TOKENS,
+        },
+        input=AGENT_TASK,
+        timeout=AGENT_TIMEOUT_S,
+    )
+    while str(interaction.status).lower().endswith("in_progress"):
+        if time.monotonic() > deadline:
+            raise TimeoutError("agent did not finish in 300 s")
+        time.sleep(AGENT_POLL_S)
+        interaction = beta.interactions.get(interaction.id, timeout=AGENT_TIMEOUT_S)
+    text = (interaction.output_text or "").strip()
+    if not text:
+        raise RuntimeError(f"no output, status {interaction.status}")
+    sandbox = "sandbox id returned" if interaction.environment_id else "no sandbox id"
+    return f"{text[:20]} ({sandbox})"
 
 
 def run(name: str, fn) -> bool:
     start = time.monotonic()
     try:
-        reply = fn()
-        status, detail, ok = "answered", f'"{reply[:20]}"', True
+        detail, status, ok = fn()[:40], "answered", True
     except NotConfigured as e:
         status, detail, ok = "not configured", str(e), False
     except Exception as e:  # report the class name only, never the message
@@ -84,17 +129,16 @@ def run(name: str, fn) -> bool:
 
 def main() -> int:
     try:
-        client = make_client()
+        stable, beta = make_clients()
     except MissingSetting as e:
         print(f"cannot start: {e}")
         return 1
 
-    results = [run(name, lambda env=env: check_chat(client, env)) for name, env in CHAT_MODELS]
-    results.append(run("Decisions API", lambda: check_decisions(client)))
-    results.append(run("Managed Agent", lambda: check_agent(client)))
+    results = [run(name, lambda env=env: check_chat(stable, env)) for name, env in CHAT_MODELS]
+    results.append(run("Decisions API", lambda: check_decisions(beta)))
+    results.append(run("Managed Agent", lambda: check_agent(beta)))
 
-    passed = sum(results)
-    print(f"\n{passed} of {len(results)} answered")
+    print(f"\n{sum(results)} of {len(results)} answered")
     return 0 if all(results) else 1
 
 
