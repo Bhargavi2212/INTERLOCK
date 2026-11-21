@@ -56,7 +56,7 @@ Detailed spec: `docs/specs/PHASE_1.md` (with its Amendments); plan: `docs/specs/
 
 ## Phase 2 — Upload and reading (12:50-14:15, lunch at 13:00 while things run)
 
-Status: in progress
+Status: done (phase-2-reading). Evidence: live uploads as a folder (`5821c37a0d46`) and as individual files (`9eeb30bca0d5`), 851 pages each, a Word file skipped with its reason; A1-A3 run, confirmed by Bhargavi against the PDFs, misses in `EVAL.md` §6; floor-wash change BLOCK with the scope/data-sheet disagreement on the live URL in 39.9 s (cache hit; the plant's first run took 102.1 s, recorded in §6); same-item threshold frozen at 0.25 on set A.
 
 Detailed spec: `docs/specs/PHASE_2.md` (with its Amendments); plan: `docs/specs/PHASE_2_PLAN.md`. **Cut-line 14:00:** anything not working moves to the first 15 minutes of phase 3; the drawing starts by 14:30.
 
