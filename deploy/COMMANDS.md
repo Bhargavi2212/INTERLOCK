@@ -111,8 +111,11 @@ gcloud projects add-iam-policy-binding $PROJECT --member "serviceAccount:$PN-com
 ## 7. Service URL and bucket CORS (once, after the first deploy)
 
 ```powershell
-$URL = gcloud run services describe interlock --region $REGION --format "value(status.url)"
-$cors = "[{`"origin`": [`"$URL`"], `"method`": [`"PUT`"], `"responseHeader`": [`"Content-Type`"], `"maxAgeSeconds`": 3600}]"
+# Cloud Run serves the same service at two addresses; allow both.
+$urls = (gcloud run services describe interlock --region $REGION --format json | ConvertFrom-Json).metadata.annotations.'run.googleapis.com/urls' | ConvertFrom-Json
+$URL  = gcloud run services describe interlock --region $REGION --format "value(status.url)"
+$origins = (@($urls) + @($URL) | Select-Object -Unique | ForEach-Object { "`"$_`"" }) -join ", "
+$cors = "[{`"origin`": [$origins], `"method`": [`"PUT`"], `"responseHeader`": [`"Content-Type`"], `"maxAgeSeconds`": 3600}]"
 $corsPath = Join-Path $env:TEMP "interlock-cors.json"
 [IO.File]::WriteAllText($corsPath, $cors)
 gcloud storage buckets update "gs://$BUCKET" --cors-file=$corsPath
@@ -120,7 +123,7 @@ Remove-Item $corsPath
 $URL
 ```
 
-Check: `gcloud storage buckets describe "gs://$BUCKET" --format "value(cors_config)"` shows the URL and `PUT`.
+Check: `gcloud storage buckets describe "gs://$BUCKET" --format "value(cors_config)"` shows **both** service URLs (`interlock-<project number>.us-central1.run.app` and `interlock-<hash>-uc.a.run.app`) and `PUT`.
 
 ## 8. Check the live service (after every deploy)
 
