@@ -35,13 +35,13 @@ def test_verdict_strings_match_eval_keys():
     ([], [], [], NO_CONFLICTS),
 ])
 def test_verdict(results, dis, clash, expected):
-    out = verdict(results, dis, clash, pages_checked=851)
+    out = verdict(results, dis, clash, pages_read=851)
     assert out["verdict"] == expected
 
 
 def test_no_conflicts_label_has_page_count():
-    out = verdict([rr("R1", "OK")], [], [], pages_checked=851)
-    assert out["label"] == "No conflicts found in 851 pages checked"
+    out = verdict([rr("R1", "OK")], [], [], pages_read=805, pages_unreadable=46)
+    assert out["label"] == "No conflicts found in 805 pages read (46 pages had no readable text)"
 
 
 def test_reasons_list_everything():

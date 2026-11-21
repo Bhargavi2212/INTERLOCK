@@ -2,7 +2,8 @@
 
 RULES.md, Verdict: any flagged result, any disagreement about a value the change
 touches, or any register clash -> BLOCK; otherwise any held -> REVIEW; otherwise
-"no conflicts found" (label "No conflicts found in N pages checked"). Never PASS.
+"no conflicts found" (label "No conflicts found in N pages read (M pages had no readable
+text)", counted at ingest). Never PASS.
 
 disagreements: [{"attribute": str, "values": [{"file", "page", "value"}]}]
     (the caller passes only those about values the change touches)
@@ -27,7 +28,7 @@ def _clash_reason(c: dict) -> str:
             f"approved {c.get('approved')}, proposed {c.get('proposed')}")
 
 
-def verdict(results, disagreements, clashes, pages_checked: int) -> dict:
+def verdict(results, disagreements, clashes, pages_read: int, pages_unreadable: int = 0) -> dict:
     flagged = [r for r in results if r.status == "flagged"]
     held = [r for r in results if r.status == "held"]
     reasons = [f"flagged: {r.message}" for r in flagged]
@@ -40,7 +41,8 @@ def verdict(results, disagreements, clashes, pages_checked: int) -> dict:
     elif held:
         v, label = REVIEW, REVIEW
     else:
-        v, label = NO_CONFLICTS, f"No conflicts found in {pages_checked} pages checked"
+        v, label = NO_CONFLICTS, (f"No conflicts found in {pages_read} pages read "
+                                  f"({pages_unreadable} pages had no readable text)")
     return {"verdict": v, "label": label, "reasons": reasons}
 
 

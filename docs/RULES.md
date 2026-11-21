@@ -32,7 +32,7 @@ Every result carries: `rule_id`, `status`, `value`, `unit`, `limit`, `limit_sour
 
 - Any **flagged** result, documents that disagree about a changed value (the caller passes only disagreements about values the change touches), or a **clash with an approved change in the register** → **BLOCK**
 - Otherwise any **held** result → **REVIEW**
-- Otherwise → **No conflicts found in N pages checked** (never "PASS")
+- Otherwise → **No conflicts found in N pages read (M pages had no readable text)** (never "PASS"). N and M are counted at ingest: a page is read if it has at least `readable_min_chars` non-space characters (`app/reading/reading.yaml`).
 
 **Proven (a proposed fix):** the server re-runs every live rule and the register check on the fixed values. Proven = no **flagged** results, no **new held** results (held results that were already held before the fix may remain), and no register clash. Information-only notes (such as velocity below a range's lower value) never block. A rule that ran before the fix but not after it is a reason, so the fix is not proven.
 

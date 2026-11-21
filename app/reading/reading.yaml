@@ -7,6 +7,7 @@ ingest:
   drawing_max_text_chars: 200     # near-empty text layer
   png_dpi: 150
   progress_every_pages: 10
+  readable_min_chars: 20          # non-space characters for a page to count as read (BHEL: 46 pages below; same at 50)
 evidence:
   table_row_word_fraction: 0.9
 scenario:

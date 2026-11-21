@@ -18,6 +18,7 @@ from app.reading.longread import long_read
 from app.reading.sameitem import same_item
 from app.reading.scenario import build_scenario, doc_limits
 from app.reading.search import merge_candidates, search_pages
+from app.reading.settings import reading_settings
 from app.reading.understand import understand
 from app.reading.values import pull_values
 from app.register.clash import find_clashes
@@ -149,12 +150,18 @@ def check_change(store, models, plant_id: str, change_id: str, text: str, progre
         steps.items.append({"name": "explain", "state": "done" if not ex_err else "failed", "seconds": ex_s})
         steps.items.append({"name": "headlines", "state": "done" if not hl_err else "failed", "seconds": hl_s})
 
-    v = steps.run("verdict", lambda: verdict(after, sc["disagreements"], clashes, plant["page_count"]))
+    if "pages_read" in plant:
+        pages_read, unreadable = plant["pages_read"], plant.get("pages_unreadable", 0)
+    else:  # plant ingested before the count existed: same rule from pages_all
+        min_chars = reading_settings()["ingest"]["readable_min_chars"]
+        unreadable = sum(1 for p in pages_all if len("".join(p["text"].split())) < min_chars)
+        pages_read = len(pages_all) - unreadable
+    v = steps.run("verdict", lambda: verdict(after, sc["disagreements"], clashes, pages_read, unreadable))
 
     return {
         "change_id": change_id, "plant_id": plant_id, "text": text, "understanding": u,
         "seconds_total": round(time.monotonic() - t0, 1), "steps": steps.items,
-        "page_count": plant["page_count"],
+        "page_count": plant["page_count"], "pages_read": pages_read, "pages_unreadable": unreadable,
         "token_count": lr.get("token_count"), "long_read": lr["status"], "long_read_message": lr.get("message"),
         "long_read_usage": lr.get("usage"),
         "same_item_mode": mode, "same_item_note": mode_note,

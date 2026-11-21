@@ -132,3 +132,10 @@ def test_reingest_refused_while_running(api, store):
     pid = api.post("/plants", json={"name": "t"}).json()["plant_id"]
     store.mutate_plant(pid, lambda d: d.update(ingest_status="running"))
     assert api.post(f"/plants/{pid}/reingest").status_code == 409
+
+
+def test_ingest_counts_pages_with_readable_text(api, store, inline_jobs):
+    pid = upload(api, store, [("a.pdf", make_pdf([(A4, BODY), (A4, "x"), (A1, "P&ID 200NB label text here ok")]))])
+    api.post(f"/plants/{pid}/ingest")
+    plant = store.get_plant(pid)
+    assert plant["pages_read"] == 2 and plant["pages_unreadable"] == 1      # "x" is below 20 characters

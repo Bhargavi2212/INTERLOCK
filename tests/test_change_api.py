@@ -41,7 +41,7 @@ def test_change_route_runs_and_stores(api, store, ingested):
 
 def test_no_conflicts_label_uses_page_count(api, store, ingested):
     from app.verdict import verdict
-    assert verdict([], [], [], len(PAGES))["label"] == f"No conflicts found in {len(PAGES)} pages checked"
+    assert verdict([], [], [], len(PAGES), 0)["label"] == f"No conflicts found in {len(PAGES)} pages read (0 pages had no readable text)"
 
 
 def test_change_refused_before_ingest(api, store, monkeypatch):

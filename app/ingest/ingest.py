@@ -108,9 +108,13 @@ def ingest_plant(store: Store, plant_id: str, job_id: str, reset: bool = False) 
 
     kept = plant.get("token_count") or {}
 
+    min_chars = cfg["readable_min_chars"]
+    unreadable = sum(1 for p in pages_all if len("".join(p["text"].split())) < min_chars)
+
     def finish(d):
         real = reset and kept.get("estimated") is False and kept.get("value")
         d.update(page_count=len(pages_all), ingest_status="done",
+                 pages_read=len(pages_all) - unreadable, pages_unreadable=unreadable,
                  token_count=kept if real else {"value": chars // est, "estimated": True})
 
     plant = store.mutate_plant(plant_id, finish)
