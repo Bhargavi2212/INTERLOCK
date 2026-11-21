@@ -1,0 +1,1184 @@
+{
+ "about": "Pre-filled set E skeletons, one per pump on the scope list. NOT keys. Copy one 'key' block to eval/keys/E<n>.json, fill id, author, written_at, the change exactly as typed, and expected_verdict; delete values the change does not touch if you want. Prepared by Claude (reviewer) from text search; no Interlock code was run.",
+ "also_relevant": [
+  {
+   "file": "Part1.pdf",
+   "page": 45
+  },
+  {
+   "file": "Part1.pdf",
+   "page": 46
+  },
+  {
+   "file": "Part5.pdf",
+   "page": 200
+  }
+ ],
+ "items": [
+  {
+   "item": 1,
+   "scope_name": "TRANSFORMER YARD UNIT-1 OILY WASTE TRANSFER PUMPS",
+   "note": "sump E4 volume not stated",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "10",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "10",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 2,
+   "scope_name": "TRANSFORMER YARD UNIT-2 OILY WASTE TRANSFER PUMPS",
+   "note": "sump E5 volume not stated",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 56
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "10",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 56
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "10",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 3,
+   "scope_name": "TG UNIT-1A WASTE WATER TRANSFER PUMPS",
+   "note": "data sheet name: floor wash water transfer pumps; P&ID label not checked",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 53
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 53
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 53
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "25",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 53
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "12",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 53
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 4,
+   "scope_name": "TG UNIT-1B WASTE WATER TRANSFER PUMPS",
+   "note": "data sheet name: floor wash water transfer pumps",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 53
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 53
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 53
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "25",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 53
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "12",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 53
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "25",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 5,
+   "scope_name": "TG UNIT-2A WASTE WATER TRANSFER PUMPS",
+   "note": "sump says TDBFP-B Unit-2, pump says TDBFP-A Unit-2",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "25",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "12",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "25",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 6,
+   "scope_name": "TG UNIT-2B WASTE WATER TRANSFER PUMPS",
+   "note": "",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "25",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 55
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "12",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "25",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 7,
+   "scope_name": "MRS UNIT-2 WASTE WATER TRANSFER PUMPS",
+   "note": "data sheet name: oily waste water transfer pumps; pump fluid text says Unit-1; P&ID values not checked",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 57
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 56
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 57
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 57
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "10",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 57
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "10",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 56
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 8,
+   "scope_name": "ESP UNIT-1 WASTE WATER TRANSFER PUMPS",
+   "note": "",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "50",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "50",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "50",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 9,
+   "scope_name": "ESP UNIT-2 WASTE WATER TRANSFER PUMPS",
+   "note": "",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 59
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 59
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 59
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "50",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 59
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "50",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "50",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 10,
+   "scope_name": "SG UNIT-2 WASTE WATER TRANSFER PUMPS",
+   "note": "scope 1W+1S, data sheet and P&ID 2W",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "2",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "0",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "105",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "105",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 58
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "105",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     },
+     {
+      "attribute": "working pumps",
+      "value": "2",
+      "unit": "count",
+      "file": "Part3.pdf",
+      "page": 146
+     },
+     {
+      "attribute": "discharge line size",
+      "value": "200",
+      "unit": "NB",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": true,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 11,
+   "scope_name": "COT/DOT WASTE WATER TRANSFER PUMPS",
+   "note": "",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "2",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "1",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 54
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "2",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 12,
+   "scope_name": "TROLLEY MOUNTED SCREW PUMPS",
+   "note": "P&ID prints 'CAP. 10M3, (2NOS.)'",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 61
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "2",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "0",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "2",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 61
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "0",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 61
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "10",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 61
+     },
+     {
+      "attribute": "minimum head",
+      "value": "15",
+      "unit": "mwc",
+      "file": "Part4.pdf",
+      "page": 61
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 13,
+   "scope_name": "WASTE SERVICE WATER SUMP (WSWS) TRANSFER PUMPS",
+   "note": "sump 250 m3 is each of two compartments",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 59
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "2",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 43
+     },
+     {
+      "attribute": "working pumps",
+      "value": "2",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 59
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 59
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "125",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 59
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "250",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 59
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "125",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 14,
+   "scope_name": "CENTRAL MONITORING BASIN (CMB) TRANSFER PUMPS",
+   "note": "basin 250 m3 each compartment; fluid text says 'Effluent from WSWS'",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 44
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 60
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "2",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 44
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 44
+     },
+     {
+      "attribute": "working pumps",
+      "value": "2",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 60
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 60
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "125",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 60
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "250",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 60
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "125",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  },
+  {
+   "item": 15,
+   "scope_name": "SLUDGE SUMP TRANSFER PUMPS",
+   "note": "sump 6.25 m3 each compartment",
+   "key": {
+    "id": "E?",
+    "author": "",
+    "written_at": "",
+    "change": "",
+    "expected_pages": [
+     {
+      "file": "Part1.pdf",
+      "page": 44
+     },
+     {
+      "file": "Part4.pdf",
+      "page": 61
+     },
+     {
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "expected_values": [
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 44
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part1.pdf",
+      "page": 44
+     },
+     {
+      "attribute": "working pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 61
+     },
+     {
+      "attribute": "standby pumps",
+      "value": "1",
+      "unit": "count",
+      "file": "Part4.pdf",
+      "page": 61
+     },
+     {
+      "attribute": "rated capacity, each",
+      "value": "12.5",
+      "unit": "m3/h",
+      "file": "Part4.pdf",
+      "page": 61
+     },
+     {
+      "attribute": "sump effective capacity",
+      "value": "6.25",
+      "unit": "m3",
+      "file": "Part4.pdf",
+      "page": 61
+     },
+     {
+      "attribute": "rated capacity",
+      "value": "12.5",
+      "unit": "m3/h",
+      "file": "Part3.pdf",
+      "page": 146
+     }
+    ],
+    "documents_disagree": false,
+    "expected_verdict": ""
+   }
+  }
+ ]
+}
